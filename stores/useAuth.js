@@ -1,7 +1,18 @@
-import { create } from 'zustand'
+import { create } from 'zustand';
 
-export const useAuth = create((set) => ({
-  token: null,
-  setToken: (token) => set({ token }),
-  removeToken: () => set({ token: null }),
-}))
+const useAuth = create((set) => ({
+  accessToken: null,
+  refreshToken: null,
+  accountId: null,
+
+  setTokens: (accessToken, refreshToken, accountId) => {
+    set({ accessToken, refreshToken, accountId });
+
+  },
+
+  clearTokens: () => {
+    set({ accessToken: null, refreshToken: null, accountId: null });
+  },
+}));
+
+export default useAuth;
