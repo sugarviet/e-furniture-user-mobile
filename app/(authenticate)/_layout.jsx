@@ -1,11 +1,19 @@
 import { Stack } from "expo-router";
 
-const AuthenLayout = () => {
+function AuthenticateLayout() {
   return (
-    <Stack screenOptions={{
-      headerShown: false,
-    }}/>
-  )
+    <Stack
+      screenOptions={{
+        title: "",
+        headerShadowVisible: false,
+      }}
+    >
+        
+      <Stack.Screen name="sign-in" options={{ headerShown: false }} />
+      <Stack.Screen name="sign-up" options={{ headerShown: false }} />
+
+    </Stack>
+  );
 }
 
-export default AuthenLayout
+export default AuthenticateLayout;
