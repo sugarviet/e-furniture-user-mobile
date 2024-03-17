@@ -1,7 +1,7 @@
-import useAuth from "../../../hooks/useAuth";
+
 
 function useSupportItemCard() {
-  const { sign_out } = useAuth();
+  
 
   const wish_list = {
     function: () => {
@@ -30,7 +30,7 @@ function useSupportItemCard() {
   };
   const log_out = {
     function: () => {
-      sign_out();
+      
     },
   };
 

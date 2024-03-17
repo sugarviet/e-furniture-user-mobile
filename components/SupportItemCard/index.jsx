@@ -1,8 +1,8 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import styles from "./style";
-import Icon3D from "../Icon3D";
-import { IMAGES } from "../../../constants";
+
+import { IMAGES} from '../../constants/image'
 import useSupportItemCard from "./useSupportItemCard";
 
 const TYPE = {

@@ -1,60 +1,39 @@
-import React from "react";
-import { View, Image } from "react-native";
-import { ROUNDED, SIZES } from "../../../constants";
+import React from 'react'
+import { View, Image } from 'react-native'
 
 const SHAPES = {
-  rounded: {
-    borderRadius: ROUNDED.full,
-  },
-  default: {
-    borderRadius: ROUNDED.tiny,
-  },
-};
-
-const AVATAR_SIZES = {
-  large: {
-    width: SIZES.mega,
-    height: SIZES.mega,
-  },
-  mega: {
-    width: 80,
-    height: 80,
-  },
-  small: {
-    width: SIZES.xxLarge,
-    height: SIZES.xxLarge,
-  },
-  medium:{
-    width: SIZES.jumbo,
-    height: SIZES.jumbo,
-  },
-  default: {
-    width: SIZES.xxxLarge,
-    height: SIZES.xxxLarge,
-  },
-};
-
-const Avatar = ({ src, size = "default", shape = "default" }) => {
-  const sizeStyle = AVATAR_SIZES[size] || AVATAR_SIZES["default"];
-  const shapeStyle = SHAPES[shape] || SHAPES["default"];
-
-  const styles = {
-    avatar: {
-      ...sizeStyle,
-      ...shapeStyle,
+    rounded: {
+      borderRadius: 'rounded-full',
+    },
+    default: {
+      borderRadius: 'rounded-sm',
     },
   };
+  
+  const AVATAR_SIZES = {
+    large: "w-10 h-10",
+    mega: "w-20 h-20",
+    small: "w-48 h-48",
+    medium: "w-32 h-32",
+    default: "w-72 h-72",
+  };
+
+const Avatar = ({ src, size = "default", shape = "default" }) => {
+    const sizeStyle = AVATAR_SIZES[size] || AVATAR_SIZES["default"];
+    const shapeStyle = SHAPES[shape] || SHAPES["default"];
+
+    const combinedClassName = `object-cover ${sizeStyle} ${shapeStyle.borderRadius}`;
 
   return (
     <View>
-      <Image
+        <Image
         source={{
           uri: src,
         }}
-        style={styles.avatar}
+        className={combinedClassName}
       />
     </View>
-  );
-};
+  )
+}
 
-export default Avatar;
+export default Avatar
