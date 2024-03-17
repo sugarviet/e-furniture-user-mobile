@@ -30,6 +30,15 @@ const TYPE = {
       },
     }),
   },
+  confirmPassword: {
+    placeholder: "Nhập lại mật khẩu",
+    icon: IMAGES.padlock,
+    isSecure: true,
+    rules: (validated) => ({
+      required: "Bạn chưa nhập lại mật khẩu!",
+      validate: () => validated || "Mật khẩu không khớp",
+    }),
+  },
 };
 
 function FormInput({ type, control }) {
