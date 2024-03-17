@@ -1,10 +1,11 @@
 import { Text, View } from "react-native"
+import ScrollableContentContainer from "../../../components/ScrollableContentContainer"
 
 const Menu = () => {
   return (
-    <View className="flex-1 justify-center items-center bg-red-500">
-        <Text>Menu page</Text>
-    </View>
+    <ScrollableContentContainer>
+
+</ScrollableContentContainer>
   )
 }
 

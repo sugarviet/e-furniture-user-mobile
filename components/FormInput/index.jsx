@@ -59,7 +59,7 @@ function FormInput({ type, control }) {
               error ? "border-rose-500" : "border-transparent"
             )}
           >
-            <Icon className="w-6 h-6 mr-2" source={TYPE[type].icon} />
+          
             <TextInput
               className="flex-1"
               placeholder={TYPE[type].placeholder}
