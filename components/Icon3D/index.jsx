@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import AnimatedLottieView from "lottie-react-native";
-import { ANIMATIONS } from "../../../constants";
+import ANIMATIONS from '../../constants/animations';
 import LottieView from "lottie-react-native";
 const TYPES = {
   balloons: {
@@ -62,6 +62,24 @@ const TYPES = {
     scale: 1.0,
     width: 28,
     height: 28,
+  },
+  cart: {
+    source: ANIMATIONS.cart,
+    scale: 1.5,
+    width: 24,
+    height: 32,
+  },
+  order: {
+    source: ANIMATIONS.order,
+    scale: 1.5,
+    width: 24,
+    height: 32,
+  },
+  wishlist: {
+    source: ANIMATIONS.favorite,
+    scale: 1.5,
+    width: 24,
+    height: 32,
   },
 };
 
