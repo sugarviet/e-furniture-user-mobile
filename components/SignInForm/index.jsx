@@ -1,19 +1,21 @@
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { useForm } from "react-hook-form";
 import LinkableButton from "../LinkableButton";
 import FormInput from "../FormInput";
 import useAuth from "../../stores/useAuthStore";
+import useNavigation from "../../hooks/useNavigation";
 
 function SignInForm() {
   const { control, handleSubmit } = useForm();
-  const {setTokens} = useAuth()
+  const { go_to_sign_up } = useNavigation();
+
+  const { setTokens } = useAuth();
   const onSubmit = (data) => {
     const { username, password } = data;
-    
   };
   const handlePress = () => {
-    setTokens(true, true, true)
-  }
+    setTokens(true, true, true);
+  };
 
   return (
     <View>
@@ -26,6 +28,10 @@ function SignInForm() {
       </LinkableButton>
       <LinkableButton className="mt-4" handlePress={handleSubmit(onSubmit)}>
         Sign in
+      </LinkableButton>
+      <LinkableButton handlePress={go_to_sign_up}>
+        Not yet has an account ?{" "}
+        <Text style={{ textDecorationLine: "underline" }}>Sign Up</Text>
       </LinkableButton>
     </View>
   );

@@ -3,7 +3,10 @@ import { Controller } from "react-hook-form";
 import { classNames } from "../../utils/classNames";
 import Icon from "../Icon";
 import { IMAGES } from "../../constants/image";
+import { ICONS } from "../../constants/icons";
 import ErrorMessage from "../ErrorMessage";
+import { Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
 
 const TYPE = {
   username: {
@@ -41,7 +44,9 @@ const TYPE = {
   },
 };
 
-function FormInput({ type, control }) {
+function FormInput({ type, control, validated = true }) {
+  const [isSecure, setIsSecure] = useState(TYPE[type]?.isSecure);
+
   return (
     <Controller
       control={control}
@@ -59,7 +64,6 @@ function FormInput({ type, control }) {
               error ? "border-rose-500" : "border-transparent"
             )}
           >
-          
             <TextInput
               className="flex-1"
               placeholder={TYPE[type].placeholder}
@@ -68,6 +72,16 @@ function FormInput({ type, control }) {
               onChangeText={onChange}
               onBlur={onBlur}
             />
+            {TYPE[type]?.isSecure && (
+              <Ionicons
+                style={{ marginRight: 2 }}
+                name={
+                  isSecure ? ICONS.ionIcon_eye_close : ICONS.ionIcon_eye_open
+                }
+                size={20}
+                onPress={() => setIsSecure(!isSecure)}
+              />
+            )}
           </View>
           {error && <ErrorMessage message={error.message} />}
         </View>
