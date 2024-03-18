@@ -2,16 +2,18 @@ import { View, Text } from "react-native";
 import { useForm } from "react-hook-form";
 import LinkableButton from "../LinkableButton";
 import FormInput from "../FormInput";
-import useAuth from "../../stores/useAuthStore";
+import useAuthStore from "../../stores/useAuthStore";
 import useNavigation from "../../hooks/useNavigation";
-
+import useAuth from "../../hooks/useAuth";
 function SignInForm() {
   const { control, handleSubmit } = useForm();
   const { go_to_sign_up } = useNavigation();
+  const {login_with_app} = useAuth();
 
-  const { setTokens } = useAuth();
+  const { setTokens } = useAuthStore();
   const onSubmit = (data) => {
     const { username, password } = data;
+    login_with_app();
   };
   const handlePress = () => {
     setTokens(true, true, true);

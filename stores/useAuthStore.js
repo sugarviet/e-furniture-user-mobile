@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-const useAuth = create((set) => ({
+const useAuthStore = create((set) => ({
   accessToken: null,
   refreshToken: null,
   accountId: null,
@@ -15,4 +15,4 @@ const useAuth = create((set) => ({
   },
 }));
 
-export default useAuth;
+export default useAuthStore;

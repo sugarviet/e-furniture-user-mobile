@@ -9,8 +9,30 @@ import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 
 const TYPE = {
+  first_name: {
+    placeholder: "First name",
+    icon: IMAGES.user,
+    rules: () => ({
+      required: "Please enter the first name",
+      pattern: {
+        value: /^\S*$/,
+        message: "first name must be no whitespace",
+      },
+    }),
+  },
+  last_name: {
+    placeholder: "Last name",
+    icon: IMAGES.user,
+    rules: () => ({
+      required: "Please enter the last name",
+      pattern: {
+        value: /^\S*$/,
+        message: "Last name must be no whitespace",
+      },
+    }),
+  },
   username: {
-    placeholder: "username",
+    placeholder: "Username",
     icon: IMAGES.user,
     rules: () => ({
       required: "Please enter the username",
@@ -21,7 +43,7 @@ const TYPE = {
     }),
   },
   password: {
-    placeholder: "password",
+    placeholder: "Password",
     icon: IMAGES.padlock,
     isSecure: true,
     rules: () => ({
@@ -34,12 +56,23 @@ const TYPE = {
     }),
   },
   confirmPassword: {
-    placeholder: "Nhập lại mật khẩu",
+    placeholder: "Confirm Password",
     icon: IMAGES.padlock,
     isSecure: true,
     rules: (validated) => ({
       required: "Bạn chưa nhập lại mật khẩu!",
       validate: () => validated || "Mật khẩu không khớp",
+    }),
+  },
+  email: {
+    placeholder: "email@example.com",
+    icon: IMAGES.email,
+    rules: () => ({
+      required: "Please enter your email",
+      pattern: {
+        value: /\S+@\S+\.\S+/,
+        message: "Invalid email address",
+      },
     }),
   },
 };
@@ -52,7 +85,7 @@ function FormInput({ type, control, validated = true }) {
       control={control}
       name={type}
       defaultValue={""}
-      rules={TYPE[type].rules()}
+      rules={TYPE[type].rules(validated)}
       render={({
         field: { value, onChange, onBlur },
         fieldState: { error },
