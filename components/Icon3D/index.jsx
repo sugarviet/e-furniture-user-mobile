@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import AnimatedLottieView from "lottie-react-native";
-import ANIMATIONS from '../../constants/animations';
+import {ANIMATIONS} from '../../constants/animations';
 import LottieView from "lottie-react-native";
 const TYPES = {
   balloons: {
