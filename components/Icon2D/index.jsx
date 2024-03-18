@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesome5, Ionicons, Feather, AntDesign, MaterialIcons } from "@expo/vector-icons";
-import { COLORS, ICONS, SIZES } from "../../../constants";
+import { ICONS } from "../../../constants/icons";
 
 import { View, Image } from "react-native";
 

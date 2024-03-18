@@ -1,13 +1,17 @@
 import { Tabs } from "expo-router";
 import { View, Text } from "react-native";
+import TabIcon from "../../../components/TabIcon";
+import HeaderButton from "../../../components/HeaderButton";
 
 const tabs = [
-  { page: "home", name: "Home", header_options: [] },
+  { page: "home", name: "E-FURNITURE", header_options: [] },
   {
     page: "cart",
     name: "Mua sắm",
     header_options: ["shopping_cart", "shopping_options"],
   },
+  { page: "order", name: "Order", header_options: [] },
+
   { page: "menu", name: "Menu", header_options: ["search", "chat"] },
 ];
 
@@ -23,12 +27,15 @@ function TabsLayout() {
             options={{
               title: "",
               tabBarShowLabel: false,
-              
+              tabBarIcon: ({ focused }) => (
+                <TabIcon activated={focused} name={page} />
+              ),
               headerLeft: () => (
                 <Text
                   style={{
-                    fontSize: 28,
-                    marginHorizontal: 16,
+                    fontSize: 24,
+                    marginHorizontal: 10,
+                    fontWeight: 'bold'
                   }}
                 >
                   {name}
@@ -51,7 +58,7 @@ function TabsLayout() {
                         marginHorizontal: 16,
                       }}
                     >
-                      {option}
+                      <HeaderButton key={`${option} + ${index}`} type={option} />
                     </Text>
                   ))}
                 </View>

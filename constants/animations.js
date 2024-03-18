@@ -26,4 +26,4 @@ import cart from "../assets/animations/cart.json"
 // export const ANIMATIONS = {
 //     delivery: delivery,
 // }
-export default { emergency, social, pet_service, shopping, NFC, diamond, coding_working_on, welcome, heart, favorite, browsing, phone, fireHeart, coin, ballons, birthday, chemical, born, confetti,empty_cart, delivery, order, cart }
+export const ANIMATIONS = { emergency, social, pet_service, shopping, NFC, diamond, coding_working_on, welcome, heart, favorite, browsing, phone, fireHeart, coin, ballons, birthday, chemical, born, confetti,empty_cart, delivery, order, cart }
