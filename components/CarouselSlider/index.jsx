@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   View,
   Dimensions,
@@ -18,7 +18,7 @@ const TYPE = {
     padding: 0,
     widthImg: WIDTH_FULL,
     heightImg: WIDTH_FULL,
-    resizeMode:'contain'
+    resizeMode: 'contain'
   },
   default: {
     title: "default",
@@ -28,8 +28,8 @@ const TYPE = {
   },
 };
 
-export default function CarouselSlider({ pagination = false, autoplay = false, carouselData = [], speed = 3000, type= 'default'}) {
-  const { itemWidth, padding, widthImg, heightImg,resizeMode } = TYPE[type];
+export default function CarouselSlider({ pagination = false, carouselData = [], type = 'default' }) {
+  const { itemWidth, padding, widthImg, heightImg, resizeMode } = TYPE[type];
   const [activeSlide, setActiveSlide] = useState(0);
   const carouselRef = useRef(null);
 
@@ -40,19 +40,6 @@ export default function CarouselSlider({ pagination = false, autoplay = false, c
       </View>
     );
   };
-
-  useEffect(() => {
-    if (autoplay && carouselRef.current) {
-      const autoplayInterval = setInterval(() => {
-        if (activeSlide < carouselData.length - 1) {
-          carouselRef.current.snapToNext();
-        } else {
-          carouselRef.current.snapToItem(0);
-        }
-      }, speed); 
-      return () => clearInterval(autoplayInterval);
-    }
-  }, [autoplay, activeSlide, carouselData.length]);
 
   return (
     <View style={styles.container}>
@@ -66,15 +53,15 @@ export default function CarouselSlider({ pagination = false, autoplay = false, c
       />
 
       {pagination && (
-          <Pagination
-            dotsLength={carouselData.length}
-            activeDotIndex={activeSlide}
-            containerStyle={styles.paginationContainer}
-            dotStyle={styles.paginationDot}
-            inactiveDotStyle={styles.inactivePaginationDot}
-            inactiveDotOpacity={0.4}
-            inactiveDotScale={0.6}
-          />
+        <Pagination
+          dotsLength={carouselData.length}
+          activeDotIndex={activeSlide}
+          containerStyle={styles.paginationContainer}
+          dotStyle={styles.paginationDot}
+          inactiveDotStyle={styles.inactivePaginationDot}
+          inactiveDotOpacity={0.4}
+          inactiveDotScale={0.6}
+        />
       )}
     </View>
   );

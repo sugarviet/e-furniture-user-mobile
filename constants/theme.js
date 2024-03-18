@@ -1,7 +1,7 @@
 const COLORS = {
     none: 'transparent',
-    primary: '#F37022',
-    secondary: '#00a480',
+    primary: '#222',
+    secondary: '#191915',
     tertiary: '#FDBD41',
 
     success: '#00d27a',

@@ -1,4 +1,4 @@
-import { ScrollView, View } from "react-native";
+import {  View } from "react-native";
 import { Stack } from "expo-router";
 import ProductDetail from "../../../../components/ProductDetail";
 const ViewProductDetail = () => {

@@ -1,6 +1,5 @@
-import { ScrollView, Text, View, Button, TouchableOpacity } from "react-native";
-import { Stack } from "expo-router";
-import { COLORS, SIZES } from "../../constants";
+import { ScrollView, Text, View, TouchableOpacity } from "react-native";
+import { COLORS } from "../../constants";
 import { ICONS } from "../../constants/icons";
 import CarouselSlider from "../../components/CarouselSlider";
 import { FontAwesome5, FontAwesome, AntDesign, FontAwesome6 } from '@expo/vector-icons';
