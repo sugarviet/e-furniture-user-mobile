@@ -7,8 +7,17 @@ function useNavigation() {
     const go_to_sign_up = () => router.replace('/sign-up')
     const go_to_home = () => router.replace('/home')
     const go_to_menu = () => router.push("/menu")
+    const go_to_product_detail = () => router.push("/product-detail")
 
-    return { go_to_sign_in, go_to_sign_up, go_to_home, go_to_welcome_screen, go_back, go_to_menu };
+    return {
+        go_to_sign_in,
+        go_to_sign_up,
+        go_to_home,
+        go_to_welcome_screen,
+        go_back,
+        go_to_menu,
+        go_to_product_detail,
+    };
 }
 
 export default useNavigation;
