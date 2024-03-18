@@ -4,7 +4,9 @@ import withAuthentication from "../hocs/withAuthentication";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const RootLayout = () => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: 2 } },
+  })
 
   return (
     <QueryClientProvider client={queryClient}>
