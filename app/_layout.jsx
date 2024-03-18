@@ -5,7 +5,9 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useFonts } from "expo-font";
 
 const RootLayout = () => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: 2 } },
+  })
 
   const [fontsLoaded] = useFonts({
     "Urbanist-Thin": require("../assets/fonts/Urbanist-Thin.ttf"),

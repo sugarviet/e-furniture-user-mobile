@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import { request } from '../../utils/request';
 
 const fetcher = async (url, params) => {
   const data = await axios.get(url, { params: params })
@@ -9,8 +10,21 @@ const fetcher = async (url, params) => {
   return data;
 };
 
+const fetcherWithAuth = async (url, params) => {
+  const data = await request.get(url, { params: params })
+    .then((response) => response.data)
+    .then((data) => data.metaData);
+
+  return data;
+};
 
 export const useFetch = (url, params, enabled) => {
+  return useQuery([url, params], () => fetcherWithAuth(url, params), {
+    enabled
+  });
+};
+
+export const useFetchWithoutAuth = (url, params, enabled) => {
   return useQuery([url, params], () => fetcher(url, params), {
     enabled
   });
@@ -45,7 +59,7 @@ export const useDelete = (url, params, onSuccessAPI = () => {}, onErrorAPI = () 
 
 export const usePost = (url, params, onSuccessAPI = () => {}, onErrorAPI = () => {}, key) => {
   return useGenericMutation(
-    async (data) => await axios.post(url, data).then((response) => response.data)
+    async (data) => await request.post(url, data).then((response) => response.data)
     .then((data) => data.metaData),
     key,
     params,
@@ -56,7 +70,18 @@ export const usePost = (url, params, onSuccessAPI = () => {}, onErrorAPI = () =>
 
 export const useUpdate = (url, params, onSuccessAPI = () => {}, onErrorAPI = () => {}, key) => {
   return useGenericMutation(
-    (data) => axios.put(url, data),
+    (data) => request.put(url, data),
+    key,
+    params,
+    onSuccessAPI,
+    onErrorAPI
+  );
+};
+
+export const usePostWithoutAuth = (url, params, onSuccessAPI = () => {}, onErrorAPI = () => {}, key) => {
+  return useGenericMutation(
+    async (data) => await axios.post(url, data).then((response) => response.data)
+    .then((data) => data.metaData),
     key,
     params,
     onSuccessAPI,
