@@ -26,9 +26,9 @@ function SignInForm() {
         <FormInput type="username" control={control} />
         <FormInput type="password" control={control} />
       </View>
-      {/* <LinkableButton className="mt-4" handlePress={handlePress}>
+      <LinkableButton className="mt-4" handlePress={handlePress}>
         Go to home
-      </LinkableButton> */}
+      </LinkableButton>
       <LinkableButton className="mt-4" handlePress={handleSubmit(onSubmit)}>
         Sign in
       </LinkableButton>
