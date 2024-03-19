@@ -6,7 +6,6 @@ import * as SplashScreenExpo from "expo-splash-screen";
 import { useState, useEffect} from "react";
 import SplashScreen from "./(authenticate)/splash";
 
-// SplashScreenExpo.preventAutoHideAsync();
 const RootLayout = () => {
 
   const [isShowSplash, setIsShowSplash] = useState(false);
@@ -15,7 +14,6 @@ const RootLayout = () => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: 2 } },
   })
-
 
   const [fontsLoaded] = useFonts({
     "Urbanist-Thin": require("../assets/fonts/Urbanist-Thin.ttf"),
@@ -29,7 +27,6 @@ const RootLayout = () => {
   });
 
   useEffect(() => {
-    // SplashScreenExpo.hideAsync();
     setIsShowSplash(true);
   }, [fontsLoaded])
 
