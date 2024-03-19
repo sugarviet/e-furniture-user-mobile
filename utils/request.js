@@ -20,6 +20,10 @@ const getTokensFromAsyncStorage = async () => {
   }
 };
 
+export const requestWithoutAuth = axios.create({
+  baseURL: BASE_URL,
+});
+
 export const request = axios.create({
   baseURL: BASE_URL,
 });

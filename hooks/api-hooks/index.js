@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import { request } from '../../utils/request';
+import { request, requestWithoutAuth } from '../../utils/request';
 
 const fetcher = async (url, params) => {
   const data = await axios.get(url, { params: params })
@@ -80,7 +80,7 @@ export const useUpdate = (url, params, onSuccessAPI = () => {}, onErrorAPI = () 
 
 export const usePostWithoutAuth = (url, params, onSuccessAPI = () => {}, onErrorAPI = () => {}, key) => {
   return useGenericMutation(
-    async (data) => await axios.post(url, data).then((response) => response.data)
+    async (data) => await requestWithoutAuth.post(url, data).then((response) => response.data)
     .then((data) => data.metaData),
     key,
     params,
