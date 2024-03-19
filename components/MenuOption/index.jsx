@@ -33,10 +33,6 @@ const TYPE = {
     icon: "cart",
     text: "Cart",
   },
-  wishlist: {
-    icon: "emergency",
-    text: "Báo mất thú cưng",
-  },
   order: {
     icon: "order",
     text: "Đơn hàng của bạn",
@@ -44,8 +40,8 @@ const TYPE = {
   wishlist: {
     icon: "wishlist",
     text: "Wishlist",
+    path: "go_to_wishlist",
   },
-  
 };
 
 function MenuOptionCard({ type }) {
@@ -54,13 +50,12 @@ function MenuOptionCard({ type }) {
   const { icon, text, path } = props;
 
   return (
-    <TouchableOpacity 
-    className='rounded-lg px-2 py-3 bg-white h-18 justify-between shadow'
-      onPress={() => {
-        
-      }}>
+    <TouchableOpacity
+      className="rounded-lg px-2 py-3 bg-white h-18 justify-between shadow"
+      onPress={() => {}}
+    >
       <Icon3D type={icon} />
-      <Text className='mt-2 text-base font-medium'>{text}</Text>
+      <Text className="mt-2 text-base font-medium">{text}</Text>
     </TouchableOpacity>
   );
 }

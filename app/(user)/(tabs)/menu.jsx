@@ -25,7 +25,7 @@ const Menu = () => {
               <View key={`${item} + ${index}`} style={{ marginBottom: 16 }}>
                 <MenuOptionCard type={item} />
               </View>
-            ))}
+            ))} 
           </View>
           <View style={{ flex: 0.5 }}>
             {OPTION_RIGHT_LIST.map((item, index) => (
