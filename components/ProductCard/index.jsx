@@ -31,6 +31,7 @@ const ProductCard = ({ product }) => {
                 color="black"
               />
               <Text className="text-[11px] ml-2 font-urbanistMedium">4.8</Text>
+              <Text>  |</Text>
               <View className="bg-[#ececec] px-2 py-1 rounded-md mr-4 ml-3">
                 <Text className="text-[11px] font-urbanistMedium">
                   {product.sold} sold
