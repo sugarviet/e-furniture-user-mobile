@@ -31,7 +31,8 @@ export default function useAuth() {
     get_logout(),
     undefined,
     () => {
-      go_to_sign_in();
+    clearTokens();
+      // go_to_sign_in();
     },
     () => {}
   );
@@ -47,6 +48,7 @@ export default function useAuth() {
   };
 
   const handleLogout = () => {
+    // logout();
     clearTokens();
   }
   return {

@@ -2,7 +2,7 @@ import useNavigation from "../../hooks/useNavigation";
 import {ICONS} from "../../constants/icons";
 
 function useHeaderButton() {
-    const { go_back} = useNavigation();
+    const { go_back, go_to_search_page} = useNavigation();
 
     const close = {
         icon: ICONS.ionIcon_close,
@@ -21,7 +21,9 @@ function useHeaderButton() {
 
     const search = {
         icon: ICONS.ionIcon_search,
-        function: () => { }
+        function: () => {
+            go_to_search_page()
+         }
     }
 
     const shopping_options = {
