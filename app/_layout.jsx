@@ -1,8 +1,12 @@
 import { Slot } from "expo-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import withAuthentication from "../hocs/withAuthentication";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { useCallback } from "react";
+
+SplashScreen.preventAutoHideAsync();
+
 import { useState, useEffect,useCallback } from "react";
 import SplashScreen from "./(authenticate)/splash";
 
@@ -20,6 +24,7 @@ const RootLayout = () => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: 2 } },
   })
+  
 
   const [fontsLoaded] = useFonts({
     "Urbanist-Thin": require("../assets/fonts/Urbanist-Thin.ttf"),
@@ -31,6 +36,8 @@ const RootLayout = () => {
     "Urbanist-ExtraBold": require("../assets/fonts/Urbanist-ExtraBold.ttf"),
     "Urbanist-Black": require("../assets/fonts/Urbanist-Black.ttf"),
   });
+  
+  if (!fontsLoaded) return null;
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) await SplashScreen.hideAsync();
@@ -41,12 +48,10 @@ const RootLayout = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <Slot onLayout={onLayoutRootView} />
+        <Slot  onLayout={onLayoutRootView} />
       </GestureHandlerRootView>
     </QueryClientProvider>
   );
 };
 
-// export default withAuthentication(RootLayout);
 export default RootLayout;
-

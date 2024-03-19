@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native";
 function ContentContainer({ children }) {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} style={{ flex: 1 }}>
         <View style={{ paddingHorizontal: 10, paddingVertical: 10, flex: 1 }}>
           {children}
         </View>
