@@ -1,60 +1,29 @@
-import {
-    FontAwesome5
-} from "@expo/vector-icons";
-import React, { useState } from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
-import { COLORS } from "../../constants";
+import { FontAwesome5 } from "@expo/vector-icons";
+import React from "react";
+import { Image, Text, View } from "react-native";
 import { ICONS } from "../../constants/icons";
-const product = {
-  id: 1,
-  name: "Mid Century Sofa",
-  sold: "9.742",
-  price: "10.000.000VND",
-  image:
-    "https://img.freepik.com/free-psd/armchair-pillow_176382-861.jpg?t=st=1710746885~exp=1710750485~hmac=5daff58b0442d6c3540e68bbf6fb30f07b7e4d802e0ee1b24d02b507a56f8f07&w=826",
-};
+import InteractiveIcon3D from "../InteractiveIcon3D";
 
-const ProductCard = () => {
-  const [isFavorited, setIsFavorited] = useState(false);
-
-  const toggleFavorite = () => {
-    setIsFavorited(!isFavorited);
-  };
-
+const ProductCard = ({ product }) => {
   return (
-    <View
-      style={{
-        height: "100%",
-        backgroundColor: COLORS.white,
-        marginTop: "20%",
-      }}
-    >
+    <View className="w-48 bg-white border border-gray-300 rounded-lg overflow-hidden m-2 items-center">
       <View className="w-48 bg-white border border-gray-300 rounded-lg overflow-hidden">
         <View className="relative px-3">
           <Image
             source={{ uri: product.image }}
-            className="w-full h-40"
+            className="w-full h-40 rounded-lg mt-2"
             resizeMode="cover"
           />
-          {/* Favourite icon */}
-          <TouchableOpacity
-            className="absolute top-0 right-0 m-2"
-            onPress={toggleFavorite}
-          >
-            <Text
-              style={
-                isFavorited
-                  ? { color: "#ff0000", fontSize: 25 }
-                  : { color: "#808080", fontSize: 25 }
-              }
-            >
-              &#x2665;
-            </Text>
-          </TouchableOpacity>
+          <View className="absolute top-0 right-0 m-2">
+            <InteractiveIcon3D type="heart" />
+          </View>
         </View>
+
         <View className="pt-4 px-4 flex flex-row items-center">
           <View className="flex-1">
-            <Text className="text-lg font-bold mb-2">{product.name}</Text>
+            <Text className="text-lg font-bold mb-2" numberOfLines={1}>
+              {product.name}
+            </Text>
             <View className="flex flex-row pt-2 items-center pb-4 border-b-grey5">
               <FontAwesome5
                 name={ICONS.fa_star_rating}
@@ -64,7 +33,7 @@ const ProductCard = () => {
               <Text className="text-[11px] ml-2 font-urbanistMedium">4.8</Text>
               <View className="bg-[#ececec] px-2 py-1 rounded-md mr-4 ml-3">
                 <Text className="text-[11px] font-urbanistMedium">
-                  9.742 sold
+                  {product.sold}
                 </Text>
               </View>
             </View>
