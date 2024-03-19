@@ -45,6 +45,7 @@ const Home = () => {
         renderItem={({ item }) => <ProductCard product={item} />}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
+        style={{backgroundColor: 'white'}}
       />
     </View>
   );
