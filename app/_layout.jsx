@@ -5,9 +5,6 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
 
-SplashScreen.preventAutoHideAsync();
-
-
 const RootLayout = () => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: 2 } },
@@ -24,11 +21,6 @@ const RootLayout = () => {
     "Urbanist-ExtraBold": require("../assets/fonts/Urbanist-ExtraBold.ttf"),
     "Urbanist-Black": require("../assets/fonts/Urbanist-Black.ttf"),
   });
-  
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) await SplashScreen.hideAsync();
-  }, [fontsLoaded]);
-
 
   if (!fontsLoaded) return null;
 
