@@ -1,9 +1,10 @@
 import { TouchableOpacity, Text } from "react-native";
+import { classNames } from "../../utils/classNames";
 
-function LinkableButton({ children, handlePress }) {
+function LinkableButton({ children, handlePress,className }) {
   return (
     <TouchableOpacity
-      className="mt-4 bg-white justify-center items-center py-3 rounded-xl"
+      className={classNames(className, "mt-4 bg-white justify-center items-center py-3 ")}
       onPress={handlePress}
     >
       <Text className="text-black uppercase font-semibold">{children}</Text>

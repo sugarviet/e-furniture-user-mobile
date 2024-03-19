@@ -5,10 +5,12 @@ import CategoriesFilter from "../../../components/CategoriesFilter";
 import { IMAGES } from '../../../constants/image'
 import Banner from "../../../components/Banner";
 import useNavigation from "../../../hooks/useNavigation";
-
+import useAuthStore from "../../../stores/useAuthStore";
 
 
 const Home = () => {
+
+  const { clearTokens } = useAuthStore();
 
   const {go_to_product_detail} = useNavigation();
 
@@ -27,6 +29,8 @@ const Home = () => {
         onPress={() => {
           go_to_product_detail();
         }} />
+
+      <Button title="logout" onPress={clearTokens} />
 
       <Button title="open bottom sheet" onPress={openBottomSheet} />
 
