@@ -1,11 +1,12 @@
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import ProductCard from "../../../components/ProductCard";
-import products from "../../../data/products";
+import ProductCard from "../../../../components/ProductCard";
+import products from "../../../../data/products";
 
 const Wishlist = () => {
   return (
-    <View className="flex-1">
+    <View className="bg-white">
+      <Stack.Screen options={{ headerTransparent: false }} />
       <FlatList
         data={products}
         renderItem={({ item }) => <ProductCard product={item} />}
