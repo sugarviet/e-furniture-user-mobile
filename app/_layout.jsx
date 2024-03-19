@@ -20,8 +20,6 @@ const RootLayout = () => {
     "Urbanist-Black": require("../assets/fonts/Urbanist-Black.ttf"),
   });
 
-  if (!fontsLoaded) return null;
-
   return (
     <QueryClientProvider client={queryClient}>
       <GestureHandlerRootView style={{ flex: 1 }}>
