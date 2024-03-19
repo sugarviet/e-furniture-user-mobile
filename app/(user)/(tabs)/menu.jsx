@@ -17,7 +17,7 @@ const Menu = () => {
   return (
     <ScrollableContentContainer>
       <UserBriefCard />
-      <View className="px-2">
+      <View className="px-2 bg-slate-50">
         <View style={{ flexDirection: "row", columnGap: 12, marginTop: 40 }}>
           <View style={{ flex: 0.5 }}>
             {/* <RewardCard type="diamond" /> */}

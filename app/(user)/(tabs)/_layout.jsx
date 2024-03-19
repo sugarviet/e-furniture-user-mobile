@@ -4,7 +4,7 @@ import TabIcon from "../../../components/TabIcon";
 import HeaderButton from "../../../components/HeaderButton";
 
 const tabs = [
-  { page: "home", name: "E-FURNITURE", header_options: [] },
+  { page: "home", name: "E-FURNITURE", header_options: ["search"] },
   {
     page: "cart",
     name: "Mua sắm",
@@ -43,12 +43,7 @@ function TabsLayout() {
               ),
               headerRight: () => (
                 <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-around",
-                    width: 72,
-                    marginHorizontal: 16,
-                  }}
+                className='flex-row items-center w-fit max-w-[90px] justify-around'
                 >
                   {header_options.map((option, index) => (
                     <Text
