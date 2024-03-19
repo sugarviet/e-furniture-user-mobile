@@ -1,11 +1,19 @@
 import { Text, View } from "react-native";
-import AnimationView from "../../components/AnimationView";
-import {ANIMATIONS} from "../../constants/animations"
+import LottieView from "lottie-react-native";
+import { ANIMATIONS } from "../../constants/animations"
 
-const SplashScreen = () => {
+const SplashScreen = ({
+    onAnimationFinish = (isCancelled) => {}
+}) => {
     return (
         <View className="flex-1 justify-center items-center bg-black">
-            <AnimationView source={ANIMATIONS.logo} className="w-80 h-80"/>
+            <LottieView
+                className="w-80 h-80"
+                autoPlay
+                loop={false}
+                source={ANIMATIONS.logo}
+                onAnimationFinish={onAnimationFinish}
+            />
         </View>
     )
 }
