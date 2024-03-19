@@ -3,8 +3,20 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import withAuthentication from "../hocs/withAuthentication";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useFonts } from "expo-font";
+import { useState, useEffect,useCallback } from "react";
+import SplashScreen from "./(authenticate)/splash";
 
 const RootLayout = () => {
+
+  const [isShowSplash, setIsShowSplash] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsShowSplash(false);
+    }, 3500);
+    return () => clearTimeout(timeout);
+  }, [])
+
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: 2 } },
   })
@@ -20,13 +32,21 @@ const RootLayout = () => {
     "Urbanist-Black": require("../assets/fonts/Urbanist-Black.ttf"),
   });
 
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) await SplashScreen.hideAsync();
+  }, [fontsLoaded]);
+
+  if (isShowSplash) return <SplashScreen />;
+
   return (
     <QueryClientProvider client={queryClient}>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <Slot/>
+        <Slot onLayout={onLayoutRootView} />
       </GestureHandlerRootView>
     </QueryClientProvider>
   );
 };
 
-export default withAuthentication(RootLayout);
+// export default withAuthentication(RootLayout);
+export default RootLayout;
+
