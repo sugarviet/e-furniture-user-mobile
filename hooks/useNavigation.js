@@ -8,6 +8,7 @@ function useNavigation() {
     const go_to_home = () => router.replace('/home')
     const go_to_menu = () => router.push("/menu")
     const go_to_product_detail = () => router.push("/product-detail")
+    const go_to_search_page = () => router.push("/search")
 
     return {
         go_to_sign_in,
@@ -17,6 +18,7 @@ function useNavigation() {
         go_back,
         go_to_menu,
         go_to_product_detail,
+        go_to_search_page
     };
 }
 
