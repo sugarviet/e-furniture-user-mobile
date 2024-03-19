@@ -8,6 +8,7 @@ const RootLayout = () => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: 2 } },
   })
+  
 
   const [fontsLoaded] = useFonts({
     "Urbanist-Thin": require("../assets/fonts/Urbanist-Thin.ttf"),
@@ -19,11 +20,12 @@ const RootLayout = () => {
     "Urbanist-ExtraBold": require("../assets/fonts/Urbanist-ExtraBold.ttf"),
     "Urbanist-Black": require("../assets/fonts/Urbanist-Black.ttf"),
   });
+  
 
   return (
     <QueryClientProvider client={queryClient}>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <Slot/>
+        <Slot />
       </GestureHandlerRootView>
     </QueryClientProvider>
   );

@@ -1,18 +1,27 @@
 import SearchBar from "../../../../components/SearchBar";
-import ScrollableContentContainer from "../../../../components/ScrollableContentContainer";
-import { View, Text, Image } from "react-native";
-import { Stack } from "expo-router";
+import { View, FlatList, SafeAreaView } from "react-native";
+import products from "../../../../data/products";
+import ProductCard from "../../../../components/ProductCard";
+
 const Search = () => {
   const handleSearcProduct = (value) => {
     console.log(value);
   };
   return (
-    <ScrollableContentContainer>
-        <View className='px-2'>
-      <SearchBar onSearch={handleSearcProduct} />
-
+    <SafeAreaView style={{ flex: 1 }}>
+      <View>
+        <View className="px-2 mb-2">
+          <SearchBar onSearch={handleSearcProduct} />
         </View>
-    </ScrollableContentContainer>
+
+        <FlatList
+          data={products}
+          renderItem={({ item }) => <ProductCard product={item} />}
+          keyExtractor={(item) => item.id.toString()}
+          numColumns={2}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
