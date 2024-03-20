@@ -2,14 +2,18 @@ import { Slot } from "expo-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
-import { useCallback } from "react";
+import * as SplashScreenExpo from "expo-splash-screen";
+import { useState, useEffect} from "react";
+import SplashScreen from "./(authenticate)/splash";
 
 const RootLayout = () => {
+
+  const [isShowSplash, setIsShowSplash] = useState(false);
+  const [splashAnimationFinished, setSplashAnimationFinished] = useState(false);
+
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: 2 } },
   })
-  
 
   const [fontsLoaded] = useFonts({
     "Urbanist-Thin": require("../assets/fonts/Urbanist-Thin.ttf"),
@@ -22,7 +26,23 @@ const RootLayout = () => {
     "Urbanist-Black": require("../assets/fonts/Urbanist-Black.ttf"),
   });
 
+  useEffect(() => {
+    setIsShowSplash(true);
+  }, [fontsLoaded])
+
   if (!fontsLoaded) return null;
+
+  if (!isShowSplash || !splashAnimationFinished) {
+    return (
+      <SplashScreen
+        onAnimationFinish={(isCancelled) => {
+          if (!isCancelled) {
+            setSplashAnimationFinished(true)
+          }
+        }}
+      />
+    );
+  }
 
   return (
     <QueryClientProvider client={queryClient}>
