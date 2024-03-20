@@ -1,25 +1,31 @@
-import { View } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import React from "react";
+import { View, ScrollView } from "react-native";
 import Banner from "../../../components/Banner";
 import CategoriesFilter from "../../../components/CategoriesFilter";
 import ProductCard from "../../../components/ProductCard";
 import { IMAGES } from "../../../constants/image";
 import products from "../../../data/products";
+
 const Home = () => {
   return (
-    <View className="flex-1">
-      <Banner source={IMAGES.banner} />
-
-      <CategoriesFilter />
-
-      <FlatList
-        data={products}
-        renderItem={({ item }) => <ProductCard product={item} />}
-        keyExtractor={(item) => item.id.toString()}
-        numColumns={2}
-        style={{ backgroundColor: "white" }}
-      />
-    </View>
+    <ScrollView >
+      <View style={{ flex: 1, backgroundColor: "white" }}>
+        <Banner source={IMAGES.banner} height={200} />
+        <CategoriesFilter />
+        <View
+          style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+          }}
+        >
+          {products.map((product) => (
+            <View key={product.id} style={{ width: "49%" }}>
+              <ProductCard product={product} />
+            </View>
+          ))}
+        </View>
+      </View>
+    </ScrollView>
   );
 };
 

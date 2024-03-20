@@ -4,6 +4,7 @@ import ProductCard from "../../../../components/ProductCard";
 import products from "../../../../data/products";
 import { Stack } from "expo-router";
 import CategoriesFilter from "../../../../components/CategoriesFilter";
+import { COLORS } from "../../../../constants/theme";
 
 const Wishlist = () => {
   return (
@@ -12,7 +13,7 @@ const Wishlist = () => {
         options={{
           headerTransparent: false,
           title: "My Wishlist",
-          headerTitleStyle: { color: "#0F1010" },
+          headerTitleStyle: { color: COLORS.blackTitle },
         }}
       />
       <CategoriesFilter />
