@@ -21,9 +21,10 @@ import confetti from "../assets/animations/confetti.json"
 import empty_cart from "../assets/animations/empty_cart.json"
 import order from "../assets/animations/order.json"
 import cart from "../assets/animations/cart.json"
+import logo from "../assets/animations/logo.json"
 
 
 // export const ANIMATIONS = {
 //     delivery: delivery,
 // }
-export const ANIMATIONS = { emergency, social, pet_service, shopping, NFC, diamond, coding_working_on, welcome, heart, favorite, browsing, phone, fireHeart, coin, ballons, birthday, chemical, born, confetti,empty_cart, delivery, order, cart }
+export const ANIMATIONS = { emergency, social, pet_service, shopping, NFC, diamond, coding_working_on, welcome, heart, favorite, browsing, phone, fireHeart, coin, ballons, birthday, chemical, born, confetti,empty_cart, delivery, order, cart,logo }
