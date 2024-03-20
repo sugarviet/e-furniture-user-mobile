@@ -14,7 +14,7 @@ const BottomSheet = forwardRef((props, ref) => {
 			snapPoints={snapPoints}
 			enablePanDownToClose={true}
 			handleIndicatorStyle={{ backgroundColor: '#ccc' }}
-			backgroundStyle={{ backgroundColor: 'white' }}
+			backgroundStyle={{ backgroundColor: '#fbfbfb' }}
 		>
 			<View className='flex bg-white'>
 				{props.children}

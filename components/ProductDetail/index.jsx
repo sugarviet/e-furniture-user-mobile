@@ -4,6 +4,8 @@ import { ICONS } from "../../constants/icons";
 import CarouselSlider from "../../components/CarouselSlider";
 import { FontAwesome5, FontAwesome, AntDesign, FontAwesome6 } from '@expo/vector-icons';
 import InteractiveIcon3D from "../InteractiveIcon3D";
+import QuantityOption from "../QuantityOption";
+import Button from "../Button";
 const productDetailCarousel = [
     { id: 1, URI: "https://img.freepik.com/free-psd/armchair-pillow_176382-861.jpg?t=st=1710746885~exp=1710750485~hmac=5daff58b0442d6c3540e68bbf6fb30f07b7e4d802e0ee1b24d02b507a56f8f07&w=826" },
     { id: 2, URI: "https://img.freepik.com/free-psd/armchair-pillow_176382-860.jpg?t=st=1710746882~exp=1710750482~hmac=809a8b8bfd6ab7b349537ced2c12298fa0289788662db717a3ebbcecd18ea98d&w=826" },
@@ -52,13 +54,9 @@ export default function ProductDetail() {
                         <FontAwesome name={ICONS.fa_circle} size={48} color="#009689" />
                     </View>
                 </View>
-                <View className="pt-5 flex flex-row items-center ">
+                <View className="pt-5 flex flex-row items-center  pb-40">
                     <Text className="text-black text-[18px] font-urbanistBold mr-4">Quantity</Text>
-                    <View className="flex flex-row items-center py-3 bg-[#f3f3f3] rounded-[40px] px-6">
-                        <AntDesign name={ICONS.antDesign_minus} size={26} color="black" />
-                        <Text className="text-[20px] font-urbanistBold mx-4">2</Text>
-                        <AntDesign name={ICONS.antDesign_plus} size={23} color="black" />
-                    </View>
+                    <QuantityOption name="productDetail" className="py-3 px-6" />
                 </View>
             </ScrollView>
 
@@ -68,12 +66,11 @@ export default function ProductDetail() {
                         <Text className="text-[12px] font-urbanistRegular text-grey1">Total price</Text>
                         <Text className="text-[26px] font-urbanistBold">2.800.000đ</Text>
                     </View>
-                    <TouchableOpacity className="w-[60%] rounded-[40px] h-full pl-2">
-                        <View className="flex flex-row justify-center items-center py-5 rounded-[40px] bg-black">
-                            <FontAwesome6 name="bag-shopping" size={16} color="white" />
-                            <Text className="text-white font-urbanistSemiBold pl-3">Add to cart</Text>
-                        </View>
-                    </TouchableOpacity>
+                    <View className="w-[60%]">
+                        <Button type="addToCart">
+                            <Text>Add to cart</Text>
+                        </Button>
+                    </View>
                 </View>
             </View>
         </View>
