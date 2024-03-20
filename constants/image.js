@@ -26,6 +26,40 @@ import help_center from '../assets/images/help.png';
 import logout from '../assets/images/logout.png';
 import visa from '../assets/images/visa.png';
 import home from '../assets/images/home.png';
+import cart_success from '../assets/images/cart_success.png';
+import success_bg from '../assets/images/success_bg.png';
 import trash from '../assets/images/trash.png';
 
-export const IMAGES = { user, padlock, warning, logo, banner, visa, logout, note, angle_circle_right, help_center, coin_3D, noData, edit, map_line, cod, check, wallet, order, shopping, favorite_3D, whiteCheck, banking, setting_3D, location, heart_3D, cancel, QA_3D,home,trash };
+export const IMAGES = {
+    user,
+    padlock,
+    warning,
+    logo,
+    banner,
+    visa,
+    logout,
+    note,
+    angle_circle_right,
+    help_center,
+    coin_3D,
+    noData,
+    edit,
+    map_line,
+    cod,
+    check,
+    wallet,
+    order,
+    shopping,
+    favorite_3D,
+    whiteCheck,
+    banking,
+    setting_3D,
+    location,
+    heart_3D,
+    cancel,
+    QA_3D,
+    home,
+    cart_success,
+    success_bg,
+    trash
+};
