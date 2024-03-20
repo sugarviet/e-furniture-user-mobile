@@ -12,38 +12,8 @@ const COLORS = {
   dark: "#343a40",
   light: "#f8f9fa",
 
-  white: "#fff",
-  black: "#000",
-  lightBlack: "#4B4B4B",
-
-  gray: "#ecf0f6",
-  lightGray: "#f0f3f8",
-
-  slategray: "#909ab3",
-  darkGrey: "#ecf0f8",
-  blackGrey: "#61677d",
-  primaryOrder: "#f6f8fc",
-
-  orange: "#f6651e",
-  slightOrange: "#fea000",
-  lightOrange: "#fe9f0e",
-
-  yellow: "#fda013",
-  lightYellow: "#ffcf4b",
-
-  cancel: "#ef5354",
-  red: "#f25156",
-
-  green: "#5ac274",
-  lightGreen: "#46c775",
-
-  brown: "rgba(150, 99, 72, 1)",
-  opacityBrown: "rgba(150, 99, 72, 0.65)",
-  lightBrown: "#a2654c",
-  blueGrey: "#E7EAF4",
-
-  blackTitle: "#0F1010",
-};
+    grey1 :'#FDFDFD'
+}
 
 const SIZES = {
   xTiny: 2,
