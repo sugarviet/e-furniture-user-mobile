@@ -35,6 +35,7 @@ const feather_shopping_bag = 'shopping-bag'
 const fa_star_rating = 'star-half-alt'
 const antDesign_check_circle = 'checkcircle'
 const fa_circle = 'circle'
+const mi_checkout = 'shopping-cart-checkout'
 
 
 export const ICONS = {
@@ -76,6 +77,6 @@ export const ICONS = {
     antDesign_check_circle,
     fa_circle,
     antDesign_minus,
-    antDesign_plus
-    
+    antDesign_plus,
+    mi_checkout
 };

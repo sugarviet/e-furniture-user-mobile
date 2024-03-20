@@ -14,12 +14,6 @@ const Home = () => {
       <Banner source={IMAGES.banner} />
 
       <CategoriesFilter />
-      <Button
-        title="product detail"
-        onPress={() => {
-          go_to_product_detail();
-        }}
-      />
 
       <FlatList
         data={products}
