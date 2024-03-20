@@ -9,6 +9,7 @@ const BottomSheet = forwardRef((props, ref) => {
 
 	return (
 		<GorhomeBottomSheet
+			
 			ref={ref}
 			index={initialIndex}
 			snapPoints={snapPoints}
