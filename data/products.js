@@ -21,7 +21,7 @@ const products = [
     dimensions: "Length: 120cm, Width: 60cm, Height: 40cm",
     color: "Black",
     image:
-      "https://mfmd.rencdn.com/product/ashley/images/T974-1-ANGLE-SW-P1-KO.jpg",
+      "https://mysleepyhead.com/media/catalog/product/m/e/menu_coffee_table.jpg",
   },
   {
     id: 3,
