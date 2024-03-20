@@ -1,6 +1,6 @@
 import { FontAwesome5 } from "@expo/vector-icons";
 import React from "react";
-import { Image, Text, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { ICONS } from "../../constants/icons";
 import InteractiveIcon3D from "../InteractiveIcon3D";
 import useNavigation from "../../hooks/useNavigation";
@@ -11,10 +11,13 @@ const ProductCard = ({ product }) => {
   const handle_go_to_detail = () => {
     go_to_product_detail();
   };
+  const handleFavoritePress = (event) => {
+    event.stopPropagation();
+  };
   return (
     <PressableContainer onPress={handle_go_to_detail}>
-      <View className="w-48 bg-white border border-gray-300 rounded-lg overflow-hidden m-2 items-center">
-        <View className="w-48 bg-white border border-gray-300 rounded-lg overflow-hidden">
+      <View className="w-48 bg-white  rounded-lg overflow-hidden m-2 items-center">
+        <View className="w-48 bg-white  rounded-lg overflow-hidden">
           <View className="relative px-3">
             <Image
               source={{ uri: product.image }}
@@ -22,7 +25,9 @@ const ProductCard = ({ product }) => {
               resizeMode="cover"
             />
             <View className="absolute top-0 right-0 m-2">
-              <InteractiveIcon3D type="heart" />
+              <TouchableOpacity onPress={handleFavoritePress}>
+                <InteractiveIcon3D type="heart" />
+              </TouchableOpacity>
             </View>
           </View>
 

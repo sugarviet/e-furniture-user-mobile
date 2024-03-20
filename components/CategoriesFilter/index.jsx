@@ -28,6 +28,7 @@ const CategoriesFilter = () => {
         horizontal
         data={list}
         keyExtractor={(item) => item.id}
+        showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
           <View className="mx-1" key={item.id}>
             <Pressable
