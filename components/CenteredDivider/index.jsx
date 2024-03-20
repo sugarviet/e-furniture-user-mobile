@@ -11,7 +11,7 @@ const CenteredDivider = ({ color= 'black', thickness = 1, width='90%'}) => {
                 borderRadius: 2,
                 marginHorizontal: 'auto',
                 alignSelf: 'center',
-                marginTop: 6,
+                marginTop: 2,
                 marginBottom: 6,
             }}
         />

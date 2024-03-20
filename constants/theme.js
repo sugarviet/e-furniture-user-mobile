@@ -12,7 +12,8 @@ const COLORS = {
   dark: "#343a40",
   light: "#f8f9fa",
 
-    grey1 :'#FDFDFD'
+    grey1 :'#FDFDFD',
+    lightGray: '#d3d3d3',
 }
 
 const SIZES = {

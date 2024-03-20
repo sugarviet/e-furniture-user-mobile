@@ -4,7 +4,7 @@ import TabIcon from "../../../components/TabIcon";
 import HeaderButton from "../../../components/HeaderButton";
 
 const tabs = [
-  { page: "home", name: "E-FURNITURE", header_options: ["search"] },
+  { page: "home", name: "E-FURNITURE", header_options: [] },
   {
     page: "cart",
     name: "Mua sắm",

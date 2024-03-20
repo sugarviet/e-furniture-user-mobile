@@ -4,6 +4,8 @@ import products from "../../../../data/products";
 import ProductCard from "../../../../components/ProductCard";
 import PressableContainer from "../../../../components/PressableContainer";
 import CenteredDivider from "../../../../components/CenteredDivider";
+import { AntDesign } from '@expo/vector-icons';
+import { COLORS } from "../../../../constants/theme";
 
 const searchData = [
   {
@@ -40,12 +42,12 @@ const Search = () => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
         <View>
-          <View className="px-2 mb-2">
+          <View className="px-2 mb-2 py-4">
             <SearchBar onSearch={handleSearcProduct} />
           </View>
 
 
-          <CenteredDivider color='#d3d3d3' />
+          <CenteredDivider color={COLORS.lightGray} />
           <FlatList
             data={searchData}
             renderItem={({ item }) => <SearchResultCard text={item.title} />}
@@ -63,8 +65,10 @@ const SearchResultCard = ({ text }) => {
 
   return (
     <PressableContainer>
-      <View className='bg-white py-2 h-12 flex-col justify-center px-4'>
+      <View className='bg-white py-2 h-12 items-center px-4 flex-row justify-between'>
         <Text className='text-gray-400 text-lg'>{text}</Text>
+        <AntDesign name="arrowright" size={24} color={COLORS.lightGray} />
+
       </View>
 
     </PressableContainer>
