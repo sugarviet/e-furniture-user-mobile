@@ -1,9 +1,10 @@
 import { Text, View } from "react-native"
-
+import OrderStep from "../../../components/OrderStep"
 const Order = () => {
   return (
-    <View className="flex-1 justify-center items-center bg-blue-400">
-        <Text>Order page</Text>
+    <View className='bg-white flex-1'>
+        
+        <OrderStep />
     </View>
   )
 }

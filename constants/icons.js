@@ -36,6 +36,10 @@ const fa_star_rating = 'star-half-alt'
 const antDesign_check_circle = 'checkcircle'
 const fa_circle = 'circle'
 const mi_checkout = 'shopping-cart-checkout'
+const feather_package = 'package'
+const fa_truck = 'truck'
+const ma_done = 'done'
+
 
 
 export const ICONS = {
@@ -78,5 +82,8 @@ export const ICONS = {
     fa_circle,
     antDesign_minus,
     antDesign_plus,
-    mi_checkout
+    mi_checkout,
+    feather_package,
+    ma_done,
+    fa_truck
 };

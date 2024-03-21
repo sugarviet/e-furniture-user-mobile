@@ -1,6 +1,6 @@
 import React from "react";
-import { FontAwesome5, Ionicons, Feather, AntDesign, MaterialIcons } from "@expo/vector-icons";
-import { ICONS } from "../../../constants/icons";
+import { FontAwesome5, Ionicons, Feather, AntDesign, MaterialIcons, FontAwesome6  } from "@expo/vector-icons";
+import { ICONS } from "../../constants/icons";
 
 import { View, Image } from "react-native";
 
@@ -77,9 +77,24 @@ const types = {
     icon: ICONS.ionIcons_image,
    
   },
+  package: {
+    component: Feather,
+    icon: ICONS.feather_package,
+   
+  },
+  ship: {
+    component: FontAwesome6,
+    icon: ICONS.fa_truck,
+   
+  },
+  done: {
+    component: MaterialIcons,
+    icon: ICONS.ma_done,
+   
+  },
 };
 
-const Icon2D = ({ activated, name }) => {
+const Icon2D = ({ activated = 'white', name, size = 12 }) => {
   const Icon = types[name].component;
  
 
@@ -88,8 +103,8 @@ const Icon2D = ({ activated, name }) => {
       <Icon
         // style={styles.icon(types[name].height, types[name].width)}
         name={types[name].icon}
-        color={'white'}
-        size={12}
+        color={activated}
+        size={size}
         source={types[name].src}
       />
     </View>
