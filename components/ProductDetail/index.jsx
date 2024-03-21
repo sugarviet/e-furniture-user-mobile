@@ -5,7 +5,7 @@ import CarouselSlider from "../../components/CarouselSlider";
 import { FontAwesome5, FontAwesome, AntDesign, FontAwesome6 } from '@expo/vector-icons';
 import InteractiveIcon3D from "../InteractiveIcon3D";
 import QuantityOption from "../QuantityOption";
-import Button from "../Button";
+import ButtonModal from "../ButtonModal";
 const productDetailCarousel = [
     { id: 1, URI: "https://img.freepik.com/free-psd/armchair-pillow_176382-861.jpg?t=st=1710746885~exp=1710750485~hmac=5daff58b0442d6c3540e68bbf6fb30f07b7e4d802e0ee1b24d02b507a56f8f07&w=826" },
     { id: 2, URI: "https://img.freepik.com/free-psd/armchair-pillow_176382-860.jpg?t=st=1710746882~exp=1710750482~hmac=809a8b8bfd6ab7b349537ced2c12298fa0289788662db717a3ebbcecd18ea98d&w=826" },
@@ -67,9 +67,9 @@ export default function ProductDetail() {
                         <Text className="text-[26px] font-urbanistBold">2.800.000đ</Text>
                     </View>
                     <View className="w-[60%]">
-                        <Button type="addToCart">
+                        <ButtonModal type="addToCart">
                             <Text className="text-white font-urbanistSemiBold">Add to cart</Text>
-                        </Button>
+                        </ButtonModal>
                     </View>
                 </View>
             </View>

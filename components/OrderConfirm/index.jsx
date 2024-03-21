@@ -1,6 +1,6 @@
 import { ScrollView, Text, View, Pressable, Image } from 'react-native';
 import AddressCard from "../AddressCard";
-import Button from '../Button';
+import ButtonModal from '../ButtonModal';
 import CartCard from '../CartCard';
 import CouponCard from '../CouponCard';
 import ShippingCard from '../ShippingCard';
@@ -92,7 +92,7 @@ export default function OrderConfirm() {
             <View className="absolute bottom-0 left-0 right-0 w-full h-[100px] shadow-md border-t border-x border-grey5 rounded-t-3xl bg-white">
                 <View className="flex flex-row justify-between px-5 pt-5">
                     <Pressable className="w-full">
-                        <Button type="checkout">
+                        <ButtonModal type="checkout">
                             <View className="flex flex-row items-center">
                                 <Text className="text-white font-urbanistSemiBold pr-4">Continue to Payment</Text>
                                 <Image
@@ -101,7 +101,7 @@ export default function OrderConfirm() {
                                     source={IMAGES.right_arrow}
                                 />
                             </View>
-                        </Button>
+                        </ButtonModal>
                     </Pressable>
                 </View>
             </View>

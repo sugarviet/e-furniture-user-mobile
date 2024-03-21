@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { COLORS } from '../../constants';
-import Button from '../Button';
+import ButtonModal from '../ButtonModal';
 import CartCard from '../CartCard';
 import GorhomeBottomSheet from '../BottomSheet'
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -73,9 +73,9 @@ function CartList() {
                         <Text className="text-[26px] font-urbanistBold">2.800.000đ</Text>
                     </View>
                     <Pressable onPress={go_to_checkout} className="w-[60%]">
-                        <Button type="cart">
+                        <ButtonModal type="cart">
                             <Text className="text-white font-urbanistSemiBold">Checkout</Text>
-                        </Button>
+                        </ButtonModal>
                     </Pressable>
                 </View>
             </View>
@@ -97,9 +97,9 @@ function CartList() {
                         </TouchableOpacity>
                     </Pressable>
                     <Pressable className="w-[60%] ">
-                        <Button type="remove">
+                        <ButtonModal type="remove">
                             <Text className="text-white font-urbanistSemiBold">Yes, Remove</Text>
-                        </Button>
+                        </ButtonModal>
                     </Pressable>
                 </View>
             </GorhomeBottomSheet>

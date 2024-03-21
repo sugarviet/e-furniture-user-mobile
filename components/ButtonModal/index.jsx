@@ -7,27 +7,41 @@ const TYPES = {
     cart: {
         icon: ICONS.mi_checkout,
         size: 24,
+        bgColor: 'black'
     },
-    addToCart:{
+    addToCart: {
         icon: ICONS.mi_checkout,
         size: 24,
+        bgColor: 'black'
     },
-    remove:{
+    remove: {
         icon: null,
         size: 24,
+        bgColor: 'black'
     },
-    checkout:{
+    checkout: {
         icon: null,
         size: 24,
+        bgColor: 'black'
+    },
+    viewOrder: {
+        icon: null,
+        size: 24,
+        bgColor: 'black'
+    },
+    goToHome: {
+        icon: null,
+        size: 24,
+        bgColor: '#e7e7e7'
     }
 
 };
 
-const Button = ({ type, children }) => {
-    const { size } = TYPES[type];
+const ButtonModal = ({ type, children }) => {
+    const { size, bgColor } = TYPES[type];
     return (
         <TouchableOpacity className="w-full rounded-[40px] pl-2">
-            <View className="flex flex-row justify-center items-center py-5 rounded-[40px] bg-black">
+            <View style={{ backgroundColor: bgColor }} className="flex flex-row justify-center items-center py-5 rounded-[40px] bg-black">
                 <MaterialIcons name={TYPES[type].icon} size={size} color="white" />
                 <View className="text-white font-urbanistSemiBold pl-3">{children}</View>
             </View>
@@ -35,4 +49,4 @@ const Button = ({ type, children }) => {
     )
 }
 
-export default Button
+export default ButtonModal
