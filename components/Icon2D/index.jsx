@@ -92,6 +92,14 @@ const types = {
     icon: ICONS.ma_done,
    
   },
+  location: {
+    component: Ionicons,
+    icon: ICONS.ionIcons_location,
+  },
+  edit:{
+    component: AntDesign,
+    icon: ICONS.antDesign_eidt,
+  }
 };
 
 const Icon2D = ({ activated = 'white', name, size = 12 }) => {
