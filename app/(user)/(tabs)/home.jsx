@@ -5,26 +5,20 @@ import CategoriesFilter from "../../../components/CategoriesFilter";
 import ProductCard from "../../../components/ProductCard";
 import { IMAGES } from "../../../constants/image";
 import products from "../../../data/products";
-import SearchBar from "../../../components/SearchBar";
-import useNavigation from "../../../hooks/useNavigation";
 import PopupModal from "../../../components/Modal";
 import ButtonModal from "../../../components/ButtonModal";
+import TypeList from "../../../components/TypeList";
+import types from "../../../data/types";
 
 const Home = () => {
-  const { go_to_search_page } = useNavigation();
 
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <ScrollView >
+    <ScrollView>
       <View style={{ flex: 1, backgroundColor: "white" }}>
-
-        <Pressable className="px-2 mb-2 py-4" onPress={go_to_search_page}>
-          <SearchBar />
-        </Pressable>
-
         <Banner source={IMAGES.banner} height={200} />
-
+        <TypeList types={types} />
         <CategoriesFilter />
 
         <Button title="Open Success Modal" onPress={() => setModalVisible(!modalVisible)}>
