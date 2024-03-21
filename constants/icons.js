@@ -39,7 +39,8 @@ const mi_checkout = 'shopping-cart-checkout'
 const feather_package = 'package'
 const fa_truck = 'truck'
 const ma_done = 'done'
-
+const ionIcons_location = 'location'
+const antDesign_eidt = 'edit'
 
 
 export const ICONS = {
@@ -85,5 +86,7 @@ export const ICONS = {
     mi_checkout,
     feather_package,
     ma_done,
-    fa_truck
+    fa_truck,
+    ionIcons_location,
+    antDesign_eidt
 };
