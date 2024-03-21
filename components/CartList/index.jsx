@@ -1,10 +1,11 @@
 import { useRef } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { COLORS } from '../../constants';
-import Button from '../Button';
+import ButtonModal from '../ButtonModal';
 import CartCard from '../CartCard';
 import GorhomeBottomSheet from '../BottomSheet'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import useNavigation from '../../hooks/useNavigation';
 
 const cartData = [
     {
@@ -51,6 +52,7 @@ function CartList() {
 
     const cartRef = useRef(null);
 
+    const { go_to_checkout } = useNavigation();
     const handleOpenDeleteModal = () => {
         cartRef.current?.expand();
     }
@@ -58,9 +60,9 @@ function CartList() {
     return (
         <View style={{ height: '100%', backgroundColor: COLORS.grey1 }}>
             <ScrollView style={{ marginBottom: 90, height: '100%', width: '100%' }}>
-                <View className="mt-6 mx-5 w-full">
+                <View className="mt-6 mx-5">
                     {cartData.map((item) => (
-                        <CartCard cart={item} handleOpenDeleteModal={handleOpenDeleteModal} />
+                        <CartCard key={item.id} cart={item} handleOpenDeleteModal={handleOpenDeleteModal} />
                     ))}
                 </View>
             </ScrollView>
@@ -70,10 +72,10 @@ function CartList() {
                         <Text className="text-[12px] font-urbanistRegular text-grey1">Total price</Text>
                         <Text className="text-[26px] font-urbanistBold">2.800.000đ</Text>
                     </View>
-                    <Pressable className="w-[60%]">
-                        <Button type="cart">
-                            <Text>Checkout</Text>
-                        </Button>
+                    <Pressable onPress={go_to_checkout} className="w-[60%]">
+                        <ButtonModal type="cart">
+                            <Text className="text-white font-urbanistSemiBold">Checkout</Text>
+                        </ButtonModal>
                     </Pressable>
                 </View>
             </View>
@@ -95,9 +97,9 @@ function CartList() {
                         </TouchableOpacity>
                     </Pressable>
                     <Pressable className="w-[60%] ">
-                        <Button type="remove">
-                            <Text>Yes, Remove</Text>
-                        </Button>
+                        <ButtonModal type="remove">
+                            <Text className="text-white font-urbanistSemiBold">Yes, Remove</Text>
+                        </ButtonModal>
                     </Pressable>
                 </View>
             </GorhomeBottomSheet>
