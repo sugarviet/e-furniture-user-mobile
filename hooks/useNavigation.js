@@ -11,6 +11,7 @@ function useNavigation() {
   const go_to_search_page = () => router.push("/search");
   const go_to_search_result_page = (search) => router.push(`/search/result?q=${search}`);
   const go_to_wishlist = () => router.push("/wishlist");
+  const go_to_checkout = () => router.push("/checkout");
 
   return {
     go_to_sign_in,
@@ -22,7 +23,8 @@ function useNavigation() {
     go_to_product_detail,
     go_to_search_page,
     go_to_wishlist,
-    go_to_search_result_page
+    go_to_search_result_page,
+    go_to_checkout
   };
 }
 

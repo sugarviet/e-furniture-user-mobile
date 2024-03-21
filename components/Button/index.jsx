@@ -15,6 +15,10 @@ const TYPES = {
     remove:{
         icon: null,
         size: 24,
+    },
+    checkout:{
+        icon: null,
+        size: 24,
     }
 
 };
@@ -22,10 +26,10 @@ const TYPES = {
 const Button = ({ type, children }) => {
     const { size } = TYPES[type];
     return (
-        <TouchableOpacity className="w-full rounded-[40px] h-full pl-2">
+        <TouchableOpacity className="w-full rounded-[40px] pl-2">
             <View className="flex flex-row justify-center items-center py-5 rounded-[40px] bg-black">
                 <MaterialIcons name={TYPES[type].icon} size={size} color="white" />
-                <Text className="text-white font-urbanistSemiBold pl-3">{children}</Text>
+                <View className="text-white font-urbanistSemiBold pl-3">{children}</View>
             </View>
         </TouchableOpacity>
     )

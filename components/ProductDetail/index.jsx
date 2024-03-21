@@ -68,7 +68,7 @@ export default function ProductDetail() {
                     </View>
                     <View className="w-[60%]">
                         <Button type="addToCart">
-                            <Text>Add to cart</Text>
+                            <Text className="text-white font-urbanistSemiBold">Add to cart</Text>
                         </Button>
                     </View>
                 </View>
