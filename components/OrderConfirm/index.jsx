@@ -1,10 +1,15 @@
 import { ScrollView, Text, View, Pressable, Image } from 'react-native';
-import AddressCard from "../AddressCard";
 import ButtonModal from '../ButtonModal';
 import CartCard from '../CartCard';
-import CouponCard from '../CouponCard';
 import ShippingCard from '../ShippingCard';
 import { IMAGES } from '../../constants/image';
+import PressableContainer from '../PressableContainer';
+import Icon2D from '../Icon2D';
+import useNavigation from '../../hooks/useNavigation';
+import { FontAwesome6 } from '@expo/vector-icons';
+import { ICONS } from '../../constants/icons';
+import { Entypo } from '@expo/vector-icons';
+import Icon from '../Icon';
 
 const cartData = [
     {
@@ -37,8 +42,17 @@ const cartData = [
     },
 ]
 
+const defaultAddress = {
+    id: 1,
+    name: 'Lê Thế Khôi',
+    phone: '0978120511',
+    address: '213 Quang Trung, phường 10, Quận Gò Vấp',
+}
+
 
 export default function OrderConfirm() {
+
+    const { go_to_address_book, go_to_voucher_list } = useNavigation();
 
     return (
         <View className="h-full relative bg-white">
@@ -46,7 +60,24 @@ export default function OrderConfirm() {
                 <View className="border-b border-grey5 pb-1">
                     <Text className="text-black text-[18px] font-urbanistBold">Shipping Address</Text>
                     <View className="py-6">
-                        <AddressCard />
+                        <PressableContainer onPress={go_to_address_book}>
+                            <View className='flex-row bg-white rounded-3xl flex gap-1 items-center px-3 py-4 shadow-sm mx-1'>
+                                <View className="w-16 h-16 rounded-full bg-[#e3e3e3] flex justify-center items-center mr-3">
+                                    <View className='w-12 h-12 rounded-full bg-black flex justify-center items-center'>
+                                        <Icon2D name='location' size={20} activated="white" />
+                                    </View>
+                                </View>
+                                <View className='flex-1'>
+                                    <Text className='font-bold text-base max-w-[150px]'>{defaultAddress.name}</Text>
+                                    <Text className='font-bold text-sm'>{defaultAddress.phone}</Text>
+                                    <Text numberOfLines={2} className="font-urbanistMedium text-grey2 pt-1">{defaultAddress.address}</Text>
+                                </View>
+                                <View className='w-12 h-12 flex justify-center items-center'>
+                                    <Icon source={IMAGES.edit} style={{ width: 22, height: 22 }} />
+                                </View>
+                            </View>
+
+                        </PressableContainer>
                     </View>
                 </View>
                 <View className="border-b border-grey5 pt-6 pb-1">
@@ -58,7 +89,7 @@ export default function OrderConfirm() {
                     </View>
                 </View>
                 <View className="border-b border-grey5 pt-6 pb-1">
-                    <Text className="text-black text-[18px] font-urbanistBold">Choose Shipping</Text>
+                    <Text className="text-black text-[18px] font-urbanistBold">Shipping Method</Text>
                     <View className="py-6">
                         <ShippingCard />
                     </View>
@@ -66,7 +97,25 @@ export default function OrderConfirm() {
                 <View className="pt-6">
                     <Text className="text-black text-[18px] font-urbanistBold">Coupon Code</Text>
                     <View className="py-6">
-                        <CouponCard />
+                        <PressableContainer onPress={go_to_voucher_list}>
+                            <View className='flex-row bg-white rounded-3xl flex gap-1 items-center justify-between px-5 py-6 shadow-sm mx-1'>
+                                <View className="flex flex-row items-center">
+                                    <Icon source={IMAGES.coupon} style={{ width: 28, height: 28 }} />
+                                    <Text className='font-bold text-base pl-3'>Choose Coupon</Text>
+                                </View>
+                                <View className=''>
+                                    <Entypo name={ICONS.enTypo_arrow_right} size={21} color="black" />
+                                </View>
+                            </View>
+                        </PressableContainer>
+                        <View className="pt-4 flex flex-row gap-2 flex-wrap">
+                            <View className="bg-black rounded-3xl w-[180px] flex flex-row items-center px-4 py-2">
+                                <Text className="text-white font-urbanistBold text-[16px] pr-4">Discount 30% Off</Text>
+                                <Pressable>
+                                    <FontAwesome6 name="xmark" size={14} color="white" />
+                                </Pressable>
+                            </View>
+                        </View>
                     </View>
                 </View>
                 <View className='flex-col bg-white rounded-3xl flex gap-4 px-4 py-4 shadow-sm mx-1 mt-4 mb-10'>
@@ -89,21 +138,13 @@ export default function OrderConfirm() {
                 </View>
             </ScrollView>
 
-            <View className="absolute bottom-0 left-0 right-0 w-full h-[100px] shadow-md border-t border-x border-grey5 rounded-t-3xl bg-white">
-                <View className="flex flex-row justify-between px-5 pt-5">
-                    <Pressable className="w-full">
-                        <ButtonModal type="checkout">
-                            <View className="flex flex-row items-center">
-                                <Text className="text-white font-urbanistSemiBold pr-4">Continue to Payment</Text>
-                                <Image
-                                    resizeMode="contain"
-                                    style={{ width: 16, height: 16 }}
-                                    source={IMAGES.right_arrow}
-                                />
-                            </View>
-                        </ButtonModal>
-                    </Pressable>
-                </View>
+            <View className="absolute bottom-0 left-0 right-0 h-[100px] shadow-md border-t border-x border-grey5 rounded-t-3xl bg-white px-5 pt-5">
+                <ButtonModal type="checkout">
+                    <View className="flex flex-row items-center">
+                        <Text className="text-white font-urbanistSemiBold pr-4">Continue to Payment</Text>
+                        <Icon source={IMAGES.right_arrow} style={{ width: 16, height: 16 }} />
+                    </View>
+                </ButtonModal>
             </View>
         </View>
     )
