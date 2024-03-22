@@ -3,6 +3,7 @@ import { router } from "expo-router";
 function useNavigation() {
   const go_back = () => router.back();
   const go_to_welcome_screen = () => router.push("/");
+  const go_to_order = () => router.push("/order");
   const go_to_sign_in = () => router.push("/sign-in");
   const go_to_sign_up = () => router.push("/sign-up");
   const go_to_home = () => router.push("/home");
@@ -30,7 +31,8 @@ function useNavigation() {
     go_to_checkout,
     go_to_address_book,
     go_to_add_new_address,
-    go_to_voucher_list
+    go_to_voucher_list,
+    go_to_order
   };
 }
 

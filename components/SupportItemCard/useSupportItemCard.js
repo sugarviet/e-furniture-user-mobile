@@ -1,7 +1,9 @@
 import useAuth from "../../hooks/useAuth";
+import useNavigation from "../../hooks/useNavigation";
 
 function useSupportItemCard() {
   const {handleLogout} = useAuth();
+  const {go_to_wishlist, go_to_order} = useNavigation();
   const bank = {
     function: () => {
       
@@ -9,7 +11,7 @@ function useSupportItemCard() {
   };
   const wish_list = {
     function: () => {
-      
+      go_to_wishlist();
     },
   };
   const saved_post = {
@@ -19,7 +21,7 @@ function useSupportItemCard() {
   };
   const order = {
     function: () => {
-      
+      go_to_order()
     },
   };
   const cart = {
