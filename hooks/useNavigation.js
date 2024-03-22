@@ -12,6 +12,9 @@ function useNavigation() {
   const go_to_search_result_page = (search) => router.push(`/search/result?q=${search}`);
   const go_to_wishlist = () => router.push("/wishlist");
   const go_to_checkout = () => router.push("/checkout");
+  const go_to_address_book = () => router.push("/address");
+  const go_to_add_new_address = () => router.push("/address/add-new-address");
+  const go_to_voucher_list = () => router.push("/checkout/voucher");
 
   return {
     go_to_sign_in,
@@ -24,7 +27,10 @@ function useNavigation() {
     go_to_search_page,
     go_to_wishlist,
     go_to_search_result_page,
-    go_to_checkout
+    go_to_checkout,
+    go_to_address_book,
+    go_to_add_new_address,
+    go_to_voucher_list
   };
 }
 

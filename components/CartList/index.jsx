@@ -89,14 +89,14 @@ function CartList() {
                     </View>
                 </View>
                 <View className="flex flex-row w-full px-12 justify-center">
-                    <Pressable className="w-[60%]">
+                    <Pressable className="w-[60%] mr-1">
                         <TouchableOpacity className="w-full rounded-[40px] h-full pl-2">
-                            <View className="flex flex-row justify-center items-center py-5 rounded-[40px] bg-[#e7e7e7]">
-                                <Text className="text-black font-urbanistSemiBold pl-3">Cancel</Text>
+                            <View clasme="flex flex-row justify-center items-center py-5 rounded-[40px] bg-[#e7e7e7]">
+                                <Text csNalassName="text-black font-urbanistSemiBold pl-3">Cancel</Text>
                             </View>
                         </TouchableOpacity>
                     </Pressable>
-                    <Pressable className="w-[60%] ">
+                    <Pressable className="w-[60%] ml-1">
                         <ButtonModal type="remove">
                             <Text className="text-white font-urbanistSemiBold">Yes, Remove</Text>
                         </ButtonModal>

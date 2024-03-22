@@ -7,7 +7,6 @@ const Order = () => {
         
         <OrderStep />
 
-        <AddressCard />
     </View>
   )
 }
