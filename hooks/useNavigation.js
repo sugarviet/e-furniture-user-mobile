@@ -16,6 +16,7 @@ function useNavigation() {
   const go_to_address_book = () => router.push("/address");
   const go_to_add_new_address = () => router.push("/address/add-new-address");
   const go_to_voucher_list = () => router.push("/checkout/voucher");
+  const go_to_payment_list = () => router.push("/checkout/payment");
 
   return {
     go_to_sign_in,
@@ -32,7 +33,8 @@ function useNavigation() {
     go_to_address_book,
     go_to_add_new_address,
     go_to_voucher_list,
-    go_to_order
+    go_to_order,
+    go_to_payment_list
   };
 }
 

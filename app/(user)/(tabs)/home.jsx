@@ -22,7 +22,7 @@ const productDetailCarousel = [
 
 const Home = () => {
   const { go_to_search_page } = useNavigation();
-  const [modalVisible, setModalVisible] = useState(false);
+
 
   return (
     <ScrollView>
@@ -40,20 +40,7 @@ const Home = () => {
         <TypeList types={types} />
         <CategoriesFilter />
 
-        <Button title="Open Success Modal" onPress={() => setModalVisible(!modalVisible)}>
-        </Button>
-        <PopupModal type="success" modalVisible={modalVisible} setModalVisible={setModalVisible}>
-          <Pressable className="w-full pt-8">
-            <ButtonModal type="viewOrder">
-              <Text className="text-white font-urbanistSemiBold">View Order</Text>
-            </ButtonModal>
-          </Pressable>
-          <Pressable onPress={() => setModalVisible(!modalVisible)} className="w-full pt-3 pb-2">
-            <ButtonModal type="goToHome">
-              <Text className="text-black font-urbanistSemiBold">Back To Home</Text>
-            </ButtonModal>
-          </Pressable>
-        </PopupModal>
+       
 
         <View
           style={{

@@ -50,8 +50,8 @@ const CouponList = () => {
         <View className="h-full relative bg-white">
             <ScrollView className="px-2 py-4 mt-4" style={{ marginBottom: 90, height: '100%', width: '100%' }}>
                 {couponList?.map((coupon) => (
-                    <View className="pb-6">
-                        <CouponCard key={coupon.id} />
+                    <View key={coupon.id} className="pb-6">
+                        <CouponCard />
                     </View>
                 ))}
             </ScrollView>

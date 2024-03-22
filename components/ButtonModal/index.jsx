@@ -45,7 +45,7 @@ const TYPES = {
 const ButtonModal = ({ type, children }) => {
     const { size, bgColor } = TYPES[type];
     return (
-        <TouchableOpacity className="w-full rounded-[40px] shadow-sm shadow-black">
+        <TouchableOpacity className="w-full rounded-[40px] shadow-sm">
             <View style={{ backgroundColor: bgColor }} className="flex flex-row justify-center items-center py-5 rounded-[40px] bg-black shadow-2xl">
                 <MaterialIcons name={TYPES[type].icon} size={size} color="white" />
                 <View className="text-white font-urbanistSemiBold pl-3">{children}</View>

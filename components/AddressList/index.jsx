@@ -51,9 +51,9 @@ const AddressList = () => {
         <View className="h-full relative bg-white">
             <ScrollView className="px-4 py-4 mt-4" style={{ marginBottom: 90, height: '100%', width: '100%' }}>
                 {addressList.map((address) => (
-                    <View className="pb-6">
+                    <View key={address.id} className="pb-6">
                         <AddressCard
-                            key={address.id}
+                            
                             data={address}
                         />
                     </View>

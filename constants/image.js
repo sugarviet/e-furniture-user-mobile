@@ -39,6 +39,7 @@ import wishlist from '../assets/images/wishlist.png';
 import checkout from '../assets/images/checkout.png';
 import bag from '../assets/images/bag.png';
 import empty from '../assets/images/empty.png';
+import vietqr from '../assets/images/vietqr.png';
 
 
 export const IMAGES = {
@@ -82,5 +83,6 @@ export const IMAGES = {
     wishlist,
     checkout,
     bag,
-    empty
+    empty,
+    vietqr
 };
