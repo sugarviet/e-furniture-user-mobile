@@ -1,9 +1,7 @@
 import { View } from "react-native";
 import ScrollableContentContainer from "../../../components/ScrollableContentContainer";
 import UserBriefCard from "../../../components/UserBriefCard";
-import MenuOptionCard from "../../../components/MenuOption";
 import SupportItemCard from "../../../components/SupportItemCard";
-import RewardCard from "../../../components/RewardCard";
 import { COLORS } from "../../../constants/theme";
 import CenteredDivider from "../../../components/CenteredDivider";
 const SUPPORT_LIST = [
@@ -15,10 +13,6 @@ const SUPPORT_LIST = [
   "setting",
   "log_out",
 ];
-// const OPTION_RIGHT_LIST = ["NFC", "wishlist", "order"];
-const OPTION_RIGHT_LIST = ["wishlist", "order", 'cart'];
-
-const OPTION_LEFT_LIST = ["cart"];
 
 const Menu = () => {
   return (
