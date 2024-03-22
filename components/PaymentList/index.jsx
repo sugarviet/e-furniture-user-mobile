@@ -51,7 +51,7 @@ const PaymentList = () => {
             </View>
             <ScrollView className="px-2 py-4 mt-4" style={{ marginBottom: 90, height: '100%', width: '100%' }}>
                 {paymentList?.map((payment) => (
-                    <View key={payment.id} className="pb-6">
+                    <View key={payment.method} className="pb-6">
                         <PaymentCard data={payment} selectPayment={selectPayment} handleSelectPayment={handleSelectPayment} />
                     </View>
                 ))}

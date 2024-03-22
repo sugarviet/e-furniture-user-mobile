@@ -1,8 +1,11 @@
-import { ScrollView, Text, View, Pressable, Image } from 'react-native';
+import { View } from 'react-native';
+import AddAddressForm from '../../../../../components/AddAddressForm';
 
 const AddAddress = () => {
     return (
-        <Text>AddAddress</Text>
+        <View className="h-full bg-white">
+            <AddAddressForm />
+        </View>
     )
 }
 
