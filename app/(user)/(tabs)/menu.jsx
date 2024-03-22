@@ -11,7 +11,7 @@ const SUPPORT_LIST = [
   "log_out",
 ];
 const OPTION_RIGHT_LIST = ["NFC", "wishlist", "order"];
-const OPTION_LEFT_LIST = ["cart", "clubs"];
+const OPTION_LEFT_LIST = ["cart"];
 
 const Menu = () => {
   return (

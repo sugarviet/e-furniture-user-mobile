@@ -24,8 +24,15 @@ const TYPE = {
     title: "default",
     itemWidth: ITEM_CAROUSEL_WIDTH * 1.2,
     heightImg: 200,
-
   },
+  flashsale: {
+    title: "flashsale",
+    itemWidth: WIDTH_FULL,
+    padding: 50,
+    widthImg: WIDTH_FULL,
+    heightImg: WIDTH_FULL,
+    resizeMode: 'contain'
+  }
 };
 
 export default function CarouselSlider({ pagination = false, carouselData = [], type = 'default' }) {
