@@ -9,6 +9,7 @@ import {
 import { ANIMATIONS } from "../../constants/animations";
 import { IMAGES } from "../../constants/image";
 import Overlay from "../Overlay";
+import Icon from "../Icon";
 
 const TYPES = {
     success: {
@@ -47,13 +48,13 @@ function PopupModal({
                                         source={ANIMATIONS.success_bg}
                                     />
                                     <View className="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center">
-                                        <Image
+                                        <Icon
+                                            source={TYPES[type].image}
+                                            className="w-[25px] h-[25px]"
                                             style={{
                                                 width,
                                                 height
                                             }}
-                                            resizeMode="contain"
-                                            source={TYPES[type].image}
                                         />
                                     </View>
                                 </View>
