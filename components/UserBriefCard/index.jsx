@@ -11,7 +11,7 @@ export default function UserBriefCard() {
       <View className="flex-1">
         <Text className='font-bold text-lg my-1'>Viet</Text>
         <TouchableOpacity>
-          <Text className='font-bold text-sm text-gray-600 my-1'>Trang cá nhân</Text>
+          <Text className='font-bold text-sm text-gray-600 my-1'>Profile</Text>
         </TouchableOpacity>
       </View>
     </View>

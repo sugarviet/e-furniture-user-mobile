@@ -32,6 +32,15 @@ import trash from '../assets/images/trash.png';
 import shipping_car from '../assets/images/shipping_car.png';
 import coupon from '../assets/images/coupon.png';
 import right_arrow from '../assets/images/right_arrow.png';
+import adjust_control from '../assets/images/contrast-adjustment.png';
+import setting from '../assets/images/setting.png';
+import help from '../assets/images/help.png';
+import wishlist from '../assets/images/wishlist.png';
+import checkout from '../assets/images/checkout.png';
+import bag from '../assets/images/bag.png';
+
+
+
 
 export const IMAGES = {
     user,
@@ -67,5 +76,11 @@ export const IMAGES = {
     trash,
     shipping_car,
     coupon,
-    right_arrow
+    right_arrow,
+    adjust_control,
+    setting,
+    help,
+    wishlist,
+    checkout,
+    bag
 };

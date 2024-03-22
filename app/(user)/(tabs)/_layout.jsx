@@ -5,6 +5,7 @@ import HeaderButton from "../../../components/HeaderButton";
 
 const tabs = [
   { page: "home", name: "E-FURNITURE", header_options: [] },
+  { page: "wishlist", name: "Wishlist", header_options: [] },
   {
     page: "cart",
     name: "Mua sắm",

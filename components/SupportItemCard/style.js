@@ -18,15 +18,20 @@ const styles = StyleSheet.create({
   icon: {
     width: 28,
     height: 28,
-    flex: 1
+
   },
   text_wrapper: {
-    justifyContent: "center",
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+
   },
-  text: {
+  text: (color = 'black') => ({
+    color,
     fontSize: 16,
-    
-  },
+    fontWeight: "bold",
+  }),
 });
 
 export default styles;

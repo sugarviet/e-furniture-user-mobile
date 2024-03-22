@@ -41,7 +41,8 @@ const fa_truck = 'truck'
 const ma_done = 'done'
 const ionIcons_location = 'location'
 const antDesign_eidt = 'edit'
-const enTypo_arrow_right = 'chevron-thin-right'
+const enTypo_arrow_right = 'chevron-thin-right';
+const ion_bookmark = 'bookmark'
 
 
 export const ICONS = {
@@ -90,5 +91,6 @@ export const ICONS = {
     fa_truck,
     ionIcons_location,
     antDesign_eidt,
-    enTypo_arrow_right
+    enTypo_arrow_right,
+    ion_bookmark
 };

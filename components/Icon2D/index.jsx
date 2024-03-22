@@ -53,7 +53,7 @@ const types = {
   },
   productCart: {
     component: Feather,
-    icon: ICONS.feather_product_cart,
+    icon: ICONS.feather_shopping_bag,
    
   },
   activity: {
@@ -99,6 +99,14 @@ const types = {
   edit:{
     component: AntDesign,
     icon: ICONS.antDesign_eidt,
+  },
+  wishlist:{
+    component: Ionicons,
+    icon: ICONS.ion_bookmark,
+  },
+  order:{
+    component: Feather,
+    icon: ICONS.feather_product_cart,
   }
 };
 

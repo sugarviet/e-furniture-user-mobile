@@ -1,34 +1,45 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import styles from "./style";
-
+import { MaterialIcons } from '@expo/vector-icons';
 import { IMAGES} from '../../constants/image'
 import useSupportItemCard from "./useSupportItemCard";
 
+
 const TYPE = {
   wish_list: {
-    icon: IMAGES.heart_3D,
-    text: "Wishlist của bạn",
+    icon: IMAGES.wishlist,
+    text: "Wishlist",
   },
-  saved_post: {
-    icon: IMAGES.favorite_3D,
-    text: "Bài viết đã lưu",
+  edit_profile: {
+    icon: IMAGES.user,
+    text: "Edit Profile",
   },
-  following: {
-    icon: IMAGES.community_3D,
-    text: "Đang theo dõi",
+  bank: {
+    icon: IMAGES.wallet,
+    text: "Bank Account",
   },
   assistance: {
-    icon: IMAGES.QA_3D,
-    text: "Trợ giúp",
+    icon: IMAGES.help,
+    text: "Help center",
+  },
+  order: {
+    icon: IMAGES.checkout,
+    text: "Order",
+  },
+  cart: {
+    icon: IMAGES.bag,
+    text: "Cart",
   },
   setting: {
-    icon: IMAGES.setting_3D,
-    text: "Cài đặt",
+    icon: IMAGES.setting,
+    text: "Settings",
   },
   log_out:{
     icon: IMAGES.logout,
-    text: "Đăng xuất",
+    text: "Logout",
+    color: 'red'
+ 
     
   }
 };
@@ -36,15 +47,17 @@ function SupportItemCard({ type }) {
   const props = TYPE[type];
   const SUPPORT_ITEM_CARD_FN = useSupportItemCard();
   const fnc = SUPPORT_ITEM_CARD_FN[type];
-  const { icon, text } = props;
+  const { icon, text, color = 'black' } = props;
 
   return (
-    <TouchableOpacity style={styles.container} onPress={fnc.function}>
+    <TouchableOpacity onPress={fnc.function} className='flex-1 flex-row my-2 shadow-lg rounded-md px-1'>
+      
       <View style={styles.icon_wrapper}>
-        <Image resizeMode="cover" style={styles.icon} source={icon} />
+        <Image resizeMode="cover" source={icon} className={`w-8 h-8`} />
       </View>
       <View style={styles.text_wrapper}>
-        <Text style={styles.text}>{text}</Text>
+        <Text style={styles.text(color)}>{text}</Text>
+        <MaterialIcons name="arrow-forward-ios" size={18} color={color} />
       </View>
     </TouchableOpacity>
   );

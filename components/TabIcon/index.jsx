@@ -74,6 +74,14 @@ const TYPE = {
     color: 'black',
 
   },
+  wishlist: {
+    component: Ionicons,
+    name: "Wishlist",
+
+    icon: ICONS.ionIcon_heart_full,
+    color: 'black',
+
+  },
   threeDotsHorizontal: {
     component: Ionicons,
     icon: ICONS.ionIcon_ellipsis_horizontal_sharp,
