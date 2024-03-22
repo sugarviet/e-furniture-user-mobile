@@ -9,8 +9,8 @@ function AuthenticateLayout() {
   const { accessToken } = useAuth();
   const { go_to_home } = useNavigation();
   useEffect(() => {
-     sleep(1000).then(() => {
-      if(accessToken) return go_to_home();
+    sleep(1000).then(() => {
+       if(accessToken) return go_to_home();
 
     });
  

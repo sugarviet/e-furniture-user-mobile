@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { TextInput, View } from "react-native";
+import { IMAGES } from "../../constants/image";
 
 import { ICONS } from '../../constants/icons'
 import { Ionicons } from "@expo/vector-icons";
 import useNavigation from "../../hooks/useNavigation";
+import Icon from "../Icon";
 
 const DEFAULT_STATE = {
   value: "",
@@ -32,6 +34,7 @@ function SearchBar({ onSearch = () => {}, initialFocus = false, initialValue = '
   return (
     <View className={`p-2.5 w-full h-14 bg-gray-100 rounded-xl items-center flex justify-between flex-row ${isFocus ? 'border-black border-[1px]' : ''}`}>
       <Ionicons
+        color={"#d3d3d3"}
         name={ICONS.ionIcon_search}
         size={20}
       />
@@ -40,12 +43,13 @@ function SearchBar({ onSearch = () => {}, initialFocus = false, initialValue = '
         value={searchValue}
         onChangeText={(value) => handleOnChange(value)}
         placeholder={placeholder}
-        placeholderTextColor={'#454545'}
+        placeholderTextColor={'#d3d3d3'}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         onSubmitEditing={handleSubmit}
 
       />
+       <Icon source={IMAGES.adjust_control} style={{ width: 22, height: 22 }} />
     </View>
   );
 }

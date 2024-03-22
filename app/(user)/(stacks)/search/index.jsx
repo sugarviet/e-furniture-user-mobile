@@ -42,12 +42,15 @@ const Search = () => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
         <View>
-          <View className="px-2 mb-2 py-4">
+          <View className="px-2 py-4">
             <SearchBar onSearch={handleSearcProduct} />
           </View>
 
-
-          <CenteredDivider color={COLORS.lightGray} />
+          <View className='flex-row justify-between items-center px-4 py-2'>
+            <Text className='font-bold text-lg'>Recent</Text>
+            <Text className='font-bold'>Clear All</Text>
+          </View>
+          <CenteredDivider color={COLORS.lightGray} thickness={0.5}/>
           <FlatList
             data={searchData}
             renderItem={({ item }) => <SearchResultCard text={item.title} />}

@@ -2,6 +2,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import Icon3D from "../Icon3D";
 import useNavigation from "../../hooks/useNavigation";
+import Icon2D from "../Icon2D";
 
 const TYPE = {
   NFC: {
@@ -36,11 +37,16 @@ const TYPE = {
   },
   order: {
     icon: "order",
-    text: "Đơn hàng của bạn",
+    text: "Your Order",
   },
   wishlist: {
     icon: "wishlist",
     text: "Wishlist",
+    path: "go_to_wishlist",
+  },
+  cart: {
+    icon: "productCart",
+    text: "Cart",
     path: "go_to_wishlist",
   },
 };
@@ -51,18 +57,20 @@ function MenuOptionCard({ type }) {
   const { icon, text, path } = props;
 
   const navigate = useNavigation();
+  console.log(icon)
 
   return (
     <TouchableOpacity
-      className="rounded-lg px-2 py-3 bg-white h-18 justify-between shadow"
+      className="rounded-lg px-2 py-3 bg-blackPrimary h-18 justify-between shadow-lg"
       onPress={() => {
         if (path) {
           navigate[path]();
         }
       }}
     >
-      <Icon3D type={icon} />
-      <Text className="mt-2 text-base font-medium">{text}</Text>
+      {/* <Icon3D type={icon} /> */}
+      <Icon2D name={icon} activated="white" size={20}/>
+      <Text className="mt-2 text-base font-medium text-white">{text}</Text>
     </TouchableOpacity>
   );
 }

@@ -11,6 +11,7 @@ const SHAPES = {
   };
   
   const AVATAR_SIZES = {
+    superMega: "w-32 h-32",
     large: "w-10 h-10",
     mega: "w-20 h-20",
     small: "w-48 h-48",
