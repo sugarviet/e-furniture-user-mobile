@@ -49,9 +49,7 @@ const TYPE = {
     rules: () => ({
       required: "Please enter the password",
       pattern: {
-        // value: /^(?=.*[a-zA-Z])(?=.*\d)(?!\s).{6,}$/,
-        value: /^\S*$/,
-
+        value: /^(?=.*[a-zA-Z])(?=.*\d)(?!\s).{6,}$/,
         message:
           "The password must be at least 6 characters long, including both uppercase and lowercase letters, and numbers, no whitespace",
       },
@@ -103,6 +101,7 @@ function FormInput({ type, control, validated = true }) {
               className="flex-1"
               placeholder={TYPE[type].placeholder}
               value={value}
+              secureTextEntry={isSecure}
               editable={TYPE[type].editable}
               onChangeText={onChange}
               onBlur={onBlur}

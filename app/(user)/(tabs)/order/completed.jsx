@@ -1,10 +1,10 @@
 import React from 'react'
-import { View, Text } from 'react-native'
-
+import { View } from 'react-native'
+import EmptyContent from '../../../../components/EmptyContent'
 const Completed = () => {
   return (
-    <View>
-        <Text>Completed</Text>
+    <View className='bg-white flex-1'>   
+        <EmptyContent type='order'/>
     </View>
   )
 }
