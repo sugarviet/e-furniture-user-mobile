@@ -38,8 +38,7 @@ import help from '../assets/images/help.png';
 import wishlist from '../assets/images/wishlist.png';
 import checkout from '../assets/images/checkout.png';
 import bag from '../assets/images/bag.png';
-
-
+import empty from '../assets/images/empty.png';
 
 
 export const IMAGES = {
@@ -82,5 +81,6 @@ export const IMAGES = {
     help,
     wishlist,
     checkout,
-    bag
+    bag,
+    empty
 };

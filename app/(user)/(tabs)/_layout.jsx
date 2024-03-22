@@ -8,7 +8,7 @@ const tabs = [
   { page: "wishlist", name: "Wishlist", header_options: [] },
   {
     page: "cart",
-    name: "Mua sắm",
+    name: "Shopping",
     header_options: ["shopping_cart", "shopping_options"],
   },
   { page: "order", name: "Order", header_options: [] },
