@@ -17,7 +17,7 @@ import BestSelletSlider from "../../../components/BestSelletSlider";
 const productDetailCarousel = [
   { id: 1, URI: "https://i.ibb.co/0QmpZ2X/image-5.png" },
   { id: 2, URI: "https://i.ibb.co/MDkgBLN/image-4.png" },
- 
+
 ];
 
 const Home = () => {
@@ -30,17 +30,22 @@ const Home = () => {
         <Pressable className="px-2 mb-2 py-4" onPress={go_to_search_page}>
           <SearchBar />
         </Pressable>
-        <View className='flex justify-center mx-auto'>
-          <View className='flex-row justify-between items-center px-4'>
+        <View className=''>
+          <View className='flex-row justify-between items-center px-3'>
             <Text className='text-xl font-urbanistBold'>Special Offers</Text>
-            <Text className='font-bold'>See All</Text>
+            <Text className='font-urbanistBold text-base'>See All</Text>
           </View>
           <BestSelletSlider pagination carouselData={productDetailCarousel} />
         </View>
         <TypeList types={types} />
-        <CategoriesFilter />
+        <View className='flex-row justify-between items-center px-3'>
+          <Text className='text-xl font-urbanistBold'>Most Popular</Text>
+          <Text className='font-urbanistBold text-base'>See All</Text>
+        </View>
+        <View className="mx-[10px]">
+          <CategoriesFilter />
+        </View>
 
-       
 
         <View
           style={{

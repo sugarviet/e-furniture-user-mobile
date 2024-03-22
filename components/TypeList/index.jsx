@@ -17,7 +17,7 @@ const TypeList = ({ types }) => {
             style={styles.typeItem}
           >
             <View style={styles.imageContainer}>
-              <Image source={{ uri: type.image }} style={styles.image} />
+              <Image source={type.image} style={styles.image} />
             </View>
             <Text style={styles.name}>{type.name}</Text>
           </Pressable>

@@ -27,7 +27,7 @@ const AddAddressForm = () => {
                 </View>
                 <View>
                     <Text className="text-[16px] font-urbanistBold pt-2">Phone number*</Text>
-                    <FormInput control={control} type="phone_user" />
+                    <FormInput control={control} type="phone" />
                 </View>
                 <View>
                     <Text className="text-[16px] font-urbanistBold pt-2">Province</Text>
@@ -43,7 +43,7 @@ const AddAddressForm = () => {
                 </View>
                 <View className="pb-12">
                     <Text className="text-[16px] font-urbanistBold pt-2">Address*</Text>
-                    <FormInput control={control} type="home_address" />
+                    <FormInput control={control} type="address" />
                 </View>
             </ScrollView>
             <Pressable

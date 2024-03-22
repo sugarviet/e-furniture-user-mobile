@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 30,
+    marginTop: 12,
     paddingHorizontal: 10,
   },
   typesContainer: {
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   typeItem: {
     width: "25%",
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: 25,
   },
   imageContainer: {
     width: 60,
@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#EBEBEC",
   },
   image: {
-    width: 30,
-    height: 30,
+    width: 28,
+    height: 28,
   },
   name: {
     textAlign: "center",
