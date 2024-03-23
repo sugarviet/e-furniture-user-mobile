@@ -1,12 +1,12 @@
 import { View } from 'react-native';
-import EditAddressForm from '../../../../../components/EditAddressForm';
+import AddressForm from '../../../../../components/AddressForm';
 
-const EditAddress = () => {
+const Address = () => {
     return (
         <View className="h-full bg-white">
-            <EditAddressForm />
+            <AddressForm type="edit"/>
         </View>
     )
 }
 
-export default EditAddress
+export default Address

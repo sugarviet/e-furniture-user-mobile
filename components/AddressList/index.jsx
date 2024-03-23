@@ -59,7 +59,9 @@ const AddressList = () => {
             </ScrollView>
             <Pressable
                 className="absolute bottom-0 left-0 right-0 h-[100px] border-t border-t-grey5 px-5 bg-white"
-                onPress={go_to_add_new_address}
+                onPress={() => {
+                    go_to_add_new_address("add");
+                }}
             >
                 <View className="flex justify-center h-full">
                     <ButtonModal type="addNewAddress">

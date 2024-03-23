@@ -31,7 +31,7 @@ const AddressCard = ({ data }) => {
                 </View>
                 <Pressable
                     onPress={() => {
-                        go_to_edit_address(data);
+                        go_to_edit_address(data, "edit");
                     }}
                     className='w-12 h-12 flex justify-center items-center'
                 >
