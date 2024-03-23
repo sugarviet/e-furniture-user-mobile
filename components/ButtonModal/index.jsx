@@ -2,6 +2,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ICONS } from "../../constants/icons";
+import useButtonModal from './useButtonModal';
 
 const TYPES = {
     cart: {
@@ -38,12 +39,20 @@ const TYPES = {
         icon: null,
         size: 24,
         bgColor: 'black'
+    },
+    updateUserProfile: {
+        icon: null,
+        size: 24,
+        bgColor: 'black'
     }
 
 };
 
 const ButtonModal = ({ type, children }) => {
     const { size, bgColor } = TYPES[type];
+  const BUTTON_MODAL_FN = useButtonModal();
+  const fnc = BUTTON_MODAL_FN[type];
+
     return (
         <TouchableOpacity className="w-full rounded-[40px] shadow-sm shadow-black">
             <View style={{ backgroundColor: bgColor }} className="flex flex-row justify-center items-center py-5 rounded-[40px] bg-black shadow-2xl">

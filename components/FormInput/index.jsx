@@ -48,7 +48,8 @@ const TYPE = {
     rules: () => ({
       required: "Please enter the password",
       pattern: {
-        value: /^(?=.*[a-zA-Z])(?=.*\d)(?!\s).{6,}$/,
+        // value: /^(?=.*[a-zA-Z])(?=.*\d)(?!\s).{6,}$/,
+        value: /^\S*$/,
         message:
           "The password must be at least 6 characters long, including both uppercase and lowercase letters, and numbers, no whitespace",
       },
@@ -74,7 +75,7 @@ const TYPE = {
       },
     }),
   },
-  phone_user: {
+  phone: {
     placeholder: "0981890262",
     icon: IMAGES.telephone,
     rules: () => ({

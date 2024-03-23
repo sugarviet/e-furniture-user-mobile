@@ -5,7 +5,7 @@ const API_URL_DEVELOPMENT = "http://34.126.181.161:4646/api/v1";
 
 const BASE_URL = API_URL_DEVELOPMENT;
 
-const getTokensFromAsyncStorage = async () => {
+export const getTokensFromAsyncStorage = async () => {
   try {
     const authDataString = await AsyncStorage.getItem('auth-storage');
     const authData = JSON.parse(authDataString);
@@ -31,16 +31,10 @@ export const request = axios.create({
 request.interceptors.request.use(
   async (config) => {
     const { accessToken, refreshToken, accountId } = await getTokensFromAsyncStorage();
-
-    if (accessToken) {
       config.headers["x-client-accesstoken"] = accessToken;
-    }
-    if (refreshToken) {
       config.headers["x-client-refreshtoken"] = refreshToken;
-    }
-    if (accountId) {
       config.headers["x-client-id"] = accountId;
-    }
+    
 
     return config;
   },

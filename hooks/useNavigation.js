@@ -16,7 +16,7 @@ function useNavigation() {
   const go_to_address_book = () => router.push("/address");
   const go_to_add_new_address = () => router.push("/address/add-new-address");
   const go_to_voucher_list = () => router.push("/checkout/voucher");
-  const go_to_profile = (userId) => router.push(`/edit-profile/${userId}`);
+  const go_to_profile = (id) => router.push(`/edit-profile/${id}`);
 
 
   return {
