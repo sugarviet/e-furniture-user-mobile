@@ -91,6 +91,10 @@ const TYPE = {
     placeholder: "0981890262",
     rules: () => ({
       required: "Please enter your phone number! ",
+      pattern: {
+        value: /^\d{10,11}$/,
+        message: "Invalid phone number!",
+    },
     }),
   },
   province: {
