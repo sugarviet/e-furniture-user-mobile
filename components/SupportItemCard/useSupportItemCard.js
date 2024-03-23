@@ -3,7 +3,7 @@ import useNavigation from "../../hooks/useNavigation";
 
 function useSupportItemCard() {
   const {handleLogout} = useAuth();
-  const {go_to_wishlist, go_to_order} = useNavigation();
+  const {go_to_wishlist, go_to_order, go_to_profile} = useNavigation();
   const bank = {
     function: () => {
       
@@ -51,7 +51,7 @@ function useSupportItemCard() {
   };
   const edit_profile = {
     function: () => {
-     
+      go_to_profile('1')
     },
   };
 
