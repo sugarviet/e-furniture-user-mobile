@@ -50,6 +50,9 @@ import storage from '../assets/images/storage.png';
 import ourdoor from '../assets/images/ourdoor.png';
 import rug from '../assets/images/rug.png';
 import others from '../assets/images/others.png';
+import telephone from '../assets/images/telephone.png';
+import mail from '../assets/images/mail.png';
+
 
 
 export const IMAGES = {
@@ -94,6 +97,8 @@ export const IMAGES = {
     checkout,
     bag,
     empty,
+    telephone,
+    mail,
     vietqr,
     order_not_found,
     sofa,

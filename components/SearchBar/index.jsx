@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TextInput, View } from "react-native";
 import { IMAGES } from "../../constants/image";
 
@@ -6,6 +6,7 @@ import { ICONS } from '../../constants/icons'
 import { Ionicons } from "@expo/vector-icons";
 import useNavigation from "../../hooks/useNavigation";
 import Icon from "../Icon";
+import { useDebouncedCallback } from "use-debounce";
 
 const DEFAULT_STATE = {
   value: "",
@@ -19,6 +20,15 @@ function SearchBar({ onSearch = () => {}, initialFocus = false, initialValue = '
   const [isFocus, setIsFocus] = useState(initialFocus);
   const [searchValue, setSearchValue] = useState(initialValue || DEFAULT_STATE.value);
   const { placeholder } = DEFAULT_STATE;
+
+  const debounced = useDebouncedCallback((value) => {
+
+    if(!value) return;
+
+    onSearch(value);
+    setSearchValue(value);
+
+  }, 500);
 
 
   const handleOnChange = (value) => {
@@ -40,8 +50,9 @@ function SearchBar({ onSearch = () => {}, initialFocus = false, initialValue = '
       />
       <TextInput
         className='text-black flex-1 h-10 mx-2'
-        value={searchValue}
-        onChangeText={(value) => handleOnChange(value)}
+        // value={searchValue}
+        // onChangeText={(value) => handleOnChange(value)}
+        onChangeText={(value) => debounced(value)}
         placeholder={placeholder}
         placeholderTextColor={'#d3d3d3'}
         onFocus={() => setIsFocus(true)}

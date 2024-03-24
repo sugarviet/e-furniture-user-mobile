@@ -18,6 +18,8 @@ function useNavigation() {
   const go_to_edit_address = (address) => router.push({ pathname: '/address/edit-address', params: address })
   const go_to_voucher_list = () => router.push("/checkout/voucher");
   const go_to_payment_list = () => router.push("/checkout/payment");
+  const go_to_profile = (id) => router.push(`/edit-profile/${id}`);
+
 
   return {
     go_to_sign_in,
@@ -36,7 +38,8 @@ function useNavigation() {
     go_to_edit_address,
     go_to_voucher_list,
     go_to_order,
-    go_to_payment_list
+    go_to_payment_list,
+    go_to_profile
   };
 }
 
