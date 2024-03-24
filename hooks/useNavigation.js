@@ -8,7 +8,7 @@ function useNavigation() {
   const go_to_sign_up = () => router.push("/sign-up");
   const go_to_home = () => router.push("/home");
   const go_to_menu = () => router.push("/menu");
-  const go_to_product_detail = () => router.push("/product-detail");
+  const go_to_product_detail = (slug) => router.push(`/product-detail/${slug}`);
   const go_to_search_page = () => router.push("/search");
   const go_to_search_result_page = (search) => router.push(`/search/result?q=${search}`);
   const go_to_wishlist = () => router.push("/wishlist");
