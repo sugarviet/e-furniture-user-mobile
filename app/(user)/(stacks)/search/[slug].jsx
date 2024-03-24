@@ -3,10 +3,13 @@ import SearchBar from "../../../../components/SearchBar";
 import { View, FlatList, SafeAreaView, Text, TouchableWithoutFeedback, Keyboard } from "react-native";
 import products from "../../../../data/products";
 import ProductCard from "../../../../components/ProductCard";
+import { withFetchData } from '../../../../hocs/withFetchData';
+import { get_search_furniture_api } from '../../../../api/furnitureUrl';
+import { getItemPlural } from '../../../../utils/getItemPlural';
 
-const Result = () => {
+const Result = ({data}) => {
   const local = useLocalSearchParams();
-
+  console.log('data', data);
   
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -18,14 +21,14 @@ const Result = () => {
 
           <View className='px-4 flex flex-row justify-between items-center'>
             <Text className='text-xl font-bold'>Results for "{local.q}"</Text>
-            <Text>0 found</Text>
+            <Text>{data.data.length} {getItemPlural('found', data.data.length)}</Text>
           </View>
 
           <FlatList
-            data={products}
+            data={data.data}
             style={{ marginTop: 10 }}
             renderItem={({ item }) => <ProductCard product={item} />}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item) => item._id.toString()}
             numColumns={2}
           />
         </View>
@@ -34,4 +37,4 @@ const Result = () => {
   )
 }
 
-export default Result
+export default withFetchData(Result, get_search_furniture_api);

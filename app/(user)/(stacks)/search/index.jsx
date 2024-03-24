@@ -6,37 +6,18 @@ import PressableContainer from "../../../../components/PressableContainer";
 import CenteredDivider from "../../../../components/CenteredDivider";
 import { AntDesign } from '@expo/vector-icons';
 import { COLORS } from "../../../../constants/theme";
-
-const searchData = [
-  {
-    id: 1,
-    title: "Product 1",
-    image: "https://picsum.photos/200/300",
-    price: 100,
-  },
-  {
-    id: 2,
-    title: "Product 2",
-    image: "https://picsum.photos/200/300",
-    price: 200,
-  },
-  {
-    id: 3,
-    title: "Product 3",
-    image: "https://picsum.photos/200/300",
-    price: 300,
-  },
-  {
-    id: 4,
-    title: "Product 4",
-    image: "https://picsum.photos/200/300",
-    price: 300,
-  }
-]
+import { useState } from "react";
+import { requestWithoutAuth } from "../../../../utils/request";
+import { fetcher } from "../../../../hooks/api-hooks";
+import { get_search_live_furniture_api } from "../../../../api/furnitureUrl";
+import useNavigation from "../../../../hooks/useNavigation";
 
 const Search = () => {
-  const handleSearcProduct = (value) => {
-    console.log(value);
+  const [searchData, setSearchData] = useState([]);
+  const handleSearcProduct = async (value) => {
+    const data = await fetcher(get_search_live_furniture_api(value)
+    )
+    setSearchData(data)
   };
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -50,11 +31,11 @@ const Search = () => {
             <Text className='font-bold text-lg'>Recent</Text>
             <Text className='font-bold'>Clear All</Text>
           </View>
-          <CenteredDivider color={COLORS.lightGray} thickness={0.5}/>
+          <CenteredDivider color={COLORS.lightGray} thickness={0.5} />
           <FlatList
-            data={searchData}
-            renderItem={({ item }) => <SearchResultCard text={item.title} />}
-            keyExtractor={(item) => item.id.toString()}
+            data={searchData?.data}
+            renderItem={({ item }) => <SearchResultCard text={item.name} />}
+            keyExtractor={(item) => item._id.toString()}
 
           />
         </View>
@@ -65,11 +46,12 @@ const Search = () => {
 
 
 const SearchResultCard = ({ text }) => {
+  const {go_to_product_detail} = useNavigation();
 
   return (
-    <PressableContainer>
+    <PressableContainer onPress={go_to_product_detail}>
       <View className='bg-white py-2 h-12 items-center px-4 flex-row justify-between'>
-        <Text className='text-gray-400 text-lg'>{text}</Text>
+        <Text className='text-gray-400 text-lg w-80' numberOfLines={1} ellipsizeMode='tail'>{text}</Text>
         <AntDesign name="arrowright" size={24} color={COLORS.lightGray} />
 
       </View>

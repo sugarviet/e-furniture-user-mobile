@@ -1,4 +1,4 @@
-import { Text, TextInput, View } from "react-native";
+import { Text, TextInput, View, Image } from "react-native";
 import { Controller } from "react-hook-form";
 import { classNames } from "../../utils/classNames";
 import Icon from "../Icon";
@@ -7,11 +7,11 @@ import { ICONS } from "../../constants/icons";
 import ErrorMessage from "../ErrorMessage";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
+import { SIZES } from "../../constants";
 
 const TYPE = {
   first_name: {
     placeholder: "First name",
-    icon: IMAGES.user,
     rules: () => ({
       required: "Please enter the first name",
       pattern: {
@@ -22,7 +22,6 @@ const TYPE = {
   },
   last_name: {
     placeholder: "Last name",
-    icon: IMAGES.user,
     rules: () => ({
       required: "Please enter the last name",
       pattern: {
@@ -49,7 +48,8 @@ const TYPE = {
     rules: () => ({
       required: "Please enter the password",
       pattern: {
-        value: /^(?=.*[a-zA-Z])(?=.*\d)(?!\s).{6,}$/,
+        // value: /^(?=.*[a-zA-Z])(?=.*\d)(?!\s).{6,}$/,
+        value: /^\S*$/,
         message:
           "The password must be at least 6 characters long, including both uppercase and lowercase letters, and numbers, no whitespace",
       },
@@ -66,7 +66,7 @@ const TYPE = {
   },
   email: {
     placeholder: "email@example.com",
-    icon: IMAGES.email,
+    icon: IMAGES.mail,
     rules: () => ({
       required: "Please enter your email",
       pattern: {
@@ -74,6 +74,11 @@ const TYPE = {
         message: "Invalid email address",
       },
     }),
+  },
+  phone_edit: {
+    placeholder: "0981890262",
+    icon: IMAGES.telephone,
+    rules: () => ({})
   },
 };
 
@@ -93,10 +98,14 @@ function FormInput({ type, control, validated = true }) {
         <View>
           <View
             className={classNames(
-              "p-2 h-12 bg-gray-100 rounded-md my-2 border-[1px] flex-row items-center",
+              "p-2 h-14 bg-gray-100 rounded-md my-2 border-[1px] flex-row items-center",
               error ? "border-rose-500" : "border-transparent"
             )}
           >
+            {TYPE[type].icon ? (
+              <Icon source={TYPE[type].icon} className="w-5 h-5 mr-2" />
+            ) : null}
+
             <TextInput
               className="flex-1"
               placeholder={TYPE[type].placeholder}

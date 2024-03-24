@@ -2,8 +2,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { request, requestWithoutAuth } from '../../utils/request';
 
-const fetcher = async (url, params) => {
-  const data = await axios.get(url, { params: params })
+export const fetcher = async (url, params) => {
+  const data = await requestWithoutAuth.get(url, { params: params })
     .then((response) => response.data)
     .then((data) => data.metaData);
 
@@ -18,13 +18,13 @@ const fetcherWithAuth = async (url, params) => {
   return data;
 };
 
-export const useFetch = (url, params, enabled) => {
+export const useFetchWithAuth = (url, params, enabled) => {
   return useQuery([url, params], () => fetcherWithAuth(url, params), {
     enabled
   });
 };
 
-export const useFetchWithoutAuth = (url, params, enabled) => {
+export const useFetch = (url, params, enabled) => {
   return useQuery([url, params], () => fetcher(url, params), {
     enabled
   });
