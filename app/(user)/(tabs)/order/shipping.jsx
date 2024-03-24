@@ -2,7 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 import EmptyContent from '../../../../components/EmptyContent'
 
-const Active = () => {
+const Shipping = () => {
   return (
     <View className='bg-white flex-1'>
         <EmptyContent type='order'/>
@@ -10,4 +10,4 @@ const Active = () => {
   )
 }
 
-export default Active
+export default Shipping
