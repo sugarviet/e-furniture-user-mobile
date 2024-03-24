@@ -17,12 +17,12 @@ import BestSelletSlider from "../../../components/BestSelletSlider";
 const productDetailCarousel = [
   { id: 1, URI: "https://i.ibb.co/0QmpZ2X/image-5.png" },
   { id: 2, URI: "https://i.ibb.co/MDkgBLN/image-4.png" },
- 
+
 ];
 
 const Home = () => {
   const { go_to_search_page } = useNavigation();
-  const [modalVisible, setModalVisible] = useState(false);
+
 
   return (
     <ScrollView>
@@ -30,30 +30,22 @@ const Home = () => {
         <Pressable className="px-2 mb-2 py-4" onPress={go_to_search_page}>
           <SearchBar />
         </Pressable>
-        <View className='flex justify-center mx-auto'>
-          <View className='flex-row justify-between items-center px-4'>
+        <View className=''>
+          <View className='flex-row justify-between items-center px-3'>
             <Text className='text-xl font-urbanistBold'>Special Offers</Text>
-            <Text className='font-bold'>See All</Text>
+            <Text className='font-urbanistBold text-base'>See All</Text>
           </View>
           <BestSelletSlider pagination carouselData={productDetailCarousel} />
         </View>
         <TypeList types={types} />
-        <CategoriesFilter />
+        <View className='flex-row justify-between items-center px-3'>
+          <Text className='text-xl font-urbanistBold'>Most Popular</Text>
+          <Text className='font-urbanistBold text-base'>See All</Text>
+        </View>
+        <View className="mx-[10px]">
+          <CategoriesFilter />
+        </View>
 
-        <Button title="Open Success Modal" onPress={() => setModalVisible(!modalVisible)}>
-        </Button>
-        <PopupModal type="success" modalVisible={modalVisible} setModalVisible={setModalVisible}>
-          <Pressable className="w-full pt-8">
-            <ButtonModal type="viewOrder">
-              <Text className="text-white font-urbanistSemiBold">View Order</Text>
-            </ButtonModal>
-          </Pressable>
-          <Pressable onPress={() => setModalVisible(!modalVisible)} className="w-full pt-3 pb-2">
-            <ButtonModal type="goToHome">
-              <Text className="text-black font-urbanistSemiBold">Back To Home</Text>
-            </ButtonModal>
-          </Pressable>
-        </PopupModal>
 
         <View
           style={{

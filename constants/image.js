@@ -39,6 +39,17 @@ import wishlist from '../assets/images/wishlist.png';
 import checkout from '../assets/images/checkout.png';
 import bag from '../assets/images/bag.png';
 import empty from '../assets/images/empty.png';
+import vietqr from '../assets/images/vietqr.png';
+import order_not_found from '../assets/images/order_not_found.png';
+import lamp from '../assets/images/lamp.png';
+import sofa from '../assets/images/sofa.png';
+import chair from '../assets/images/chair.png';
+import table from '../assets/images/table.png';
+import bed from '../assets/images/bed.png';
+import storage from '../assets/images/storage.png';
+import ourdoor from '../assets/images/ourdoor.png';
+import rug from '../assets/images/rug.png';
+import others from '../assets/images/others.png';
 import telephone from '../assets/images/telephone.png';
 import mail from '../assets/images/mail.png';
 
@@ -87,5 +98,16 @@ export const IMAGES = {
     bag,
     empty,
     telephone,
-    mail
+    mail,
+    vietqr,
+    order_not_found,
+    sofa,
+    chair,
+    table,
+    lamp,
+    bed,
+    storage,
+    ourdoor,
+    rug,
+    others
 };

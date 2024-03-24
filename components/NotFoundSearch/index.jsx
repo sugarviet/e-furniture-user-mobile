@@ -3,7 +3,7 @@ import { View, Text, Image } from "react-native";
 
 const NotFoundSearch = () => {
   return (
-    <View className="flex justify-center items-center mt-44">
+    <View className="flex justify-center items-center mx-auto my-auto">
       <Image
         source={{
           uri: "https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-3328225-2809510.png",

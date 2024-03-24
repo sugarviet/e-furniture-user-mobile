@@ -32,7 +32,7 @@ const CategoriesFilter = () => {
         renderItem={({ item }) => (
           <View className="mx-1" key={item.id}>
             <Pressable
-              className={`px-4 py-2 rounded-full border-black border-[1px] ${
+              className={`px-4 py-2 rounded-full border-black border-[2px] ${
                 activeCategory === item.value
                   ? STATUS.activePresable
                   : STATUS.defaultPresable

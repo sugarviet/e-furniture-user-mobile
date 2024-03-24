@@ -75,6 +75,52 @@ const TYPE = {
       },
     }),
   },
+  first_name: {
+    placeholder: "Việt",
+    rules: () => ({
+      required: "Please enter your first name! ",
+    }),
+  },
+  last_name: {
+    placeholder: "Đăng",
+    rules: () => ({
+      required: "Please enter your last name! ",
+    }),
+  },
+  phone: {
+    placeholder: "0981890262",
+    rules: () => ({
+      required: "Please enter your phone number! ",
+      pattern: {
+        value: /^\d{10,11}$/,
+        message: "Invalid phone number!",
+    },
+    }),
+  },
+  province: {
+    placeholder: "Ho Chi Minh",
+    editable: false,
+    rules: () => ({
+    }),
+  },
+  district: {
+    placeholder: "District",
+    rules: () => ({
+      required: "Please choose your district address!",
+    }),
+  },
+  ward: {
+    placeholder: "Ward",
+    rules: () => ({
+      required: "Please choose your ward address!",
+    }),
+  },
+  address: {
+    placeholder: "VD: 123 Lê Đức Thọ, Phường Linh Trung",
+    rules: () => ({
+      required: "Please enter your detail address (include home number)",
+    }),
+  },
   phone_edit: {
     placeholder: "0981890262",
     icon: IMAGES.telephone,
@@ -82,14 +128,14 @@ const TYPE = {
   },
 };
 
-function FormInput({ type, control, validated = true }) {
+function FormInput({ defaultValue, type, control, validated = true }) {
   const [isSecure, setIsSecure] = useState(TYPE[type]?.isSecure);
 
   return (
     <Controller
       control={control}
       name={type}
-      defaultValue={""}
+      defaultValue={defaultValue}
       rules={TYPE[type].rules(validated)}
       render={({
         field: { value, onChange, onBlur },

@@ -9,8 +9,10 @@ import { COLORS } from "../../../constants/theme";
 const Wishlist = () => {
   return (
     <View className="bg-white flex-initial">
-      
-      <CategoriesFilter />
+
+      <View className="mx-4">
+        <CategoriesFilter />
+      </View>
       <FlatList
         data={products}
         renderItem={({ item }) => <ProductCard product={item} />}

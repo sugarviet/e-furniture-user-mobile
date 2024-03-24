@@ -1,10 +1,13 @@
-import { Text, View } from "react-native"
+import { Pressable, Text, View } from "react-native"
 import { IMAGES } from "../../constants/image"
 import Icon from "../Icon"
 import Icon2D from "../Icon2D"
 import PressableContainer from "../PressableContainer"
+import useNavigation from "../../hooks/useNavigation"
 
 const AddressCard = ({ data }) => {
+
+    const { go_to_edit_address } = useNavigation();
 
     return (
         <PressableContainer>
@@ -16,7 +19,7 @@ const AddressCard = ({ data }) => {
                 </View>
                 <View className='flex-1'>
                     <View className='flex-row items-center gap-4'>
-                        <Text className='font-bold text-base max-w-[150px]'>{data.name}</Text>
+                        <Text className='font-bold text-base max-w-[150px]'>{data.last_name} {data.first_name}</Text>
                         {data.default === true &&
                             <View className='bg-gray-200 rounded-md p-1'>
                                 <Text className='text-xs'>Default</Text>
@@ -24,11 +27,16 @@ const AddressCard = ({ data }) => {
                         }
                     </View>
                     <Text className='font-bold text-sm'>{data.phone}</Text>
-                    <Text numberOfLines={2} className="font-urbanistMedium text-grey2 pt-1">{data.address}</Text>
+                    <Text numberOfLines={2} className="font-urbanistMedium text-grey2 pt-1">{data.address}, {data.ward}, {data.district}</Text>
                 </View>
-                <View className='w-12 h-12 flex justify-center items-center'>
-                    <Icon source={IMAGES.edit} className="w-[22px] h-[22px]"/>
-                </View>
+                <Pressable
+                    onPress={() => {
+                        go_to_edit_address(data, "edit");
+                    }}
+                    className='w-12 h-12 flex justify-center items-center'
+                >
+                    <Icon source={IMAGES.edit} className="w-[22px] h-[22px]" />
+                </Pressable>
             </View>
 
         </PressableContainer>

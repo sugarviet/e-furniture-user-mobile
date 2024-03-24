@@ -52,7 +52,7 @@ const defaultAddress = {
 
 export default function OrderConfirm() {
 
-    const { go_to_address_book, go_to_voucher_list } = useNavigation();
+    const { go_to_address_book, go_to_voucher_list, go_to_payment_list } = useNavigation();
 
     return (
         <View className="h-full relative bg-white">
@@ -138,14 +138,14 @@ export default function OrderConfirm() {
                 </View>
             </ScrollView>
 
-            <View className="absolute bottom-0 left-0 right-0 h-[100px] shadow-md border-t border-x border-grey5 rounded-t-3xl bg-white px-5 pt-5">
+            <Pressable onPress={go_to_payment_list} className="absolute bottom-0 left-0 right-0 h-[100px] shadow-md border-t border-x border-grey5 rounded-t-3xl bg-white px-5 pt-5">
                 <ButtonModal type="checkout">
                     <View className="flex flex-row items-center">
                         <Text className="text-white font-urbanistSemiBold pr-4">Continue to Payment</Text>
                         <Icon source={IMAGES.right_arrow} style={{ width: 16, height: 16 }} />
                     </View>
                 </ButtonModal>
-            </View>
+            </Pressable>
         </View>
     )
 }

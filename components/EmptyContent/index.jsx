@@ -9,10 +9,9 @@ const TYPES = {
 }
 const EmptyContent = ({type}) => {
   return (
-    <View className='mx-auto'>
-        <Image source={IMAGES.empty} className='w-96 h-96'/>
-
-        <View className='mx-auto'>
+    <View className='mx-auto my-auto'>
+        <Image source={IMAGES.order_not_found} className='w-60 h-60'/>
+        <View className='mx-auto pt-12'>
             <Text className='text-center font-bold text-lg mb-2'>{TYPES[type].title}</Text>
             <Text>{TYPES[type].subTitle}</Text>
 
