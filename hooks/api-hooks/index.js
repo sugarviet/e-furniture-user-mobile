@@ -2,8 +2,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { request, requestWithoutAuth } from '../../utils/request';
 
-const fetcher = async (url, params) => {
-  const data = await axios.get(url, { params: params })
+export const fetcher = async (url, params) => {
+  const data = await requestWithoutAuth.get(url, { params: params })
     .then((response) => response.data)
     .then((data) => data.metaData);
 

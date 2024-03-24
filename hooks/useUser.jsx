@@ -1,13 +1,15 @@
 import { useLocalSearchParams } from 'expo-router';
-import React from 'react'
+import { Alert } from 'react-native';
 import { useUpdate } from './api-hooks';
-import { get_update_user_profile } from '../api/userUrl';
+import { get_update_user_profile, get_user_profile } from '../api/userUrl';
+import useNotification from './useNotification';
 
 const useUser = () => {
   const param = useLocalSearchParams();
+  const { success_message } = useNotification();
   const { mutate: edit_profile } = useUpdate(get_update_user_profile(param.slug), undefined, () => {
-      console.log("thanh cong");
-  }, () => { console.log("That bai") });
+    success_message('update_profile', 'update')
+  }, () => { console.log("That bai") }, get_user_profile(param.slug));
   return {
     edit_profile
   }

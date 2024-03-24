@@ -1,9 +1,10 @@
 
 export const get_user_profile = (param) => {
-
-    return `account/${param}`
+    const { slug } = param;
+    return `account/${slug}`
 }
 
 export const get_update_user_profile = (param) => {
-    return `account/${param}`
+    const { slug } = param;
+    return `account/${slug}`
 }

@@ -7,14 +7,16 @@ import { withFetchDataWithAuth } from "../../hocs/withFetchDataWithAuth";
 import { get_user_profile } from "../../api/userUrl";
 import useUser from "../../hooks/useUser";
 
-const EditProfileForm = ({data}) => {
-  const {edit_profile} = useUser();
-  const { control, handleSubmit } = useForm({defaultValues: {
-    first_name: data.first_name,
-    last_name: data.last_name,
-    email: data.email,
-    username: data.username,
-  }});
+const EditProfileForm = ({ data }) => {
+  const { edit_profile } = useUser();
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      first_name: data.first_name,
+      last_name: data.last_name,
+      email: data.email,
+      username: data.username,
+    }
+  });
   const onSubmit = (data) => {
     edit_profile(data);
   };
@@ -24,7 +26,7 @@ const EditProfileForm = ({data}) => {
       behavior={"padding"}
       enabled
       keyboardVerticalOffset={120}
-      style={{ flex: 1}}
+      style={{ flex: 1 }}
     >
       <ScrollView>
         <View className="mx-auto border w-fit h-fit rounded-full my-2 bg-white flex-1">
@@ -38,15 +40,18 @@ const EditProfileForm = ({data}) => {
         <FormInput type="last_name" control={control} />
         <FormInput type="username" control={control} />
         <FormInput type="email" control={control} />
-        {/* <FormInput type="phone" control={control} /> */}
-        
-        <Pressable className="flex justify-center h-24 bg-white" onPress={handleSubmit(onSubmit)}>
-          <ButtonModal type="updateUserProfile">
-            <View className="flex flex-row items-center">
-              <Text className="text-white font-urbanistSemiBold">Apply</Text>
-            </View>
-          </ButtonModal>
-        </Pressable>
+        <FormInput type="phone_edit" control={control} />
+
+
+        <View className='mt-44'>
+        <ButtonModal type="updateUserProfile" onPress={handleSubmit(onSubmit)}>
+          <View className="flex flex-row items-center">
+            <Text className="text-white font-urbanistSemiBold">Apply</Text>
+          </View>
+        </ButtonModal>
+
+        </View>
+
       </ScrollView>
     </KeyboardAvoidingView>
   );

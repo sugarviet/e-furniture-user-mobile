@@ -75,12 +75,10 @@ const TYPE = {
       },
     }),
   },
-  phone: {
+  phone_edit: {
     placeholder: "0981890262",
     icon: IMAGES.telephone,
-    rules: () => ({
-      required: "Please enter your phone number! ",
-    }),
+    rules: () => ({})
   },
 };
 
