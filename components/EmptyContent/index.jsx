@@ -5,6 +5,10 @@ const TYPES = {
     order: {
         title: "You don't have an order yet",
         subTitle: "You don't have an active order at this time"
+    },
+    search: {
+      title: "Not found :(",
+        subTitle: "The keyword you are looking for is not defined"
     }
 }
 const EmptyContent = ({type}) => {

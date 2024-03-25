@@ -6,6 +6,8 @@ import { FontAwesome5, FontAwesome, AntDesign, FontAwesome6 } from '@expo/vector
 import InteractiveIcon3D from "../InteractiveIcon3D";
 import QuantityOption from "../QuantityOption";
 import ButtonModal from "../ButtonModal";
+import { withFetchData } from "../../hocs/withFetchData";
+import { get_furniture_detail_api } from "../../api/furnitureUrl";
 const productDetailCarousel = [
     { id: 1, URI: "https://img.freepik.com/free-psd/armchair-pillow_176382-861.jpg?t=st=1710746885~exp=1710750485~hmac=5daff58b0442d6c3540e68bbf6fb30f07b7e4d802e0ee1b24d02b507a56f8f07&w=826" },
     { id: 2, URI: "https://img.freepik.com/free-psd/armchair-pillow_176382-860.jpg?t=st=1710746882~exp=1710750482~hmac=809a8b8bfd6ab7b349537ced2c12298fa0289788662db717a3ebbcecd18ea98d&w=826" },
@@ -16,17 +18,18 @@ const productDetailCarousel = [
 ];
 
 
-export default function ProductDetail() {
+function ProductDetail({data}) {
+    console.log(data);
 
 
     return (
         <View style={{ height: '100%', backgroundColor: COLORS.white }}>
             <View style={{ height: 260 }}>
-                <CarouselSlider pagination type="productDetail" carouselData={productDetailCarousel} />
+                <CarouselSlider pagination type="productDetail" carouselData={data.thumbs} />
             </View>
             <ScrollView className="bg-white w-full h-full rounded-t-xl mt-2 px-5 py-6 relative">
                 <View className="flex flex-row justify-between items-center">
-                    <Text className="text-black text-[28px] font-urbanistBold">Mid Century Sofa</Text>
+                    <Text className="text-black text-[28px] font-urbanistBold">{data.name}</Text>
                     <InteractiveIcon3D type="heart" />
                 </View>
                 <View className="flex flex-row pt-2 items-center border-b pb-4 border-b-grey5">
@@ -39,8 +42,7 @@ export default function ProductDetail() {
                 <View className="pt-3">
                     <Text className="text-black text-[18px] font-urbanistBold">Description</Text>
                     <Text className="text-black text-[13px] font-urbanistLight pt-2">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                        {data.description}
                     </Text>
                 </View>
                 <View className="pt-3">
@@ -76,3 +78,5 @@ export default function ProductDetail() {
         </View>
     );
 };
+
+export default withFetchData(ProductDetail,get_furniture_detail_api);

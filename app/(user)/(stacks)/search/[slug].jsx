@@ -6,11 +6,12 @@ import ProductCard from "../../../../components/ProductCard";
 import { withFetchData } from '../../../../hocs/withFetchData';
 import { get_search_furniture_api } from '../../../../api/furnitureUrl';
 import { getItemPlural } from '../../../../utils/getItemPlural';
+import EmptyContent from '../../../../components/EmptyContent';
 
-const Result = ({data}) => {
+const Result = ({ data }) => {
   const local = useLocalSearchParams();
-  console.log('data', data);
-  
+  const empty = !data.data.length;
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <SafeAreaView style={{ flex: 1, backgroundColor: 'white', paddingHorizontal: 4 }}>
@@ -24,13 +25,15 @@ const Result = ({data}) => {
             <Text>{data.data.length} {getItemPlural('found', data.data.length)}</Text>
           </View>
 
-          <FlatList
+          {empty ? <EmptyContent type='search' /> : <FlatList
             data={data.data}
             style={{ marginTop: 10 }}
             renderItem={({ item }) => <ProductCard product={item} />}
             keyExtractor={(item) => item._id.toString()}
             numColumns={2}
-          />
+          />}
+
+
         </View>
       </SafeAreaView>
     </TouchableWithoutFeedback>

@@ -1,5 +1,4 @@
 import { View } from 'react-native';
-import AddressForm from '../../../../../components/AddressForm';
 import AddAddressForm from '../../../../../components/AddAddressForm';
 
 const Address = () => {
