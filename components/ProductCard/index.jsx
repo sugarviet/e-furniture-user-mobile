@@ -5,26 +5,33 @@ import { ICONS } from "../../constants/icons";
 import InteractiveIcon3D from "../InteractiveIcon3D";
 import useNavigation from "../../hooks/useNavigation";
 import PressableContainer from "../PressableContainer";
+import useFeedback from "../../hooks/useFeedback";
+import { formatCurrency } from "../../utils/formatCurrency";
+import useWishlist from "../../hooks/useWishlist";
+import FavoriteButton from "../FavoriteButton";
 
 const ProductCard = ({ product }) => {
   const { go_to_product_detail } = useNavigation();
-  const handleFavoritePress = (event) => {
-    event.stopPropagation();
-  };
+
+  const { get_average_rating, isLoading } = useFeedback(product._id);
+
+  if (isLoading) return null;
+
   return (
-    <PressableContainer onPress={() => go_to_product_detail(product.slug)}>
-      <View className="w-48 bg-white  rounded-lg overflow-hidden m-2 items-center">
-        <View className="w-48 bg-white  rounded-lg overflow-hidden">
+    <PressableContainer
+      className="w-full"
+      onPress={() => go_to_product_detail(product.slug)}
+    >
+      <View className="w-full  rounded-lg overflow-hidden items-center">
+        <View className="w-full  rounded-lg overflow-hidden">
           <View className="relative px-3">
             <Image
               source={{ uri: product.thumbs[0] }}
-              className="w-full h-40 rounded-lg mt-2"
-              resizeMode="cover"
+              className="w-full h-40 rounded-lg mt-2 object-center"
+              resizeMode="contain"
             />
             <View className="absolute top-0 right-0 m-2">
-              <TouchableOpacity onPress={handleFavoritePress}>
-                <InteractiveIcon3D type="heart" />
-              </TouchableOpacity>
+              <FavoriteButton id={product._id} />
             </View>
           </View>
 
@@ -40,7 +47,7 @@ const ProductCard = ({ product }) => {
                   color="black"
                 />
                 <Text className="text-[11px] ml-2 font-urbanistMedium">
-                  4.8
+                  {get_average_rating()}
                 </Text>
                 <Text> |</Text>
                 <View className="bg-[#ececec] px-2 py-1 rounded-md mr-4 ml-3">
@@ -50,7 +57,7 @@ const ProductCard = ({ product }) => {
                 </View>
               </View>
               <Text className="text-zinc-950 font-bold mb-3">
-                {product.price}
+                {formatCurrency(product.sale_price)}
               </Text>
             </View>
           </View>

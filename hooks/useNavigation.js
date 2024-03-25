@@ -19,9 +19,10 @@ function useNavigation() {
   const go_to_voucher_list = () => router.push("/checkout/voucher");
   const go_to_payment_list = () => router.push("/checkout/payment");
   const go_to_profile = (id) => router.push(`/edit-profile/${id}`);
-
+  const go_to_catalog = (slug) => router.push(`/product-catalog/${slug}`)
 
   return {
+    go_to_catalog,
     go_to_sign_in,
     go_to_sign_up,
     go_to_home,
