@@ -10,7 +10,6 @@ const TYPES = {
     width: 40,
     height: 40,
   },
-  
 };
 
 function InteractiveIcon3D({ type }) {

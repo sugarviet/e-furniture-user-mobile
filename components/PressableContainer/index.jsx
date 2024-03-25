@@ -1,7 +1,8 @@
 import { Pressable } from "react-native";
-const PressableContainer = ({ children, onPress }) => {
+const PressableContainer = ({ children, onPress, className }) => {
   return (
     <Pressable
+      className={className}
       onPress={onPress}
       style={({ pressed }) => [
         {

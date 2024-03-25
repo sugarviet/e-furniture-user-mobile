@@ -1,26 +1,24 @@
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import ProductCard from "../../../components/ProductCard";
-import products from "../../../data/products";
-import { Stack } from "expo-router";
 import CategoriesFilter from "../../../components/CategoriesFilter";
-import { COLORS } from "../../../constants/theme";
+import { withFetchDataWithAuth } from "../../../hocs/withFetchDataWithAuth";
+import { get_all_wishlist_api } from "../../../api/wishlistUrl";
 
-const Wishlist = () => {
+const Wishlist = ({ data }) => {
   return (
     <View className="bg-white flex-initial">
-
       <View className="mx-4">
         <CategoriesFilter />
       </View>
       <FlatList
-        data={products}
+        data={data}
         renderItem={({ item }) => <ProductCard product={item} />}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item._id}
         numColumns={2}
       />
     </View>
   );
 };
 
-export default Wishlist;
+export default withFetchDataWithAuth(Wishlist, get_all_wishlist_api);

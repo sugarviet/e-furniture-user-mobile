@@ -5,21 +5,33 @@ import { ICONS } from "../../constants/icons";
 import InteractiveIcon3D from "../InteractiveIcon3D";
 import useNavigation from "../../hooks/useNavigation";
 import PressableContainer from "../PressableContainer";
+import { useFetch } from "../../hooks/api-hooks";
+import { get_feedback_api_of } from "../../api/feedbackUrl";
+import useFeedback from "../../hooks/useFeedback";
 
 const ProductCard = ({ product }) => {
   const { go_to_product_detail } = useNavigation();
+
+  const { get_average_rating, isLoading } = useFeedback(product._id);
+
   const handleFavoritePress = (event) => {
     event.stopPropagation();
   };
+
+  if (isLoading) return null;
+
   return (
-    <PressableContainer onPress={() => go_to_product_detail(product.slug)}>
-      <View className="w-48 bg-white  rounded-lg overflow-hidden m-2 items-center">
-        <View className="w-48 bg-white  rounded-lg overflow-hidden">
+    <PressableContainer
+      className="w-full"
+      onPress={() => go_to_product_detail(product.slug)}
+    >
+      <View className="w-full  rounded-lg overflow-hidden items-center">
+        <View className="w-full  rounded-lg overflow-hidden">
           <View className="relative px-3">
             <Image
               source={{ uri: product.thumbs[0] }}
-              className="w-full h-40 rounded-lg mt-2"
-              resizeMode="cover"
+              className="w-full h-40 rounded-lg mt-2 object-center"
+              resizeMode="contain"
             />
             <View className="absolute top-0 right-0 m-2">
               <TouchableOpacity onPress={handleFavoritePress}>
@@ -40,7 +52,7 @@ const ProductCard = ({ product }) => {
                   color="black"
                 />
                 <Text className="text-[11px] ml-2 font-urbanistMedium">
-                  4.8
+                  {get_average_rating()}
                 </Text>
                 <Text> |</Text>
                 <View className="bg-[#ececec] px-2 py-1 rounded-md mr-4 ml-3">
