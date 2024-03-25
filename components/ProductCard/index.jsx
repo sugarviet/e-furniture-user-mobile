@@ -5,9 +5,8 @@ import { ICONS } from "../../constants/icons";
 import InteractiveIcon3D from "../InteractiveIcon3D";
 import useNavigation from "../../hooks/useNavigation";
 import PressableContainer from "../PressableContainer";
-import { useFetch } from "../../hooks/api-hooks";
-import { get_feedback_api_of } from "../../api/feedbackUrl";
 import useFeedback from "../../hooks/useFeedback";
+import { formatCurrency } from "../../utils/formatCurrency";
 
 const ProductCard = ({ product }) => {
   const { go_to_product_detail } = useNavigation();
@@ -62,7 +61,7 @@ const ProductCard = ({ product }) => {
                 </View>
               </View>
               <Text className="text-zinc-950 font-bold mb-3">
-                {product.price}
+                {formatCurrency(product.sale_price)}
               </Text>
             </View>
           </View>
