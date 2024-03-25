@@ -9,3 +9,7 @@ export const get_search_furniture_api = (param) => {
 export const get_search_live_furniture_api = (searchValue) => {
     return `${FURNITURE_URL}/search/${searchValue}?page=1&limit=4`
 }
+
+export const get_furniture_detail_api = (param) => {
+    return `${FURNITURE_URL}/detail/${param.slug}?page=1&limit=4`
+}

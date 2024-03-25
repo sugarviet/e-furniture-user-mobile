@@ -8,19 +8,16 @@ import PressableContainer from "../PressableContainer";
 
 const ProductCard = ({ product }) => {
   const { go_to_product_detail } = useNavigation();
-  const handle_go_to_detail = () => {
-    go_to_product_detail();
-  };
   const handleFavoritePress = (event) => {
     event.stopPropagation();
   };
   return (
-    <PressableContainer onPress={handle_go_to_detail}>
+    <PressableContainer onPress={() => go_to_product_detail(product.slug)}>
       <View className="w-48 bg-white  rounded-lg overflow-hidden m-2 items-center">
         <View className="w-48 bg-white  rounded-lg overflow-hidden">
           <View className="relative px-3">
             <Image
-              source={{ uri: product.image }}
+              source={{ uri: product.thumbs[0] }}
               className="w-full h-40 rounded-lg mt-2"
               resizeMode="cover"
             />

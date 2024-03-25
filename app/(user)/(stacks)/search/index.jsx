@@ -34,7 +34,7 @@ const Search = () => {
           <CenteredDivider color={COLORS.lightGray} thickness={0.5} />
           <FlatList
             data={searchData?.data}
-            renderItem={({ item }) => <SearchResultCard text={item.name} />}
+            renderItem={({ item }) => <SearchResultCard text={item.name} slug={item.slug} />}
             keyExtractor={(item) => item._id.toString()}
 
           />
@@ -45,11 +45,12 @@ const Search = () => {
 };
 
 
-const SearchResultCard = ({ text }) => {
+const SearchResultCard = ({ text, slug }) => {
+  console.log(slug)
   const {go_to_product_detail} = useNavigation();
 
   return (
-    <PressableContainer onPress={go_to_product_detail}>
+    <PressableContainer onPress={() => go_to_product_detail(slug)}>
       <View className='bg-white py-2 h-12 items-center px-4 flex-row justify-between'>
         <Text className='text-gray-400 text-lg w-80' numberOfLines={1} ellipsizeMode='tail'>{text}</Text>
         <AntDesign name="arrowright" size={24} color={COLORS.lightGray} />
