@@ -4,16 +4,20 @@ import TabIcon from "../../../components/TabIcon";
 import HeaderButton from "../../../components/HeaderButton";
 
 const tabs = [
-  { page: "home", name: "E-FURNITURE", header_options: [] },
+  {
+    page: "home",
+    name: "E-FURNITURE",
+    header_options: ["notification"],
+  },
   { page: "wishlist", name: "Wishlist", header_options: [] },
   {
     page: "cart",
     name: "Shopping",
-    header_options: ["shopping_cart", "shopping_options"],
+    header_options: [],
   },
   { page: "order", name: "Order", header_options: [] },
 
-  { page: "menu", name: "Menu", header_options: ["search", "chat"] },
+  { page: "menu", name: "Menu", header_options: [] },
 ];
 
 function TabsLayout() {
@@ -36,26 +40,16 @@ function TabsLayout() {
                   style={{
                     fontSize: 24,
                     marginHorizontal: 10,
-                    fontWeight: 'bold'
+                    fontWeight: "bold",
                   }}
                 >
                   {name}
                 </Text>
               ),
               headerRight: () => (
-                <View
-                className='flex-row items-center w-fit max-w-[90px] justify-around'
-                >
+                <View className="flex-row items-center mr-4 w-fit max-w-[90px] justify-around">
                   {header_options.map((option, index) => (
-                    <Text
-                      key={index}
-                      style={{
-                        fontSize: 28,
-                        marginHorizontal: 16,
-                      }}
-                    >
-                      <HeaderButton key={`${option} + ${index}`} type={option} />
-                    </Text>
+                    <HeaderButton key={`${option} + ${index}`} type={option} />
                   ))}
                 </View>
               ),
