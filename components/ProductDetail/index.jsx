@@ -16,6 +16,7 @@ import { get_furniture_detail_api } from "../../api/furnitureUrl";
 import useFeedback from "../../hooks/useFeedback";
 import { formatCurrency } from "../../utils/formatCurrency";
 import useCart from "../../hooks/useCart";
+import FavoriteButton from "../FavoriteButton";
 const productDetailCarousel = [
   {
     id: 1,
@@ -52,7 +53,7 @@ function ProductDetail({ data }) {
           <Text className="text-black text-[28px] font-urbanistBold">
             {data.name}
           </Text>
-          <InteractiveIcon3D type="heart" />
+          <FavoriteButton id={data._id} />
         </View>
         <View className="flex flex-row pt-2 items-center border-b pb-4 border-b-grey5">
           <View className="bg-[#ececec] px-2 py-1 rounded-md mr-4">

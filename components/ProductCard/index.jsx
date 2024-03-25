@@ -7,15 +7,13 @@ import useNavigation from "../../hooks/useNavigation";
 import PressableContainer from "../PressableContainer";
 import useFeedback from "../../hooks/useFeedback";
 import { formatCurrency } from "../../utils/formatCurrency";
+import useWishlist from "../../hooks/useWishlist";
+import FavoriteButton from "../FavoriteButton";
 
 const ProductCard = ({ product }) => {
   const { go_to_product_detail } = useNavigation();
 
   const { get_average_rating, isLoading } = useFeedback(product._id);
-
-  const handleFavoritePress = (event) => {
-    event.stopPropagation();
-  };
 
   if (isLoading) return null;
 
@@ -33,9 +31,7 @@ const ProductCard = ({ product }) => {
               resizeMode="contain"
             />
             <View className="absolute top-0 right-0 m-2">
-              <TouchableOpacity onPress={handleFavoritePress}>
-                <InteractiveIcon3D type="heart" />
-              </TouchableOpacity>
+              <FavoriteButton id={product._id} />
             </View>
           </View>
 

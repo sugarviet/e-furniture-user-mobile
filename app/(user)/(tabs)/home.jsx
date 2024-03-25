@@ -1,16 +1,8 @@
-import { useState } from "react";
-import { View, ScrollView, Pressable, Button, Text } from "react-native";
-import Banner from "../../../components/Banner";
+import { View, ScrollView, Pressable, Text } from "react-native";
 import CategoriesFilter from "../../../components/CategoriesFilter";
-import ProductCard from "../../../components/ProductCard";
-import { IMAGES } from "../../../constants/image";
-import products from "../../../data/products";
-import PopupModal from "../../../components/Modal";
-import ButtonModal from "../../../components/ButtonModal";
 import TypeList from "../../../components/TypeList";
 import types from "../../../data/types";
 import useNavigation from "../../../hooks/useNavigation";
-import CarouselSlider from "../../../components/CarouselSlider";
 import SearchBar from "../../../components/SearchBar";
 import BestSelletSlider from "../../../components/BestSelletSlider";
 
