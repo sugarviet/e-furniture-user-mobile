@@ -8,6 +8,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import useNavigation from "../../hooks/useNavigation";
 import useCart from "../../hooks/useCart";
 import { formatCurrency } from "../../utils/formatCurrency";
+import LoadingSpinner from "../LoadingSpinner";
 
 function CartList() {
   const { getCart, isLoading, getTotalPrice, removeFromCart } = useCart();
@@ -21,7 +22,7 @@ function CartList() {
     setRemoveItem(item);
   };
 
-  if (isLoading) return null;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <View style={{ height: "100%", backgroundColor: COLORS.grey1 }}>

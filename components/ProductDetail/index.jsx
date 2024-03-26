@@ -17,6 +17,7 @@ import useFeedback from "../../hooks/useFeedback";
 import { formatCurrency } from "../../utils/formatCurrency";
 import useCart from "../../hooks/useCart";
 import FavoriteButton from "../FavoriteButton";
+import LoadingSpinner from "../LoadingSpinner";
 const productDetailCarousel = [
   {
     id: 1,
@@ -38,7 +39,7 @@ function ProductDetail({ data }) {
   );
   const { addToCart } = useCart();
 
-  if (isLoading) return null;
+  if (isLoading) return <LoadingSpinner />;
   return (
     <View style={{ height: "100%", backgroundColor: COLORS.white }}>
       <View style={{ height: 260 }}>

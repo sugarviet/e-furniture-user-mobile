@@ -9,13 +9,14 @@ import useFeedback from "../../hooks/useFeedback";
 import { formatCurrency } from "../../utils/formatCurrency";
 import useWishlist from "../../hooks/useWishlist";
 import FavoriteButton from "../FavoriteButton";
+import LoadingSpinner from "../LoadingSpinner";
 
 const ProductCard = ({ product }) => {
   const { go_to_product_detail } = useNavigation();
 
   const { get_average_rating, isLoading } = useFeedback(product._id);
 
-  if (isLoading) return null;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <PressableContainer

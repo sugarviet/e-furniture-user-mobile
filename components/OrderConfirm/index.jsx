@@ -13,11 +13,12 @@ import Icon from '../Icon';
 import AddressCard from '../AddressCard';
 import useCart from '../../hooks/useCart';
 import { formatCurrency } from '../../utils/formatCurrency';
-import useVouchers from '../../hooks/useVouchers';
 import { useCheckout } from '../../context/CheckoutContext';
 import { withFetchDataWithAuth } from '../../hocs/withFetchDataWithAuth';
 import { get_address_default_by_user } from '../../api/addressApi';
 
+
+const DefaultAddressCard = withFetchDataWithAuth(AddressCard, get_address_default_by_user)
 
 const cartData = [
     {
@@ -62,16 +63,10 @@ const defaultAddress = {
 }
 
 
-
-
 export default function OrderConfirm() {
     const { go_to_address_book, go_to_voucher_list, go_to_payment_list } = useNavigation();
     const { getCart, getTotalPrice } = useCart();
-    // const {dataAfterApplyVoucher, isPriceVoucherLoading}  = useVouchers();
-
     const { dataAfterApplyVoucher, isPriceVoucherLoading } = useCheckout();
-
-    console.log(dataAfterApplyVoucher);
 
     if (isPriceVoucherLoading) return null;
 
@@ -81,25 +76,8 @@ export default function OrderConfirm() {
                 <View className="border-b border-grey5 pb-1">
                     <Text className="text-black text-[18px] font-urbanistBold">Shipping Address</Text>
                     <View className="py-6">
-                        {/* <PressableContainer onPress={go_to_address_book}>
-                            <View className='flex-row bg-white rounded-3xl flex gap-1 items-center px-3 py-4 shadow-sm mx-1'>
-                                <View className="w-16 h-16 rounded-full bg-[#e3e3e3] flex justify-center items-center mr-3">
-                                    <View className='w-12 h-12 rounded-full bg-black flex justify-center items-center'>
-                                        <Icon2D name='location' size={20} activated="white" />
-                                    </View>
-                                </View>
-                                <View className='flex-1'>
-                                    <Text className='font-bold text-base max-w-[150px]'>{defaultAddress.name}</Text>
-                                    <Text className='font-bold text-sm'>{defaultAddress.phone}</Text>
-                                    <Text numberOfLines={2} className="font-urbanistMedium text-grey2 pt-1">{defaultAddress.address}</Text>
-                                </View>
-                                <View className='w-12 h-12 flex justify-center items-center'>
-                                    <Icon source={IMAGES.edit} style={{ width: 22, height: 22 }} />
-                                </View>
-                            </View>
-                        </PressableContainer> */}
-
-                        <AddressCard data={defaultAddress} onPress={go_to_address_book} />
+                      
+                        <DefaultAddressCard onPress={go_to_address_book} />
 
                     </View>
                 </View>
@@ -107,7 +85,7 @@ export default function OrderConfirm() {
                     <Text className="text-black text-[18px] font-urbanistBold">Order List</Text>
                     <View className="mt-6 mx-1">
                         {getCart().map((item) => (
-                            <CartCard key={item.id} cart={item} />
+                            <CartCard key={item._id} cart={item} />
                         ))}
                     </View>
                 </View>
@@ -131,14 +109,17 @@ export default function OrderConfirm() {
                                 </View>
                             </View>
                         </PressableContainer>
-                        <View className="pt-4 flex flex-row gap-2 flex-wrap">
+                        {dataAfterApplyVoucher?.voucher ? (
+                            <View className="pt-4 flex flex-row gap-2 flex-wrap">
                             <View className="bg-black rounded-3xl w-[180px] flex flex-row items-center px-4 py-2">
-                                <Text className="text-white font-urbanistBold text-[16px] pr-4">Discount {dataAfterApplyVoucher ? dataAfterApplyVoucher.voucher.value : 0}% Off</Text>
+                                <Text className="text-white font-urbanistBold text-[16px] pr-4">Discount {dataAfterApplyVoucher.voucher.value}% Off</Text>
                                 <Pressable>
                                     <FontAwesome6 name="xmark" size={14} color="white" />
                                 </Pressable>
                             </View>
                         </View>
+                        ) : null}
+                        
                     </View>
                 </View>
                 <View className='flex-col bg-white rounded-3xl flex gap-4 px-4 py-4 shadow-sm mx-1 mt-4 mb-10'>

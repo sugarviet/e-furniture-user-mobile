@@ -3,13 +3,8 @@ import { COLORS, FONTS } from '../../constants';
 import useNavigation from '../../hooks/useNavigation';
 import CouponCard from '../CouponCard';
 import ButtonModal from '../ButtonModal';
-import { withFetchDataWithAuth } from '../../hocs/withFetchDataWithAuth';
-import { get_voucher_by_specified } from '../../api/voucherApi';
-import useCart from '../../hooks/useCart';
-import { usePost } from '../../hooks/api-hooks';
-import { useEffect, useState } from 'react';
-import useVouchers from '../../hooks/useVouchers';
 import { useCheckout } from '../../context/CheckoutContext';
+import LoadingSpinner from '../LoadingSpinner';
 
 const couponList = [
     {
@@ -52,11 +47,9 @@ const couponList = [
 
 
 const CouponList = () => {
-    // const [selectedCoupon, setSelectedCoupon] = useState();
-    // const { vouchers, isLoading, handleApplyVoucher } = useVouchers(selectedCoupon)
     const { vouchers, isLoading, handleApplyVoucher, setSelectedVoucher } = useCheckout()
 
-    if (isLoading) return null;
+    if (isLoading) return <LoadingSpinner />;
 
     const handleGetCouponId = (couponId) => {
         setSelectedVoucher(couponId)
@@ -66,7 +59,7 @@ const CouponList = () => {
         <View className="h-full relative bg-white">
             <ScrollView className="px-2 py-4 mt-4" style={{ marginBottom: 90, height: '100%', width: '100%' }}>
                 {vouchers?.map((coupon) => (
-                    <View key={coupon.id} className="pb-6">
+                    <View key={coupon._id} className="pb-6">
                         <CouponCard data={coupon} key={coupon.id} handleGetCouponId={handleGetCouponId} />
                     </View>
                 ))}
