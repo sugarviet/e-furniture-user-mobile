@@ -3,20 +3,12 @@ import padlock from '../assets/images/padlock.png';
 import warning from '../assets/images/warning.png';
 import logo from '../assets/images/logo.png';
 import banner from '../assets/images/banner.jpg';
-import heart_3D from '../assets/images/heart_3D.png';
-import favorite_3D from '../assets/images/favorite_3D.png';
-import setting_3D from '../assets/images/setting_3D.png';
-import QA_3D from '../assets/images/QA_3D.png';
-import coin_3D from '../assets/images/coin_3D.png';
-import location from '../assets/images/location.png';
 import order from '../assets/images/order.png';
-import shopping from '../assets/images/shopping.png';
 import wallet from '../assets/images/wallet.png';
 import cancel from '../assets/images/cancel.png';
 import noData from '../assets/images/noData.png';
 import check from '../assets/images/check.png';
 import whiteCheck from '../assets/images/white_check.png';
-import banking from '../assets/images/banking.png';
 import cod from '../assets/images/cod.png';
 import map_line from '../assets/images/map_line.png';
 import edit from '../assets/images/edit.png';
@@ -52,10 +44,14 @@ import rug from '../assets/images/rug.png';
 import others from '../assets/images/others.png';
 import telephone from '../assets/images/telephone.png';
 import mail from '../assets/images/mail.png';
-
-
+import heart_outline from '../assets/images/heart-outline.png'
+import notification from '../assets/images/notification.png';
+import back from '../assets/images/back.png'
 
 export const IMAGES = {
+    back,
+    notification,
+    heart_outline,
     user,
     padlock,
     warning,
@@ -66,7 +62,6 @@ export const IMAGES = {
     note,
     angle_circle_right,
     help_center,
-    coin_3D,
     noData,
     edit,
     map_line,
@@ -74,15 +69,8 @@ export const IMAGES = {
     check,
     wallet,
     order,
-    shopping,
-    favorite_3D,
     whiteCheck,
-    banking,
-    setting_3D,
-    location,
-    heart_3D,
     cancel,
-    QA_3D,
     home,
     cart_success,
     success_bg,
