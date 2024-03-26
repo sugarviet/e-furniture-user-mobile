@@ -10,6 +10,15 @@ import { FontAwesome6 } from '@expo/vector-icons';
 import { ICONS } from '../../constants/icons';
 import { Entypo } from '@expo/vector-icons';
 import Icon from '../Icon';
+import AddressCard from '../AddressCard';
+import useCart from '../../hooks/useCart';
+import { formatCurrency } from '../../utils/formatCurrency';
+import { useCheckout } from '../../context/CheckoutContext';
+import { withFetchDataWithAuth } from '../../hocs/withFetchDataWithAuth';
+import { get_address_default_by_user } from '../../api/addressApi';
+
+
+const DefaultAddressCard = withFetchDataWithAuth(AddressCard, get_address_default_by_user)
 
 const cartData = [
     {
@@ -45,14 +54,21 @@ const cartData = [
 const defaultAddress = {
     id: 1,
     name: 'Lê Thế Khôi',
+    account_id: {
+        first_name: "Le",
+        last_name: "Khoi"
+    },
     phone: '0978120511',
     address: '213 Quang Trung, phường 10, Quận Gò Vấp',
 }
 
 
 export default function OrderConfirm() {
-
     const { go_to_address_book, go_to_voucher_list, go_to_payment_list } = useNavigation();
+    const { getCart, getTotalPrice } = useCart();
+    const { dataAfterApplyVoucher, isPriceVoucherLoading } = useCheckout();
+
+    if (isPriceVoucherLoading) return null;
 
     return (
         <View className="h-full relative bg-white">
@@ -60,31 +76,16 @@ export default function OrderConfirm() {
                 <View className="border-b border-grey5 pb-1">
                     <Text className="text-black text-[18px] font-urbanistBold">Shipping Address</Text>
                     <View className="py-6">
-                        <PressableContainer onPress={go_to_address_book}>
-                            <View className='flex-row bg-white rounded-3xl flex gap-1 items-center px-3 py-4 shadow-sm mx-1'>
-                                <View className="w-16 h-16 rounded-full bg-[#e3e3e3] flex justify-center items-center mr-3">
-                                    <View className='w-12 h-12 rounded-full bg-black flex justify-center items-center'>
-                                        <Icon2D name='location' size={20} activated="white" />
-                                    </View>
-                                </View>
-                                <View className='flex-1'>
-                                    <Text className='font-bold text-base max-w-[150px]'>{defaultAddress.name}</Text>
-                                    <Text className='font-bold text-sm'>{defaultAddress.phone}</Text>
-                                    <Text numberOfLines={2} className="font-urbanistMedium text-grey2 pt-1">{defaultAddress.address}</Text>
-                                </View>
-                                <View className='w-12 h-12 flex justify-center items-center'>
-                                    <Icon source={IMAGES.edit} style={{ width: 22, height: 22 }} />
-                                </View>
-                            </View>
+                      
+                        <DefaultAddressCard onPress={go_to_address_book} />
 
-                        </PressableContainer>
                     </View>
                 </View>
                 <View className="border-b border-grey5 pt-6 pb-1">
                     <Text className="text-black text-[18px] font-urbanistBold">Order List</Text>
                     <View className="mt-6 mx-1">
-                        {cartData.map((item) => (
-                            <CartCard key={item.id} cart={item} />
+                        {getCart().map((item) => (
+                            <CartCard key={item._id} cart={item} />
                         ))}
                     </View>
                 </View>
@@ -108,20 +109,24 @@ export default function OrderConfirm() {
                                 </View>
                             </View>
                         </PressableContainer>
-                        <View className="pt-4 flex flex-row gap-2 flex-wrap">
+                        {dataAfterApplyVoucher?.voucher ? (
+                            <View className="pt-4 flex flex-row gap-2 flex-wrap">
                             <View className="bg-black rounded-3xl w-[180px] flex flex-row items-center px-4 py-2">
-                                <Text className="text-white font-urbanistBold text-[16px] pr-4">Discount 30% Off</Text>
+                                <Text className="text-white font-urbanistBold text-[16px] pr-4">Discount {dataAfterApplyVoucher.voucher.value}% Off</Text>
                                 <Pressable>
                                     <FontAwesome6 name="xmark" size={14} color="white" />
                                 </Pressable>
                             </View>
                         </View>
+                        ) : null}
+                        
                     </View>
                 </View>
                 <View className='flex-col bg-white rounded-3xl flex gap-4 px-4 py-4 shadow-sm mx-1 mt-4 mb-10'>
                     <View className="flex flex-row justify-between">
                         <Text className="text-[16px] text-grey2 font-urbanistMedium">Subtotal</Text>
-                        <Text className="text-[18px] text-grey font-urbanistSemiBold">30.000.000đ</Text>
+                        <Text className="text-[18px] text-grey font-urbanistSemiBold">                            {formatCurrency(getTotalPrice())}
+                        </Text>
                     </View>
                     <View className="flex flex-row justify-between">
                         <Text className="text-[16px] text-grey2 font-urbanistMedium">Shipping</Text>
@@ -129,11 +134,15 @@ export default function OrderConfirm() {
                     </View>
                     <View className="flex flex-row justify-between border-b border-grey5 pb-6">
                         <Text className="text-[16px] text-grey2 font-urbanistMedium">Discount</Text>
-                        <Text className="text-[18px] text-grey font-urbanistSemiBold">- 300.000đ</Text>
+                        {/* <Text className="text-[18px] text-grey font-urbanistSemiBold">- 300.000đ</Text> */}
+                        <Text className="text-[18px] text-grey font-urbanistSemiBold">{dataAfterApplyVoucher ? formatCurrency
+                            (dataAfterApplyVoucher.old_order_total - dataAfterApplyVoucher.order_total_after_voucher) : formatCurrency(0)}</Text>
                     </View>
                     <View className="flex flex-row justify-between pb-3">
                         <Text className="text-[16px] text-grey2 font-urbanistMedium">Total</Text>
-                        <Text className="text-[18px] text-grey font-urbanistSemiBold">29.700.000đ</Text>
+                        <Text className="text-[18px] text-grey font-urbanistSemiBold">
+                            {dataAfterApplyVoucher ? formatCurrency(dataAfterApplyVoucher.order_total_after_voucher) : formatCurrency(getTotalPrice())}
+                        </Text>
                     </View>
                 </View>
             </ScrollView>

@@ -1,5 +1,6 @@
 import useWishlist from "../../hooks/useWishlist";
 import InteractiveIcon3D from "../InteractiveIcon3D";
+import LoadingSpinner from "../LoadingSpinner";
 
 function FavoriteButton({ id }) {
   const { addToWishlist, removeFromWishlist, isLoading, isInWishlist } =
@@ -11,7 +12,7 @@ function FavoriteButton({ id }) {
     if (!active) addToWishlist();
   };
 
-  if (isLoading) return null;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <InteractiveIcon3D

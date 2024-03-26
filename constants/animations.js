@@ -12,6 +12,8 @@ import order from "../assets/animations/order.json"
 import cart from "../assets/animations/cart.json"
 import logo from "../assets/animations/logo.json"
 import success_bg from "../assets/animations/success_bg.json"
+import loading from "../assets/animations/loading.json"
+
 
 
 export const ANIMATIONS = {
@@ -28,5 +30,6 @@ export const ANIMATIONS = {
     order,
     cart,
     logo,
-    success_bg
+    success_bg,
+    loading
 };
