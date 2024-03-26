@@ -19,7 +19,7 @@ const AddressCard = ({ data, onPress }) => {
                 </View>
                 <View className='flex-1'>
                     <View className='flex-row items-center gap-4'>
-                        <Text className='font-bold text-base max-w-[170px]' numberOfLines={1} ellipsizeMode='tail'>{data.address}</Text>
+                        <Text className='font-bold text-base max-w-[170px]' numberOfLines={1} ellipsizeMode='tail'>{data.account_id.first_name} {data.account_id.last_name}</Text>
                         {data.default === true &&
                             <View className='bg-gray-200 rounded-md p-1'>
                                 <Text className='text-xs'>Default</Text>
@@ -27,7 +27,7 @@ const AddressCard = ({ data, onPress }) => {
                         }
                     </View>
                     <Text className='font-bold text-sm'>{data.phone}</Text>
-                    <Text numberOfLines={2} className="font-urbanistMedium text-grey2 pt-1">{data.ward}, {data.district}</Text>
+                    <Text numberOfLines={2} className="font-urbanistMedium text-grey2 pt-1">{data.address} {data.ward} {data.district}</Text>
                 </View>
                 <Pressable
                     onPress={() => {

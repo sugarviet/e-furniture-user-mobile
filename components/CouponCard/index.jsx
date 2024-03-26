@@ -4,13 +4,15 @@ import { ICONS } from "../../constants/icons";
 import CircleCheckbox from "../CircleCheckbox";
 import PressableContainer from "../PressableContainer";
 import { useState, useEffect } from "react";
+import { formatDate } from '../../utils/formatDate';
 
-const CouponCard = () => {
-
+const CouponCard = ({data, handleGetCouponId}) => {
+    // const {handleApplyVoucher} = useVouchers(data._id);
     const [selectCoupon, setSelectCoupon] = useState(false);
 
     const handleSelectCoupon = () => {
         setSelectCoupon(!selectCoupon)
+        handleGetCouponId(data._id)
     }
 
     return (
@@ -25,10 +27,10 @@ const CouponCard = () => {
                 </View>
                 <View className='flex-row bg-white flex items-center justify-between pl-2 pr-3 w-[70%]'>
                     <View className="flex flex-col pl-1">
-                        <Text className='font-bold text-sm pb-1'>MUVODICH</Text>
-                        <Text className='font-urbanistMedium text-[13px] '>20% off Capped at ₫100k</Text>
-                        <Text className='font-urbanistMedium text-[13px] '>Min. Spend ₫2tr</Text>
-                        <Text className='font-urbanistMedium text-[12px] text-grey1 pt-2'>20% used, Valid Till: 13.4.2023</Text>
+                        <Text className='font-bold text-sm pb-1'>{data.code}</Text>
+                        <Text className='font-urbanistMedium text-[13px] '>{data.value}% off Capped at ₫100k</Text>
+                        <Text className='font-urbanistMedium text-[13px] '>Min. Spend ₫{data.minimum_order_value / 1000000}M</Text>
+                        <Text className='font-urbanistMedium text-[12px] text-grey1 pt-2'>20% used, Valid Till: {formatDate(data.end_date)}</Text>
                     </View>
 
                     <Pressable>
