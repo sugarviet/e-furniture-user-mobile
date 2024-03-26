@@ -3,6 +3,8 @@ import { COLORS, FONTS } from '../../constants';
 import useNavigation from '../../hooks/useNavigation';
 import CouponCard from '../CouponCard';
 import ButtonModal from '../ButtonModal';
+import { withFetchDataWithAuth } from '../../hocs/withFetchDataWithAuth';
+import { get_voucher_by_specified } from '../../api/voucherApi';
 
 const couponList = [
     {
@@ -44,7 +46,9 @@ const couponList = [
 
 
 
-const CouponList = () => {
+const CouponList = ({data}) => {
+
+    console.log('data', data);
 
     return (
         <View className="h-full relative bg-white">
@@ -71,4 +75,4 @@ const CouponList = () => {
     )
 }
 
-export default CouponList
+export default withFetchDataWithAuth(CouponList, get_voucher_by_specified);

@@ -5,12 +5,12 @@ import Icon2D from "../Icon2D"
 import PressableContainer from "../PressableContainer"
 import useNavigation from "../../hooks/useNavigation"
 
-const AddressCard = ({ data }) => {
+const AddressCard = ({ data, onPress }) => {
 
     const { go_to_edit_address } = useNavigation();
 
     return (
-        <PressableContainer>
+        <PressableContainer onPress={onPress}>
             <View className='flex-row bg-white rounded-3xl flex gap-1 items-center px-3 py-4 shadow-sm mx-1'>
                 <View className="w-16 h-16 rounded-full bg-[#e3e3e3] flex justify-center items-center mr-3">
                     <View className='w-12 h-12 rounded-full bg-black flex justify-center items-center'>
@@ -19,7 +19,7 @@ const AddressCard = ({ data }) => {
                 </View>
                 <View className='flex-1'>
                     <View className='flex-row items-center gap-4'>
-                        <Text className='font-bold text-base max-w-[150px]'>{data.last_name} {data.first_name}</Text>
+                        <Text className='font-bold text-base max-w-[170px]' numberOfLines={1} ellipsizeMode='tail'>{data.address}</Text>
                         {data.default === true &&
                             <View className='bg-gray-200 rounded-md p-1'>
                                 <Text className='text-xs'>Default</Text>
@@ -27,7 +27,7 @@ const AddressCard = ({ data }) => {
                         }
                     </View>
                     <Text className='font-bold text-sm'>{data.phone}</Text>
-                    <Text numberOfLines={2} className="font-urbanistMedium text-grey2 pt-1">{data.address}, {data.ward}, {data.district}</Text>
+                    <Text numberOfLines={2} className="font-urbanistMedium text-grey2 pt-1">{data.ward}, {data.district}</Text>
                 </View>
                 <Pressable
                     onPress={() => {

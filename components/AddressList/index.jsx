@@ -3,6 +3,8 @@ import { COLORS, FONTS } from '../../constants';
 import useNavigation from '../../hooks/useNavigation';
 import AddressCard from '../AddressCard';
 import ButtonModal from '../ButtonModal';
+import { withFetchDataWithAuth } from '../../hocs/withFetchDataWithAuth';
+import { get_all_address } from '../../api/addressApi';
 
 const addressList = [
     {
@@ -43,14 +45,15 @@ const addressList = [
 
 
 
-const AddressList = () => {
+const AddressList = ({data}) => {
+    console.log(data);
 
     const { go_to_add_new_address } = useNavigation();
     return (
         <View className="h-full relative bg-white">
             <ScrollView className="px-4 py-4 mt-4" style={{ marginBottom: 90, height: '100%', width: '100%' }}>
-                {addressList.map((address) => (
-                    <View key={address.id} className="pb-6">
+                {data.map((address) => (
+                    <View key={address._id} className="pb-6">
                         <AddressCard
                             data={address}
                         />
@@ -76,4 +79,4 @@ const AddressList = () => {
     )
 }
 
-export default AddressList
+export default withFetchDataWithAuth(AddressList,get_all_address);

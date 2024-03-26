@@ -10,6 +10,7 @@ import { FontAwesome6 } from '@expo/vector-icons';
 import { ICONS } from '../../constants/icons';
 import { Entypo } from '@expo/vector-icons';
 import Icon from '../Icon';
+import AddressCard from '../AddressCard';
 
 const cartData = [
     {
@@ -51,7 +52,6 @@ const defaultAddress = {
 
 
 export default function OrderConfirm() {
-
     const { go_to_address_book, go_to_voucher_list, go_to_payment_list } = useNavigation();
 
     return (
@@ -60,7 +60,7 @@ export default function OrderConfirm() {
                 <View className="border-b border-grey5 pb-1">
                     <Text className="text-black text-[18px] font-urbanistBold">Shipping Address</Text>
                     <View className="py-6">
-                        <PressableContainer onPress={go_to_address_book}>
+                        {/* <PressableContainer onPress={go_to_address_book}>
                             <View className='flex-row bg-white rounded-3xl flex gap-1 items-center px-3 py-4 shadow-sm mx-1'>
                                 <View className="w-16 h-16 rounded-full bg-[#e3e3e3] flex justify-center items-center mr-3">
                                     <View className='w-12 h-12 rounded-full bg-black flex justify-center items-center'>
@@ -76,8 +76,10 @@ export default function OrderConfirm() {
                                     <Icon source={IMAGES.edit} style={{ width: 22, height: 22 }} />
                                 </View>
                             </View>
+                        </PressableContainer> */}
 
-                        </PressableContainer>
+                            <AddressCard data={defaultAddress} onPress={go_to_address_book}/>
+
                     </View>
                 </View>
                 <View className="border-b border-grey5 pt-6 pb-1">
