@@ -1,8 +1,12 @@
 import { Text, View, ScrollView } from 'react-native'
+import OrderProductCard from '../../../../../components/OrderProductCard'
 
 const OrderDetailStatus = () => {
+
     return (
-        <Text>OrderDetailStatus</Text>
+        <ScrollView>
+           
+        </ScrollView>
     )
 }
 
