@@ -3,6 +3,8 @@ import { COLORS, FONTS } from '../../constants';
 import useNavigation from '../../hooks/useNavigation';
 import CouponCard from '../CouponCard';
 import ButtonModal from '../ButtonModal';
+import { useCheckout } from '../../context/CheckoutContext';
+import LoadingSpinner from '../LoadingSpinner';
 
 const couponList = [
     {
@@ -45,17 +47,25 @@ const couponList = [
 
 
 const CouponList = () => {
+    const { vouchers, isLoading, handleApplyVoucher, setSelectedVoucher } = useCheckout()
+
+    if (isLoading) return <LoadingSpinner />;
+
+    const handleGetCouponId = (couponId) => {
+        setSelectedVoucher(couponId)
+    }
 
     return (
         <View className="h-full relative bg-white">
             <ScrollView className="px-2 py-4 mt-4" style={{ marginBottom: 90, height: '100%', width: '100%' }}>
-                {couponList?.map((coupon) => (
-                    <View key={coupon.id} className="pb-6">
-                        <CouponCard />
+                {vouchers?.map((coupon) => (
+                    <View key={coupon._id} className="pb-6">
+                        <CouponCard data={coupon} key={coupon.id} handleGetCouponId={handleGetCouponId} />
                     </View>
                 ))}
             </ScrollView>
             <Pressable
+                onPress={handleApplyVoucher}
                 className="absolute bottom-0 left-0 right-0 h-[100px] border-t border-t-grey5 px-5 bg-white"
             >
                 <View className="flex justify-center h-full">
@@ -71,4 +81,4 @@ const CouponList = () => {
     )
 }
 
-export default CouponList
+export default CouponList;

@@ -101,6 +101,7 @@ function useCart() {
         removeFromCart,
         getTotalPrice,
         updateQuantity,
+        
     };
 }
 

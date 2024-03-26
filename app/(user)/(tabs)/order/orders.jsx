@@ -5,6 +5,7 @@ import { get_order_by_state } from '../../../../api/orderHistoryApi'
 import EmptyContent from '../../../../components/EmptyContent'
 import OrderProductCard from '../../../../components/OrderProductCard'
 import { useFetchWithAuth } from '../../../../hooks/api-hooks'
+import LoadingSpinner from '../../../../components/LoadingSpinner'
 
 const Orders = ({ ...props }) => {
 
@@ -12,7 +13,7 @@ const Orders = ({ ...props }) => {
 
     const isEmptyData = !data?.data.length
 
-    if (isLoading) return <Text>loading...</Text>;
+    if (isLoading) return <LoadingSpinner />
 
     return (
         <View className='bg-[#f5f5f5] flex-1'>
