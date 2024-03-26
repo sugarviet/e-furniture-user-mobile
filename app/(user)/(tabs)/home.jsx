@@ -22,7 +22,6 @@ const Home = () => {
       <View className="">
         <View className="flex-row justify-between items-center px-3">
           <Text className="text-xl font-urbanistBold">Special Offers</Text>
-          <Text className="font-urbanistBold text-base">See All</Text>
         </View>
         <BestSelletSlider pagination carouselData={productDetailCarousel} />
       </View>
@@ -32,7 +31,6 @@ const Home = () => {
       <TypeList types={types} />
       <View className="flex-row justify-between items-center px-3">
         <Text className="text-xl font-urbanistBold">Most Popular</Text>
-        <Text className="font-urbanistBold text-base">See All</Text>
       </View>
       <View className="mx-[10px]">
         <CategoriesFilter />
