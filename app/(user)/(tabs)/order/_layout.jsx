@@ -1,18 +1,48 @@
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { withLayoutContext } from 'expo-router'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { withLayoutContext } from 'expo-router';
+import React from 'react';
+import Orders from './orders';
 
-const { Navigator } = createMaterialTopTabNavigator();
+const { Navigator, Screen } = createMaterialTopTabNavigator();
 
-export const MaterialTopTabs = withLayoutContext(Navigator);
-const OrderLayout = () => {
+const TAB_ORDER = [
+    { name: "pending", title: "Pending" },
+    { name: "processing", title: "Processing" },
+    { name: "shipping", title: "Shipping" },
+    { name: "done", title: "Done" },
+    { name: "cancel", title: "Cancelled" },
+    { name: "failed", title: "Failed" },
+    { name: "refunded", title: "Refund" }
+];
+
+const OrderLayout = withLayoutContext(() => {
+
     return (
-        <MaterialTopTabs screenOptions={{ tabBarActiveTintColor: 'black', tabBarLabelStyle: { fontSize: 14, fontWeight: 'bold', textTransform: 'capitalize' }, tabBarIndicatorStyle: {backgroundColor: 'black'} }}>
-            <MaterialTopTabs.Screen name="active" options={{ title: 'Active' }} />
-            <MaterialTopTabs.Screen name="completed" options={{ title: 'Completed' }} />
+        <Navigator
+            screenOptions={{
+                tabBarActiveTintColor: 'black',
+                tabBarLabelStyle: { fontSize: 14, fontWeight: 'bold', textTransform: 'capitalize' },
+                tabBarIndicatorStyle: { backgroundColor: 'black' },
+                tabBarScrollEnabled: true,
+                tabBarItemStyle: {
+                    width: 120,
+                    height: 50,
+                }
+            }}
 
-
-        </MaterialTopTabs>
+        >
+            {TAB_ORDER.map(tab => (
+                <Screen
+                    key={tab.name}
+                    name={tab.name}
+                    options={{ title: tab.title }}
+                >
+                    {props => <Orders {...props} />}
+                </Screen>
+            ))}
+        </Navigator>
     )
 }
+);
 
-export default OrderLayout
+export default OrderLayout;
