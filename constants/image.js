@@ -47,6 +47,8 @@ import mail from '../assets/images/mail.png';
 import heart_outline from '../assets/images/heart-outline.png'
 import notification from '../assets/images/notification.png';
 import back from '../assets/images/back.png'
+import truck_white from '../assets/images/truck-white.png'
+import truck_black from '../assets/images/truck-black.png'
 
 export const IMAGES = {
     back,
@@ -97,5 +99,7 @@ export const IMAGES = {
     storage,
     ourdoor,
     rug,
-    others
+    others,
+    truck_white,
+    truck_black
 };

@@ -20,6 +20,8 @@ function useNavigation() {
   const go_to_payment_list = () => router.push("/checkout/payment");
   const go_to_profile = (id) => router.push(`/edit-profile/${id}`);
   const go_to_catalog = (slug) => router.push(`/product-catalog/${slug}`)
+  const go_to_order_detail = (id) => router.push({ pathname: '/order-detail', params: id })
+  const go_to_delivery_tracking = (orderTracking) => router.push({ pathname: '/order-detail/delivery-detail', params: orderTracking })
 
   return {
     go_to_catalog,
@@ -40,7 +42,9 @@ function useNavigation() {
     go_to_voucher_list,
     go_to_order,
     go_to_payment_list,
-    go_to_profile
+    go_to_profile,
+    go_to_order_detail,
+    go_to_delivery_tracking
   };
 }
 
