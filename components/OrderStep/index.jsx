@@ -3,6 +3,7 @@ import { View, Text } from "react-native";
 import StepIndicator from "react-native-step-indicator";
 import { COLORS } from '../../constants/theme';
 import Icon2D from "../Icon2D";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 const labels = [
     "Packaging",
@@ -13,36 +14,52 @@ const labels = [
 
 const STEPS = {
     0: {
-        activeIcon: <Icon2D name='package' activated={COLORS.primary} size={24} />,
-        unactiveIcon: <Icon2D name='package' activated='#d3d3d3' size={24} />
+        activeIcon: <Icon2D name='package' activated={COLORS.primary} size={20} />,
+        unactiveIcon: <Icon2D name='package' activated='#d3d3d3' size={20} />
 
     },
     1: {
-        activeIcon: <Icon2D name='ship' activated={COLORS.primary} size={24} />,
-        unactiveIcon: <Icon2D name='ship' activated='#d3d3d3' size={24} />
+        activeIcon: <Icon2D name='ship' activated={COLORS.primary} size={14} />,
+        unactiveIcon: <Icon2D name='ship' activated='#d3d3d3' size={14} />
     },
     2: {
 
-        activeIcon: <Icon2D name='package' activated={COLORS.primary} size={24} />,
-        unactiveIcon: <Icon2D name='package' activated='#d3d3d3' size={24} />
+        activeIcon: <Icon2D name='package' activated={COLORS.primary} size={20} />,
+        unactiveIcon: <Icon2D name='package' activated='#d3d3d3' size={20} />
     },
     3: {
-        activeIcon: <Icon2D name='done' activated={COLORS.primary} size={24} />,
-        unactiveIcon: <Icon2D name='done' activated='#d3d3d3' size={24} />
+        activeIcon: <Icon2D name='done' activated={COLORS.primary} size={20} />,
+        unactiveIcon: <Icon2D name='done' activated='#d3d3d3' size={20} />
 
     }
 }
 
 
+const TYPES = {
+    Pending: {
+        step: 0,
+    },
+    Processing: {
+        step: 1,
+    },
+    Shipping: {
+        step: 2,
+    },
+    Done: {
+        step: 3,
+    },
+};
+
+
 const customStyles = {
-    stepIndicatorSize: 45,
-    currentStepIndicatorSize: 55,
-    separatorStrokeWidth: 2,
-    currentStepStrokeWidth: 2,
-    stepStrokeWidth: 2,
-    stepStrokeFinishedColor: 'white',
-    stepStrokeCurrentColor: 'white',
-    stepStrokeUnFinishedColor: `white`,
+    stepIndicatorSize: 35,
+    currentStepIndicatorSize: 45,
+    separatorStrokeWidth: 1,
+    currentStepStrokeWidth: 1,
+    stepStrokeWidth: 1,
+    stepStrokeFinishedColor: '#d3d3d3',
+    stepStrokeCurrentColor: 'black',
+    stepStrokeUnFinishedColor: `#d3d3d3`,
     separatorUnFinishedColor: `#d3d3d3`,
     stepIndicatorFinishedColor: 'white',
     stepIndicatorUnFinishedColor: `white`,
@@ -56,10 +73,18 @@ const customStyles = {
     labelSize: 12,
 };
 
-function OrderStep() {
-    const [step, setStep] = useState(1);
+function OrderStep({ type }) {
+
+    const validTypes = Object.keys(TYPES);
+
+    if (!validTypes.includes(type)) {
+        return null;
+    }
+
+    const { step } = TYPES[type];
+
     return (
-        <View className="mt-4">
+        <View className="">
             <StepIndicator
                 renderStepIndicator={({ position }) => {
                     return position === step ? (

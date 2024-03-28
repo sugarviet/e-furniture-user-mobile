@@ -19,6 +19,10 @@ const OrderDetail = ({ data }) => {
 
     const orderState = data.order_tracking[data.order_tracking.length - 1].name
 
+    const VALID_STATES = ['Pending', 'Processing', 'Shipping', 'Done'];
+
+    const isValidState = VALID_STATES.includes(orderState);
+
     const orderShipping = data.order_shipping
 
     return (
@@ -48,15 +52,17 @@ const OrderDetail = ({ data }) => {
                         <Text className="text-sm leading-4 font-urbanistMedium tracking-wide text-grey1">EFX Express Delivery</Text>
                     </View>
                 </View>
-                <Pressable
-                    onPress={() => {
-                        go_to_delivery_tracking({ orderTracking: JSON.stringify(data.order_tracking) });
-                    }}
-                >
-                    <Text className="font-urbanistBold text-sm">
-                        VIEW
-                    </Text>
-                </Pressable>
+                {isValidState &&
+                    <Pressable
+                        onPress={() => {
+                            go_to_delivery_tracking({ orderTracking: JSON.stringify(data) });
+                        }}
+                    >
+                        <Text className="font-urbanistBold text-sm">
+                            VIEW
+                        </Text>
+                    </Pressable>
+                }
             </View>
             <View className="bg-white px-4 py-3 mt-2">
                 <View className=" border-b border-grey5 ">
