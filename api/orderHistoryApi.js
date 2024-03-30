@@ -5,8 +5,8 @@ export const get_order_by_state = (state) => {
     return `${ORDER_URL}/state/tracking?page=1&limit=10&&type=${state}`
 }
 
-export const get_order_detail_by_id = (params, urlParams) => {
-    const { id } = urlParams;
+export const get_order_detail_by_id = (params) => {
+    const id = Object.values(params).join('');
     return `${ORDER_URL}/${id}`
 }
 
