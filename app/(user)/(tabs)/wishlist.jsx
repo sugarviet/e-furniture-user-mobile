@@ -13,7 +13,11 @@ const Wishlist = ({ data }) => {
       </View>
       <FlatList
         data={data}
-        renderItem={({ item }) => <ProductCard product={item} />}
+        renderItem={({ item }) => (
+          <View className="w-1/2">
+            <ProductCard product={item} />
+          </View>
+        )}
         keyExtractor={(item) => item._id}
         numColumns={2}
       />

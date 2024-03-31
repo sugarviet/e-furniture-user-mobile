@@ -2,14 +2,7 @@ import { ScrollView, Text, View, TouchableOpacity } from "react-native";
 import { COLORS } from "../../constants";
 import { ICONS } from "../../constants/icons";
 import CarouselSlider from "../../components/CarouselSlider";
-import {
-  FontAwesome5,
-  FontAwesome,
-  AntDesign,
-  FontAwesome6,
-} from "@expo/vector-icons";
-import InteractiveIcon3D from "../InteractiveIcon3D";
-import QuantityOption from "../QuantityOption";
+import { FontAwesome5 } from "@expo/vector-icons";
 import ButtonModal from "../ButtonModal";
 import { withFetchData } from "../../hocs/withFetchData";
 import { get_furniture_detail_api } from "../../api/furnitureUrl";
@@ -72,29 +65,6 @@ function ProductDetail({ data }) {
           <Text className="text-black text-[13px] font-urbanistLight pt-2">
             {data.description}
           </Text>
-        </View>
-        <View className="pt-3">
-          <Text className="text-black text-[18px] font-urbanistBold">
-            Color
-          </Text>
-          <View className="flex flex-row gap-3 items-center pt-2">
-            <AntDesign
-              name={ICONS.antDesign_check_circle}
-              size={40}
-              color="#7a5547"
-            />
-            <FontAwesome name={ICONS.fa_circle} size={48} color="#607d8a" />
-            <FontAwesome name={ICONS.fa_circle} size={48} color="#9d28ac" />
-            <FontAwesome name={ICONS.fa_circle} size={48} color="#797979" />
-            <FontAwesome name={ICONS.fa_circle} size={48} color="#3f51b2" />
-            <FontAwesome name={ICONS.fa_circle} size={48} color="#009689" />
-          </View>
-        </View>
-        <View className="pt-5 flex flex-row items-center  pb-40">
-          <Text className="text-black text-[18px] font-urbanistBold mr-4">
-            Quantity
-          </Text>
-          <QuantityOption name="productDetail" className="py-3 px-6" />
         </View>
       </ScrollView>
 

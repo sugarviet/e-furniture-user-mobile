@@ -4,8 +4,6 @@ import { useFetch } from "./api-hooks";
 function useFeedback(id) {
     const { data, isLoading } = useFetch(get_feedback_api_of(id));
 
-    console.log(data);
-
     const get_average_rating = () => {
         const value = data.reduce((rating, cur) => rating + cur.rating, 0) / data.length;
         return value ? value.toFixed(1) : 'not rated'

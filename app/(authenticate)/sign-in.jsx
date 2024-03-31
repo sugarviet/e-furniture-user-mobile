@@ -1,7 +1,5 @@
 import { SafeAreaView, Text, View } from "react-native";
 import SignInForm from "../../components/SignInForm";
-import AnimationView from "../../components/AnimationView";
-import { ANIMATIONS } from "../../constants/animations";
 import Logo from "../../components/Logo";
 
 const SignIn = () => {
@@ -11,7 +9,6 @@ const SignIn = () => {
         <View className="mt-8">
           <Logo />
         </View>
-        {/* <AnimationView className="w-72 h-72" source={ANIMATIONS.delivery} /> */}
       </SafeAreaView>
       <View className="bg-white flex-1 rounded-l-[50] rounded-r-[50] px-4 py-8">
         <Text className="text-2xl font-bold mb-4 text-gray-700 text-center">

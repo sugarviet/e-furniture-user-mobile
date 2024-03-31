@@ -2,6 +2,7 @@ import AnimatedLottieView from "lottie-react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ANIMATIONS } from "../../constants/animations";
 import { useEffect, useRef, useState } from "react";
+import { View } from "react-native";
 
 const TYPES = {
   heart: {
@@ -12,8 +13,7 @@ const TYPES = {
   },
 };
 
-function InteractiveIcon3D({ type, onPress, activated }) {
-  const [active, setActive] = useState(activated);
+function InteractiveIcon3D({ type, onPress, active }) {
   const iconRef = useRef();
 
   const { width, height, scale } = TYPES[type];
@@ -24,26 +24,27 @@ function InteractiveIcon3D({ type, onPress, activated }) {
   }, [active]);
 
   return (
-    <TouchableOpacity
-      onPress={() => {
-        const curState = !active;
-        setActive(curState);
-        onPress(curState);
+    <View
+      onTouchEnd={(e) => {
+        e.stopPropagation();
       }}
+      onStartShouldSetResponder={(e) => true}
     >
-      <AnimatedLottieView
-        ref={iconRef}
-        style={{
-          transform: [{ scale }],
-          width,
-          height,
-        }}
-        source={TYPES[type].source}
-        resizeMode="contain"
-        progress={active ? 1 : 0}
-        loop={false}
-      />
-    </TouchableOpacity>
+      <TouchableOpacity onPress={onPress}>
+        <AnimatedLottieView
+          ref={iconRef}
+          style={{
+            transform: [{ scale }],
+            width,
+            height,
+          }}
+          source={TYPES[type].source}
+          resizeMode="contain"
+          progress={active ? 1 : 0}
+          loop={false}
+        />
+      </TouchableOpacity>
+    </View>
   );
 }
 
