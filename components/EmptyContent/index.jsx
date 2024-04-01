@@ -9,6 +9,10 @@ const TYPES = {
     search: {
       title: "Not found :(",
         subTitle: "The keyword you are looking for is not defined"
+    },
+    review: {
+      title: "Not found :(",
+        subTitle: "The rating you are looking for is not defined"
     }
 }
 const EmptyContent = ({type}) => {
