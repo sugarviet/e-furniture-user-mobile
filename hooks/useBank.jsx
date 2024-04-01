@@ -1,37 +1,49 @@
 import { get_bank_account_api, get_create_bank_info_api } from "../api/bankApi";
 import { useDeleteAuth, usePostAuth, useUpdateWithAuth } from "./api-hooks";
-
+import { useQueryClient } from "@tanstack/react-query";
+import useNavigation from "./useNavigation";
 
 function useBank() {
+
+  const queryClient = useQueryClient();
+
+  const {go_to_bank_account} = useNavigation();
   
   const { mutate: createBankAccount } = usePostAuth(
     get_create_bank_info_api(),
     undefined,
     () => {
-      console.warn("thành công")
+      queryClient.invalidateQueries(get_bank_account_api());
+      go_to_bank_account();
+      console.warn("Add bank account successfully")
     },
     () => {
       console.warn("thất bại")
     },
-    get_bank_account_api()
   );
 
   const { mutate: updateBankAccount } = useUpdateWithAuth(
     get_create_bank_info_api(),
     undefined,
     () => {
+      queryClient.invalidateQueries(get_bank_account_api());
+      console.warn("Set default successfully")
     },
-    (error) => {
+    () => {
+      console.warn("thất bại")
     },
-    get_bank_account_api()
   );
 
   const { mutate: remove } = useDeleteAuth(
     get_create_bank_info_api(),
     undefined,
-    () => {},
-    () => {},
-    get_bank_account_api()
+    () => {
+      queryClient.invalidateQueries(get_bank_account_api());
+      console.warn("Delete bank account successfully")
+    },
+    () => {
+      console.warn("thất bại")
+    },
   );
 
   const addBankAccount = (data) => {

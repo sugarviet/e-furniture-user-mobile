@@ -48,6 +48,16 @@ const TYPES = {
         icon: null,
         size: 24,
         bgColor: 'black'
+    },
+    removeBank: {
+        icon: null,
+        size: 24,
+        bgColor: '#B7bdbf'
+    },
+    setDefaultBank: {
+        icon: null,
+        size: 24,
+        bgColor: 'black'
     }
 
 };
@@ -58,7 +68,7 @@ const ButtonModal = ({ type, children, onPress }) => {
 
     return (
         <TouchableOpacity className="w-full rounded-[40px] shadow-sm" onPress={onPress}>
-            <View style={{ backgroundColor: bgColor }} className="flex flex-row justify-center items-center py-5 rounded-[40px] bg-black shadow-2xl">
+            <View style={{ backgroundColor: bgColor }} className="flex flex-row justify-center items-center py-5 rounded-[40px] bg-black/5 shadow-2xl">
                 <MaterialIcons name={TYPES[type].icon} size={size} color="white" />
                 <View className="text-white font-urbanistSemiBold pl-3">{children}</View>
             </View>

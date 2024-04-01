@@ -23,29 +23,29 @@ const BankAccountForm = () => {
     const { addBankAccount } = useBank();
 
     const handleLookUpAccount = () => {
-        const data = JSON.stringify({
-          bin: bin,
-          accountNumber: accountNumber,
-        });
-        const config = {
-          method: "post",
-          url: "https://api.vietqr.io/v2/lookup",
-          headers: {
-            "x-client-id": client_id,
-            "x-api-key": api_key,
-            "Content-Type": "application/json",
-          },
-          data: data,
-        };
-        axios(config)
-          .then(function (response) {
-            const { accountName } = response.data.data;
-            setAccountName(accountName);
-          })
-          .catch(function (error) {
-            setAccountError(true);
-            setAccountName(undefined);
-          });
+        // const data = JSON.stringify({
+        //     bin: bin,
+        //     accountNumber: accountNumber,
+        // });
+        // const config = {
+        //     method: "post",
+        //     url: "https://api.vietqr.io/v2/lookup",
+        //     headers: {
+        //         "x-client-id": client_id,
+        //         "x-api-key": api_key,
+        //         "Content-Type": "application/json",
+        //     },
+        //     data: data,
+        // };
+        // axios(config)
+        //     .then(function (response) {
+        //         const { accountName } = response.data.data;
+        //         setAccountName(accountName);
+        //     })
+        //     .catch(function (error) {
+        //         setAccountError(true);
+        //         setAccountName(undefined);
+        //     });
     };
 
     const handleAddAccount = () => {

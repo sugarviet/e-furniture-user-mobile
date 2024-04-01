@@ -3,8 +3,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useFonts } from "expo-font";
 import * as SplashScreenExpo from "expo-splash-screen";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import SplashScreen from "./(authenticate)/splash";
+import { PortalProvider } from '@gorhom/portal';
 
 const RootLayout = () => {
 
@@ -47,7 +48,9 @@ const RootLayout = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <Slot />
+        <PortalProvider>
+          <Slot />
+        </PortalProvider>
       </GestureHandlerRootView>
     </QueryClientProvider>
   );

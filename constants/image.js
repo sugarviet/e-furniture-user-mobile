@@ -49,6 +49,8 @@ import notification from '../assets/images/notification.png';
 import back from '../assets/images/back.png'
 import truck_white from '../assets/images/truck-white.png'
 import truck_black from '../assets/images/truck-black.png'
+import bank_bg from '../assets/images/bank_bg.png'
+import not_found_bank from '../assets/images/not_found_bank.png'
 
 export const IMAGES = {
     back,
@@ -101,5 +103,7 @@ export const IMAGES = {
     rug,
     others,
     truck_white,
-    truck_black
+    truck_black,
+    bank_bg,
+    not_found_bank
 };
