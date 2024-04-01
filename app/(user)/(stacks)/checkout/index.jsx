@@ -1,15 +1,12 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import OrderConfirm from "../../../../components/OrderConfirm";
-import { COLORS } from "../../../../constants";
 
 const CheckoutScreen = () => {
-    return (
-        <View style={{ height: '100%', backgroundColor: COLORS.white }}>
-          
-                <OrderConfirm />
-           
-        </View>
-    )
-}
+  return (
+    <View>
+      <OrderConfirm />
+    </View>
+  );
+};
 
-export default CheckoutScreen
+export default CheckoutScreen;

@@ -76,32 +76,31 @@ const TYPE = {
     }),
   },
   first_name: {
-    placeholder: "Việt",
+    placeholder: "First name",
     rules: () => ({
       required: "Please enter your first name! ",
     }),
   },
   last_name: {
-    placeholder: "Đăng",
+    placeholder: "Last name",
     rules: () => ({
       required: "Please enter your last name! ",
     }),
   },
   phone: {
-    placeholder: "0981890262",
+    placeholder: "Phone number",
     rules: () => ({
       required: "Please enter your phone number! ",
       pattern: {
         value: /^\d{10,11}$/,
         message: "Invalid phone number!",
-    },
+      },
     }),
   },
   province: {
     placeholder: "Ho Chi Minh",
     editable: false,
-    rules: () => ({
-    }),
+    rules: () => ({}),
   },
   district: {
     placeholder: "District",
@@ -124,11 +123,17 @@ const TYPE = {
   phone_edit: {
     placeholder: "0981890262",
     icon: IMAGES.telephone,
-    rules: () => ({})
+    rules: () => ({}),
   },
 };
 
-function FormInput({ defaultValue, type, control, validated = true }) {
+function FormInput({
+  defaultValue,
+  type,
+  control,
+  validated = true,
+  className,
+}) {
   const [isSecure, setIsSecure] = useState(TYPE[type]?.isSecure);
 
   return (
@@ -144,8 +149,9 @@ function FormInput({ defaultValue, type, control, validated = true }) {
         <View>
           <View
             className={classNames(
-              "p-2 h-14 bg-gray-100 rounded-md my-2 border-[1px] flex-row items-center",
-              error ? "border-rose-500" : "border-transparent"
+              "p-2 h-10 bg-white flex-row items-center",
+              error ? "border-rose-500" : "border-transparent",
+              className
             )}
           >
             {TYPE[type].icon ? (

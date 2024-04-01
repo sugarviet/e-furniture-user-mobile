@@ -4,7 +4,7 @@ import { useFetch, usePost } from "./api-hooks";
 
 function useFeedback(id) {
     const { data, isLoading } = useFetch(get_feedback_api_of(id));
-    const {mutate:feedback} = usePost(get_feedback_api(), undefined, ()=>{},()=>{})
+    const { mutate: feedback } = usePost(get_feedback_api(), undefined, () => { }, () => { })
 
     const get_feedback_at_rate = (rate) => {
         if(rate == 0) return data;

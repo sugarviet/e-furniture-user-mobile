@@ -6,18 +6,13 @@ import useAuthStore from "../../stores/useAuthStore";
 import useNavigation from "../../hooks/useNavigation";
 import useAuth from "../../hooks/useAuth";
 
-
 function SignInForm() {
   const { control, handleSubmit } = useForm();
   const { go_to_sign_up } = useNavigation();
-  const {login_with_app} = useAuth();
+  const { login_with_app } = useAuth();
 
-  const { setTokens } = useAuthStore();
   const onSubmit = (data) => {
     login_with_app(data);
-  };
-  const handlePress = () => {
-    setTokens(true, true, true);
   };
 
   return (
@@ -26,9 +21,6 @@ function SignInForm() {
         <FormInput type="username" control={control} />
         <FormInput type="password" control={control} />
       </View>
-      <LinkableButton className="mt-4" handlePress={handlePress}>
-        Go to home
-      </LinkableButton>
       <LinkableButton className="mt-4" handlePress={handleSubmit(onSubmit)}>
         Sign in
       </LinkableButton>

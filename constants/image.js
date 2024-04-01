@@ -49,8 +49,10 @@ import notification from '../assets/images/notification.png';
 import back from '../assets/images/back.png'
 import truck_white from '../assets/images/truck-white.png'
 import truck_black from '../assets/images/truck-black.png'
+import right_arrow_black from '../assets/images/right-arrow.png'
 
 export const IMAGES = {
+    right_arrow_black,
     back,
     notification,
     heart_outline,

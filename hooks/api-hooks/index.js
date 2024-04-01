@@ -46,9 +46,9 @@ const useGenericMutation = (func, key, params, onSuccessAPI, onErrorAPI) => {
   });
 };
 
-export const useDelete = (url, params, onSuccessAPI = () => {}, onErrorAPI = () => {}, key) => {
+export const useDelete = (url, params, onSuccessAPI = () => { }, onErrorAPI = () => { }, key) => {
   return useGenericMutation(
-    (id) => axios.delete(`${url}/${id}`),
+    (id) => request.delete(`${url}/${id}`),
     key,
     params,
     onSuccessAPI,
@@ -57,10 +57,10 @@ export const useDelete = (url, params, onSuccessAPI = () => {}, onErrorAPI = () 
 };
 
 
-export const usePost = (url, params, onSuccessAPI = () => {}, onErrorAPI = () => {}, key) => {
+export const usePost = (url, params, onSuccessAPI = () => { }, onErrorAPI = () => { }, key) => {
   return useGenericMutation(
     async (data) => await request.post(url, data).then((response) => response.data)
-    .then((data) => data.metaData),
+      .then((data) => data.metaData),
     key,
     params,
     onSuccessAPI,
@@ -68,7 +68,7 @@ export const usePost = (url, params, onSuccessAPI = () => {}, onErrorAPI = () =>
   );
 };
 
-export const useUpdate = (url, params, onSuccessAPI = () => {}, onErrorAPI = () => {}, key) => {
+export const useUpdate = (url, params, onSuccessAPI = () => { }, onErrorAPI = () => { }, key) => {
   return useGenericMutation(
     (data) => request.put(url, data),
     key,
@@ -78,10 +78,10 @@ export const useUpdate = (url, params, onSuccessAPI = () => {}, onErrorAPI = () 
   );
 };
 
-export const usePostWithoutAuth = (url, params, onSuccessAPI = () => {}, onErrorAPI = () => {}, key) => {
+export const usePostWithoutAuth = (url, params, onSuccessAPI = () => { }, onErrorAPI = () => { }, key) => {
   return useGenericMutation(
     async (data) => await requestWithoutAuth.post(url, data).then((response) => response.data)
-    .then((data) => data.metaData),
+      .then((data) => data.metaData),
     key,
     params,
     onSuccessAPI,
