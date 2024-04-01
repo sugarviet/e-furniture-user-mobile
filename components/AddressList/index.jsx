@@ -51,22 +51,17 @@ const addressList = [
 ];
 
 const AddressList = ({ data }) => {
-  console.log(data);
-
   const { go_to_add_new_address } = useNavigation();
   return (
-    <View className="h-full relative bg-white">
-      <ScrollView
-        className="px-4 py-4 mt-4"
-        style={{ marginBottom: 90, height: "100%", width: "100%" }}
-      >
+    <View className="relative flex-1">
+      <ScrollView className="">
         {data.map((address) => (
           <View key={address._id} className="pb-6">
             <AddressCard data={address} />
           </View>
         ))}
       </ScrollView>
-      <Pressable
+      <TouchableOpacity
         className="absolute bottom-0 left-0 right-0 h-[100px] border-t border-t-grey5 px-5 bg-white"
         onPress={() => {
           go_to_add_new_address();
@@ -81,7 +76,7 @@ const AddressList = ({ data }) => {
             </View>
           </ButtonModal>
         </View>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 };

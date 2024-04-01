@@ -1,67 +1,62 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  Pressable,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import FormInput from "../../components/FormInput";
 import { useForm } from "react-hook-form";
-import ButtonModal from "../ButtonModal";
 import useNavigation from "../../hooks/useNavigation";
 import { useUserStore } from "../../stores/useUserStore";
+import { IMAGES } from "../../constants/image";
+import useAddress from "../../hooks/useAddress";
 
 const AddAddressForm = () => {
   const { control, handleSubmit } = useForm();
+  const { addAddress } = useAddress();
   const { go_to_region_select } = useNavigation();
 
   const { region } = useUserStore();
 
   const onSubmit = (data) => {
-    console.log(data);
+    addAddress({ ...data, ...region });
   };
 
   return (
-    <View className="flex-1 relative bg-white">
-      <ScrollView className="pt-[25px] mb-24 h-full px-5">
-        <View>
-          <Text className="text-[16px] font-urbanistBold">First name*</Text>
-          <FormInput control={control} type="first_name" />
-        </View>
-        <View>
-          <Text className="text-[16px] font-urbanistBold pt-2">Last name*</Text>
-          <FormInput control={control} type="last_name" />
-        </View>
-        <View>
-          <Text className="text-[16px] font-urbanistBold pt-2">
-            Phone number*
-          </Text>
+    <View className="flex-1 relative">
+      <ScrollView className="mb-24">
+        <View className="my-2">
+          <Text className="m-2 text-gray-500">Contact</Text>
           <FormInput control={control} type="phone" />
         </View>
-        <TouchableOpacity onPress={go_to_region_select}>
-          <Text className="text-[16px] font-urbanistBold pt-2">
-            Province, District, Ward
-            {region && `${region.district.name} ${region.ward.name}`}
-          </Text>
-        </TouchableOpacity>
-        <View className="pb-12">
-          <Text className="text-[16px] font-urbanistBold pt-2">Address*</Text>
+        <View>
+          <Text className="m-2 text-gray-500">Address</Text>
+          <TouchableOpacity
+            className="bg-white flex-row p-2 justify-between items-center"
+            onPress={go_to_region_select}
+          >
+            {region ? (
+              <View>
+                <Text>{`${region.province}`}</Text>
+                <Text>{`${region.district.name}`}</Text>
+                <Text>{`${region.ward.name}`}</Text>
+              </View>
+            ) : (
+              <Text className="text-gray-300">Province, District, Ward</Text>
+            )}
+
+            <Image
+              className="w-4 h-4 text-gray-300"
+              source={IMAGES.right_arrow_black}
+            />
+          </TouchableOpacity>
           <FormInput control={control} type="address" />
         </View>
+        <TouchableOpacity
+          onPress={handleSubmit(onSubmit)}
+          className="bg-black py-3 mx-1 mt-4"
+        >
+          <Text className="text-white text-md uppercase text-center font-urbanistBold">
+            Submit
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
-      <Pressable
-        className="absolute bottom-0 left-0 right-0 h-[100px] border-t border-t-grey5 px-5 bg-white"
-        onPress={handleSubmit(onSubmit)}
-      >
-        <View className="flex justify-center h-full">
-          <ButtonModal type="addNewAddress">
-            <View className="flex flex-row items-center">
-              <Text className="text-white font-urbanistSemiBold">Add</Text>
-            </View>
-          </ButtonModal>
-        </View>
-      </Pressable>
     </View>
   );
 };

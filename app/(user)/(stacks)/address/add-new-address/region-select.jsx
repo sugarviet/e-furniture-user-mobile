@@ -88,7 +88,7 @@ function RegionSelectionScreen() {
         ? wards.map((item) => ({ ...item, name: item.ward_name }))
         : [],
       onSelect: (ward) => {
-        setRegion({ district, ward });
+        setRegion({ province: "TP.Hồ Chí Minh", district, ward });
         go_back();
       },
     },

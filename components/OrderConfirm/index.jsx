@@ -10,17 +10,10 @@ import { FontAwesome6 } from "@expo/vector-icons";
 import { ICONS } from "../../constants/icons";
 import { Entypo } from "@expo/vector-icons";
 import Icon from "../Icon";
-import AddressCard from "../AddressCard";
 import useCart from "../../hooks/useCart";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { useCheckout } from "../../context/CheckoutContext";
-import { withFetchDataWithAuth } from "../../hocs/withFetchDataWithAuth";
-import { get_address_default_by_user } from "../../api/addressApi";
-
-const DefaultAddressCard = withFetchDataWithAuth(
-  AddressCard,
-  get_address_default_by_user
-);
+import DefaultAddressCard from "../DefaultAddressCard";
 
 export default function OrderConfirm() {
   const { go_to_voucher_list, go_to_payment_list } = useNavigation();
