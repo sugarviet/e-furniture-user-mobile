@@ -21,22 +21,20 @@ const BottomSheet = forwardRef((props, ref) => {
 
 	return (
 		<Portal>
-		<Portal>
 			<GorhomeBottomSheet
 				ref={ref}
 				index={initialIndex}
 				snapPoints={snapPoints}
 				enablePanDownToClose={true}
 				handleIndicatorStyle={{ backgroundColor: '#ccc' }}
-			keyboardBehavior="fillParent"
-			backdropComponent={renderBackdrop}
+				keyboardBehavior="fillParent"
+				backdropComponent={renderBackdrop}
 				backgroundStyle={{ backgroundColor: '#fbfbfb' }}
 			>
 				<View className='flex bg-white flex-1'>
 					{props.children}
 				</View>
 			</GorhomeBottomSheet>
-		</Portal>
 		</Portal>
 	);
 });
