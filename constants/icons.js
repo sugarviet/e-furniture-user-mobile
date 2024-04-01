@@ -43,6 +43,8 @@ const ionIcons_location = 'location'
 const antDesign_eidt = 'edit'
 const enTypo_arrow_right = 'chevron-thin-right';
 const ion_bookmark = 'bookmark'
+const antDesign_staro = 'staro'
+const antDesign_star = 'star'
 
 
 export const ICONS = {
@@ -92,5 +94,7 @@ export const ICONS = {
     ionIcons_location,
     antDesign_eidt,
     enTypo_arrow_right,
-    ion_bookmark
+    ion_bookmark,
+    antDesign_staro,
+    antDesign_star
 };

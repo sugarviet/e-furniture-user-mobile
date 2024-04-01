@@ -97,6 +97,11 @@ const types = {
     component: Feather,
     icon: ICONS.feather_product_cart,
   },
+  star: {
+    component: AntDesign,
+    icon: ICONS.antDesign_star,
+
+  }
 };
 
 const Icon2D = ({ activated = "white", name, size = 12 }) => {
