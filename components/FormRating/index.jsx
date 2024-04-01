@@ -18,7 +18,7 @@ const TYPE = {
 
 
 };
-const FormRating = ({ defaultValue, type, control, validated = true }) => {
+const FormRating = ({ defaultValue, type, control, validated = true, size = 40, count = 5 }) => {
     return (
         <Controller
             control={control}
@@ -32,9 +32,9 @@ const FormRating = ({ defaultValue, type, control, validated = true }) => {
                 <View>
                     <AirbnbRating
                         onFinishRating={onChange}
-                        defaultRating={4}
-                        size={40}
-                        count={5}
+                        defaultRating={defaultValue}
+                        size={size}
+                        count={count}
                         reviews={[]}
                         selectedColor={'black'}
 

@@ -15,6 +15,7 @@ const RatingForm = ({ orderBriefInfoCard }) => {
       product_id: orderBriefInfoCard.product_id,
       ...data
     }
+    console.log(body)
   };
 
 
@@ -85,7 +86,6 @@ const RatingForm = ({ orderBriefInfoCard }) => {
       </ScrollView>
 
 
-      {/* Submit rating */}
       <View className="flex flex-row w-full justify-between mb-6">
         <Pressable className="flex-1 mx-1">
           <ButtonModal
