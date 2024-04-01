@@ -43,6 +43,8 @@ const ionIcons_location = 'location'
 const antDesign_eidt = 'edit'
 const enTypo_arrow_right = 'chevron-thin-right';
 const ion_bookmark = 'bookmark'
+const antDesign_staro = 'staro'
+const antDesign_star = 'star'
 const feather_check_circle = 'check-circle'
 const simple_options_vertical = 'options-vertical'
 
@@ -96,6 +98,8 @@ export const ICONS = {
     antDesign_eidt,
     enTypo_arrow_right,
     ion_bookmark,
+    antDesign_staro,
+    antDesign_star,
     feather_check_circle,
     simple_options_vertical
 };

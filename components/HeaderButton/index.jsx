@@ -1,6 +1,5 @@
 import { Image, TouchableOpacity } from "react-native";
 import useHeaderButton from "./useHeaderButton";
-import { IMAGES } from "../../constants/image";
 
 function HeaderButton({ type }) {
   const HEADER_BUTTON = useHeaderButton();

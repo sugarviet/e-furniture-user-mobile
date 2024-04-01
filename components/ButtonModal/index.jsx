@@ -44,6 +44,16 @@ const TYPES = {
         size: 24,
         bgColor: 'black'
     },
+    cancel: {
+        icon: null,
+        size: 24,
+        bgColor: 'gray'
+    },
+    submit: {
+        icon: null,
+        size: 24,
+        bgColor: 'black'
+    },
     addBankAccount: {
         icon: null,
         size: 24,

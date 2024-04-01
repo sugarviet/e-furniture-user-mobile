@@ -2,7 +2,7 @@ import { usePost, usePostWithoutAuth } from "./api-hooks";
 import { get_login, get_logout, get_register } from "../api/authUrl";
 import useAuthStore from "../stores/useAuthStore";
 import useNavigation from "./useNavigation";
-import {jwtDecode}  from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import "core-js/stable/atob";
 
 export default function useAuth() {
@@ -15,7 +15,6 @@ export default function useAuth() {
       const { access_token, refresh_token } = data;
       const decode = jwtDecode(access_token);
       setTokens(access_token, refresh_token, decode.account_id);
-
     },
     () => {}
   );
@@ -31,8 +30,7 @@ export default function useAuth() {
     get_logout(),
     undefined,
     () => {
-    clearTokens();
-      // go_to_sign_in();
+      clearTokens();
     },
     () => {}
   );
@@ -42,18 +40,18 @@ export default function useAuth() {
   const register_with_app = (data) => {
     const body = {
       ...data,
-      status: 1
-    }
+      status: 1,
+    };
     register(body);
   };
 
   const handleLogout = () => {
     // logout();
     clearTokens();
-  }
+  };
   return {
     login_with_app,
     register_with_app,
-    handleLogout
+    handleLogout,
   };
 }
