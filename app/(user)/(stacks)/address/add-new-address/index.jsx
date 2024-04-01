@@ -3,7 +3,7 @@ import AddAddressForm from "../../../../../components/AddAddressForm";
 
 const Address = () => {
   return (
-    <View className="h-full bg-white">
+    <View className="flex-1">
       <AddAddressForm />
     </View>
   );

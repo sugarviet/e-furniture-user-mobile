@@ -1,10 +1,8 @@
-import { Pressable, Text, TouchableOpacity, View } from "react-native";
+import { Pressable, Text, TouchableOpacity, View, Image } from "react-native";
 import { IMAGES } from "../../constants/image";
 import Icon from "../Icon";
 import Icon2D from "../Icon2D";
-import PressableContainer from "../PressableContainer";
 import useNavigation from "../../hooks/useNavigation";
-import ButtonModal from "../ButtonModal";
 
 const AddressCard = ({ data }) => {
   const { go_to_edit_address, go_to_address_book, go_to_add_new_address } =
@@ -13,19 +11,28 @@ const AddressCard = ({ data }) => {
   if (!data)
     return (
       <TouchableOpacity onPress={go_to_add_new_address}>
-        <View className="flex-row bg-white rounded-3xl flex gap-1 items-center px-3 py-4 shadow-sm mx-1">
-          <View className="flex flex-row items-center">
-            <View className="w-12 h-12 mr-4 rounded-full bg-black flex justify-center items-center">
-              <Icon2D name="location" size={20} activated="white" />
+        <View className="flex-row justify-between items-center bg-white px-3 py-4 shadow-sm">
+          <View className="flex-row">
+            <View>
+              <Icon2D name="location" size={20} activated="black" />
             </View>
-            <Text className="font-urbanistSemiBold">Add New Address</Text>
+            <View className="ml-2">
+              <Text className="font-urbanistSemiBold">Delivery Address</Text>
+              <Text className="text-xs font-urbanist">
+                Please select address
+              </Text>
+            </View>
           </View>
+          <Image
+            className="w-6 h-6 text-black"
+            source={IMAGES.right_arrow_black}
+          />
         </View>
       </TouchableOpacity>
     );
 
   return (
-    <PressableContainer onPress={go_to_address_book}>
+    <TouchableOpacity onPress={go_to_address_book}>
       <View className="flex-row bg-white rounded-3xl flex gap-1 items-center px-3 py-4 shadow-sm mx-1">
         <View className="w-16 h-16 rounded-full bg-[#e3e3e3] flex justify-center items-center mr-3">
           <View className="w-12 h-12 rounded-full bg-black flex justify-center items-center">
@@ -64,7 +71,7 @@ const AddressCard = ({ data }) => {
           <Icon source={IMAGES.edit} className="w-[22px] h-[22px]" />
         </Pressable>
       </View>
-    </PressableContainer>
+    </TouchableOpacity>
   );
 };
 

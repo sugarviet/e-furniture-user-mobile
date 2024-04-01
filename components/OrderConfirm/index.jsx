@@ -22,52 +22,6 @@ const DefaultAddressCard = withFetchDataWithAuth(
   get_address_default_by_user
 );
 
-const cartData = [
-  {
-    id: 1,
-    name: "Lawson Chair",
-    quantity: 2,
-    price: "4.500.000đ",
-    image:
-      "https://www.planscape.co.uk/557ed71e9aa15d29605cd279/product_images/tables/coffee/nomique/lux/nomique-lux-table-09.jpg?w=640",
-  },
-  {
-    id: 2,
-    name: "Parabolic Reflector",
-    quantity: 1,
-    price: "2.000.000đ",
-    image:
-      "https://static.wixstatic.com/media/21bf73_601754224ee4419683968042a8b3a947~mv2_d_1770_2221_s_2.png/v1/fill/w_657,h_801,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/Blue-ChairShadow.png",
-  },
-  {
-    id: 3,
-    name: "Mini Wooden Table",
-    quantity: 1,
-    price: "600.000đ",
-    image:
-      "https://img.freepik.com/free-psd/armchair-pillow_176382-861.jpg?t=st=1710746885~exp=1710750485~hmac=5daff58b0442d6c3540e68bbf6fb30f07b7e4d802e0ee1b24d02b507a56f8f07&w=826",
-  },
-  {
-    id: 4,
-    name: "Wooden Wardrobe",
-    quantity: 1,
-    price: "6.399.000đ",
-    image:
-      "https://a.1stdibscdn.com/mid-century-teak-wardrobe-from-younger-1960s-for-sale/f_73322/f_361110821694452076895/f_36111082_1694452077540_bg_processed.jpg?disable=upscale&auto=webp&quality=60&width=640",
-  },
-];
-
-const defaultAddress = {
-  id: 1,
-  name: "Lê Thế Khôi",
-  account_id: {
-    first_name: "Le",
-    last_name: "Khoi",
-  },
-  phone: "0978120511",
-  address: "213 Quang Trung, phường 10, Quận Gò Vấp",
-};
-
 export default function OrderConfirm() {
   const { go_to_voucher_list, go_to_payment_list } = useNavigation();
   const { getCart, getTotalPrice } = useCart();
@@ -76,19 +30,9 @@ export default function OrderConfirm() {
   if (isPriceVoucherLoading) return null;
 
   return (
-    <View className="h-full relative bg-white">
-      <ScrollView
-        className="px-5 py-4"
-        style={{ marginBottom: 90, height: "100%", width: "100%" }}
-      >
-        <View className="border-b border-grey5 pb-1">
-          <Text className="text-black text-[18px] font-urbanistBold">
-            Shipping Address
-          </Text>
-          <View className="py-6">
-            <DefaultAddressCard />
-          </View>
-        </View>
+    <View className="relative">
+      <ScrollView className="mb-32">
+        <DefaultAddressCard />
         <View className="border-b border-grey5 pt-6 pb-1">
           <Text className="text-black text-[18px] font-urbanistBold">
             Order List
@@ -168,7 +112,6 @@ export default function OrderConfirm() {
             <Text className="text-[16px] text-grey2 font-urbanistMedium">
               Discount
             </Text>
-            {/* <Text className="text-[18px] text-grey font-urbanistSemiBold">- 300.000đ</Text> */}
             <Text className="text-[18px] text-grey font-urbanistSemiBold">
               {dataAfterApplyVoucher
                 ? formatCurrency(
@@ -195,7 +138,7 @@ export default function OrderConfirm() {
 
       <Pressable
         onPress={go_to_payment_list}
-        className="absolute bottom-0 left-0 right-0 h-[100px] shadow-md border-t border-x border-grey5 rounded-t-3xl bg-white px-5 pt-5"
+        className="absolute bottom-0 left-0 right-0 h-32 shadow-md border-t border-x border-grey5 rounded-t-3xl bg-white px-5 pt-5"
       >
         <ButtonModal type="checkout">
           <View className="flex flex-row items-center">

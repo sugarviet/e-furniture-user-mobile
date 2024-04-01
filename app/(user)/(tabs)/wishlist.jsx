@@ -3,7 +3,7 @@ import { FlatList } from "react-native-gesture-handler";
 import ProductCard from "../../../components/ProductCard";
 import CategoriesFilter from "../../../components/CategoriesFilter";
 import { withFetchDataWithAuth } from "../../../hocs/withFetchDataWithAuth";
-import { get_all_wishlist_api } from "../../../api/wishlistUrl";
+import { get_wishlist_api } from "../../../api/wishlistApi";
 
 const Wishlist = ({ data }) => {
   return (
@@ -25,4 +25,4 @@ const Wishlist = ({ data }) => {
   );
 };
 
-export default withFetchDataWithAuth(Wishlist, get_all_wishlist_api);
+export default withFetchDataWithAuth(Wishlist, get_wishlist_api);

@@ -1,6 +1,6 @@
 import LoadingSpinner from "../components/LoadingSpinner";
-import { useFetch, useFetchWithAuth } from "../hooks/api-hooks";
-import { useLocalSearchParams } from 'expo-router';
+import { useFetch } from "../hooks/api-hooks";
+import { useLocalSearchParams } from "expo-router";
 export const withFetchData = (WrappedComponent, getApi) => {
   return (props) => {
     const params = useLocalSearchParams();
