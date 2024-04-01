@@ -43,6 +43,16 @@ const TYPES = {
         icon: null,
         size: 24,
         bgColor: 'black'
+    },
+    cancel: {
+        icon: null,
+        size: 24,
+        bgColor: 'gray'
+    },
+    submit: {
+        icon: null,
+        size: 24,
+        bgColor: 'black'
     }
 
 };
