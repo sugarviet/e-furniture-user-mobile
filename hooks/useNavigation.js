@@ -23,6 +23,10 @@ function useNavigation() {
   const go_to_order_detail = (id) => router.push({ pathname: '/order-detail', params: id })
   const go_to_delivery_tracking = (orderTracking) => router.push({ pathname: '/order-detail/delivery-detail', params: orderTracking })
 
+  const go_to_review_products = (id) => {
+    return router.push(`/product-review/${id}`)
+
+  }
   return {
     go_to_catalog,
     go_to_sign_in,
@@ -44,7 +48,8 @@ function useNavigation() {
     go_to_payment_list,
     go_to_profile,
     go_to_order_detail,
-    go_to_delivery_tracking
+    go_to_delivery_tracking,
+    go_to_review_products
   };
 }
 
