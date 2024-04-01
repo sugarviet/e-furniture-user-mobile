@@ -1,13 +1,26 @@
 import { View } from 'react-native';
-import React, { forwardRef, useMemo } from 'react';
-import GorhomeBottomSheet  from '@gorhom/bottom-sheet';
+import React, { forwardRef, useMemo, useCallback } from 'react';
+import GorhomeBottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
+import { Portal } from '@gorhom/portal';
 
 const BottomSheet = forwardRef((props, ref) => {
-	const snapPoints = useMemo(() => ['50%', '70%', '90%'], []);
+	const snapPoints = useMemo(() => ['50%', '70%', '80%'], []);
 
     const initialIndex = props.initialIndex !== undefined ? props.initialIndex : -1;
 
+	const renderBackdrop = useCallback(
+		(props) => (
+			<BottomSheetBackdrop
+				{...props}
+				disappearsOnIndex={1}
+				appearsOnIndex={2}
+			/>
+		),
+		[]
+	);
+
 	return (
+		<Portal>
 		<GorhomeBottomSheet
 			
 			ref={ref}
@@ -15,12 +28,15 @@ const BottomSheet = forwardRef((props, ref) => {
 			snapPoints={snapPoints}
 			enablePanDownToClose={true}
 			handleIndicatorStyle={{ backgroundColor: '#ccc' }}
+			keyboardBehavior="fillParent"
+			backdropComponent={renderBackdrop}
 			backgroundStyle={{ backgroundColor: '#fbfbfb' }}
 		>
-			<View className='flex bg-white'>
+			<View className='flex bg-white flex-1'>
 				{props.children}
 			</View>
 		</GorhomeBottomSheet>
+		</Portal>
 	);
 });
 
