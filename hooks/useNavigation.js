@@ -22,7 +22,9 @@ function useNavigation() {
   const go_to_catalog = (slug) => router.push(`/product-catalog/${slug}`)
   const go_to_order_detail = (id) => router.push({ pathname: '/order-detail', params: id })
   const go_to_delivery_tracking = (orderTracking) => router.push({ pathname: '/order-detail/delivery-detail', params: orderTracking })
-
+  const go_to_bank_account = () => router.push("/bank");
+  const go_to_list_bank_account = () => router.push("/bank/bank-list");
+  const go_to_bank_form = (selectedBank) => router.push({ pathname: '/bank/bank-form', params: selectedBank })
   return {
     go_to_catalog,
     go_to_sign_in,
@@ -44,7 +46,10 @@ function useNavigation() {
     go_to_payment_list,
     go_to_profile,
     go_to_order_detail,
-    go_to_delivery_tracking
+    go_to_delivery_tracking,
+    go_to_bank_account,
+    go_to_list_bank_account,
+    go_to_bank_form
   };
 }
 

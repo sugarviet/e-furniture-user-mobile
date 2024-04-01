@@ -43,6 +43,11 @@ const TYPES = {
         icon: null,
         size: 24,
         bgColor: 'black'
+    },
+    addBankAccount: {
+        icon: null,
+        size: 24,
+        bgColor: 'black'
     }
 
 };
