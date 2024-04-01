@@ -10,14 +10,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     position: 'relative',
-    borderRadius: 200,
   },
   carouselItem: (padding, width, height) => ({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
   }),
-  
+
   imageItem: (resizeMode) => ({
     resizeMode: resizeMode,
     width: 380,
