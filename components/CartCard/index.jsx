@@ -10,8 +10,9 @@ import useCart from "../../hooks/useCart";
 
 function CartCard({ cart, handleOpenDeleteModal }) {
   const { decreaseQuantity, increaseQuantity } = useCart();
+  console.log(cart);
   return (
-    <View className="bg-white shadow-sm px-5 py-5 rounded-3xl mb-6">
+    <View className="bg-white shadow-sm px-5 py-5 mb-6">
       <View className="flex flex-row gap-3">
         <Image
           resizeMode="contain"
@@ -32,12 +33,6 @@ function CartCard({ cart, handleOpenDeleteModal }) {
             <TouchableOpacity onPress={() => handleOpenDeleteModal(cart)}>
               <Icon source={IMAGES.trash} className="w-[25px] h-[25px]" />
             </TouchableOpacity>
-          </View>
-          <View className="mt-3 flex flex-row items-center">
-            <FontAwesome name={ICONS.fa_circle} size={20} color="#9d28ac" />
-            <Text className="text-[12px] font-urbanistRegular pl-[6px] text-grey2">
-              Yellow
-            </Text>
           </View>
           <View className="flex flex-row items-center justify-between w-[215px] pt-3">
             <Text className="text-[18px] font-urbanistSemiBold">

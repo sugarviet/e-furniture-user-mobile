@@ -27,7 +27,7 @@ function CartList() {
   return (
     <View style={{ height: "100%", backgroundColor: COLORS.grey1 }}>
       <ScrollView style={{ marginBottom: 90, height: "100%", width: "100%" }}>
-        <View className="mt-6 mx-5">
+        <View>
           {getCart().map((item) => (
             <CartCard
               key={item._id}
