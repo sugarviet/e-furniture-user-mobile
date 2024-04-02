@@ -45,6 +45,9 @@ const enTypo_arrow_right = 'chevron-thin-right';
 const ion_bookmark = 'bookmark'
 const antDesign_staro = 'staro'
 const antDesign_star = 'star'
+const feather_check_circle = 'check-circle'
+const simple_options_vertical = 'options-vertical'
+
 
 
 export const ICONS = {
@@ -96,5 +99,7 @@ export const ICONS = {
     enTypo_arrow_right,
     ion_bookmark,
     antDesign_staro,
-    antDesign_star
+    antDesign_star,
+    feather_check_circle,
+    simple_options_vertical
 };

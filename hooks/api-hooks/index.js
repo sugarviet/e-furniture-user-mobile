@@ -56,6 +56,15 @@ export const useDelete = (url, params, onSuccessAPI = () => { }, onErrorAPI = ()
   );
 };
 
+export const useDeleteAuth = (url, params, onSuccessAPI = () => { }, onErrorAPI = () => { }, key) => {
+  return useGenericMutation(
+    (data) => request.delete(url, { data }),
+    key,
+    params,
+    onSuccessAPI,
+    onErrorAPI
+  );
+};
 
 export const usePost = (url, params, onSuccessAPI = () => { }, onErrorAPI = () => { }, key) => {
   return useGenericMutation(
@@ -68,7 +77,18 @@ export const usePost = (url, params, onSuccessAPI = () => { }, onErrorAPI = () =
   );
 };
 
-export const useUpdate = (url, params, onSuccessAPI = () => { }, onErrorAPI = () => { }, key) => {
+export const usePostAuth = (url, params, onSuccessAPI = () => { }, onErrorAPI = () => { }, key) => {
+  return useGenericMutation(
+    (data) => request.post(url, data),
+    key,
+    params,
+    onSuccessAPI,
+    onErrorAPI
+  );
+};
+
+
+export const useUpdate = (url, params, onSuccessAPI = () => {}, onErrorAPI = () => {}, key) => {
   return useGenericMutation(
     (data) => request.put(url, data),
     key,
@@ -77,6 +97,17 @@ export const useUpdate = (url, params, onSuccessAPI = () => { }, onErrorAPI = ()
     onErrorAPI
   );
 };
+
+export const useUpdateWithAuth = (url, params, onSuccessAPI = () => { }, onErrorAPI = () => { }, key) => {
+  return useGenericMutation(
+    (data) => request.put(url, data),
+    key,
+    params,
+    onSuccessAPI,
+    onErrorAPI
+  );
+};
+
 
 export const usePostWithoutAuth = (url, params, onSuccessAPI = () => { }, onErrorAPI = () => { }, key) => {
   return useGenericMutation(
