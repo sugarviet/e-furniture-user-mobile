@@ -3,12 +3,12 @@ import useNavigation from "../../hooks/useNavigation";
 import useAuthStore from "../../stores/useAuthStore";
 
 function useSupportItemCard() {
-  const {handleLogout} = useAuth();
-  const {accountId} = useAuthStore();
-  const {go_to_wishlist, go_to_order, go_to_profile} = useNavigation();
+  const { handleLogout } = useAuth();
+  const { accountId } = useAuthStore();
+  const { go_to_wishlist, go_to_order, go_to_profile, go_to_bank_account } = useNavigation();
   const bank = {
     function: () => {
-      
+      go_to_bank_account();
     },
   };
   const wish_list = {
@@ -18,7 +18,7 @@ function useSupportItemCard() {
   };
   const saved_post = {
     function: () => {
-      
+
     },
   };
   const order = {
@@ -28,22 +28,22 @@ function useSupportItemCard() {
   };
   const cart = {
     function: () => {
-      
+
     },
   };
   const setting = {
     function: () => {
-      
+
     },
   };
   const assistance = {
     function: () => {
-      
+
     },
   };
   const following = {
     function: () => {
-      
+
     },
   };
   const log_out = {

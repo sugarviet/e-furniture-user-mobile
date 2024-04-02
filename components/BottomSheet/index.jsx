@@ -6,7 +6,7 @@ import { Portal } from '@gorhom/portal';
 const BottomSheet = forwardRef((props, ref) => {
 	const snapPoints = useMemo(() => ['50%', '70%', '80%'], []);
 
-    const initialIndex = props.initialIndex !== undefined ? props.initialIndex : -1;
+	const initialIndex = props.initialIndex !== undefined ? props.initialIndex : -1;
 
 	const renderBackdrop = useCallback(
 		(props) => (
@@ -21,21 +21,20 @@ const BottomSheet = forwardRef((props, ref) => {
 
 	return (
 		<Portal>
-		<GorhomeBottomSheet
-			
-			ref={ref}
-			index={initialIndex}
-			snapPoints={snapPoints}
-			enablePanDownToClose={true}
-			handleIndicatorStyle={{ backgroundColor: '#ccc' }}
-			keyboardBehavior="fillParent"
-			backdropComponent={renderBackdrop}
-			backgroundStyle={{ backgroundColor: '#fbfbfb' }}
-		>
-			<View className='flex bg-white flex-1'>
-				{props.children}
-			</View>
-		</GorhomeBottomSheet>
+			<GorhomeBottomSheet
+				ref={ref}
+				index={initialIndex}
+				snapPoints={snapPoints}
+				enablePanDownToClose={true}
+				handleIndicatorStyle={{ backgroundColor: '#ccc' }}
+				keyboardBehavior="fillParent"
+				backdropComponent={renderBackdrop}
+				backgroundStyle={{ backgroundColor: '#fbfbfb' }}
+			>
+				<View className='flex bg-white flex-1'>
+					{props.children}
+				</View>
+			</GorhomeBottomSheet>
 		</Portal>
 	);
 });
