@@ -1,19 +1,28 @@
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { IMAGES } from "../../constants/image";
-import { ICONS } from "../../constants/icons";
-import { AntDesign, FontAwesome, FontAwesome6 } from "@expo/vector-icons";
 import QuantityOption from "../QuantityOption";
 import Icon from "../Icon";
 import { formatCurrency } from "../../utils/formatCurrency";
 import useCart from "../../hooks/useCart";
+import CheckBox from "react-native-check-box";
 
 function CartCard({ cart, handleOpenDeleteModal }) {
-  const { decreaseQuantity, increaseQuantity } = useCart();
+  const {
+    decreaseQuantity,
+    increaseQuantity,
+    addToPurchaseItems,
+    isInPurchaseItems,
+  } = useCart();
   console.log(cart);
+  const onSale = cart.regular_price - cart.sale_price > 0;
   return (
-    <View className="bg-white shadow-sm px-5 py-5 mb-6">
-      <View className="flex flex-row gap-3">
+    <View className="bg-white shadow-sm px-5 py-5 mb-3">
+      <View className="flex flex-row gap-3 items-center">
+        <CheckBox
+          isChecked={isInPurchaseItems(cart)}
+          onClick={() => addToPurchaseItems(cart)}
+        />
         <Image
           resizeMode="contain"
           className="rounded-3xl"
@@ -35,9 +44,16 @@ function CartCard({ cart, handleOpenDeleteModal }) {
             </TouchableOpacity>
           </View>
           <View className="flex flex-row items-center justify-between w-[215px] pt-3">
-            <Text className="text-[18px] font-urbanistSemiBold">
-              {formatCurrency(cart.sale_price * cart.quantity_in_cart)}
-            </Text>
+            <View>
+              {onSale && (
+                <Text className="text-sm line-through text-gray-400 font-urbanistSemiBold">
+                  {formatCurrency(cart.regular_price)}
+                </Text>
+              )}
+              <Text className="text-sm  font-urbanistSemiBold">
+                {formatCurrency(cart.sale_price)}
+              </Text>
+            </View>
             <QuantityOption
               onMinus={() => decreaseQuantity(cart._id)}
               onPlus={() => increaseQuantity(cart._id)}

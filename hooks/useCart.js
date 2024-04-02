@@ -7,6 +7,7 @@ import {
     get_remove_from_cart_api,
     get_update_quantity_api,
 } from "../api/cartUrl";
+import { useCartStore } from "../stores/useCartStore";
 import {
     useDelete,
     useFetchWithAuth,
@@ -16,6 +17,7 @@ import {
 
 function useCart() {
     const { data, isLoading } = useFetchWithAuth(get_cart_api());
+    const { purchaseItems, setPurchaseItems } = useCartStore();
     const { mutate: addToCartMutation } = usePost(
         get_add_to_cart_api(),
         undefined,
@@ -92,8 +94,32 @@ function useCart() {
 
     const getCart = () => [...data.products]
 
+    const getPurchaseItems = () => [...purchaseItems]
+
+    const addToPurchaseItems = (item) => {
+        const isExist = getPurchaseItems().some(i => i._id === item._id);
+
+        if (isExist) return setPurchaseItems([...purchaseItems.filter(i => i._id !== item._id)])
+
+        return setPurchaseItems([...purchaseItems, item])
+    }
+
+    const purchaseAll = () => {
+        if (isPurchaseAll()) return setPurchaseItems([])
+        return setPurchaseItems([...getCart()])
+    }
+
+    const isInPurchaseItems = (item) => getPurchaseItems().some(i => i._id === item._id);
+
+    const isPurchaseAll = () => purchaseItems.length === getCart().length;
+
     return {
         isLoading,
+        purchaseAll,
+        isPurchaseAll,
+        isInPurchaseItems,
+        addToPurchaseItems,
+        getPurchaseItems,
         getCart,
         addToCart,
         decreaseQuantity,
@@ -101,7 +127,7 @@ function useCart() {
         removeFromCart,
         getTotalPrice,
         updateQuantity,
-        
+
     };
 }
 
