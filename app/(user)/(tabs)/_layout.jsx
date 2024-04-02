@@ -12,7 +12,7 @@ const tabs = [
   { page: "wishlist", name: "Wishlist", header_options: [] },
   {
     page: "cart",
-    name: "Shopping",
+    name: "Shopping Cart",
     header_options: [],
   },
   { page: "order", name: "Order", header_options: [] },

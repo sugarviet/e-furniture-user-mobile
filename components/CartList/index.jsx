@@ -9,9 +9,20 @@ import useNavigation from "../../hooks/useNavigation";
 import useCart from "../../hooks/useCart";
 import { formatCurrency } from "../../utils/formatCurrency";
 import LoadingSpinner from "../LoadingSpinner";
+import { MaterialIcons } from "@expo/vector-icons";
+import { ICONS } from "../../constants/icons";
+import CheckBox from "react-native-check-box";
 
 function CartList() {
-  const { getCart, isLoading, getTotalPrice, removeFromCart } = useCart();
+  const {
+    getCart,
+    isLoading,
+    getTotalPrice,
+    removeFromCart,
+    purchaseAll,
+    isPurchaseAll,
+    getPurchaseItems,
+  } = useCart();
   const [removeItem, setRemoveItem] = useState(undefined);
 
   const cartRef = useRef(null);
@@ -27,7 +38,7 @@ function CartList() {
   return (
     <View style={{ height: "100%", backgroundColor: COLORS.grey1 }}>
       <ScrollView style={{ marginBottom: 90, height: "100%", width: "100%" }}>
-        <View className="mt-6 mx-5">
+        <View>
           {getCart().map((item) => (
             <CartCard
               key={item._id}
@@ -37,21 +48,33 @@ function CartList() {
           ))}
         </View>
       </ScrollView>
-      <View className="absolute bottom-0 left-0 right-0 w-full h-[100px] shadow-md border-t border-x border-grey5 rounded-t-3xl bg-white">
-        <View className="flex flex-row justify-between px-5 pt-5">
-          <View className="flex flex-col">
-            <Text className="text-[12px] font-urbanistRegular text-grey1">
-              Total price
-            </Text>
-            <Text className="text-[26px] font-urbanistBold">
-              {formatCurrency(getTotalPrice())}
-            </Text>
+      <View className="absolute bottom-0 left-0 right-0 h-16 shadow-md border-t border-x border-grey5 bg-white">
+        <View className="flex-row items-center pl-6">
+          <CheckBox
+            isChecked={isPurchaseAll()}
+            onClick={() => {
+              purchaseAll();
+            }}
+          />
+          <View className="flex-row justify-end items-center flex-1">
+            <View className="mr-2">
+              <Text className="text-xs font-urbanistRegular text-grey1">
+                Total price
+              </Text>
+              <Text className="text-lg font-urbanistBold">
+                {formatCurrency(getTotalPrice())}
+              </Text>
+            </View>
+            <TouchableOpacity
+              onPress={go_to_checkout}
+              className="w-40 bg-black flex-row h-full items-center justify-center"
+            >
+              <MaterialIcons size={20} color="white" name={ICONS.mi_checkout} />
+              <Text className="text-white font-urbanistSemiBold">
+                Check Out {`(${getPurchaseItems().length})`}
+              </Text>
+            </TouchableOpacity>
           </View>
-          <Pressable onPress={go_to_checkout} className="w-[60%]">
-            <ButtonModal type="cart">
-              <Text className="text-white font-urbanistSemiBold">Checkout</Text>
-            </ButtonModal>
-          </Pressable>
         </View>
       </View>
       <GorhomeBottomSheet ref={cartRef}>
