@@ -20,7 +20,12 @@ function useHeaderButton() {
         function: () => { go_back() },
     }
 
-    return { close, back, notification };
+    const back_white = {
+        icon: IMAGES.right_arrow_white,
+        function: () => { go_back() },
+    }
+
+    return { close, back, notification,back_white };
 }
 
 export default useHeaderButton;

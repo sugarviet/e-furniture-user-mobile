@@ -52,6 +52,12 @@ import truck_black from '../assets/images/truck-black.png'
 import right_arrow_black from '../assets/images/right-arrow.png'
 import bank_bg from '../assets/images/bank_bg.png'
 import not_found_bank from '../assets/images/not_found_bank.png'
+import flashsale from '../assets/images/flashsale.png'
+import flashsale_white from '../assets/images/flashsale_white.png'
+import right_arrow_white from '../assets/images/back_white.png'
+import flashsale_bg from '../assets/images/flashsale_bg.png'
+import flashsale_slider from '../assets/images/flashsale_slider.png'
+import flashsale_slider2 from '../assets/images/flashsale_slider2.png'
 
 export const IMAGES = {
     right_arrow_black,
@@ -107,5 +113,11 @@ export const IMAGES = {
     truck_white,
     truck_black,
     bank_bg,
-    not_found_bank
+    not_found_bank,
+    flashsale,
+    right_arrow_white,
+    flashsale_white,
+    flashsale_bg,
+    flashsale_slider,
+    flashsale_slider2
 };
