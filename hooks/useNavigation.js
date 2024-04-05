@@ -12,7 +12,7 @@ function useNavigation() {
   const go_to_search_page = () => router.push("/search");
   const go_to_search_result_page = (search) => router.push(`/search/result?q=${search}`);
   const go_to_wishlist = () => router.push("/wishlist");
-  const go_to_checkout = () => router.push("/checkout");
+  const go_to_checkout = (purchaseItems) => router.push({ pathname: '/checkout', params: { data: JSON.stringify(purchaseItems) } });
   const go_to_address_book = () => router.push("/address");
   const go_to_add_new_address = () => router.push("/address/add-new-address");
   const go_to_edit_address = (address) => router.push({ pathname: '/address/edit-address', params: address })
@@ -29,7 +29,7 @@ function useNavigation() {
   const go_to_bank_account = () => router.push("/bank");
   const go_to_list_bank_account = () => router.push("/bank/bank-list");
   const go_to_bank_form = (selectedBank) => router.push({ pathname: '/bank/bank-form', params: selectedBank })
-  const go_to_flash_sale= () => router.push("/flashsale");
+  const go_to_flash_sale = () => router.push("/flashsale");
 
   return {
     go_to_region_select,

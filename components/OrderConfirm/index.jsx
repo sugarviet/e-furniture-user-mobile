@@ -4,7 +4,6 @@ import CartCard from "../CartCard";
 import ShippingCard from "../ShippingCard";
 import { IMAGES } from "../../constants/image";
 import PressableContainer from "../PressableContainer";
-import Icon2D from "../Icon2D";
 import useNavigation from "../../hooks/useNavigation";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { ICONS } from "../../constants/icons";
@@ -14,11 +13,16 @@ import useCart from "../../hooks/useCart";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { useCheckout } from "../../context/CheckoutContext";
 import DefaultAddressCard from "../DefaultAddressCard";
+import { useLocalSearchParams } from "expo-router";
 
 export default function OrderConfirm() {
   const { go_to_voucher_list, go_to_payment_list } = useNavigation();
-  const { getCart, getTotalPrice } = useCart();
+  const { getTotalPrice } = useCart();
   const { dataAfterApplyVoucher, isPriceVoucherLoading } = useCheckout();
+
+  const params = useLocalSearchParams();
+  const { data } = params;
+  const purchaseItems = JSON.parse(data);
 
   if (isPriceVoucherLoading) return null;
 
@@ -31,7 +35,7 @@ export default function OrderConfirm() {
             Order List
           </Text>
           <View className="mt-6 mx-1">
-            {getCart().map((item) => (
+            {purchaseItems.map((item) => (
               <CartCard key={item._id} cart={item} />
             ))}
           </View>

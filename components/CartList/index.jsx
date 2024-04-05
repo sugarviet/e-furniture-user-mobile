@@ -62,16 +62,16 @@ function CartList() {
                 Total price
               </Text>
               <Text className="text-lg font-urbanistBold">
-                {/* {formatCurrency(getTotalPrice())} */}
+                {formatCurrency(getTotalPrice())}
               </Text>
             </View>
             <TouchableOpacity
-              onPress={go_to_checkout}
+              onPress={() => go_to_checkout(getPurchaseItems())}
               className="w-40 bg-black flex-row h-full items-center justify-center"
             >
               <MaterialIcons size={20} color="white" name={ICONS.mi_checkout} />
               <Text className="text-white font-urbanistSemiBold">
-                {/* Check Out {`(${getPurchaseItems().length})`} */}
+                Check Out {`(${getPurchaseItems().length})`}
               </Text>
             </TouchableOpacity>
           </View>

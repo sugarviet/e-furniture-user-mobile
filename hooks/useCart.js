@@ -1,4 +1,5 @@
 
+import { useEffect } from "react";
 import {
     get_add_to_cart_api,
     get_cart_api,
@@ -20,6 +21,7 @@ import {
 function useCart() {
     const { data, isLoading } = useFetchWithAuth(get_cart_api());
     const { purchaseItems, setPurchaseItems } = useCartStore();
+
     const { mutate: addToCartMutation } = usePost(
         get_add_to_cart_api(),
         undefined,
@@ -100,16 +102,13 @@ function useCart() {
     };
 
     const getTotalPrice = () => {
-        return getCart().reduce(
-            (total, item) => {
-                const subPrice = item.select_variation.reduce(
-                    (total, cur) => total + cur.sub_price,
-                    0
-                );
-                return total + (item.sale_price + subPrice) * item.quantity_in_cart
-            },
-            0
-        );
+        return total = purchaseItems.reduce((total, cur) => {
+            const subPrice = cur.select_variation.reduce(
+                (total, cur) => total + cur.sub_price,
+                0
+            );
+            return total + (cur.sale_price + subPrice) * cur.quantity_in_cart;
+        }, 0);
     };
 
     const getCart = () => [...data.products]
@@ -117,9 +116,9 @@ function useCart() {
     const getPurchaseItems = () => [...purchaseItems]
 
     const addToPurchaseItems = (item) => {
-        const isExist = getPurchaseItems().some(i => i._id === item._id);
+        const isExist = getPurchaseItems().some(i => i.code === item.code);
 
-        if (isExist) return setPurchaseItems([...purchaseItems.filter(i => i._id !== item._id)])
+        if (isExist) return setPurchaseItems([...purchaseItems.filter(i => i.code !== item.code)])
 
         return setPurchaseItems([...purchaseItems, item])
     }
@@ -139,7 +138,7 @@ function useCart() {
         return setPurchaseItems([...getCart()])
     }
 
-    const isInPurchaseItems = (item) => getPurchaseItems().some(i => i._id === item._id);
+    const isInPurchaseItems = (item) => getPurchaseItems().some(i => i.code === item.code);
 
     const isPurchaseAll = () => purchaseItems.length === getCart().length;
 
