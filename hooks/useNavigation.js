@@ -29,6 +29,7 @@ function useNavigation() {
   const go_to_bank_account = () => router.push("/bank");
   const go_to_list_bank_account = () => router.push("/bank/bank-list");
   const go_to_bank_form = (selectedBank) => router.push({ pathname: '/bank/bank-form', params: selectedBank })
+  const go_to_flash_sale= () => router.push("/flashsale");
 
   return {
     go_to_region_select,
@@ -56,7 +57,8 @@ function useNavigation() {
     go_to_review_products,
     go_to_bank_account,
     go_to_list_bank_account,
-    go_to_bank_form
+    go_to_bank_form,
+    go_to_flash_sale
   };
 }
 

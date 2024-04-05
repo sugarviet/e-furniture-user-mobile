@@ -12,6 +12,7 @@ import FavoriteButton from "../FavoriteButton";
 import LoadingSpinner from "../LoadingSpinner";
 
 const ProductCard = ({ product }) => {
+  console.log(product.slug)
   const { go_to_product_detail } = useNavigation();
 
   const { get_average_rating, isLoading } = useFeedback(product._id);

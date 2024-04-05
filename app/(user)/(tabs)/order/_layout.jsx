@@ -1,48 +1,25 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { withLayoutContext } from 'expo-router';
 import React from 'react';
-import Orders from './orders';
+import Orders from '.';
+import TopTabNavigator from '../../../../components/TopTabNavigator';
 
-const { Navigator, Screen } = createMaterialTopTabNavigator();
 
 const TAB_ORDER = [
-    { name: "pending", title: "Pending" },
-    { name: "processing", title: "Processing" },
-    { name: "shipping", title: "Shipping" },
-    { name: "done", title: "Done" },
-    { name: "cancel", title: "Cancelled" },
-    { name: "failed", title: "Failed" },
-    { name: "refunded", title: "Refund" }
+    { title: "pending", name: "Pending" },
+    { title: "processing", name: "Processing" },
+    { title: "shipping", name: "Shipping" },
+    { title: "done", name: "Done" },
+    { title: "cancel", name: "Cancelled" },
+    { title: "failed", name: "Failed" },
+    { title: "refunded", name: "Refund" }
 ];
 
-const OrderLayout = withLayoutContext(() => {
+const OrderLayout = () => {
 
     return (
-        <Navigator
-            screenOptions={{
-                tabBarActiveTintColor: 'black',
-                tabBarLabelStyle: { fontSize: 14, fontWeight: 'bold', textTransform: 'capitalize' },
-                tabBarIndicatorStyle: { backgroundColor: 'black' },
-                tabBarScrollEnabled: true,
-                tabBarItemStyle: {
-                    width: 120,
-                    height: 50,
-                }
-            }}
-
-        >
-            {TAB_ORDER.map(tab => (
-                <Screen
-                    key={tab.name}
-                    name={tab.name}
-                    options={{ title: tab.title }}
-                >
-                    {props => <Orders {...props} />}
-                </Screen>
-            ))}
-        </Navigator>
+        <TopTabNavigator TABS={TAB_ORDER} Component={Orders} type="order" isOpen={true}/>
     )
 }
-);
 
 export default OrderLayout;
