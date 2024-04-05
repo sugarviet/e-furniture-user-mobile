@@ -23,7 +23,7 @@ const TYPES = {
         title: 'white',
         tabBarActiveTintColor: 'white',
         tabBarLabelStyle: { fontSize: 18, fontWeight: 'bold', textTransform: 'capitalize' },
-        tabBarIndicatorStyle: { backgroundColor: '#fff' },
+        tabBarIndicatorStyle: { backgroundColor: '#ffe503' },
         tabBarItemStyle: {
             width: 100,
             height: 50,

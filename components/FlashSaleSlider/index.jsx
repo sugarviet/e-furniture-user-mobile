@@ -24,7 +24,7 @@ export default function FlashSaleSlider({
     carouselData = [],
     autoplay = false,
     type = "default",
-    speed = 3000,
+    speed = 8000,
 }) {
     const { itemWidth, resizeMode } = TYPE[type];
     const [activeSlide, setActiveSlide] = useState(0);
