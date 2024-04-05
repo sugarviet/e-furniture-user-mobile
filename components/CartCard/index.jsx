@@ -6,6 +6,7 @@ import Icon from "../Icon";
 import { formatCurrency } from "../../utils/formatCurrency";
 import useCart from "../../hooks/useCart";
 import CheckBox from "react-native-check-box";
+import ProductVariationList from "../ProductVariationList";
 
 function CartCard({ cart, handleOpenDeleteModal }) {
   const {
@@ -13,9 +14,14 @@ function CartCard({ cart, handleOpenDeleteModal }) {
     increaseQuantity,
     addToPurchaseItems,
     isInPurchaseItems,
+    updateVariation,
   } = useCart();
-  console.log(cart);
+  const { variation, select_variation } = cart;
   const onSale = cart.regular_price - cart.sale_price > 0;
+  const subPrice = select_variation.reduce(
+    (total, cur) => total + cur.sub_price,
+    0
+  );
   return (
     <View className="bg-white shadow-sm px-5 py-5 mb-3">
       <View className="flex flex-row gap-3 items-center">
@@ -43,7 +49,18 @@ function CartCard({ cart, handleOpenDeleteModal }) {
               <Icon source={IMAGES.trash} className="w-[25px] h-[25px]" />
             </TouchableOpacity>
           </View>
-          <View className="flex flex-row items-center justify-between w-[215px] pt-3">
+          <ProductVariationList
+            onUpdate={(updated_select_variation) => {
+              updateVariation({
+                ...cart,
+                select_variation: updated_select_variation,
+              });
+            }}
+            itemClassName="w-6 h-6"
+            selectVariation={select_variation}
+            data={variation}
+          />
+          <View className="flex flex-row items-center justify-between w-[215px]">
             <View>
               {onSale && (
                 <Text className="text-sm line-through text-gray-400 font-urbanistSemiBold">
@@ -51,12 +68,12 @@ function CartCard({ cart, handleOpenDeleteModal }) {
                 </Text>
               )}
               <Text className="text-sm  font-urbanistSemiBold">
-                {formatCurrency(cart.sale_price)}
+                {formatCurrency(cart.sale_price + subPrice)}
               </Text>
             </View>
             <QuantityOption
-              onMinus={() => decreaseQuantity(cart._id)}
-              onPlus={() => increaseQuantity(cart._id)}
+              onMinus={() => decreaseQuantity(cart.code)}
+              onPlus={() => increaseQuantity(cart.code)}
               value={cart.quantity_in_cart}
               name="cart"
               className="px-4 py-2"

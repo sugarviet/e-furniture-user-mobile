@@ -41,7 +41,7 @@ function CartList() {
         <View>
           {getCart().map((item) => (
             <CartCard
-              key={item._id}
+              key={item.code}
               cart={item}
               handleOpenDeleteModal={handleOpenDeleteModal}
             />
@@ -62,7 +62,7 @@ function CartList() {
                 Total price
               </Text>
               <Text className="text-lg font-urbanistBold">
-                {formatCurrency(getTotalPrice())}
+                {/* {formatCurrency(getTotalPrice())} */}
               </Text>
             </View>
             <TouchableOpacity
@@ -71,7 +71,7 @@ function CartList() {
             >
               <MaterialIcons size={20} color="white" name={ICONS.mi_checkout} />
               <Text className="text-white font-urbanistSemiBold">
-                Check Out {`(${getPurchaseItems().length})`}
+                {/* Check Out {`(${getPurchaseItems().length})`} */}
               </Text>
             </TouchableOpacity>
           </View>
@@ -100,7 +100,7 @@ function CartList() {
           </Pressable>
           <Pressable className="w-[60%] ml-1">
             <ButtonModal
-              onPress={() => removeFromCart(removeItem._id)}
+              onPress={() => removeFromCart(removeItem.code)}
               type="remove"
             >
               <Text className="text-white font-urbanistSemiBold">
