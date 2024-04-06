@@ -12,36 +12,49 @@ import useCart from "../../hooks/useCart";
 import FavoriteButton from "../FavoriteButton";
 import LoadingSpinner from "../LoadingSpinner";
 import useNavigation from "../../hooks/useNavigation";
+import ProductVariationList from "../ProductVariationList";
+import { useState } from "react";
+import { MaterialIcons } from "@expo/vector-icons";
 
 function ProductDetail({ data }) {
-  const { get_average_rating, get_total_feedback, isLoading } = useFeedback(
-    data._id
-  );
+  const [furniture, setFurniture] = useState(data);
+  const {
+    _id,
+    thumbs,
+    name,
+    select_variation,
+    variation,
+    description,
+    sale_price,
+  } = furniture;
+  const { get_average_rating, get_total_feedback, isLoading } =
+    useFeedback(_id);
   const { addToCart } = useCart();
   const { go_to_review_products } = useNavigation();
 
   const handleGoToReviewProducts = () => {
-    if(get_total_feedback()){
-      go_to_review_products(data._id)
+    if (get_total_feedback()) {
+      go_to_review_products(_id);
     }
-  }
+  };
+
+  const subPrice = select_variation.reduce(
+    (total, cur) => total + cur.sub_price,
+    0
+  );
 
   if (isLoading) return <LoadingSpinner />;
   return (
     <View style={{ height: "100%", backgroundColor: COLORS.white }}>
       <View style={{ height: 260 }}>
-        <CarouselSlider
-          pagination
-          type="productDetail"
-          carouselData={data.thumbs}
-        />
+        <CarouselSlider pagination type="productDetail" carouselData={thumbs} />
       </View>
-      <ScrollView className="bg-white w-full h-full rounded-t-xl mt-2 px-5 py-6 relative">
+      <ScrollView className="bg-white flex-1 rounded-t-xl mt-2 px-5 py-6 relative">
         <View className="flex flex-row justify-between items-center">
           <Text className="text-black text-[28px] font-urbanistBold">
-            {data.name}
+            {name}
           </Text>
-          <FavoriteButton id={data._id} />
+          {/* <FavoriteButton id={data._id} /> */}
         </View>
         <View className="flex flex-row pt-2 items-center border-b pb-4 border-b-grey5">
           <View className="bg-[#ececec] px-2 py-1 rounded-md mr-4">
@@ -52,35 +65,51 @@ function ProductDetail({ data }) {
             <Text className="text-[11px] ml-2 font-urbanistMedium">
               {get_average_rating()} {`(${get_total_feedback()} reviews)`}
             </Text>
-
           </TouchableOpacity>
         </View>
-        <View className="pt-3">
+        <ProductVariationList
+          selectVariation={select_variation}
+          onUpdate={(updated_select_variation) =>
+            setFurniture({
+              ...furniture,
+              select_variation: updated_select_variation,
+            })
+          }
+          className="mt-2"
+          data={variation}
+        />
+        <View className="mt-2">
           <Text className="text-black text-[18px] font-urbanistBold">
             Description
           </Text>
           <Text className="text-black text-[13px] font-urbanistLight pt-2">
-            {data.description}
+            {description}
           </Text>
         </View>
       </ScrollView>
 
-      <View className="absolute bottom-0 left-0 right-0 w-full h-[110px] border-t border-t-grey5 bg-white">
-        <View className="flex flex-row justify-between px-5 pt-5">
-          <View className="flex flex-col">
-            <Text className="text-[12px] font-urbanistRegular text-grey1">
-              Total price
-            </Text>
-            <Text className="text-[26px] font-urbanistBold">
-              {formatCurrency(data.sale_price)}
-            </Text>
-          </View>
-          <View className="w-[60%]">
-            <ButtonModal onPress={() => addToCart(data)} type="addToCart">
+      <View className="shadow-md border-t border-x pb-8 border-grey5 bg-white">
+        <View className="flex-row items-center pl-6">
+          <View className="flex-row justify-end items-center flex-1">
+            <View className="mr-2">
+              <Text className="text-xs font-urbanistRegular text-grey1">
+                Total price:
+              </Text>
+              <Text className="text-lg font-urbanistBold">
+                {formatCurrency(sale_price + subPrice)}
+              </Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => {
+                addToCart(furniture);
+              }}
+              className="w-40 bg-black flex-row h-16 items-center justify-center"
+            >
+              <MaterialIcons size={20} color="white" name={ICONS.mi_checkout} />
               <Text className="text-white font-urbanistSemiBold">
                 Add to cart
               </Text>
-            </ButtonModal>
+            </TouchableOpacity>
           </View>
         </View>
       </View>

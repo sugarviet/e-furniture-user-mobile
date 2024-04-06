@@ -1,4 +1,5 @@
 
+import { useEffect } from "react";
 import {
     get_add_to_cart_api,
     get_cart_api,
@@ -6,10 +7,12 @@ import {
     get_increase_by_one_api,
     get_remove_from_cart_api,
     get_update_quantity_api,
+    get_update_variation_api,
 } from "../api/cartUrl";
 import { useCartStore } from "../stores/useCartStore";
 import {
     useDelete,
+    useDeleteAuth,
     useFetchWithAuth,
     usePost,
     useUpdate,
@@ -18,6 +21,7 @@ import {
 function useCart() {
     const { data, isLoading } = useFetchWithAuth(get_cart_api());
     const { purchaseItems, setPurchaseItems } = useCartStore();
+
     const { mutate: addToCartMutation } = usePost(
         get_add_to_cart_api(),
         undefined,
@@ -48,7 +52,7 @@ function useCart() {
         () => { },
         get_cart_api()
     );
-    const { mutate: removeFromCartMutation } = useDelete(
+    const { mutate: removeFromCartMutation } = useDeleteAuth(
         get_remove_from_cart_api(),
         undefined,
         () => { },
@@ -56,40 +60,55 @@ function useCart() {
         get_cart_api()
     );
 
+    const { mutate: updateVariationMutation } = useUpdate(
+        get_update_variation_api(),
+        undefined,
+        () => { },
+        (error) => { },
+        get_cart_api()
+    );
+
     const addToCart = (item) => {
-        const isInCart = getCart().some((i) => i._id === item._id);
+        const { _id, select_variation } = item;
 
-        if (isInCart) return increaseQuantity(item._id);
+        const body = {
+            _id: _id,
+            variation: select_variation,
+            quantity: 1,
+        };
 
-        addToCartMutation({ _id: item._id, quantity: 1 });
+        addToCartMutation(body);
     };
 
-    const removeFromCart = (id) => {
-        removeFromCartMutation({ _id: id, quantity: 1 });
+    const removeFromCart = (code) => {
+        removeFromCartMutation({ code: code, quantity: 1 });
     };
 
-    const increaseQuantity = (id) => {
-        increaseQuantityMutation({ _id: id, quantity: 1 });
+    const increaseQuantity = (code) => {
+        increaseQuantityMutation({ code: code, quantity: 1 });
     };
 
-    const decreaseQuantity = (id) => {
-        decreaseQuantityMutation({ _id: id, quantity: 1 });
+    const decreaseQuantity = (code) => {
+        decreaseQuantityMutation({ code: code, quantity: 1 });
     };
 
-    const updateQuantity = (id, quantity) => {
+    const updateQuantity = (code, quantity) => {
         updateQuantityMutation({
             product: {
-                _id: id,
+                code: code,
             },
             newQuantity: quantity,
         });
     };
 
     const getTotalPrice = () => {
-        return getCart().reduce(
-            (total, item) => total + item.sale_price * item.quantity_in_cart,
-            0
-        );
+        return total = purchaseItems.reduce((total, cur) => {
+            const subPrice = cur.select_variation.reduce(
+                (total, cur) => total + cur.sub_price,
+                0
+            );
+            return total + (cur.sale_price + subPrice) * cur.quantity_in_cart;
+        }, 0);
     };
 
     const getCart = () => [...data.products]
@@ -97,23 +116,34 @@ function useCart() {
     const getPurchaseItems = () => [...purchaseItems]
 
     const addToPurchaseItems = (item) => {
-        const isExist = getPurchaseItems().some(i => i._id === item._id);
+        const isExist = getPurchaseItems().some(i => i.code === item.code);
 
-        if (isExist) return setPurchaseItems([...purchaseItems.filter(i => i._id !== item._id)])
+        if (isExist) return setPurchaseItems([...purchaseItems.filter(i => i.code !== item.code)])
 
         return setPurchaseItems([...purchaseItems, item])
     }
+
+    const updateVariation = (item) => {
+        const { code, _id, select_variation } = item;
+        const body = {
+            code: code,
+            _id: _id,
+            variation: select_variation,
+        };
+        updateVariationMutation(body);
+    };
 
     const purchaseAll = () => {
         if (isPurchaseAll()) return setPurchaseItems([])
         return setPurchaseItems([...getCart()])
     }
 
-    const isInPurchaseItems = (item) => getPurchaseItems().some(i => i._id === item._id);
+    const isInPurchaseItems = (item) => getPurchaseItems().some(i => i.code === item.code);
 
     const isPurchaseAll = () => purchaseItems.length === getCart().length;
 
     return {
+        updateVariation,
         isLoading,
         purchaseAll,
         isPurchaseAll,

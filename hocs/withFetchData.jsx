@@ -7,6 +7,6 @@ export const withFetchData = (WrappedComponent, getApi) => {
     const { data, isLoading } = useFetch(getApi(params));
 
     if (isLoading) return <LoadingSpinner />;
-    return <WrappedComponent {...props} data={data} />;
+    return <WrappedComponent params={params} {...props} data={data} />;
   };
 };
