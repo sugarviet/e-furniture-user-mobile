@@ -5,64 +5,61 @@ import CouponCard from '../CouponCard';
 import ButtonModal from '../ButtonModal';
 import { useCheckout } from '../../context/CheckoutContext';
 import LoadingSpinner from '../LoadingSpinner';
-
-const couponList = [
-    {
-        id: 1,
-        name: 'Vũ Trường Giang',
-        phone: '0981890260',
-        address: '58/19, Tân Lập 1, phường Hiệp Phú, Quận 9',
-        default: true
-    },
-    {
-        id: 2,
-        name: 'Đặng Hoàng Việt',
-        phone: '0124131251',
-        address: '217 D2, phường Tân Hưng, Quận 7',
-        default: false
-    },
-    {
-        id: 3,
-        name: 'Lê Thế Khôi',
-        phone: '0978120511',
-        address: '213 Quang Trung, phường 10, Quận Gò Vấp',
-        default: false
-    },
-    {
-        id: 4,
-        name: 'Đặng Hoàng Việt',
-        phone: '0124131251',
-        address: '217 D2, phường Tân Hưng, Quận 7',
-        default: false
-    },
-    {
-        id: 5,
-        name: 'Lê Thế Khôi',
-        phone: '0978120511',
-        address: '213 Quang Trung, phường 10, Quận Gò Vấp',
-        default: false
-    },
-]
-
-
+import { useLocalSearchParams } from "expo-router";
 
 const CouponList = () => {
-    const { vouchers, isLoading, handleApplyVoucher, setSelectedVoucher } = useCheckout()
+    const { vouchers, isLoading, handleApplyVoucher, selectedVoucher, setSelectedVoucher } = useCheckout()
+
+    const params = useLocalSearchParams();
+    const { data } = params;
+    const purchaseItems = JSON.parse(data);
+
+    const getTotalPrice = () =>
+        purchaseItems.reduce((total, cur) => {
+            const subPrice = cur.select_variation.reduce(
+                (total, cur) => total + cur.sub_price,
+                0
+            );
+            return total + (cur.sale_price + subPrice) * cur.quantity_in_cart;
+        }, 0);
 
     if (isLoading) return <LoadingSpinner />;
 
+
     const handleGetCouponId = (couponId) => {
-        setSelectedVoucher(couponId)
-    }
+        if (selectedVoucher === couponId) {
+            setSelectedVoucher(null);
+        } else {
+            setSelectedVoucher(couponId);
+        }
+    };
 
     return (
         <View className="h-full relative bg-white">
             <ScrollView className="px-2 py-4 mt-4" style={{ marginBottom: 90, height: '100%', width: '100%' }}>
-                {vouchers?.map((coupon) => (
-                    <View key={coupon._id} className="pb-6">
-                        <CouponCard data={coupon} key={coupon.id} handleGetCouponId={handleGetCouponId} />
-                    </View>
-                ))}
+                {vouchers?.sort((a, b) => {
+                    const aIsHideCoupon = (a.used_turn_count === a.maximum_use_per_user) || (a.minimum_order_value > getTotalPrice());
+                    const bIsHideCoupon = (b.used_turn_count === b.maximum_use_per_user) || (b.minimum_order_value > getTotalPrice());
+                    if (aIsHideCoupon && !bIsHideCoupon) {
+                        return 1;
+                    } else if (!aIsHideCoupon && bIsHideCoupon) {
+                        return -1;
+                    } else {
+                        return 0;
+                    }
+                })
+                    .map((coupon) => (
+                        <View key={coupon._id} className="pb-6">
+                            <CouponCard
+                                getTotalPrice={getTotalPrice}
+                                data={coupon}
+                                key={coupon.id}
+                                selectedVoucher={selectedVoucher}
+                                handleGetCouponId={handleGetCouponId}
+                            />
+                        </View>
+                    ))
+                }
             </ScrollView>
             <Pressable
                 onPress={handleApplyVoucher}

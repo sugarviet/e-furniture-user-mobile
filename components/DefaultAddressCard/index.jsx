@@ -11,26 +11,23 @@ function DefaultAddressCard({ data }) {
   const { account_id, phone, address, province, ward, district } = data;
   const { first_name, last_name } = account_id;
 
-  console.log(data);
-
   return (
     <TouchableOpacity onPress={go_to_address_book}>
-      <View className="flex-row justify-between items-center bg-white px-3 py-4 shadow-sm">
-        <View className="flex-row">
+      <View className="flex-row justify-between items-center bg-white px-3 py-4 shadow-sm rounded-xl">
+        <View className="flex-row items-center">
           <View>
-            <Icon2D name="location" size={20} activated="black" />
+            <Icon2D name="location" size={28} activated="black" />
           </View>
           <View className="ml-2">
-            <Text className="font-urbanistSemiBold">Delivery Address</Text>
             {data ? (
               <View>
                 <View className="flex-row items-center mt-1">
-                  <Text className="text-gray-500 text-sm">{`${last_name} ${first_name}`}</Text>
-                  <Text className="text-gray-500 text-sm">|</Text>
-                  <Text className="text-gray-500 text-sm">{phone}</Text>
+                  <Text className="text-sm font-urbanistSemiBold">{`${last_name} ${first_name}`}</Text>
+                  <Text className="text-sm font-urbanistSemiBold px-2">|</Text>
+                  <Text className="text-sm font-urbanistSemiBold">{phone}</Text>
                 </View>
-                <Text className="text-gray-500 text-sm">{address}</Text>
-                <Text className="text-gray-500 text-sm">{`${ward} ${district} ${province}`}</Text>
+                <Text className="text-gray-500 text-sm font-urbanistRegular">{address}</Text>
+                <Text className="text-gray-500 text-sm font-urbanistRegular max-w-[300px]">{`${ward} ${district} ${province}`}</Text>
               </View>
             ) : (
               <Text className="text-xs font-urbanist">

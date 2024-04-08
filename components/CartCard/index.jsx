@@ -31,7 +31,7 @@ function CartCard({ cart, handleOpenDeleteModal }) {
         />
         <Image
           resizeMode="contain"
-          className="rounded-3xl"
+          className="rounded-xl"
           style={{ width: 100, height: 100 }}
           source={{
             uri: cart.thumbs[0],
