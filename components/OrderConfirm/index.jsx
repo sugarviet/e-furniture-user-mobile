@@ -15,31 +15,57 @@ import Icon from "../Icon";
 import PopupModal from "../Modal";
 import OrderConfirmLayout from "../OrderConfirmLayout";
 import ShippingCard from "../ShippingCard";
+import { useForm } from "react-hook-form";
+import FormInput from "../FormInput";
 
 export default function OrderConfirm() {
-  const { go_to_home, go_to_order, go_to_order_confirmation } = useNavigation();
+
+  const { control, handleSubmit } = useForm();
+
+  const { go_to_home, go_to_order_confirmation } = useNavigation();
   const { getTotalPrice } = useCart();
-  const { dataAfterVoucher, isPriceVoucherLoading } = useCheckout();
+  const { orderShipping,
+    checkoutForUser,
+    selectedPayment,
+    dataAfterVoucher,
+    isPriceVoucherLoading,
+    modalVisible,
+    setModalVisible,
+    handleBackToHome,
+    handleGoToOrder
+  } = useCheckout();
 
   const params = useLocalSearchParams();
   const { data } = params;
   const purchaseItems = JSON.parse(data);
 
-  const [modalVisible, setModalVisible] = useState(false);
 
-  const handleBackToHome = () => {
-    setModalVisible(!modalVisible)
-    go_to_home();
-  }
 
-  const handleGoToOrder = () => {
-    setModalVisible(!modalVisible)
-    go_to_order_confirmation();
-  }
+  const orderProducts = purchaseItems.map((cart) => ({
+    code: cart.code,
+    product_id: cart._id,
+    price: cart.sale_price,
+    quantity: cart.quantity_in_cart,
+    variation: cart.select_variation,
+  }));
 
-  if (isPriceVoucherLoading) return null;
+  const onSubmit = (data) => {
+    checkoutForUser({
+      order_products: orderProducts,
+      payment_method: selectedPayment,
+      order_shipping: orderShipping,
+      order_checkout: {
+        final_total: dataAfterVoucher
+          ? dataAfterVoucher.order_total_after_voucher
+          : getTotalPrice(),
+        voucher: dataAfterVoucher ? dataAfterVoucher.voucher : null,
+        total: getTotalPrice(),
+      },
+      note: data.note,
+    })
+  };
 
-  console.log(purchaseItems)
+  if (isPriceVoucherLoading) return <Text>isPriceVoucherLoading</Text>;
 
   return (
     <View className="relative bg-[#f8f8f8]">
@@ -65,6 +91,12 @@ export default function OrderConfirm() {
 
         <OrderConfirmLayout type="payment">
           <DefaultPaymentCard purchaseItems={purchaseItems} dataAfterVoucher={dataAfterVoucher} />
+        </OrderConfirmLayout>
+
+        <OrderConfirmLayout type="note">
+          <View className="px-1">
+            <FormInput type="note" control={control} />
+          </View>
         </OrderConfirmLayout>
 
         <View className="flex-col bg-white rounded-xl flex gap-4 px-4 py-4 shadow-sm mx-1 mt-4 mb-10">
@@ -114,13 +146,13 @@ export default function OrderConfirm() {
       </ScrollView>
 
       <Pressable
-        onPress={() => setModalVisible(!modalVisible)}
+        onPress={handleSubmit(onSubmit)}
         className="absolute bottom-0 left-0 right-0 h-28 shadow-md border-t border-x border-grey5 rounded-t-3xl bg-white px-5 flex justify-center"
       >
         <ButtonModal type="checkout">
           <View className="flex flex-row items-center">
             <Text className="text-white font-urbanistSemiBold pr-4">
-              Continue to Payment
+              Place Order
             </Text>
             <Icon
               source={IMAGES.right_arrow}

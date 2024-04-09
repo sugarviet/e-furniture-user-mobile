@@ -5,7 +5,7 @@ import { formatCurrency } from "../../utils/formatCurrency";
 import ProductVariationList from "../ProductVariationList";
 
 function CheckoutProductCard({ cart }) {
-
+ 
   const { variation, select_variation } = cart;
   const onSale = cart.regular_price - cart.sale_price > 0;
   const subPrice = select_variation.reduce(
@@ -23,7 +23,7 @@ function CheckoutProductCard({ cart }) {
             uri: cart.thumbs[0],
           }}
         />
-        <View style={{ flex: 1 }} className="pt-2">
+        <View style={{flex:1}} className="pt-2">
           <View className="flex flex-row items-center justify-between">
             <Text
               numberOfLines={2}

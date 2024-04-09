@@ -4,12 +4,30 @@ import { withFetchDataWithAuth } from "../../hocs/withFetchDataWithAuth";
 import useNavigation from "../../hooks/useNavigation";
 import { Text, TouchableOpacity, View, Image } from "react-native";
 import Icon2D from "../Icon2D";
+import { useCheckout } from "../../context/CheckoutContext";
+import { useEffect } from "react";
 
 function DefaultAddressCard({ data }) {
   const { go_to_address_book } = useNavigation();
 
+  const { setOrderShipping } = useCheckout();
+
   const { account_id, phone, address, province, ward, district } = data;
   const { first_name, last_name } = account_id;
+
+  useEffect(() => {
+    setOrderShipping({
+      first_name: first_name,
+      last_name: last_name,
+      address: address,
+      ward: ward,
+      district: district,
+      province: province,
+      phone: phone,
+      longitude: 106.75197333979435,
+      latitude: 10.786098323202225
+    })
+  }, [data])
 
   return (
     <TouchableOpacity onPress={go_to_address_book}>

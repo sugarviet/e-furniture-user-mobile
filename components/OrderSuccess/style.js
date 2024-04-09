@@ -124,8 +124,8 @@ const styles = StyleSheet.create({
     productContent: {
         backgroundColor: '#f6f8fc',
         borderRadius: 8,
-        paddingHorizontal: 20,
-        paddingVertical: 20,
+        paddingHorizontal: 22,
+        paddingVertical: 22,
         marginTop: 22,
     },
     productContentName: {

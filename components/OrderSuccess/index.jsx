@@ -1,97 +1,46 @@
-import React, { useState, useEffect } from 'react'
-import styles from './style'
-import { ScrollView, Text, View, TouchableOpacity, Image, TextInput, Pressable } from 'react-native';
-import { ANIMATIONS } from '../../constants/animations';
-import { Stack } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 import LottieView from "lottie-react-native";
-import useNavigation from '../../hooks/useNavigation';
+import React from 'react';
+import { Image, Pressable, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ANIMATIONS } from '../../constants/animations';
 import { IMAGES } from '../../constants/image';
-import OrderStep from '../OrderStep';
-import CheckoutProductCard from '../CheckoutProductCard';
+import useNavigation from '../../hooks/useNavigation';
 import { formatCurrency } from '../../utils/formatCurrency';
-
-const purchaseItems = [
-    {
-        attributes: { attributeType: {} },
-        code: "987654321",
-        createdAt: "2024-04-05T08:30:00.000Z",
-        description: "Beautiful chair for your home",
-        is_draft: false,
-        is_published: true,
-        model3D: "",
-        name: "Elegant Chair",
-        quantity_in_cart: 2,
-        regular_price: 80000,
-        sale_price: 60000,
-        select_variation: [
-            {
-                color: "#ffffff",
-                property_id: "abcdefg123456",
-                sub_price: 0,
-                variation_id: "zyxwvuts987654"
-            }
-        ],
-        slug: "elegant-chair",
-        thumbs: ["https://i.ibb.co/yRCdF5t/chair.webp"],
-        type: "9876543210",
-        updatedAt: "2024-04-05T10:45:00.000Z",
-        variation: [
-            {
-                name: "color",
-                properties: [
-                    {
-                        sub_price: 0,
-                        value: "#ffffff",
-                        _id: "abcdefg123456"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        attributes: { attributeType: {} },
-        code: "123456789",
-        createdAt: "2024-04-06T12:00:00.000Z",
-        description: "Stylish table for your living room",
-        is_draft: false,
-        is_published: true,
-        model3D: "",
-        name: "Modern Table",
-        quantity_in_cart: 1,
-        regular_price: 150000,
-        sale_price: 120000,
-        select_variation: [
-            {
-                color: "#c0c0c0",
-                property_id: "123456789abc",
-                sub_price: 0,
-                variation_id: "987654321xyz"
-            }
-        ],
-        slug: "modern-table",
-        thumbs: ["https://i.ibb.co/b3WjhHR/simple-chair.jpg"],
-        type: "9876543210",
-        updatedAt: "2024-04-06T14:30:00.000Z",
-        variation: [
-            {
-                name: "color",
-                properties: [
-                    {
-                        sub_price: 0,
-                        value: "#c0c0c0",
-                        _id: "123456789abc"
-                    }
-                ]
-            }
-        ]
-    }
-];
-
+import { formatDate, formatTime } from '../../utils/formatDate';
+import OrderStep from '../OrderStep';
+import ProductVariation from '../ProductVariation';
+import styles from './style';
+import { PAYMENT_METHOD } from "../../constants/paymentMethod";
+import DepositPrice from "../DepositPrice";
 
 export default function OrderSuccess() {
 
-
     const { go_to_home, go_to_order_detail } = useNavigation();
+
+    const params = useLocalSearchParams();
+    const { data } = params;
+    const orderConfirmation = JSON.parse(data);
+    console.log(orderConfirmation);
+
+
+    const isPaidDeposit =
+        orderConfirmation.order_checkout.paid.type === "Deposit";
+    const totalPrice = orderConfirmation.order_checkout.total;
+
+    const orderProduct = orderConfirmation.order_products || [];
+    const orderShipping = orderConfirmation.order_shipping || {
+        orderShipping: null,
+    };
+
+    const orderCheckout = orderConfirmation.order_checkout || {
+        orderCheckout: null,
+    };
+
+    const discount = orderConfirmation.order_checkout.voucher
+        ? formattedCurrency(
+            (orderConfirmation.order_checkout.voucher.value / 100) * totalPrice
+        )
+        : "0,00đ";
 
     return (
         <View style={styles.container}>
@@ -120,7 +69,7 @@ export default function OrderSuccess() {
                     <View style={styles.bottomHeader}>
                         <Pressable
                             onPress={() => {
-                                go_to_order_detail();
+                                go_to_order_detail(orderConfirmation.id);
                             }}
                             style={styles.wrapperBottomHeader}
                         >
@@ -141,54 +90,120 @@ export default function OrderSuccess() {
                     <Text className="text-[16px] font-urbanistMedium px-5">Billing Address</Text>
                     <View style={styles.bodyContent}>
                         <View style={styles.addressContent}>
-                            <Text style={styles.addressContentName} className="font-urbanistMedium">Vũ Trường Giang</Text>
-                            <Text style={styles.addressContentDes} className="font-urbanistMedium">Phường Long Bình, Quận 9, 58/19, Tân Lập 1, Phường Hiệp Phú, Quận 9</Text>
-                            <Text style={styles.addressContentDes} className="font-urbanistMedium">0981890260</Text>
-                            <Text style={styles.addressContentDes} className="font-urbanistMedium">test@gmail.com</Text>
+                            <Text style={styles.addressContentName} className="font-urbanistMedium">{orderShipping.first_name} {orderShipping.last_name}</Text>
+                            <Text style={styles.addressContentDes} className="font-urbanistMedium">{orderShipping.ward}, {orderShipping.district}, {orderShipping.address}</Text>
+                            <Text style={styles.addressContentDes} className="font-urbanistMedium">{orderShipping.phone}</Text>
+                            <Text style={styles.addressContentDes} className="font-urbanistMedium">{orderShipping.email}</Text>
                         </View>
                         <View style={styles.codeContent}>
                             <Text style={styles.codeContentName} className="font-urbanistMedium">Order ID</Text>
-                            <Text style={styles.codeContentDes} className="font-urbanistMedium">EFURNITURE-391EC23C</Text>
+                            <Text style={styles.codeContentDes} className="font-urbanistMedium">{orderConfirmation.order_code}</Text>
                         </View>
                         <View style={styles.paymentContent}>
                             <Text style={styles.paymentContentName} className="font-urbanistMedium">Payment method</Text>
-                            <Text style={styles.paymentContentDes} className="font-urbanistMedium">
-                                Cash On Delivery
-                            </Text>
+                            <View className="font-urbanistMedium">
+                                {orderConfirmation.payment_method === PAYMENT_METHOD.cod ?
+                                    <Text className="font-urbanistMedium">Cash On Delivery</Text>
+                                    :
+                                    <Text className="font-urbanistMedium">Scan QR by VietQr</Text>
+                                }
+                            </View>
                         </View>
                         <View style={styles.dateCreateContent}>
                             <Text style={styles.dateCreateContentName} className="font-urbanistMedium">Order date</Text>
-                            <Text style={styles.dateCreateContentDes} className="font-urbanistMedium">11:02, 09.04.2024</Text>
+                            <Text style={styles.dateCreateContentDes} className="font-urbanistMedium">{formatTime(orderConfirmation.createdAt)}, {formatDate(orderConfirmation.createdAt)}</Text>
                         </View>
                         <Text className="text-[16px] font-urbanistMedium pt-8">Order items</Text>
                         <View style={styles.productContent}>
-                            {purchaseItems.map((item) => (
-                                <CheckoutProductCard key={item._id} cart={item} />
-                            ))}
+                            {orderConfirmation.order_products.map((product, index) => {
+                                const onSale =
+                                    product.product_id.regular_price -
+                                    product.product_id.sale_price >
+                                    0;
+                                return (
+                                    <View
+                                        key={index}
+                                        className="flex flex-row justify-between"
+                                    >
+                                        <View className="flex flex-row gap-5">
+                                            <View className="w-16 h-16 rounded-xl px-2 py-2 bg-white">
+                                                <Image
+                                                    className="w-full h-full"
+                                                    source={product.product_id.thumbs}
+                                                ></Image>
+                                            </View>
+                                            <View className="flex flex-col justify-between">
+                                                <View>
+                                                    <Text className="font-urbanistBold text-[14px]">
+                                                        {product.product_id.name}
+                                                    </Text>
+                                                    <Text className="text-[12px] font-urbanistRegular">
+                                                        Qty: {product.quantity}
+                                                    </Text>
+                                                </View>
+                                                <View>
+                                                    {product.variation.map((item, i) => {
+                                                        const { variation_id, property_id } = item;
+                                                        const currentVariation =
+                                                            product.product_id.variation.find(
+                                                                (i) => i._id === variation_id
+                                                            );
+                                                        currentVariation.properties =
+                                                            currentVariation.properties.filter(
+                                                                (item) => item._id === property_id
+                                                            );
+                                                        return (
+                                                            <ProductVariation
+                                                                key={i}
+                                                                currentVariation={currentVariation}
+                                                                variation={currentVariation}
+                                                                className="text-[10px] w-6 h-6"
+                                                            />
+                                                        );
+                                                    })}
+                                                </View>
+                                            </View>
+                                        </View>
+                                        <View className="flex flex-col">
+                                            {onSale && (
+                                                <Text className="font-urbanistSemiBold text-[14px] line-through text-grey2">
+                                                    {formatCurrency(
+                                                        product.product_id.regular_price
+                                                    )}
+                                                </Text>
+                                            )}
+                                            <Text
+                                                className={`font-urbanistBold text-[13px]`}
+                                            >
+                                                {formatCurrency(product.product_id.sale_price)}
+                                            </Text>
+                                        </View>
+                                    </View>
+                                );
+                            })}
                         </View>
                         <View style={styles.dateCreateContent}>
                             <Text style={styles.dateCreateContentName} className="font-urbanistMedium">Subtotal</Text>
-                            <Text style={styles.dateCreateContentDes}>{formatCurrency(210000)}</Text>
+                            <Text style={styles.dateCreateContentDes} className="font-urbanistMedium">{formatCurrency(orderCheckout.total)}</Text>
                         </View>
                         <View style={styles.dateCreateContent}>
                             <Text style={styles.dateCreateContentName} className="font-urbanistMedium">Discount</Text>
-                            <Text style={styles.dateCreateContentDes}>{formatCurrency(21000)}</Text>
+                            <Text style={styles.dateCreateContentDes} className="font-urbanistMedium">{discount}</Text>
                         </View>
                         <View style={styles.dateCreateContent}>
                             <Text style={styles.dateCreateContentName} className="font-urbanistMedium">Shipping</Text>
-                            <Text style={styles.dateCreateContentDes}>{formatCurrency(0)}</Text>
+                            <Text style={styles.dateCreateContentDes} className="font-urbanistMedium">0,00đ</Text>
                         </View>
-                        <View style={styles.dateCreateContent}>
-                            <Text style={styles.dateCreateContentName} className="font-urbanistMedium">Deposit</Text>
-                            <Text style={styles.dateCreateContentDes}>{formatCurrency(0)}</Text>
-                        </View>
+                        {isPaidDeposit && (
+                            <DepositPrice order={orderConfirmation} />
+                        )}
                         <View style={styles.borderLine}></View>
                         <View style={styles.totalContent}>
                             <Text style={styles.totalContentName} className="font-urbanistBold">QUOTATION TOTAL</Text>
                             <Text style={styles.totalContentDes}>{formatCurrency(189000)}</Text>
                         </View>
 
-                        <TouchableOpacity onPress={() => { go_to_home({}) }} className="w-full flex my-2 pt-4">
+                        <TouchableOpacity onPress={go_to_home} className="w-full flex my-2 pt-4">
                             <View className="flex flex-row justify-center items-center px-6 py-[14px] rounded-md bg-black shadow-2xl">
                                 <Text className="text-white">Done</Text>
                             </View>

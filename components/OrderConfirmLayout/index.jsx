@@ -21,6 +21,10 @@ const TYPES = {
     },
     payment: {
         name: " Payment Method",
+        className: "border-b border-grey5 pt-6 pb-1"
+    },
+    note: {
+        name: "Note",
         className: "pt-6"
     },
 };

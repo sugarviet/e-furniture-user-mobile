@@ -27,11 +27,6 @@ const paymentList = [
 
 const PaymentList = () => {
 
-    const { go_to_home, go_to_order } = useNavigation();
-
-    const [modalVisible, setModalVisible] = useState(false);
-
-
     const { selectedPayment, handleConfirmPayment } = useCheckout();
     const [selectPayment, setSelectPayment] = useState(selectedPayment);
 

@@ -6,9 +6,10 @@ import ButtonModal from '../ButtonModal';
 import { useCheckout } from '../../context/CheckoutContext';
 import LoadingSpinner from '../LoadingSpinner';
 import { useLocalSearchParams } from "expo-router";
+import EmptyContent from '../EmptyContent';
 
 const CouponList = () => {
-    const { vouchers, isLoading, handleApplyVoucher, selectedVoucher, setSelectedVoucher } = useCheckout()
+    const { vouchers, isVoucherLoading, handleApplyVoucher, selectedVoucher, setSelectedVoucher } = useCheckout()
 
     const params = useLocalSearchParams();
     const { data } = params;
@@ -23,9 +24,6 @@ const CouponList = () => {
             return total + (cur.sale_price + subPrice) * cur.quantity_in_cart;
         }, 0);
 
-    if (isLoading) return <LoadingSpinner />;
-
-
     const handleGetCouponId = (couponId) => {
         if (selectedVoucher === couponId) {
             setSelectedVoucher(null);
@@ -33,9 +31,14 @@ const CouponList = () => {
             setSelectedVoucher(couponId);
         }
     };
+    const emptyVoucher = !vouchers?.length;
+
+
+    if (isVoucherLoading) return <LoadingSpinner />;
 
     return (
         <View className="h-full relative bg-white">
+            {emptyVoucher && <EmptyContent type="coupon"/>}
             <ScrollView className="px-2 py-4 mt-4" style={{ marginBottom: 90, height: '100%', width: '100%' }}>
                 {vouchers?.sort((a, b) => {
                     const aIsHideCoupon = (a.used_turn_count === a.maximum_use_per_user) || (a.minimum_order_value > getTotalPrice());

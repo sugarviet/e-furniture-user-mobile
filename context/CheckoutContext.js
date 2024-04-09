@@ -3,15 +3,21 @@ import { createContext, useContext, useState, useEffect } from "react";
 import useCart from "../hooks/useCart";
 import { usePost } from "../hooks/api-hooks";
 import { apply_voucher, get_voucher_by_specified } from "../api/voucherApi";
+import { checkout_with_user } from "../api/checkoutApi";
+import { PAYMENT_METHOD } from "../constants/paymentMethod";
 
 const CheckoutContext = createContext();
 
 function CheckoutProvider(props) {
   const [selectedVoucher, setSelectedVoucher] = useState();
   const [dataAfterVoucher, setDataAfterVoucher] = useState();
-  const [selectedPayment, setSelectedPayment] = useState();
-  const { go_back } = useNavigation();
-  const { getCart } = useCart();
+  const [selectedPayment, setSelectedPayment] = useState(PAYMENT_METHOD.cod);
+  const [orderShipping, setOrderShipping] = useState();
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const { go_back,go_to_order_confirmation } = useNavigation();
+  const { getCart, getTotalPrice } = useCart();
+
   const voucherInfo = getCart()?.map((item) => ({
     product_id: item._id,
     price: item.sale_price ? item.sale_price : item.regular_price,
@@ -33,10 +39,36 @@ function CheckoutProvider(props) {
     undefined,
     (data) => {
       setDataAfterVoucher(data)
-      
     },
     (error) => {
+    }
+  );
 
+  const handlePaymentMethod = (metaData) => {
+    const isDeposit = metaData.order_checkout.paid.type === "Deposit"
+    const isCod = metaData.payment_method === PAYMENT_METHOD.cod;
+    if (isDeposit && isCod) {
+      setModalVisible(!modalVisible)
+      // go_to_payment(metaData);
+    }
+    if (!isDeposit && isCod) {
+      setModalVisible(!modalVisible)
+      // go_to_order_confirmation(metaData);
+    }
+    if (!isDeposit && !isCod) {
+      go_to_order_confirmation(metaData);
+      // go_to_payment(metaData);
+    }
+  };
+
+  const { mutate: checkoutForUser, data: dataCheckout } = usePost(
+    checkout_with_user(),
+    undefined,
+    (data) => {
+      handlePaymentMethod(data)
+    },
+    (error) => {
+      message.error(error.response.data.error.message);
     }
   );
 
@@ -53,20 +85,38 @@ function CheckoutProvider(props) {
     go_back();
   }
 
+  const handleBackToHome = () => {
+    setModalVisible(!modalVisible)
+    go_to_home();
+  }
+
+  const handleGoToOrder = () => {
+    setModalVisible(!modalVisible)
+    go_to_order_confirmation(dataCheckout);
+  }
+
   useEffect(() => {
     getSpecificVoucher(voucherInfo)
   }, [])
 
   const value = {
     vouchers,
-    isLoading: isVoucherLoading,
+    getTotalPrice,
+    isVoucherLoading,
     handleApplyVoucher,
     dataAfterVoucher,
     isPriceVoucherLoading,
     selectedVoucher,
     setSelectedVoucher,
     selectedPayment,
-    handleConfirmPayment
+    handleConfirmPayment,
+    checkoutForUser,
+    orderShipping,
+    setOrderShipping,
+    modalVisible,
+    setModalVisible,
+    handleBackToHome,
+    handleGoToOrder
   };
   return (
     <CheckoutContext.Provider value={value}>
