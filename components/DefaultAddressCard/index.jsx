@@ -4,33 +4,48 @@ import { withFetchDataWithAuth } from "../../hocs/withFetchDataWithAuth";
 import useNavigation from "../../hooks/useNavigation";
 import { Text, TouchableOpacity, View, Image } from "react-native";
 import Icon2D from "../Icon2D";
+import { useCheckout } from "../../context/CheckoutContext";
+import { useEffect } from "react";
 
 function DefaultAddressCard({ data }) {
   const { go_to_address_book } = useNavigation();
 
+  const { setOrderShipping } = useCheckout();
+
   const { account_id, phone, address, province, ward, district } = data;
   const { first_name, last_name } = account_id;
 
-  console.log(data);
+  useEffect(() => {
+    setOrderShipping({
+      first_name: first_name,
+      last_name: last_name,
+      address: address,
+      ward: ward,
+      district: district,
+      province: province,
+      phone: phone,
+      longitude: 106.75197333979435,
+      latitude: 10.786098323202225
+    })
+  }, [data])
 
   return (
     <TouchableOpacity onPress={go_to_address_book}>
-      <View className="flex-row justify-between items-center bg-white px-3 py-4 shadow-sm">
-        <View className="flex-row">
+      <View className="flex-row justify-between items-center bg-white px-3 py-4 shadow-sm rounded-xl">
+        <View className="flex-row items-center">
           <View>
-            <Icon2D name="location" size={20} activated="black" />
+            <Icon2D name="location" size={28} activated="black" />
           </View>
           <View className="ml-2">
-            <Text className="font-urbanistSemiBold">Delivery Address</Text>
             {data ? (
               <View>
                 <View className="flex-row items-center mt-1">
-                  <Text className="text-gray-500 text-sm">{`${last_name} ${first_name}`}</Text>
-                  <Text className="text-gray-500 text-sm">|</Text>
-                  <Text className="text-gray-500 text-sm">{phone}</Text>
+                  <Text className="text-sm font-urbanistSemiBold">{`${last_name} ${first_name}`}</Text>
+                  <Text className="text-sm font-urbanistSemiBold px-2">|</Text>
+                  <Text className="text-sm font-urbanistSemiBold">{phone}</Text>
                 </View>
-                <Text className="text-gray-500 text-sm">{address}</Text>
-                <Text className="text-gray-500 text-sm">{`${ward} ${district} ${province}`}</Text>
+                <Text className="text-gray-500 text-sm font-urbanistRegular">{address}</Text>
+                <Text className="text-gray-500 text-sm font-urbanistRegular max-w-[300px]">{`${ward} ${district} ${province}`}</Text>
               </View>
             ) : (
               <Text className="text-xs font-urbanist">

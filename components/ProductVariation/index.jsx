@@ -13,8 +13,8 @@ export default function ProductVariation({
     onUpdateVariation(property_id);
   };
   return (
-    <View>
-      <Text className="text-black text-[18px] font-urbanistBold capitalize mb-1">
+    <View className="flex flex-row gap-2 items-center pt-4">
+      <Text className="text-black text-[12px] font-urbanistMedium capitalize mb-1">
         {name}
       </Text>
       <FlatList

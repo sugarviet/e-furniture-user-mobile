@@ -1,22 +1,25 @@
 import { useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { IMAGES } from '../../constants/image';
+import { PAYMENT_METHOD } from '../../constants/paymentMethod';
+import { useCheckout } from '../../context/CheckoutContext';
+import useNavigation from '../../hooks/useNavigation';
 import ButtonModal from '../ButtonModal';
 import PopupModal from '../Modal';
 import PaymentCard from '../PaymentCard';
-import { PAYMENT_METHOD } from '../../constants/paymentMethod';
-import useNavigation from '../../hooks/useNavigation';
 
 
 const paymentList = [
     {
         method: PAYMENT_METHOD.cod,
         name: 'COD',
+        description: 'Please be aware: If your order exceeds ₫1,000,000, you will be required to pay a 10% deposit upfront for the order.',
         image: IMAGES.cod,
     },
     {
         method: PAYMENT_METHOD.banking,
-        name: 'Online Payment VietQR',
+        name: 'Online Payment',
+        description: 'Payment by scanning VietQR.',
         image: IMAGES.vietqr,
     }
 ]
@@ -24,24 +27,11 @@ const paymentList = [
 
 const PaymentList = () => {
 
-    const { go_to_home, go_to_order } = useNavigation();
-
-    const [modalVisible, setModalVisible] = useState(false);
-
-    const [selectPayment, setSelectPayment] = useState(PAYMENT_METHOD.cod);
+    const { selectedPayment, handleConfirmPayment } = useCheckout();
+    const [selectPayment, setSelectPayment] = useState(selectedPayment);
 
     const handleSelectPayment = (payment) => {
-        setSelectPayment(payment)
-    }
-
-    const handleBackToHome = () => {
-        setModalVisible(!modalVisible)
-        go_to_home();
-    }
-
-    const handleGoToOrder = () => {
-        setModalVisible(!modalVisible)
-        go_to_order();
+        setSelectPayment(payment);
     }
 
     return (
@@ -52,12 +42,12 @@ const PaymentList = () => {
             <ScrollView className="px-2 py-4 mt-4" style={{ marginBottom: 90, height: '100%', width: '100%' }}>
                 {paymentList?.map((payment) => (
                     <View key={payment.method} className="pb-6">
-                        <PaymentCard data={payment} selectPayment={selectPayment} handleSelectPayment={handleSelectPayment} />
+                        <PaymentCard data={payment} selectedPayment={selectedPayment} selectPayment={selectPayment} handleSelectPayment={handleSelectPayment} />
                     </View>
                 ))}
             </ScrollView>
             <Pressable
-                onPress={() => setModalVisible(!modalVisible)}
+                onPress={() => handleConfirmPayment(selectPayment)}
                 className="absolute bottom-0 left-0 right-0 h-[100px] border-t border-t-grey5 px-5 bg-white"
             >
                 <View className="flex justify-center h-full">
@@ -68,20 +58,6 @@ const PaymentList = () => {
                     </ButtonModal>
                 </View>
             </Pressable>
-
-            <PopupModal type="success" modalVisible={modalVisible} setModalVisible={setModalVisible}>
-                <Pressable onPress={handleGoToOrder} className="w-full pt-8">
-                    <ButtonModal type="viewOrder">
-                        <Text className="text-white font-urbanistSemiBold">View Order</Text>
-                    </ButtonModal>
-                </Pressable>
-                <Pressable onPress={handleBackToHome} className="w-full pt-3 pb-2">
-                    <ButtonModal type="goToHome">
-                        <Text className="text-black font-urbanistSemiBold">Back To Home</Text>
-                    </ButtonModal>
-                </Pressable>
-            </PopupModal>
-
         </View>
     )
 }

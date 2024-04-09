@@ -19,9 +19,10 @@ const AddressCard = ({ data }) => {
     () => {
       go_back();
     },
-    () => {},
+    () => { },
     get_address_default_by_user()
   );
+
 
   return (
     <TouchableOpacity
@@ -34,7 +35,7 @@ const AddressCard = ({ data }) => {
           <View
             className={classNames(
               "w-12 h-12 rounded-full flex justify-center items-center",
-              data.is_default ? "bg-black" : "bg-white"
+              data.is_default ? "bg-black" : "bg-black"
             )}
           >
             <Icon2D name="location" size={20} activated="white" />

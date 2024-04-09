@@ -125,6 +125,10 @@ const TYPE = {
     icon: IMAGES.telephone,
     rules: () => ({}),
   },
+  note: {
+    placeholder: "Leave a message...",
+    rules: () => ({}),
+  },
 };
 
 function FormInput({

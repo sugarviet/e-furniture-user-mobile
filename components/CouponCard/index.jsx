@@ -5,19 +5,29 @@ import CircleCheckbox from "../CircleCheckbox";
 import PressableContainer from "../PressableContainer";
 import { useState, useEffect } from "react";
 import { formatDate } from '../../utils/formatDate';
+import formatMoney from "../../utils/formatMoney";
+import CouponError from '../CouponError';
 
-const CouponCard = ({data, handleGetCouponId}) => {
-    // const {handleApplyVoucher} = useVouchers(data._id);
-    const [selectCoupon, setSelectCoupon] = useState(false);
+const CouponCard = ({ getTotalPrice, data, selectedVoucher, handleGetCouponId }) => {
 
-    const handleSelectCoupon = () => {
-        setSelectCoupon(!selectCoupon)
-        handleGetCouponId(data._id)
+    const handleSelectCoupon = (couponId) => {
+        handleGetCouponId(couponId)
     }
 
+    const isHideCoupon = (data.used_turn_count === data.maximum_use_per_user) || (data.minimum_order_value > getTotalPrice())
+
+    const maxUsedCoupon = data.used_turn_count === data.maximum_use_per_user
+
+    const notReachValueCoupon = data.minimum_order_value > getTotalPrice()
+
+
     return (
-        <PressableContainer onPress={() => handleSelectCoupon()}>
-            <View style={{ width: '100%' }} className="flex flex-row w-full mx-2 shadow-sm">
+        <PressableContainer onPress={() => {
+            if (!isHideCoupon) {
+                handleSelectCoupon(data._id);
+            }
+        }}>
+            <View style={{ width: '100%' }} className={`flex flex-row w-full mx-2 shadow-sm ${isHideCoupon ? "opacity-60" : "opacity-100"}`}>
                 <View className="">
                     <Image
                         resizeMode="contain"
@@ -29,14 +39,40 @@ const CouponCard = ({data, handleGetCouponId}) => {
                     <View className="flex flex-col pl-1">
                         <Text className='font-bold text-sm pb-1'>{data.code}</Text>
                         <Text className='font-urbanistMedium text-[13px] '>{data.value}% off Capped at ₫100k</Text>
-                        <Text className='font-urbanistMedium text-[13px] '>Min. Spend ₫{data.minimum_order_value / 1000000}M</Text>
-                        <Text className='font-urbanistMedium text-[12px] text-grey1 pt-2'>20% used, Valid Till: {formatDate(data.end_date)}</Text>
+                        <Text className='font-urbanistMedium text-[13px] '>Min. Spend ₫{formatMoney(data.minimum_order_value)}</Text>
+                        <Text className='font-urbanistMedium text-[12px] text-grey1 pt-2'>{(data.used_turn_count / data.maximum_use) * 100}% used, Valid Till: {formatDate(data.end_date)}</Text>
                     </View>
 
                     <Pressable>
-                        <CircleCheckbox checked={selectCoupon} handlePress={handleSelectCoupon} color="#f8dddd" />
+                        <CircleCheckbox
+                            checked={selectedVoucher === data._id}
+                            handlePress={() => {
+                                if (!isHideCoupon) {
+                                    handleSelectCoupon(data._id);
+                                }
+                            }}
+                            color="#f8dddd"
+                        />
                     </Pressable>
                 </View>
+                <View className="bg-white z-10 absolute right-[14px] top-2">
+                    <View className="rounded-l-[10px] z-20 bg-black/60 w-9 h-5 rounded-r-[1px] text-white flex justify-center items-center">
+                        <Text className="text-white font-urbanistMedium text-[12px]">
+                            x{data.maximum_use}
+                        </Text>
+                    </View>
+                    <View className='absolute top-5 right-[1px] border-b-black border-b-4 border-r-4 border-r-transparent rotate-90'></View>
+                </View>
+            </View>
+            <View className="mx-2">
+                {maxUsedCoupon
+                    &&
+                    <CouponError type="maxUsed" />
+                }
+                {notReachValueCoupon
+                    &&
+                    <CouponError type="notReachValue" />
+                }
             </View>
 
         </PressableContainer>

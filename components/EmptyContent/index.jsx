@@ -22,6 +22,13 @@ const TYPES = {
     image: IMAGES.not_found_bank,
     imageWidth: 176,
     imageHeight: 128,
+  },
+  coupon: {
+    title: "Not found :(",
+    subTitle: "You don't have any bank account available",
+    image: IMAGES.not_found_voucher,
+    imageWidth: 176,
+    imageHeight: 140,
   }
 }
 const EmptyContent = ({ type }) => {

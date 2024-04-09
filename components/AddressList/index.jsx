@@ -1,54 +1,14 @@
 import {
   ScrollView,
   Text,
-  View,
-  Pressable,
-  Image,
   TouchableOpacity,
+  View
 } from "react-native";
-import { COLORS, FONTS } from "../../constants";
+import { get_all_address } from "../../api/addressApi";
+import { withFetchDataWithAuth } from "../../hocs/withFetchDataWithAuth";
 import useNavigation from "../../hooks/useNavigation";
 import AddressCard from "../AddressCard";
 import ButtonModal from "../ButtonModal";
-import { withFetchDataWithAuth } from "../../hocs/withFetchDataWithAuth";
-import { get_all_address } from "../../api/addressApi";
-
-const addressList = [
-  {
-    id: 1,
-    first_name: "Giang",
-    last_name: "Vũ Trường",
-    phone: "0981890260",
-    province: "TP. Hồ Chí Minh",
-    district: " Quận 9",
-    ward: "phường Hiệp Phú",
-    address: "58/19, Tân Lập 1",
-    default: true,
-  },
-  {
-    id: 2,
-    first_name: "Việt",
-    last_name: "Đặng Hoàng",
-    phone: "0124131251",
-    province: "TP. Hồ Chí Minh",
-    district: "Quận 7",
-    ward: "phường Tân Hưng",
-    address: "217 D2",
-    default: false,
-  },
-  {
-    id: 3,
-
-    first_name: "Khôi",
-    last_name: "Lê Thế",
-    phone: "0978120511",
-    province: "TP. Hồ Chí Minh",
-    district: "Quận Gò Vấp",
-    ward: "phường 10",
-    address: "213 Quang Trung",
-    default: false,
-  },
-];
 
 const AddressList = ({ data }) => {
   const { go_to_add_new_address } = useNavigation();
