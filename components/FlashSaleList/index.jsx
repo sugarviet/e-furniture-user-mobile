@@ -31,7 +31,7 @@ const FlashSaleList = ({ data,activeFlashSale,handleCategorySelect }) => {
 
                         />
                         <View className="" >
-                            <Text className="text-[12px] text-center font-urbanistBold text-black max-w-[100] pt-1">{item.name}</Text>
+                            <Text className="text-[12px] text-center font-urbanistBold text-black max-w-[100] pt-1 uppercase">{item.name}</Text>
                         </View>
                     </Pressable>
                 )}
