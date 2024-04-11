@@ -61,6 +61,7 @@ import flashsale_slider2 from '../assets/images/flashsale_slider2.png'
 import coupon_green_bg from '../assets/images/coupon_green_bg.png'
 import coupon_orange from '../assets/images/coupon_orange.png'
 import not_found_voucher from '../assets/images/not_found_voucher.png'
+import flash_sale_icon from '../assets/images/flash_sale_icon.png'
 
 export const IMAGES = {
     right_arrow_black,
@@ -125,5 +126,6 @@ export const IMAGES = {
     flashsale_slider2,
     coupon_green_bg,
     coupon_orange,
-    not_found_voucher
+    not_found_voucher,
+    flash_sale_icon
 };

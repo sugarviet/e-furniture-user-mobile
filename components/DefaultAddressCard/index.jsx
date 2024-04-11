@@ -12,12 +12,14 @@ function DefaultAddressCard({ data }) {
 
   const { setOrderShipping } = useCheckout();
 
-  const { account_id, phone, address, province, ward, district } = data;
+  const { account_id, phone, address, province, ward, district, email } = data;
   const { first_name, last_name } = account_id;
+
 
   useEffect(() => {
     setOrderShipping({
       first_name: first_name,
+      email: email,
       last_name: last_name,
       address: address,
       ward: ward,

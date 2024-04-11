@@ -16,6 +16,7 @@ import BestSelletSlider from "../../../components/BestSelletSlider";
 import { Tabs } from "expo-router";
 import HeaderButton from "../../../components/HeaderButton";
 import { IMAGES } from "../../../constants/image";
+import FlashSaleBgSlider from "../../../components/FlashSaleBgSlider";
 
 const productDetailCarousel = [
   { id: 1, URI: "https://i.ibb.co/0QmpZ2X/image-5.png" },
@@ -26,7 +27,7 @@ const Home = () => {
   const { go_to_search_page, go_to_flash_sale } = useNavigation();
 
   return (
-    <ScrollView className="flex-1">
+    <ScrollView className="flex-1 mb-4">
       <Tabs.Screen
         options={{
           header: () => (
@@ -56,11 +57,14 @@ const Home = () => {
         <CategoriesFilter />
       </View>
 
-      <Pressable onPress={go_to_flash_sale} className="flex flex-row justify-between px-3 items-center">
-        <Image source={IMAGES.flashsale} className="w-[100px] h-4"></Image>
-        <View>
-          <Text className="text-sm font-urbanistBold">See All Deals</Text>
+      <Pressable onPress={go_to_flash_sale} className="px-3">
+        <View className="flex flex-row justify-between my-2 items-center">
+          <Image source={IMAGES.flashsale} className="w-[100px] h-4"></Image>
+          <View>
+            <Text className="text-sm font-urbanistBold">See All Deals</Text>
+          </View>
         </View>
+        <FlashSaleBgSlider/>
       </Pressable>
 
       <View className="flex-row flex-wrap">
