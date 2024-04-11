@@ -5,43 +5,43 @@ import { formatDateWithType, formatTime } from "../../utils/formatDate";
 import Icon2D from "../Icon2D";
 
 
-const data = [
-    {
-        name: 'Pending',
-        note: 'Order Placed',
-        date: '2024-03-25T1:04:07.018Z'
-    },
-    {
-        name: 'Processing',
-        note: 'Efurniture staff is preparing the order',
-        date: '2024-03-26T11:04:07.018Z'
-    },
-    {
-        name: 'Shipping',
-        note: 'Your order will be delivered soon, please keep your phone handy.',
-        date: '2024-03-27T6:04:07.018Z'
-    },
-    {
-        name: 'Done',
-        note: 'Your order has been received',
-        date: '2024-03-28T17:04:07.018Z'
-    },
-]
+// const data = [
+//     {
+//         name: 'Pending',
+//         note: 'Your order is waiting for to',
+//         date: '2024-03-25T1:04:07.018Z'
+//     },
+//     {
+//         name: 'Processing',
+//         note: 'Efurniture staff is preparing the order',
+//         date: '2024-03-26T11:04:07.018Z'
+//     },
+//     {
+//         name: 'Shipping',
+//         note: 'Your order will be delivered soon, please keep your phone handy.',
+//         date: '2024-03-27T6:04:07.018Z'
+//     },
+//     {
+//         name: 'Done',
+//         note: 'Your order has been received',
+//         date: '2024-03-28T17:04:07.018Z'
+//     },
+// ]
 
 const STEPS = {
     3: {
-        activeIcon: <Icon2D name='package' activated={COLORS.primary} size={15} />,
-        unactiveIcon: <Icon2D name='package' activated='#d3d3d3' size={15} />
+        activeIcon: <Icon2D name='pending' activated={COLORS.primary} size={15} />,
+        unactiveIcon: <Icon2D name='pending' activated='#d3d3d3' size={15} />
 
     },
     2: {
-        activeIcon: <Icon2D name='ship' activated={COLORS.primary} size={10} />,
-        unactiveIcon: <Icon2D name='ship' activated='#d3d3d3' size={10} />
+        activeIcon: <Icon2D name='package' activated={COLORS.primary} size={15} />,
+        unactiveIcon: <Icon2D name='package' activated='#d3d3d3' size={15} />
     },
     1: {
 
-        activeIcon: <Icon2D name='package' activated={COLORS.primary} size={15} />,
-        unactiveIcon: <Icon2D name='package' activated='#d3d3d3' size={15} />
+        activeIcon: <Icon2D name='ship' activated={COLORS.primary} size={10} />,
+        unactiveIcon: <Icon2D name='ship' activated='#d3d3d3' size={10} />
     },
     0: {
         activeIcon: <Icon2D name='done' activated={COLORS.primary} size={15} />,
@@ -73,15 +73,24 @@ const customStyles = {
     labelSize: 12,
 };
 
-function VerticalOrderStep() {
-    
+const classNameMap = {
+    1: 'h-20',
+    2: 'h-36',
+    3: 'h-64',
+    4: 'h-full',
+};
+
+function VerticalOrderStep({ data }) {
+
     const labels = data.map((track) => track.name).reverse();
     const note = data.map((track) => track.note).reverse();
     const date = data.map((track) => track.date).reverse();
 
-    console.log(labels)
-
     const currentPosition = 0
+
+    const deliveryLength = data.length
+
+    const className = classNameMap[deliveryLength] || 'h-32';
 
     const renderLabel = ({
         position,
@@ -109,7 +118,7 @@ function VerticalOrderStep() {
     };
 
     return (
-        <View className="h-full pl-14">
+        <View className={`pl-14 ${className}`}>
             <StepIndicator
                 renderStepIndicator={({ position }) => {
                     return position === currentPosition ? (

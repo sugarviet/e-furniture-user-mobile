@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         paddingTop: 20,
     },
     codeContentName: {
-        fontSize: 13,
+        fontSize: 14,
     },
     codeContentDes: {
         fontSize: 16,
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         paddingTop: 20,
     },
     paymentContentName: {
-        fontSize: 13,
+        fontSize: 14,
     },
     paymentContentDes: {
         fontSize: 16,
@@ -116,10 +116,10 @@ const styles = StyleSheet.create({
         paddingTop: 20,
     },
     dateCreateContentName: {
-        fontSize: 13,
+        fontSize: 14,
     },
     dateCreateContentDes: {
-        fontSize: 16,
+        fontSize: 14,
     },
     productContent: {
         backgroundColor: '#f6f8fc',
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
         marginTop: 22,
     },
     productContentName: {
-        fontSize: 16,
+        fontSize: 14,
     },
     wrapperProductContent: {
         display: 'flex',
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
         maxWidth: 220,
     },
     productDes: {
-        fontSize: 16,
+        fontSize: 14,
     },
     borderLine: {
         borderTopWidth: 1,

@@ -3,10 +3,13 @@ import { Image, Text, View } from "react-native";
 import useCart from "../../hooks/useCart";
 import { formatCurrency } from "../../utils/formatCurrency";
 import ProductVariationList from "../ProductVariationList";
+import ProductVariation from "../ProductVariation";
 
 function CheckoutProductCard({ cart }) {
- 
+
   const { variation, select_variation } = cart;
+
+  console.log("variation", cart);
   const onSale = cart.regular_price - cart.sale_price > 0;
   const subPrice = select_variation.reduce(
     (total, cur) => total + cur.sub_price,
@@ -23,7 +26,7 @@ function CheckoutProductCard({ cart }) {
             uri: cart.thumbs[0],
           }}
         />
-        <View style={{flex:1}} className="pt-2">
+        <View style={{ flex: 1 }} className="pt-2">
           <View className="flex flex-row items-center justify-between">
             <Text
               numberOfLines={2}
@@ -32,12 +35,26 @@ function CheckoutProductCard({ cart }) {
               {cart.name}
             </Text>
           </View>
-          {/* <ProductVariationList
-            onUpdate={() => {}}
-            itemClassName="w-6 h-6"
-            selectVariation={select_variation}
-            data={variation}
-          /> */}
+          <View className="pt-2">
+            {select_variation.map((item, i) => {
+              const { variation_id, property_id } = item;
+              const currentVariation = variation.find(
+                (i) => i._id === variation_id
+              );
+              currentVariation.properties =
+                currentVariation.properties.filter(
+                  (item) => item._id === property_id
+                );
+              return (
+                <ProductVariation
+                  key={i}
+                  currentVariation={currentVariation}
+                  variation={currentVariation}
+                  className="text-[10px] w-6 h-6"
+                />
+              );
+            })}
+          </View>
           <View className="flex flex-row items-center justify-between">
             <View className="mt-2">
               {onSale && (
@@ -51,7 +68,7 @@ function CheckoutProductCard({ cart }) {
             </View>
             <View
               className={
-                "flex justify-center items-center bg-[#f3f3f3] rounded-[50%] h-10 w-10"
+                "flex justify-center items-center bg-[#f3f3f3] rounded-[50%] h-8 w-8"
               }
             >
 

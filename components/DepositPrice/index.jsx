@@ -1,14 +1,14 @@
 import { Text, View } from 'react-native';
 import { formatCurrency } from '../../utils/formatCurrency';
 
-function DepositPrice({ order }) {
+function DepositPrice({ order,className }) {
     const isDepositPaid = order.order_checkout.paid.paid_amount > 0;
     const depositPrice = order.order_checkout.paid.must_paid
     return (
         <>
-            <View className="flex flex-row justify-between items-center flex-wrap pt-[20px] text-[13px]">
-                <Text className="font-urbanistMedium">Deposit </Text>
-                <Text className="text-base font-urbanistMedium">
+            <View className="flex flex-row justify-between items-center flex-wrap">
+                <Text className={`${className}`}>Deposit </Text>
+                <Text className={`${className}`}>
                     {formatCurrency(depositPrice)}
                 </Text>
             </View>

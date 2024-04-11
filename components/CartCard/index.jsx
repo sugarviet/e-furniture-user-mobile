@@ -49,17 +49,19 @@ function CartCard({ cart, handleOpenDeleteModal }) {
               <Icon source={IMAGES.trash} className="w-[25px] h-[25px]" />
             </TouchableOpacity>
           </View>
-          <ProductVariationList
-            onUpdate={(updated_select_variation) => {
-              updateVariation({
-                ...cart,
-                select_variation: updated_select_variation,
-              });
-            }}
-            itemClassName="w-6 h-6"
-            selectVariation={select_variation}
-            data={variation}
-          />
+          <View className="pt-4">
+            <ProductVariationList
+              onUpdate={(updated_select_variation) => {
+                updateVariation({
+                  ...cart,
+                  select_variation: updated_select_variation,
+                });
+              }}
+              itemClassName="w-6 h-6"
+              selectVariation={select_variation}
+              data={variation}
+            />
+          </View>
           <View className="flex flex-row items-center justify-between w-[215px]">
             <View>
               {onSale && (

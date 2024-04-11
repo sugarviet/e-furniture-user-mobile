@@ -17,6 +17,7 @@ const Orders = ({ ...props }) => {
 
     return (
         <View className='bg-[#f5f5f5] flex-1'>
+            
             {isEmptyData ?
                 <EmptyContent type="order" />
                 :
