@@ -3,7 +3,7 @@ import { ICONS } from "../../constants/icons";
 import { IMAGES } from "../../constants/image";
 
 function useHeaderButton() {
-    const { go_back } = useNavigation();
+    const { go_back, go_to_order } = useNavigation();
 
     const close = {
         icon: IMAGES.back,
@@ -25,7 +25,12 @@ function useHeaderButton() {
         function: () => { go_back() },
     }
 
-    return { close, back, notification,back_white };
+    const order_back = {
+        icon: IMAGES.back,
+        function: () => { go_to_order() },
+    }
+
+    return { close, back, notification, back_white, order_back };
 }
 
 export default useHeaderButton;

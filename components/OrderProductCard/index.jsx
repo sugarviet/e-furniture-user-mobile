@@ -5,6 +5,7 @@ import useNavigation from '../../hooks/useNavigation';
 import OrderProductBriefInfo from '../OrderProductBriefInfo';
 import OrderStatusButton from '../OrderStatusButton';
 import { formatCurrency } from '../../utils/formatCurrency';
+import DeliveryTrackingBrief from '../DeliveryTrackingBrief';
 
 const OrderProductCard = ({ orderData }) => {
 
@@ -13,6 +14,8 @@ const OrderProductCard = ({ orderData }) => {
   const orderState = orderData.order_tracking[orderData.order_tracking.length - 1].name
 
   const lengthOfProduct = orderData.order_products.length
+
+
 
   return (
     <View className="pt-2 mx-2">
@@ -41,13 +44,7 @@ const OrderProductCard = ({ orderData }) => {
           <Text className="font-urbanistSemiBold text-[16px]">Order Total: <Text className="font-urbanistSemiBold text-[14px]">{formatCurrency(orderData.order_checkout.final_total)}</Text></Text>
         </View>
 
-        <View className="border-b border-grey5 flex justify-between flex-row items-center py-4">
-          <View className="flex flex-row gap-2 items-center">
-            <FontAwesome5 name="shipping-fast" size={16} color="black" />
-            <Text className="font-urbanistLight text-[14px]">Your order is waiting to be approved</Text>
-          </View>
-          <Entypo name={ICONS.enTypo_arrow_right} size={16} color="black" />
-        </View>
+        <DeliveryTrackingBrief data={orderData}/>
 
         <OrderStatusButton className="items-end" type={orderState} data={orderData} />
 

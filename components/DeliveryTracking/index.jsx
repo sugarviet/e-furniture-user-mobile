@@ -16,6 +16,8 @@ const DeliveryTracking = () => {
 
     const orderTracking = data.order_tracking
 
+    console.log("data",data);
+
     return (
         <View className="bg-[#f5f5f5] px-3 ">
             <View className="bg-white px-3 py-3 my-2 rounded-md shadow">
@@ -25,7 +27,7 @@ const DeliveryTracking = () => {
                             resizeMode="contain"
                             style={{ width: 25, height: 25 }}
                             source={{
-                                uri: data.order_products[0].thumb
+                                uri: data.order_products[0].product_id.thumbs[0]
                             }}
 
                         />

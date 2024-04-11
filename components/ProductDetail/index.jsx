@@ -67,17 +67,19 @@ function ProductDetail({ data }) {
             </Text>
           </TouchableOpacity>
         </View>
-        <ProductVariationList
-          selectVariation={select_variation}
-          onUpdate={(updated_select_variation) =>
-            setFurniture({
-              ...furniture,
-              select_variation: updated_select_variation,
-            })
-          }
-          className="mt-2"
-          data={variation}
-        />
+        <View className="py-2">
+          <ProductVariationList
+            selectVariation={select_variation}
+            onUpdate={(updated_select_variation) =>
+              setFurniture({
+                ...furniture,
+                select_variation: updated_select_variation,
+              })
+            }
+            className="mt-2"
+            data={variation}
+          />
+        </View>
         <View className="mt-2">
           <Text className="text-black text-[18px] font-urbanistBold">
             Description

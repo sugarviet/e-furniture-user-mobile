@@ -11,6 +11,7 @@ import useNavigation from '../../hooks/useNavigation'
 import ButtonModal from '../ButtonModal'
 import OrderStatusButton from '../OrderStatusButton'
 import { formatDate, formatTime } from '../../utils/formatDate'
+import DepositPrice from '../DepositPrice'
 
 
 const OrderDetail = ({ data }) => {
@@ -25,12 +26,20 @@ const OrderDetail = ({ data }) => {
 
     const orderShipping = data.order_shipping
 
+    const isPaidDeposit = data.order_checkout.paid.type === "Deposit";
+
+    const discount = data.order_checkout.voucher
+        ? formatCurrency(
+            (data.order_checkout.voucher.value / 100) * totalPrice
+        )
+        : "0.00đ"
+
     return (
         <ScrollView className="bg-[#f5f5f5] h-full">
             <View className="bg-blackPrimary w-full px-4 py-6 flex flex-row justify-between items-center">
                 <View className="max-w-[300px]">
-                    <Text className="text-white text-[16px] font-urbanistSemiBold"  >Order is being processed by eFurniture</Text>
-                    <Text className="text-white text-[14px] font-urbanistRegular pt-3"  >Our shipper will ship your order after your order is processed</Text>
+                    <Text className="text-white text-[16px] font-urbanistSemiBold"  >{data.current_order_tracking.name}</Text>
+                    <Text className="text-white text-[14px] font-urbanistRegular pt-3"  >{data.current_order_tracking.note}</Text>
                 </View>
                 <Icon className="mr-3" source={IMAGES.truck_white} style={{ width: 45, height: 45 }} />
             </View>
@@ -69,6 +78,21 @@ const OrderDetail = ({ data }) => {
                     <OrderProductBriefInfo orderProduct={data.order_products} />
                 </View>
                 <View className="flex flex-row justify-between pt-2">
+                    <Text className="font-urbanistMedium text-[14px] text-grey1">Subtotal</Text>
+                    <Text className="font-urbanistMedium text-[14px] text-grey1">{formatCurrency(data.order_checkout.final_total)}</Text>
+                </View>
+                <View className="flex flex-row justify-between pt-2">
+                    <Text className="font-urbanistMedium text-[14px] text-grey1">Discount</Text>
+                    <Text className="font-urbanistMedium text-[14px] text-grey1">{discount}</Text>
+                </View>
+                <View className="flex flex-row justify-between pt-2">
+                    <Text className="font-urbanistMedium text-[14px] text-grey1">Shipping</Text>
+                    <Text className="font-urbanistMedium text-[14px] text-grey1">0.00đ</Text>
+                </View>
+                {isPaidDeposit && (
+                    <DepositPrice className="font-urbanistMedium text-[14px] text-grey1 pt-2" order={data} />
+                )}
+                <View className="flex flex-row justify-between">
                     <Text className="font-urbanistMedium text-[16px]">Order Total</Text>
                     <Text className="font-urbanistSemiBold text-[16px]">{formatCurrency(data.order_checkout.final_total)}</Text>
                 </View>

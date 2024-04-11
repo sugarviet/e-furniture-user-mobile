@@ -13,7 +13,7 @@ export default function ProductVariation({
     onUpdateVariation(property_id);
   };
   return (
-    <View className="flex flex-row gap-2 items-center pt-4">
+    <View className="flex flex-row gap-2 items-center">
       <Text className="text-black text-[12px] font-urbanistMedium capitalize mb-1">
         {name}
       </Text>

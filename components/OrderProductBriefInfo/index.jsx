@@ -3,6 +3,7 @@ import { formatCurrency } from "../../utils/formatCurrency";
 import { useRef, useState } from "react";
 import BottomSheet from "../BottomSheet";
 import RatingForm from "../RatingForm";
+import ProductVariation from "../ProductVariation";
 
 
 const OrderProductBriefInfo = ({ orderProduct }) => {
@@ -16,56 +17,77 @@ const OrderProductBriefInfo = ({ orderProduct }) => {
 
     return (
         <View className="">
-            {orderProduct.map((product) => (
-                <View key={product.product_id} className="flex flex-row gap-4 pt-2 mb-4">
-                    <View className="border border-grey4 px-2 py-2 rounded-xl">
-                        <Image
-                            resizeMode="contain"
-                            style={{ width: 70, height: 70 }}
-                            source={{
-                                uri: product.thumb
-                            }}
-                        />
+            {orderProduct.map((product, index) => {
+                const onSale =
+                    product.product_id.regular_price -
+                    product.product_id.sale_price >
+                    0;
+                return (
+                    <View key={`${product} + ${index}`} className="flex flex-row gap-4 pt-2 mb-4">
+                        <View className="border border-grey4 px-2 py-2 rounded-xl">
+                            <Image
+                                resizeMode="contain"
+                                style={{ width: 70, height: 70 }}
+                                source={{
+                                    uri: product.product_id.thumbs[0]
+                                }}
+                            />
 
-                    </View>
+                        </View>
 
-                    <View className="flex justify-between py-1 flex-row flex-1">
-                        <View>
+                        <View className="flex-1">
                             <View className="flex flex-row items-center justify-between">
                                 <Text
                                     numberOfLines={2}
                                     className="text-[16px] font-urbanistExtraBold max-w-[180px]"
                                 >
-                                    {product.name}
+                                    {product.product_id.name}
+                                </Text>
+                                <Pressable onPress={() => handleOpenRatingModal(product)}>
+                                    <Text>Review</Text>
+                                </Pressable>
+                            </View>
+
+                            <View className="flex flex-row items-center justify-between pt-4">
+                                <View>
+                                    {product.product_id.variation.map((item, i) => {
+                                        return (
+                                            <ProductVariation
+                                                key={i}
+                                                currentVariation={item}
+                                                variation={item}
+                                                className="text-[10px] w-6 h-6"
+                                            />
+                                        );
+                                    })}
+                                </View>
+                                <Text className="text-[16px] font-urbanistRegular text-grey1">
+                                    x{product.quantity}
                                 </Text>
                             </View>
-                            <Text className="text-[16px] font-urbanistRegular text-grey1">
-                                x{product.quantity}
-                            </Text>
-                            <View className="flex flex-row items-center gap-2 w-[215px] pt-3">
-                                <Text className="text-[16px] font-urbanistSemiBold line-through text-grey2">
-                                    20.000.000đ
-                                </Text>
+
+                            <View className="flex flex-row items-center justify-end gap-2 pt-3">
+                                {onSale && (
+                                    <Text className="text-[16px] font-urbanistSemiBold line-through text-grey2">
+                                        {formatCurrency(
+                                            product.product_id.regular_price
+                                        )}
+                                    </Text>
+                                )}
                                 <Text className="text-[16px] font-urbanistSemiBold">
-                                    {formatCurrency(product.price)}
+                                    {formatCurrency(product.product_id.sale_price)}
                                 </Text>
 
                             </View>
+
                         </View>
-
-
-
-                        <Pressable onPress={()=> handleOpenRatingModal(product)}>
-                            <Text>Review</Text>
-                        </Pressable>
-
                     </View>
-                </View>
-            ))}
+                )
+            })}
 
             <BottomSheet ref={ratingBottomSheet}>
                 {orderBriefInfoCard ? <RatingForm orderBriefInfoCard={orderBriefInfoCard} /> : null}
-               
+
             </BottomSheet>
         </View>
     );

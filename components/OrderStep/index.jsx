@@ -6,30 +6,30 @@ import Icon2D from "../Icon2D";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 const labels = [
-    "Packaging",
+    "Pending",
+    "Processing",
     "Shipping",
-    "Receive",
     "Done",
 ];
 
 const STEPS = {
     0: {
-        activeIcon: <Icon2D name='package' activated={COLORS.primary} size={20} />,
-        unactiveIcon: <Icon2D name='package' activated='#d3d3d3' size={20} />
+        activeIcon: <Icon2D name='pending' activated={COLORS.primary} size={18} />,
+        unactiveIcon: <Icon2D name='pending' activated='#d3d3d3' size={18} />
 
     },
     1: {
-        activeIcon: <Icon2D name='ship' activated={COLORS.primary} size={14} />,
-        unactiveIcon: <Icon2D name='ship' activated='#d3d3d3' size={14} />
+        activeIcon: <Icon2D name='package' activated={COLORS.primary} size={18} />,
+        unactiveIcon: <Icon2D name='package' activated='#d3d3d3' size={18} />
     },
     2: {
 
-        activeIcon: <Icon2D name='package' activated={COLORS.primary} size={20} />,
-        unactiveIcon: <Icon2D name='package' activated='#d3d3d3' size={20} />
+        activeIcon: <Icon2D name='ship' activated={COLORS.primary} size={14} />,
+        unactiveIcon: <Icon2D name='ship' activated='#d3d3d3' size={14} />
     },
     3: {
-        activeIcon: <Icon2D name='done' activated={COLORS.primary} size={20} />,
-        unactiveIcon: <Icon2D name='done' activated='#d3d3d3' size={20} />
+        activeIcon: <Icon2D name='done' activated={COLORS.primary} size={18} />,
+        unactiveIcon: <Icon2D name='done' activated='#d3d3d3' size={18} />
 
     }
 }

@@ -20,14 +20,11 @@ export default function OrderSuccess() {
     const params = useLocalSearchParams();
     const { data } = params;
     const orderConfirmation = JSON.parse(data);
-    console.log(orderConfirmation);
 
+    console.log("hi", orderConfirmation);
 
-    const isPaidDeposit =
-        orderConfirmation.order_checkout.paid.type === "Deposit";
+    const isPaidDeposit = orderConfirmation.order_checkout.paid.type === "Deposit";
     const totalPrice = orderConfirmation.order_checkout.total;
-
-    const orderProduct = orderConfirmation.order_products || [];
     const orderShipping = orderConfirmation.order_shipping || {
         orderShipping: null,
     };
@@ -37,10 +34,10 @@ export default function OrderSuccess() {
     };
 
     const discount = orderConfirmation.order_checkout.voucher
-        ? formattedCurrency(
+        ? formatCurrency(
             (orderConfirmation.order_checkout.voucher.value / 100) * totalPrice
         )
-        : "0,00đ";
+        : "0.00đ";
 
     return (
         <View style={styles.container}>
@@ -123,13 +120,13 @@ export default function OrderSuccess() {
                                 return (
                                     <View
                                         key={index}
-                                        className="flex flex-row justify-between"
+                                        className="flex flex-row justify-between pb-4"
                                     >
                                         <View className="flex flex-row gap-5">
                                             <View className="w-16 h-16 rounded-xl px-2 py-2 bg-white">
                                                 <Image
                                                     className="w-full h-full"
-                                                    source={product.product_id.thumbs}
+                                                    source={{ uri: product.product_id.thumbs[0] }}
                                                 ></Image>
                                             </View>
                                             <View className="flex flex-col justify-between">
@@ -141,7 +138,7 @@ export default function OrderSuccess() {
                                                         Qty: {product.quantity}
                                                     </Text>
                                                 </View>
-                                                <View>
+                                                <View className="pt-4">
                                                     {product.variation.map((item, i) => {
                                                         const { variation_id, property_id } = item;
                                                         const currentVariation =
@@ -192,15 +189,15 @@ export default function OrderSuccess() {
                         </View>
                         <View style={styles.dateCreateContent}>
                             <Text style={styles.dateCreateContentName} className="font-urbanistMedium">Shipping</Text>
-                            <Text style={styles.dateCreateContentDes} className="font-urbanistMedium">0,00đ</Text>
+                            <Text style={styles.dateCreateContentDes} className="font-urbanistMedium">0.00đ</Text>
                         </View>
                         {isPaidDeposit && (
-                            <DepositPrice order={orderConfirmation} />
+                            <DepositPrice className="font-urbanistMedium text-[14px] pt-5" order={orderConfirmation} />
                         )}
                         <View style={styles.borderLine}></View>
                         <View style={styles.totalContent}>
                             <Text style={styles.totalContentName} className="font-urbanistBold">QUOTATION TOTAL</Text>
-                            <Text style={styles.totalContentDes}>{formatCurrency(189000)}</Text>
+                            <Text style={styles.totalContentDes}>{formatCurrency(orderConfirmation.order_checkout.final_total)}</Text>
                         </View>
 
                         <TouchableOpacity onPress={go_to_home} className="w-full flex my-2 pt-4">

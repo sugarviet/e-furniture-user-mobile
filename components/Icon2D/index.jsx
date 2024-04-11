@@ -69,6 +69,10 @@ const types = {
     component: Ionicons,
     icon: ICONS.ionIcons_image,
   },
+  pending: {
+    component: MaterialIcons,
+    icon: ICONS.materials_pending,
+  },
   package: {
     component: Feather,
     icon: ICONS.feather_package,

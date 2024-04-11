@@ -11,7 +11,6 @@ const TAB_ORDER = [
     { title: "shipping", name: "Shipping" },
     { title: "done", name: "Done" },
     { title: "cancel", name: "Cancelled" },
-    { title: "failed", name: "Failed" },
     { title: "refunded", name: "Refund" }
 ];
 

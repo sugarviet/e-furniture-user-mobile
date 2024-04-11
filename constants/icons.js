@@ -47,7 +47,7 @@ const antDesign_staro = 'staro'
 const antDesign_star = 'star'
 const feather_check_circle = 'check-circle'
 const simple_options_vertical = 'options-vertical'
-
+const materials_pending = "pending-actions"
 
 
 export const ICONS = {
@@ -101,5 +101,6 @@ export const ICONS = {
     antDesign_staro,
     antDesign_star,
     feather_check_circle,
-    simple_options_vertical
+    simple_options_vertical,
+    materials_pending
 };
