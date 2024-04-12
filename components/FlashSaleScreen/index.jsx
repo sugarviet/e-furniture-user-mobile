@@ -12,6 +12,8 @@ const productDetailCarousel = [
     { id: 2, image: IMAGES.flashsale_slider2 },
 ];
 
+
+
 function FlashSaleScreen({ data, ...props }) {
 
     const initialFlashSales = {};
@@ -69,7 +71,7 @@ function FlashSaleScreen({ data, ...props }) {
                 <Text className="font-urbanistLight text-grey2">ENDS IN</Text>
                 <CountDown
                     size={10}
-                    until={15*60}
+                    until={15 * 60}
                     digitStyle={{ backgroundColor: '#000', borderWidth: 1, borderColor: '#000' }}
                     digitTxtStyle={{ color: '#fff' }}
                     timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}

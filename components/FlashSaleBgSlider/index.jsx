@@ -18,14 +18,17 @@ function FlashSaleBgSlider({ data }) {
 
     if (!data.length) return null;
 
+    console.log(data);
+
     return (
 
-        <View className="flex flex-row justify-between my-2 items-center">
-            <Image source={IMAGES.flashsale} className="w-[100px] h-4"></Image>
-            <View>
-                <Text className="text-sm font-urbanistBold">See All Deals</Text>
+        <View className="flex flex-col">
+            <View className="flex flex-row justify-between my-2 items-center">
+                <Image source={IMAGES.flashsale} className="w-[100px] h-4"></Image>
+                <View>
+                    <Text className="text-sm font-urbanistBold">See All Deals</Text>
+                </View>
             </View>
-            <FlashSaleBgSlider />
             <View className="my-[6px] relative">
                 <FlatList
                     horizontal
@@ -35,7 +38,7 @@ function FlashSaleBgSlider({ data }) {
                     renderItem={({ item }) => (
                         <Pressable
                             onPress={go_to_flash_sale}
-                            className={` mr-2 pb-1 flex items-center border-[#e7e7e7] border bg-white`}
+                            className={`mr-2 pb-1 flex items-center border-[#e7e7e7] border bg-white`}
                         >
                             <Image
                                 source={{ uri: item.background }}
@@ -44,10 +47,10 @@ function FlashSaleBgSlider({ data }) {
 
                             />
                             <View className="" >
-                                <Text className="text-[12px] text-center font-urbanistBold text-black max-w-[100] pt-1 uppercase">{item.name}</Text>
+                                <Text className="text-[12px] text-center font-urbanistBold text-black max-w-[100] pt-1 uppercase py-2">{item.name}</Text>
                             </View>
                             <View className="z-10 absolute right-[-5px] top-2">
-                                <View className="z-20 bg-yellow-300 w-[38px] h-5 text-white flex justify-center items-center pl-2">
+                                <View className="z-20 bg-yellow-300 w-[36px] h-5 text-white flex justify-center items-center pl-2">
                                     <Text className="text-orange-600 font-urbanistBold text-[11px]">
                                         -20%
                                     </Text>

@@ -7,7 +7,24 @@ const STATUS = {
     activePresable: "border-black border",
 };
 
-const FlashSaleList = ({ data,activeFlashSale,handleCategorySelect }) => {
+const OCCUR_STATE = {
+    0: {
+        state: "Upcoming",
+        color: ""
+    },
+    1: {
+        state: "Ongoing",
+        color: ""
+    },
+    2: {
+        state: "Finished",
+        color: "opacity-40"
+    }
+}
+
+const FlashSaleList = ({ data, activeFlashSale, handleCategorySelect }) => {
+
+    console.log("data", data);
 
     return (
         <View className="my-[6px]">
@@ -16,25 +33,31 @@ const FlashSaleList = ({ data,activeFlashSale,handleCategorySelect }) => {
                 data={data}
                 keyExtractor={(item) => item._id}
                 showsHorizontalScrollIndicator={false}
-                renderItem={({ item }) => (
-                    <Pressable
-                        onPress={() => handleCategorySelect(item._id)}
-                        className={`mx-2 px-2 pt-2 pb-1 w-[105px] h-[110px] flex items-center ${activeFlashSale === item._id
-                            ? STATUS.activePresable
-                            : STATUS.defaultPresable
-                            }`}
-                    >
-                        <Image
-                            source={{ uri: item.background }}
-                            resizeMode="cover"
-                            className={`w-16 h-16 rounded-md`}
+                renderItem={({ item }) => {
+                    const flashSaleStatus = item.status  //0,1,2
 
-                        />
-                        <View className="" >
-                            <Text className="text-[12px] text-center font-urbanistBold text-black max-w-[100] pt-1 uppercase">{item.name}</Text>
-                        </View>
-                    </Pressable>
-                )}
+                    return (
+                        <Pressable
+                            onPress={() => handleCategorySelect(item._id)}
+                            className={`mx-2 px-2 pt-2 pb-1 w-[105px] h-[110px] flex items-center ${activeFlashSale === item._id
+                                ? STATUS.activePresable
+                                : STATUS.defaultPresable
+                                }  ${OCCUR_STATE[flashSaleStatus].color}`
+                            }
+                        >
+                            <Image
+                                source={{ uri: item.background }}
+                                resizeMode="cover"
+                                className={`w-16 h-16 rounded-md`}
+
+                            />
+                            <View className="" >
+                                <Text className="text-[10px] text-center font-urbanistBold text-black max-w-[100] pt-1 uppercase">{item.name}</Text>
+                                <Text className="text-[12px] text-center font-urbanistBold text-black max-w-[100] pt-1 ">{OCCUR_STATE[flashSaleStatus].state}</Text>
+                            </View>
+                        </Pressable>
+                    )
+                }}
             />
         </View>
     );

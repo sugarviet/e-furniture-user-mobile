@@ -50,12 +50,21 @@ const OrderProductBriefInfo = ({ orderProduct }) => {
 
                             <View className="flex flex-row items-center justify-between pt-4">
                                 <View>
-                                    {product.product_id.variation.map((item, i) => {
+                                    {product.variation.map((item, i) => {
+                                        const { variation_id, property_id } = item;
+                                        const currentVariation =
+                                            product.product_id.variation.find(
+                                                (i) => i._id === variation_id
+                                            );
+                                        currentVariation.properties =
+                                            currentVariation.properties.filter(
+                                                (item) => item._id === property_id
+                                            );
                                         return (
                                             <ProductVariation
                                                 key={i}
-                                                currentVariation={item}
-                                                variation={item}
+                                                currentVariation={currentVariation}
+                                                variation={currentVariation}
                                                 className="text-[10px] w-6 h-6"
                                             />
                                         );
