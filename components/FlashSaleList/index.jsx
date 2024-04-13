@@ -10,21 +10,21 @@ const STATUS = {
 const OCCUR_STATE = {
     0: {
         state: "Upcoming",
-        color: ""
+        opacity: ""
     },
     1: {
         state: "Ongoing",
-        color: ""
+        opacity: ""
     },
     2: {
         state: "Finished",
-        color: "opacity-40"
+        opacity: "opacity-40"
     }
 }
 
 const FlashSaleList = ({ data, activeFlashSale, handleCategorySelect }) => {
 
-    console.log("data", data);
+ 
 
     return (
         <View className="my-[6px]">
@@ -42,7 +42,7 @@ const FlashSaleList = ({ data, activeFlashSale, handleCategorySelect }) => {
                             className={`mx-2 px-2 pt-2 pb-1 w-[105px] h-[110px] flex items-center ${activeFlashSale === item._id
                                 ? STATUS.activePresable
                                 : STATUS.defaultPresable
-                                }  ${OCCUR_STATE[flashSaleStatus].color}`
+                                }  ${OCCUR_STATE[flashSaleStatus].opacity}`
                             }
                         >
                             <Image

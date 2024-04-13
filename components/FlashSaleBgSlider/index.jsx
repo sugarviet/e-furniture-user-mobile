@@ -6,11 +6,7 @@ import { get_flash_sale_today } from "../../api/flashSaleApi";
 import useNavigation from "../../hooks/useNavigation";
 import { IMAGES } from "../../constants/image";
 import Icon from "../Icon";
-
-const STATUS = {
-    defaultPresable: "border-[#e7e7e7] border",
-    activePresable: "border-black border",
-};
+import { formatTime } from '../../utils/formatDate';
 
 function FlashSaleBgSlider({ data }) {
 
@@ -18,7 +14,7 @@ function FlashSaleBgSlider({ data }) {
 
     if (!data.length) return null;
 
-    console.log(data);
+    console.log("data", data);
 
     return (
 
@@ -52,7 +48,7 @@ function FlashSaleBgSlider({ data }) {
                             <View className="z-10 absolute right-[-5px] top-2">
                                 <View className="z-20 bg-yellow-300 w-[36px] h-5 text-white flex justify-center items-center pl-2">
                                     <Text className="text-orange-600 font-urbanistBold text-[11px]">
-                                        -20%
+                                        SALE
                                     </Text>
                                 </View>
                                 <View className='absolute top-5 right-[1px] border-b-yellow-700 border-b-4 border-r-4 border-r-transparent rotate-90'></View>
