@@ -18,7 +18,7 @@ const DeliveryTrackingBrief = ({ data }) => {
         >
             <View className="flex flex-row gap-2 items-center">
                 <FontAwesome5 name="shipping-fast" size={16} color="black" />
-                <Text className="font-urbanistLight text-[14px]">{currentTracking}</Text>
+                <Text className="font-urbanistLight text-[14px]">{data.current_order_tracking.name === "Processing" ? "Efurniture staff is preparing the order" : currentTracking}</Text>
             </View>
             <Entypo name={ICONS.enTypo_arrow_right} size={16} color="black" />
         </Pressable>

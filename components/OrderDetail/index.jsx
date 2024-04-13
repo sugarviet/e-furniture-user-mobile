@@ -92,7 +92,7 @@ const OrderDetail = ({ data }) => {
                 {isPaidDeposit && (
                     <DepositPrice className="font-urbanistMedium text-[14px] text-grey1 pt-2" order={data} />
                 )}
-                <View className="flex flex-row justify-between">
+                <View className="flex flex-row justify-between pt-2">
                     <Text className="font-urbanistMedium text-[16px]">Order Total</Text>
                     <Text className="font-urbanistSemiBold text-[16px]">{formatCurrency(data.order_checkout.final_total)}</Text>
                 </View>

@@ -57,7 +57,7 @@ function DefaultAddressCard({ data }) {
           </View>
         </View>
         <Image
-          className="w-6 h-6 text-black"
+          style={{ width: 24, height: 24 }}
           source={IMAGES.right_arrow_black}
         />
       </View>
