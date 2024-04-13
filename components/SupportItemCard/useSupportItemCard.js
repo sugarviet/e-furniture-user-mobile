@@ -5,7 +5,7 @@ import useAuthStore from "../../stores/useAuthStore";
 function useSupportItemCard() {
   const { handleLogout } = useAuth();
   const { accountId } = useAuthStore();
-  const { go_to_wishlist, go_to_order, go_to_profile, go_to_bank_account } = useNavigation();
+  const { go_to_wishlist, go_to_order, go_to_profile,go_to_bank_account, go_to_address_book } = useNavigation();
   const bank = {
     function: () => {
       go_to_bank_account();
@@ -33,7 +33,7 @@ function useSupportItemCard() {
   };
   const setting = {
     function: () => {
-
+      go_to_address_book();
     },
   };
   const assistance = {

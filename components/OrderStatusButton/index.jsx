@@ -3,11 +3,11 @@ import { Pressable, Text, View } from "react-native";
 const TYPES = {
     Pending: {
         type: "Pending",
-        name: "Cancel Order",
+        name: "Pay again",
     },
     Processing: {
         type: "Processing",
-        name: "Refund",
+        name: "Cancel Order",
     },
     Shipping: {
         type: "Shipping",
@@ -21,13 +21,9 @@ const TYPES = {
         type: "Cancel",
         name: "View detail",
     },
-    Failed: {
-        type: "Failed",
-        name: "View detail",
-    },
     Refunded: {
         type: "Refunded",
-        name: "Refunded",
+        name: "View detail",
     },
 
 };

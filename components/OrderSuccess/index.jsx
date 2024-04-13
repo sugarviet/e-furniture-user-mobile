@@ -126,6 +126,7 @@ export default function OrderSuccess() {
                                             <View className="w-16 h-16 rounded-xl px-2 py-2 bg-white">
                                                 <Image
                                                     className="w-full h-full"
+                                                    resizeMode="contain"
                                                     source={{ uri: product.product_id.thumbs[0] }}
                                                 ></Image>
                                             </View>

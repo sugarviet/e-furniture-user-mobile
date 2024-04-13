@@ -36,7 +36,7 @@ export default function ProductVariation({
             >
               <View
                 style={{ backgroundColor: value }}
-                className="w-full h-full rounded-full"
+                className="w-full h-full rounded-full border border-grey5"
               ></View>
             </TouchableOpacity>
           );

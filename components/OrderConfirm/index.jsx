@@ -50,19 +50,20 @@ export default function OrderConfirm() {
   }));
 
   const onSubmit = (data) => {
-    checkoutForUser({
-      order_products: orderProducts,
-      payment_method: selectedPayment,
-      order_shipping: orderShipping,
-      order_checkout: {
-        final_total: dataAfterVoucher
-          ? dataAfterVoucher.order_total_after_voucher
-          : getTotalPrice(),
-        voucher: dataAfterVoucher ? dataAfterVoucher.voucher : null,
-        total: getTotalPrice(),
-      },
-      note: data.note,
-    })
+    // checkoutForUser({
+    //   order_products: orderProducts,
+    //   payment_method: selectedPayment,
+    //   order_shipping: orderShipping,
+    //   order_checkout: {
+    //     final_total: dataAfterVoucher
+    //       ? dataAfterVoucher.order_total_after_voucher
+    //       : getTotalPrice(),
+    //     voucher: dataAfterVoucher ? dataAfterVoucher.voucher : null,
+    //     total: getTotalPrice(),
+    //   },
+    //   note: data.note,
+    // })
+    console.log(orderShipping);
   };
 
   if (isPriceVoucherLoading) return <Text>isPriceVoucherLoading</Text>;

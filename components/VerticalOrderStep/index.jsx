@@ -103,7 +103,7 @@ function VerticalOrderStep({ data }) {
             <View className="pl-2 flex flex-row justify-between w-full pr-10 relative">
                 <View className="flex flex-col max-w-[250px]">
                     <Text className="font-urbanistSemiBold" style={{ color }}>{label}</Text>
-                    <Text style={{ color }}>{note[position]}</Text>
+                    <Text style={{ color }}>{label === "Processing" ? "Efurniture staff is preparing the order" : note[position]}</Text>
                 </View>
                 <View className="absolute left-[-85px] top-1 flex items-center">
                     <Text style={{ color: dateColor }} className="text-[11px] font-urbanistMedium text-grey2">

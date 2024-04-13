@@ -39,7 +39,6 @@ const TYPE = {
     icon: IMAGES.logout,
     text: "Logout",
     color: 'red'
- 
     
   }
 };

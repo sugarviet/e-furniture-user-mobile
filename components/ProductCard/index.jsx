@@ -50,7 +50,7 @@ const ProductCard = ({ product }) => {
                         backgroundColor: value,
                         transform: `translateX(-${12 * i}rem)`,
                       }}
-                      className="rounded-full w-6 h-6"
+                      className="rounded-full w-6 h-6  border border-grey5"
                       key={i}
                     ></View>
                   );
