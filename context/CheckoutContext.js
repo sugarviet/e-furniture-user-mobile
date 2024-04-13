@@ -56,7 +56,7 @@ function CheckoutProvider(props) {
       // go_to_order_confirmation(metaData);
     }
     if (!isDeposit && !isCod) {
-      go_to_order_confirmation(metaData);
+      setModalVisible(!modalVisible)
       // go_to_payment(metaData);
     }
   };
