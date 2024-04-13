@@ -12,6 +12,8 @@ const productDetailCarousel = [
     { id: 2, image: IMAGES.flashsale_slider2 },
 ];
 
+
+
 function FlashSaleScreen({ data, ...props }) {
 
     const initialFlashSales = {};
@@ -43,6 +45,7 @@ function FlashSaleScreen({ data, ...props }) {
     // for (let i = 0; i < data.length; i++) {
     //     for (let j = 0; j < data[i].FlashSales.length; j++) {
     //         const saleStartTime = new Date(data[i].FlashSales[j].startDay);
+    //         console.log(saleStartTime.getMinutes());
     //         saleStartTime.setMinutes(saleStartTime.getMinutes() + saleStartTime.getTimezoneOffset());
     //         if (saleStartTime > currentTime && (nextFlashSaleStart === null || saleStartTime < nextFlashSaleStart)) {
     //             nextFlashSaleStart = saleStartTime;
@@ -52,13 +55,13 @@ function FlashSaleScreen({ data, ...props }) {
 
     // const [secondsUntilNextFlashSale, setSecondsUntilNextFlashSale] = useState(nextFlashSaleStart ? Math.floor((nextFlashSaleStart - currentTime) / 1000) : 0);
 
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         setSecondsUntilNextFlashSale(secondsUntilNextFlashSale => secondsUntilNextFlashSale - 1);
-    //     }, 1000);
+    // // useEffect(() => {
+    // //     const interval = setInterval(() => {
+    // //         setSecondsUntilNextFlashSale(secondsUntilNextFlashSale => secondsUntilNextFlashSale - 1);
+    // //     }, 1000);
 
-    //     return () => clearInterval(interval);
-    // }, []);
+    // //     return () => clearInterval(interval);
+    // // }, []);
 
 
     return (
@@ -66,10 +69,10 @@ function FlashSaleScreen({ data, ...props }) {
             <FlashSaleList data={flashSales} activeFlashSale={activeFlashSale} handleCategorySelect={handleCategorySelect} />
             <FlashSaleSlider pagination carouselData={productDetailCarousel} autoplay />
             <View className="flex flex-row gap-2 items-center pt-2 justify-end px-2">
-                <Text className="font-urbanistLight text-grey2">ENDS IN</Text>
+                <Text className="font-urbanistLight text-grey2">{filteredProducts.status === 1 ? "ENDS IN" : "STARTS IN"}</Text>
                 <CountDown
                     size={10}
-                    until={15*60}
+                    until={2*60*60}
                     digitStyle={{ backgroundColor: '#000', borderWidth: 1, borderColor: '#000' }}
                     digitTxtStyle={{ color: '#fff' }}
                     timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
@@ -81,7 +84,7 @@ function FlashSaleScreen({ data, ...props }) {
             </View>
             <View className="mt-2">
                 {filteredProducts.products.map((product, index) => (
-                    <FlashSaleProduct key={`${product._id} + ${index}`} data={product} />
+                    <FlashSaleProduct key={`${product._id} + ${index}`} data={product} status={filteredProducts.status} />
                 ))}
             </View>
         </ScrollView>
