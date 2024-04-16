@@ -8,19 +8,29 @@ import { useUpdate } from "../../hooks/api-hooks";
 import {
   get_address_default_by_user,
   set_address_default_by_user,
+  get_all_address
 } from "../../api/addressApi";
+import useNotification from "../../hooks/useNotification";
+import { useQueryClient } from "@tanstack/react-query";
 
 const AddressCard = ({ data }) => {
+
+  const queryClient = useQueryClient();
+  const { success_message, error_message } = useNotification();
   const { go_to_edit_address, go_back } = useNavigation();
 
   const { mutate } = useUpdate(
     set_address_default_by_user(data._id),
     undefined,
     () => {
-      go_back();
+      // go_back();
+      queryClient.invalidateQueries(get_all_address());
+      success_message("address", "set_default");
     },
-    () => { },
-    get_address_default_by_user()
+    () => {
+      error_message("address", "set_default");
+    },
+
   );
 
 
@@ -57,7 +67,7 @@ const AddressCard = ({ data }) => {
             {data.address}
           </Text>
           <Text className="font-urbanistMedium text-grey2 pt-1">
-            {data.ward} {data.district} {data.province}
+            {data.ward}, {data.district}, {data.province}
           </Text>
           {data.is_default && (
             <Text className="mt-2">
@@ -68,7 +78,7 @@ const AddressCard = ({ data }) => {
           )}
         </View>
         <TouchableOpacity
-          onPress={go_to_edit_address}
+          onPress={() => go_to_edit_address({ address: JSON.stringify(data) })}
           className="w-12 h-12 flex justify-center items-center"
         >
           <Icon source={IMAGES.edit} className="w-[22px] h-[22px]" />

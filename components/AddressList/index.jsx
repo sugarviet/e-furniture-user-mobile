@@ -14,7 +14,7 @@ const AddressList = ({ data }) => {
   const { go_to_add_new_address } = useNavigation();
   return (
     <View className="relative flex-1">
-      <ScrollView className="">
+      <ScrollView className="mb-24">
         {data.map((address) => (
           <View key={address._id} className="pb-6">
             <AddressCard data={address} />

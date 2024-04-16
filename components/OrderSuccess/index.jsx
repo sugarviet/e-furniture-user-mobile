@@ -21,8 +21,6 @@ export default function OrderSuccess() {
     const { data } = params;
     const orderConfirmation = JSON.parse(data);
 
-    console.log("hi", orderConfirmation);
-
     const isPaidDeposit = orderConfirmation.order_checkout.paid.type === "Deposit";
     const totalPrice = orderConfirmation.order_checkout.total;
     const orderShipping = orderConfirmation.order_shipping || {

@@ -153,7 +153,7 @@ function FormInput({
         <View>
           <View
             className={classNames(
-              "p-2 h-10 bg-white flex-row items-center",
+              "p-3 h-10 bg-white flex-row items-center",
               error ? "border-rose-500" : "border-transparent",
               className
             )}

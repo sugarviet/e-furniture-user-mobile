@@ -6,6 +6,7 @@ import * as SplashScreenExpo from "expo-splash-screen";
 import { useState, useEffect } from "react";
 import SplashScreen from "./(authenticate)/splash";
 import { PortalProvider } from '@gorhom/portal';
+import FlashMessage from "react-native-flash-message";
 
 const RootLayout = () => {
 
@@ -51,6 +52,7 @@ const RootLayout = () => {
         <PortalProvider>
           <Slot />
         </PortalProvider>
+        <FlashMessage position="top" />
       </GestureHandlerRootView>
     </QueryClientProvider>
   );

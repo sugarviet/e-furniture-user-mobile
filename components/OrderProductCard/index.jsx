@@ -9,15 +9,11 @@ import DeliveryTrackingBrief from '../DeliveryTrackingBrief';
 
 const OrderProductCard = ({ orderData }) => {
 
-  console.log(orderData);
-
   const { go_to_order_detail } = useNavigation();
 
   const orderState = orderData.order_tracking[orderData.order_tracking.length - 1].name
 
   const lengthOfProduct = orderData.order_products.length
-
-
 
   return (
     <View className="pt-2 mx-2">

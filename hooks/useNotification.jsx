@@ -1,43 +1,41 @@
-import { Alert } from 'react-native';
+import { showMessage, hideMessage } from "react-native-flash-message";
 
-const TYPES = {
-    update_profile:{
+const type = {
+    address: {
         success: {
-            update: 'Profile updated successfully'
+            add: "Successfully added address",
+            edit: "Successfully edited address",
+            delete: "Successfully deleted delete",
+            set_default: "Successfully set default address",
         },
-        failed: {
-            update: 'Profile updated failed'
-        }
-    }
+        fail: {
+            add: "Failed added address",
+            edit: "Failed edited address",
+            delete: "Failed deleted delete",
+            set_default: "Failed set default address",
+        },
+    },
+};
+
+function useNotification() {
+    const success_message = (msg, action, custom) => {
+        showMessage({
+            message: "Success",
+            description: custom ? custom : type[msg].success[action],
+            type: "success",
+        });
+    };
+    const error_message = (msg, action, custom) => {
+        showMessage({
+            message: "Failed",
+            description: custom ? custom : type[msg].fail[action],
+            type: "danger",
+        });
+    };
+    return {
+        success_message,
+        error_message,
+    };
 }
 
-const useNotification = () => {
-    const success_message = (type, action) => {
-        Alert.alert(
-            "Success",
-            TYPES[type].success[action]
-            ,
-            [
-              { text: "OK"}
-            ],
-            { cancelable: false }
-          );
-    }
-    const error_message = (type, action) => {
-        Alert.alert(
-            "Error",
-            TYPES[type].success[action]
-            ,
-            [
-              { text: "OK"}
-            ],
-            { cancelable: false }
-          );
-    }
-  return {
-    success_message,
-    error_message
-  }
-}
-
-export default useNotification
+export default useNotification;

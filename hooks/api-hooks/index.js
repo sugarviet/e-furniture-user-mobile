@@ -90,7 +90,8 @@ export const usePostAuth = (url, params, onSuccessAPI = () => { }, onErrorAPI = 
 
 export const useUpdate = (url, params, onSuccessAPI = () => {}, onErrorAPI = () => {}, key) => {
   return useGenericMutation(
-    (data) => request.put(url, data),
+    async (data) => await request.put(url, data).then((response) => response.data)
+      .then((data) => data.metaData),
     key,
     params,
     onSuccessAPI,

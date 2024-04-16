@@ -3,7 +3,7 @@ import EditAddressForm from '../../../../../components/EditAddressForm';
 
 const Address = () => {
     return (
-        <View className="h-full bg-white">
+        <View className="h-full">
            <EditAddressForm/>
         </View>
     )
