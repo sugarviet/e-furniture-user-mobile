@@ -5,14 +5,36 @@ const type = {
         success: {
             add: "Successfully added address",
             edit: "Successfully edited address",
-            delete: "Successfully deleted delete",
+            delete: "Successfully deleted address",
             set_default: "Successfully set default address",
         },
         fail: {
             add: "Failed added address",
             edit: "Failed edited address",
-            delete: "Failed deleted delete",
+            delete: "Failed deleted address",
             set_default: "Failed set default address",
+        },
+    },
+    bank: {
+        success: {
+            add: "Successfully added bank",
+            edit: "Successfully edited bank",
+            delete: "Successfully deleted bank",
+            set_default: "Successfully set default bank",
+        },
+        fail: {
+            add: "Failed added bank",
+            edit: "Failed edited bank",
+            delete: "Failed deleted bank",
+            set_default: "Failed set default bank",
+        },
+    },
+    profile: {
+        success: {
+            update: "Successfully update profile",
+        },
+        fail: {
+            update: "Failed update profile",
         },
     },
 };

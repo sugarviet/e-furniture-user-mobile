@@ -19,10 +19,9 @@ import { IMAGES } from "../../../constants/image";
 import FlashSaleBgSlider from "../../../components/FlashSaleBgSlider";
 
 const productDetailCarousel = [
-  { id: 1, URI: "https://i.ibb.co/0QmpZ2X/image-5.png" },
-  { id: 2, URI: "https://i.ibb.co/MDkgBLN/image-4.png" },
+  { id: 1, URI: "https://res.cloudinary.com/dc4hafqoa/image/upload/v1713444521/eFurniture/slier_bg_k0s1h2.png" },
+  { id: 2, URI: "https://res.cloudinary.com/dc4hafqoa/image/upload/v1713445862/eFurniture/slider_bg_2_q0ov8n.png" },
 ];
-
 const Home = () => {
   const { go_to_search_page, go_to_flash_sale } = useNavigation();
 
@@ -32,7 +31,7 @@ const Home = () => {
         options={{
           header: () => (
             <SafeAreaView>
-              <View className="flex-row z-50 items-center px-4">
+              <View className="flex-row z-50 items-center px-4 pt-2">
                 <TouchableOpacity
                   className="flex-1 mr-2"
                   onPress={go_to_search_page}

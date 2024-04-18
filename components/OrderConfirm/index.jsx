@@ -22,7 +22,6 @@ export default function OrderConfirm() {
 
   const { control, handleSubmit } = useForm();
 
-  const { go_to_home, go_to_order_confirmation } = useNavigation();
   const { getTotalPrice } = useCart();
   const { orderShipping,
     checkoutForUser,
@@ -38,7 +37,6 @@ export default function OrderConfirm() {
   const params = useLocalSearchParams();
   const { data } = params;
   const purchaseItems = JSON.parse(data);
-
 
 
   const orderProducts = purchaseItems.map((cart) => ({

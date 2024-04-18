@@ -8,27 +8,31 @@ import { useCheckout } from "../../context/CheckoutContext";
 import { useEffect } from "react";
 
 function DefaultAddressCard({ data }) {
+
   const { go_to_address_book } = useNavigation();
 
   const { setOrderShipping } = useCheckout();
 
-  const { account_id, phone, address, province, ward, district, email } = data;
-  const { first_name, last_name } = account_id;
+  const { account_id, phone, address, province, ward, district } = data || {};
+  const { first_name, last_name, email } = account_id || {};
 
 
   useEffect(() => {
-    setOrderShipping({
-      first_name: first_name,
-      email: email,
-      last_name: last_name,
-      address: address,
-      ward: ward,
-      district: district,
-      province: province,
-      phone: phone,
-      longitude: 106.75197333979435,
-      latitude: 10.786098323202225
-    })
+    if (data) {
+      setOrderShipping({
+        first_name: first_name,
+        email: email,
+        last_name: last_name,
+        address: address,
+        ward: ward,
+        district: district,
+        province: province,
+        phone: phone,
+        longitude: 106.75197333979435,
+        latitude: 10.786098323202225
+      })
+    }
+    setOrderShipping({})
   }, [data])
 
   return (
@@ -50,7 +54,7 @@ function DefaultAddressCard({ data }) {
                 <Text className="text-gray-500 text-sm font-urbanistRegular max-w-[300px]">{`${ward} ${district} ${province}`}</Text>
               </View>
             ) : (
-              <Text className="text-xs font-urbanist">
+              <Text className="text-sm font-urbanist">
                 Please select address
               </Text>
             )}

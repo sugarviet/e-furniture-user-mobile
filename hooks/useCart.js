@@ -18,14 +18,19 @@ import {
     useUpdate,
 } from "./api-hooks";
 
+import useNotification from "./useNotification";
+
 function useCart() {
+    const { success_message, error_message } = useNotification();
+
     const { data, isLoading } = useFetchWithAuth(get_cart_api());
     const { purchaseItems, setPurchaseItems } = useCartStore();
 
     const { mutate: addToCartMutation } = usePost(
         get_add_to_cart_api(),
         undefined,
-        () => {
+        (data) => {
+            success_message(null, null,"Add to cart successfully");
         },
         (error) => {
         },
@@ -111,7 +116,7 @@ function useCart() {
         }, 0);
     };
 
-    const getCart = () => [...data.products]
+    const getCart = () => data ? [...data.products] : [];
 
     const getPurchaseItems = () => [...purchaseItems]
 

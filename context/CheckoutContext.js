@@ -15,7 +15,7 @@ function CheckoutProvider(props) {
   const [orderShipping, setOrderShipping] = useState();
   const [modalVisible, setModalVisible] = useState(false);
 
-  const { go_back,go_to_order_confirmation } = useNavigation();
+  const { go_back, go_to_order_confirmation } = useNavigation();
   const { getCart, getTotalPrice } = useCart();
 
   const voucherInfo = getCart()?.map((item) => ({
@@ -65,7 +65,8 @@ function CheckoutProvider(props) {
     checkout_with_user(),
     undefined,
     (data) => {
-      handlePaymentMethod(data)
+      // handlePaymentMethod(data)
+      console.log("checkoutData", data);
     },
     (error) => {
       message.error(error.response.data.error.message);

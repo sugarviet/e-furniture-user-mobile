@@ -39,31 +39,6 @@ function FlashSaleScreen({ data, ...props }) {
 
     const filteredProducts = flashSales.find(flashSale => flashSale._id === activeFlashSale);
 
-    // const currentTime = new Date();
-    // let nextFlashSaleStart = null;
-
-    // for (let i = 0; i < data.length; i++) {
-    //     for (let j = 0; j < data[i].FlashSales.length; j++) {
-    //         const saleStartTime = new Date(data[i].FlashSales[j].startDay);
-    //         console.log(saleStartTime.getMinutes());
-    //         saleStartTime.setMinutes(saleStartTime.getMinutes() + saleStartTime.getTimezoneOffset());
-    //         if (saleStartTime > currentTime && (nextFlashSaleStart === null || saleStartTime < nextFlashSaleStart)) {
-    //             nextFlashSaleStart = saleStartTime;
-    //         }
-    //     }
-    // }
-
-    // const [secondsUntilNextFlashSale, setSecondsUntilNextFlashSale] = useState(nextFlashSaleStart ? Math.floor((nextFlashSaleStart - currentTime) / 1000) : 0);
-
-    // // useEffect(() => {
-    // //     const interval = setInterval(() => {
-    // //         setSecondsUntilNextFlashSale(secondsUntilNextFlashSale => secondsUntilNextFlashSale - 1);
-    // //     }, 1000);
-
-    // //     return () => clearInterval(interval);
-    // // }, []);
-
-
     return (
         <ScrollView className="bg-[#f5f5f5] ">
             <FlashSaleList data={flashSales} activeFlashSale={activeFlashSale} handleCategorySelect={handleCategorySelect} />

@@ -10,6 +10,8 @@ import { IMAGES } from '../../constants/image'
 
 function DefaultCouponCard({ purchaseItems, dataAfterVoucher }) {
     const { go_to_voucher_list } = useNavigation();
+
+    console.log(dataAfterVoucher);
     return (
         <PressableContainer onPress={() => go_to_voucher_list(purchaseItems)}>
             <View className="flex-row bg-white rounded-xl flex items-center justify-between px-5 py-6 shadow-sm mx-1">
@@ -34,27 +36,27 @@ function DefaultCouponCard({ purchaseItems, dataAfterVoucher }) {
                         <View className="flex flex-row">
                             <View className="flex flex-row pr-1">
                                 <Image
-                                    className="w-[4px] h-6 text-gray-300"
+                                    className="w-[4px] h-6"
                                     source={IMAGES.coupon_orange}
                                 />
                                 <View className="h-[23.5px] px-1 border-y-[1.2px] border-[#ed562d] flex justify-center">
                                     <Text className="text-[12px] text-[#ed562d] font-urbanistMedium">{dataAfterVoucher.voucher.value}% off</Text>
                                 </View>
                                 <Image
-                                    className="w-[4px] h-6 text-gray-300 scale-x-[-1]"
+                                    className="w-[4px] h-6 scale-x-[-1]"
                                     source={IMAGES.coupon_orange}
                                 />
                             </View>
                             <View className="flex flex-row">
                                 <Image
-                                    className="w-[4px] h-6 text-gray-300"
+                                    className="w-[4px] h-6"
                                     source={IMAGES.coupon_green_bg}
                                 />
                                 <View className="h-[23.5px] px-1 border-y-[1.2px] border-[#00bca1] flex justify-center">
-                                    <Text className="text-[12px] text-[#00bca1] font-urbanistMedium">{dataAfterVoucher.voucher.code}</Text>
+                                    <Text className="text-[12px] text-[#00bca1] font-urbanistMedium">{dataAfterVoucher.voucher.name}</Text>
                                 </View>
                                 <Image
-                                    className="w-[4px] h-6 text-gray-300 scale-x-[-1]"
+                                    className="w-[4px] h-6 scale-x-[-1]"
                                     source={IMAGES.coupon_green_bg}
                                 />
                             </View>

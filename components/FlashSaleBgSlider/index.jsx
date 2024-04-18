@@ -14,8 +14,6 @@ function FlashSaleBgSlider({ data }) {
 
     if (!data.length) return null;
 
-    console.log("data", data);
-
     return (
 
         <View className="flex flex-col">

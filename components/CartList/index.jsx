@@ -12,6 +12,7 @@ import LoadingSpinner from "../LoadingSpinner";
 import { MaterialIcons } from "@expo/vector-icons";
 import { ICONS } from "../../constants/icons";
 import CheckBox from "react-native-check-box";
+import EmptyContent from "../EmptyContent";
 
 function CartList() {
   const {
@@ -27,6 +28,8 @@ function CartList() {
 
   const cartRef = useRef(null);
 
+  const isEmptyCart = !getCart().length;
+
   const { go_to_checkout } = useNavigation();
   const handleOpenDeleteModal = (item) => {
     cartRef.current?.expand();
@@ -38,6 +41,11 @@ function CartList() {
   return (
     <View style={{ height: "100%", backgroundColor: COLORS.grey1 }}>
       <ScrollView style={{ marginBottom: 90, height: "100%", width: "100%" }}>
+        {isEmptyCart &&
+          <View className="pt-16">
+            <EmptyContent type="cart" />
+          </View>
+        }
         <View>
           {getCart().map((item) => (
             <CartCard
@@ -66,8 +74,12 @@ function CartList() {
               </Text>
             </View>
             <TouchableOpacity
-              onPress={() => go_to_checkout(getPurchaseItems())}
-              className="w-40 bg-black flex-row h-full items-center justify-center"
+              onPress={() => {
+                if (!isEmptyCart) {
+                  go_to_checkout(getPurchaseItems());
+                }
+              }}
+              className={`w-40 bg-black flex-row h-full items-center justify-center ${isEmptyCart && 'bg-black/30'}`}
             >
               <MaterialIcons size={20} color="white" name={ICONS.mi_checkout} />
               <Text className="text-white font-urbanistSemiBold">

@@ -1,10 +1,17 @@
-import { View,Text } from 'react-native';
+import { Stack } from "expo-router";
+import { View } from 'react-native';
 import BankAccount from '../../../../components/BankAccount';
-
+import HeaderButton from "../../../../components/HeaderButton";
 const Bank = () => {
   return (
     <View >
-        <BankAccount/>
+      <Stack.Screen
+        options={{
+          title: "Order Detail",
+          headerLeft: () => <HeaderButton type={"bank_back"} />,
+        }}
+      />
+      <BankAccount />
     </View>
   )
 }

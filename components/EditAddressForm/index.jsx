@@ -25,8 +25,6 @@ const EditAddressForm = () => {
 
     const { region, setRegion } = useUserStore();
 
-    console.log("ghiu", { ...region });
-
     const { success_message, error_message } = useNotification();
 
     const { account_id, phone, address, province, ward, district } = data;
@@ -36,7 +34,6 @@ const EditAddressForm = () => {
         edit_address(data._id),
         undefined,
         (data) => {
-            console.log(data);
             queryClient.invalidateQueries(get_all_address());
             success_message('address', 'edit')
             go_back();
