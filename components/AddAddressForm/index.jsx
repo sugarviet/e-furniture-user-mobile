@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, TouchableOpacity, Image } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import FormInput from "../../components/FormInput";
 import { useForm } from "react-hook-form";
 import useNavigation from "../../hooks/useNavigation";
@@ -12,11 +12,17 @@ const AddAddressForm = () => {
   const { addAddress } = useAddress();
   const { go_to_region_select } = useNavigation();
 
-  const { region } = useUserStore();
+  const { region, setRegion } = useUserStore();
 
   const onSubmit = (data) => {
     addAddress({ ...data, ...region });
   };
+
+  useEffect(() => {
+    return () => {
+      setRegion(null);
+    };
+  }, [setRegion]);
 
   return (
     <View className="flex-1 relative">
@@ -42,7 +48,7 @@ const AddAddressForm = () => {
             )}
 
             <Image
-              className="w-4 h-4 text-gray-300"
+              className="w-4 h-4"
               source={IMAGES.right_arrow_black}
             />
           </TouchableOpacity>

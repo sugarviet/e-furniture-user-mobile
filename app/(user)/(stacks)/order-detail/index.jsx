@@ -1,12 +1,10 @@
-import { View, ScrollView } from 'react-native'
-import OrderDetail from '../../../../components/OrderDetail'
-import { Button } from 'react-native'
 import { Stack } from "expo-router";
-import useNavigation from '../../../../hooks/useNavigation';
+import { View } from 'react-native';
 import HeaderButton from "../../../../components/HeaderButton";
+import OrderDetail from '../../../../components/OrderDetail';
+import useNavigation from '../../../../hooks/useNavigation';
 const OrderDetailStatus = () => {
 
-    const { go_to_order } = useNavigation();
     return (
         <View className="h-full">
             <Stack.Screen

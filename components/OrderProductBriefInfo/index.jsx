@@ -22,6 +22,10 @@ const OrderProductBriefInfo = ({ orderProduct }) => {
                     product.product_id.regular_price -
                     product.product_id.sale_price >
                     0;
+                const subPrice = product.variation.reduce(
+                    (total, cur) => total + cur.sub_price,
+                    0
+                );
                 return (
                     <View key={`${product} + ${index}`} className="flex flex-row gap-4 pt-2 mb-4">
                         <View className="border border-grey4 px-2 py-2 rounded-xl">
@@ -76,15 +80,15 @@ const OrderProductBriefInfo = ({ orderProduct }) => {
                             </View>
 
                             <View className="flex flex-row items-center justify-end gap-2 pt-3">
-                                {onSale && (
+                                {/* {onSale && (
                                     <Text className="text-[16px] font-urbanistSemiBold line-through text-grey2">
                                         {formatCurrency(
                                             product.product_id.regular_price
                                         )}
                                     </Text>
-                                )}
+                                )} */}
                                 <Text className="text-[16px] font-urbanistSemiBold">
-                                    {formatCurrency(product.product_id.sale_price)}
+                                    {formatCurrency(product.price + subPrice)}
                                 </Text>
 
                             </View>

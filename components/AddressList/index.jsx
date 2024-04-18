@@ -9,12 +9,19 @@ import { withFetchDataWithAuth } from "../../hocs/withFetchDataWithAuth";
 import useNavigation from "../../hooks/useNavigation";
 import AddressCard from "../AddressCard";
 import ButtonModal from "../ButtonModal";
+import EmptyContent from "../EmptyContent";
 
 const AddressList = ({ data }) => {
   const { go_to_add_new_address } = useNavigation();
+  const isAddressEmpty = !data.length
   return (
     <View className="relative flex-1">
-      <ScrollView className="">
+      {isAddressEmpty &&
+        <View className="pt-20">
+          <EmptyContent type="address" />
+        </View>
+      }
+      <ScrollView className="mb-24 ">
         {data.map((address) => (
           <View key={address._id} className="pb-6">
             <AddressCard data={address} />

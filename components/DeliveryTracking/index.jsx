@@ -16,8 +16,6 @@ const DeliveryTracking = () => {
 
     const orderTracking = data.order_tracking
 
-    console.log("data",data);
-
     return (
         <View className="bg-[#f5f5f5] px-3 ">
             <View className="bg-white px-3 py-3 my-2 rounded-md shadow">

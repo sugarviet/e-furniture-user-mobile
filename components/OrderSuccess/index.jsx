@@ -21,8 +21,6 @@ export default function OrderSuccess() {
     const { data } = params;
     const orderConfirmation = JSON.parse(data);
 
-    console.log("hi", orderConfirmation);
-
     const isPaidDeposit = orderConfirmation.order_checkout.paid.type === "Deposit";
     const totalPrice = orderConfirmation.order_checkout.total;
     const orderShipping = orderConfirmation.order_shipping || {
@@ -117,6 +115,10 @@ export default function OrderSuccess() {
                                     product.product_id.regular_price -
                                     product.product_id.sale_price >
                                     0;
+                                const subPrice = product.variation.reduce(
+                                    (total, cur) => total + cur.sub_price,
+                                    0
+                                );
                                 return (
                                     <View
                                         key={index}
@@ -165,15 +167,15 @@ export default function OrderSuccess() {
                                         <View className="flex flex-col">
                                             {onSale && (
                                                 <Text className="font-urbanistSemiBold text-[14px] line-through text-grey2">
-                                                    {formatCurrency(
-                                                        product.product_id.regular_price
-                                                    )}
+                                                    {formatCurrency(product.product_id.regular_price)}
                                                 </Text>
                                             )}
                                             <Text
                                                 className={`font-urbanistBold text-[13px]`}
                                             >
-                                                {formatCurrency(product.product_id.sale_price)}
+                                                {formatCurrency(
+                                                    product.price + subPrice
+                                                )}
                                             </Text>
                                         </View>
                                     </View>

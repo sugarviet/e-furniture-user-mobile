@@ -16,9 +16,7 @@ const BankAccount = ({ data }) => {
         <ScrollView className="h-full bg-white px-4 py-4">
             <Text className="text-grey2 font-urbanistRegular text-[14px] uppercase">Your bank account list</Text>
             {data.map((bank, index) => (
-                <View className="">
-                    <BankAccountCard key={`${bank._id} + ${index}`} bank={bank} />
-                </View>
+                <BankAccountCard key={`${bank} + ${index}`} bank={bank} />
             ))}
             {isEmptyBankAccount &&
                 <View className="pt-12 pb-6">

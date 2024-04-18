@@ -15,8 +15,6 @@ const OrderProductCard = ({ orderData }) => {
 
   const lengthOfProduct = orderData.order_products.length
 
-
-
   return (
     <View className="pt-2 mx-2">
       <Pressable

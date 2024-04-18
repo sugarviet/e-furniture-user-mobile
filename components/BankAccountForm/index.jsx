@@ -1,10 +1,10 @@
+import axios from "axios";
 import { useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { Image, ScrollView, Text, View } from 'react-native';
+import useBank from '../../hooks/useBank';
 import BankInput from '../BankInput';
 import ButtonModal from '../ButtonModal';
-import useBank from '../../hooks/useBank';
-import axios from "axios";
 import ErrorMessage from "../ErrorMessage";
 
 const client_id = "b2b6a9d3-0e62-48fe-8731-07f072b97412";
