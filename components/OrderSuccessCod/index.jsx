@@ -14,14 +14,14 @@ import { PAYMENT_METHOD } from "../../constants/paymentMethod";
 import DepositPrice from "../DepositPrice";
 import { withFetchDataWithAuth } from '../../hocs/withFetchDataWithAuth'
 import { get_order_by_pay_os } from '../../api/orderHistoryApi'
-const OrderSuccess = ({ data }) => {
+const OrderSuccessCod = () => {
 
 
     const { go_to_home, go_to_order_detail } = useNavigation();
 
-    const orderConfirmation = data;
-
-    console.log(orderConfirmation);
+    const params = useLocalSearchParams();
+    const { data } = params;
+    const orderConfirmation = JSON.parse(data);
 
     const isPaidDeposit = orderConfirmation.order_checkout.paid.type === "Deposit";
     const totalPrice = orderConfirmation.order_checkout.total;
@@ -39,7 +39,7 @@ const OrderSuccess = ({ data }) => {
         )
         : "0.00đ";
 
-    
+
     return (
         <View style={styles.container}>
             <Stack.Screen
@@ -83,7 +83,7 @@ const OrderSuccess = ({ data }) => {
                 </View>
                 <ScrollView >
                     <View className="pt-4 pb-8" >
-                        {/* <OrderStep type={orderConfirmation.current_order_tracking.name} /> */}
+                        <OrderStep type={orderConfirmation.current_order_tracking.name} />
                     </View>
                     <Text className="text-[16px] font-urbanistMedium px-5">Billing Address</Text>
                     <View style={styles.bodyContent}>
@@ -218,4 +218,4 @@ const OrderSuccess = ({ data }) => {
         </View>
     )
 }
-export default withFetchDataWithAuth(OrderSuccess, get_order_by_pay_os)
+export default OrderSuccessCod

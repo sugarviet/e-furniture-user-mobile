@@ -1,5 +1,5 @@
 import { useLocalSearchParams } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { IMAGES } from "../../constants/image";
 import { useCheckout } from "../../context/CheckoutContext";
@@ -17,27 +17,28 @@ import OrderConfirmLayout from "../OrderConfirmLayout";
 import ShippingCard from "../ShippingCard";
 import { useForm } from "react-hook-form";
 import FormInput from "../FormInput";
+import { usePost } from "../../hooks/api-hooks";
+import { checkout_with_user } from "../../api/checkoutApi";
+import * as WebBrowser from 'expo-web-browser';
+import { PAYMENT_METHOD } from "../../constants/paymentMethod";
+import * as Linking from 'expo-linking';
 
 export default function OrderConfirm() {
 
   const { control, handleSubmit } = useForm();
+  const { go_back, go_to_order_confirmation_cod, go_to_home } = useNavigation();
+  const [modalVisible, setModalVisible] = useState(false);
 
   const { getTotalPrice } = useCart();
   const { orderShipping,
-    checkoutForUser,
     selectedPayment,
     dataAfterVoucher,
     isPriceVoucherLoading,
-    modalVisible,
-    setModalVisible,
-    handleBackToHome,
-    handleGoToOrder
   } = useCheckout();
 
   const params = useLocalSearchParams();
   const { data } = params;
   const purchaseItems = JSON.parse(data);
-
 
   const orderProducts = purchaseItems.map((cart) => ({
     code: cart.code,
@@ -46,6 +47,43 @@ export default function OrderConfirm() {
     quantity: cart.quantity_in_cart,
     variation: cart.select_variation,
   }));
+
+  const handleBackToHome = () => {
+    setModalVisible(!modalVisible)
+    go_to_home();
+  }
+
+  const handleGoToOrder = () => {
+    setModalVisible(!modalVisible)
+    go_to_order_confirmation_cod(dataCheckout);
+  }
+
+  const handlePaymentMethod = async (metaData) => {
+    const isDeposit = metaData.order_checkout.paid.type === "Deposit"
+    const isCod = metaData.payment_method === PAYMENT_METHOD.cod;
+    if (isDeposit && isCod) {
+      await WebBrowser.openBrowserAsync(metaData.order_checkout.pay_os.checkoutUrl);
+      WebBrowser.dismissBrowser();
+    }
+    if (!isDeposit && isCod) {
+      setModalVisible(!modalVisible)
+    }
+    if (!isDeposit && !isCod) {
+      await WebBrowser.openBrowserAsync(metaData.order_checkout.pay_os.checkoutUrl);
+      WebBrowser.dismissBrowser();
+    }
+  };
+
+  const { mutate: checkoutForUser, data: dataCheckout } = usePost(
+    checkout_with_user(),
+    undefined,
+    (data) => {
+      handlePaymentMethod(data)
+    },
+    (error) => {
+      message.error(error.response.data.error.message);
+    }
+  );
 
   const onSubmit = (data) => {
     checkoutForUser({
@@ -61,7 +99,10 @@ export default function OrderConfirm() {
       },
       note: data.note,
     })
+
   };
+
+
 
   if (isPriceVoucherLoading) return <Text>isPriceVoucherLoading</Text>;
 
@@ -88,7 +129,7 @@ export default function OrderConfirm() {
         </OrderConfirmLayout>
 
         <OrderConfirmLayout type="payment">
-          <DefaultPaymentCard purchaseItems={purchaseItems} dataAfterVoucher={dataAfterVoucher} />
+          <DefaultPaymentCard />
         </OrderConfirmLayout>
 
         <OrderConfirmLayout type="note">

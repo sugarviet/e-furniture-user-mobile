@@ -37,7 +37,7 @@ function DefaultPaymentCard() {
                                     <Text className="text-[11px] font-urbanistMedium">Need to pay with 10% deposit</Text>
                                 </View>
                                 :
-                                <Text className="text-[14px] font-urbanistMedium text-center">Scan QR by VietQr</Text>
+                                <Text className="text-[14px] font-urbanistMedium text-center">Scan QR by PayOS</Text>
                             }
                         </View>
                     }

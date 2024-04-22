@@ -31,7 +31,7 @@ import wishlist from '../assets/images/wishlist.png';
 import checkout from '../assets/images/checkout.png';
 import bag from '../assets/images/bag.png';
 import empty from '../assets/images/empty.png';
-import vietqr from '../assets/images/vietqr.png';
+import payos from '../assets/images/payos.png';
 import order_not_found from '../assets/images/order_not_found.png';
 import lamp from '../assets/images/lamp.png';
 import sofa from '../assets/images/sofa.png';
@@ -104,7 +104,7 @@ export const IMAGES = {
     empty,
     telephone,
     mail,
-    vietqr,
+    payos,
     order_not_found,
     sofa,
     chair,

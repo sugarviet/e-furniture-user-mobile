@@ -16,7 +16,6 @@ function DefaultAddressCard({ data }) {
   const { account_id, phone, address, province, ward, district } = data || {};
   const { first_name, last_name, email } = account_id || {};
 
-
   useEffect(() => {
     if (data) {
       setOrderShipping({
@@ -29,10 +28,13 @@ function DefaultAddressCard({ data }) {
         province: province,
         phone: phone,
         longitude: 106.75197333979435,
-        latitude: 10.786098323202225
+        latitude: 10.786098323202225,
+        mobile: true,
       })
+    } else {
+      setOrderShipping({})
     }
-    setOrderShipping({})
+
   }, [data])
 
   return (

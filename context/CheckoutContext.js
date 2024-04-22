@@ -1,11 +1,9 @@
-import useNavigation from "../hooks/useNavigation";
-import { createContext, useContext, useState, useEffect } from "react";
-import useCart from "../hooks/useCart";
-import { usePost } from "../hooks/api-hooks";
+import { createContext, useContext, useEffect, useState } from "react";
 import { apply_voucher, get_voucher_by_specified } from "../api/voucherApi";
-import { checkout_with_user } from "../api/checkoutApi";
 import { PAYMENT_METHOD } from "../constants/paymentMethod";
-
+import { usePost } from "../hooks/api-hooks";
+import useCart from "../hooks/useCart";
+import useNavigation from "../hooks/useNavigation";
 const CheckoutContext = createContext();
 
 function CheckoutProvider(props) {
@@ -13,9 +11,11 @@ function CheckoutProvider(props) {
   const [dataAfterVoucher, setDataAfterVoucher] = useState();
   const [selectedPayment, setSelectedPayment] = useState(PAYMENT_METHOD.cod);
   const [orderShipping, setOrderShipping] = useState();
-  const [modalVisible, setModalVisible] = useState(false);
 
-  const { go_back, go_to_order_confirmation } = useNavigation();
+  console.log("selectedPayment orrigin",selectedPayment);
+
+
+  const { go_back, go_to_order_confirmation, go_to_home } = useNavigation();
   const { getCart, getTotalPrice } = useCart();
 
   const voucherInfo = getCart()?.map((item) => ({
@@ -44,35 +44,6 @@ function CheckoutProvider(props) {
     }
   );
 
-  const handlePaymentMethod = (metaData) => {
-    const isDeposit = metaData.order_checkout.paid.type === "Deposit"
-    const isCod = metaData.payment_method === PAYMENT_METHOD.cod;
-    if (isDeposit && isCod) {
-      setModalVisible(!modalVisible)
-      // go_to_payment(metaData);
-    }
-    if (!isDeposit && isCod) {
-      setModalVisible(!modalVisible)
-      // go_to_order_confirmation(metaData);
-    }
-    if (!isDeposit && !isCod) {
-      setModalVisible(!modalVisible)
-      // go_to_payment(metaData);
-    }
-  };
-
-  const { mutate: checkoutForUser, data: dataCheckout } = usePost(
-    checkout_with_user(),
-    undefined,
-    (data) => {
-      // handlePaymentMethod(data)
-      console.log("checkoutData", data);
-    },
-    (error) => {
-      message.error(error.response.data.error.message);
-    }
-  );
-
   const handleApplyVoucher = () => {
     if (selectedVoucher) {
       applyVoucher(productForVoucher);
@@ -86,15 +57,7 @@ function CheckoutProvider(props) {
     go_back();
   }
 
-  const handleBackToHome = () => {
-    setModalVisible(!modalVisible)
-    go_to_home();
-  }
 
-  const handleGoToOrder = () => {
-    setModalVisible(!modalVisible)
-    go_to_order_confirmation(dataCheckout);
-  }
 
   useEffect(() => {
     getSpecificVoucher(voucherInfo)
@@ -110,14 +73,10 @@ function CheckoutProvider(props) {
     selectedVoucher,
     setSelectedVoucher,
     selectedPayment,
+    setSelectedPayment,
     handleConfirmPayment,
-    checkoutForUser,
     orderShipping,
     setOrderShipping,
-    modalVisible,
-    setModalVisible,
-    handleBackToHome,
-    handleGoToOrder
   };
   return (
     <CheckoutContext.Provider value={value}>
@@ -140,5 +99,6 @@ const useCheckout = () => {
 export {
   CheckoutContext,
   CheckoutProvider,
-  useCheckout,
+  useCheckout
 };
+

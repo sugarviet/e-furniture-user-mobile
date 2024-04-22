@@ -18,11 +18,9 @@ const fetcherWithAuth = async (url, params) => {
   return data;
 };
 
-export const useFetchWithAuth = (url, params, enabled) => {
-  return useQuery([url, params], () => fetcherWithAuth(url, params), {
-    enabled
-  });
-};
+export const useFetchWithAuth = (url, params, options) => {
+  return useQuery([url, params], () => fetcherWithAuth(url, params), options);
+}
 
 export const useFetch = (url, params, enabled) => {
   return useQuery([url, params], () => fetcher(url, params), {

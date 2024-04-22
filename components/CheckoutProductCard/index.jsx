@@ -9,7 +9,6 @@ function CheckoutProductCard({ cart }) {
 
   const { variation, select_variation } = cart;
 
-  console.log("variation", cart);
   const onSale = cart.regular_price - cart.sale_price > 0;
   const subPrice = select_variation.reduce(
     (total, cur) => total + cur.sub_price,
