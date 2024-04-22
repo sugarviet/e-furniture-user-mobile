@@ -48,6 +48,9 @@ const antDesign_star = 'star'
 const feather_check_circle = 'check-circle'
 const simple_options_vertical = 'options-vertical'
 const materials_pending = "pending-actions"
+const fa6_cancel = "xmark"
+const materials_community_refund = "cash-refund"
+const fa5_fail = "exclamation"
 
 
 export const ICONS = {
@@ -102,5 +105,8 @@ export const ICONS = {
     antDesign_star,
     feather_check_circle,
     simple_options_vertical,
-    materials_pending
+    materials_pending,
+    fa6_cancel,
+    materials_community_refund,
+    fa5_fail
 };

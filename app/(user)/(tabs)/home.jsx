@@ -17,7 +17,10 @@ import { Tabs } from "expo-router";
 import HeaderButton from "../../../components/HeaderButton";
 import { IMAGES } from "../../../constants/image";
 import FlashSaleBgSlider from "../../../components/FlashSaleBgSlider";
-
+import * as WebBrowser from 'expo-web-browser';
+import * as Linking from 'expo-linking';
+import { useEffect, useState } from "react";
+import BestSellerProduct from "../../../components/BestSellerProduct";
 const productDetailCarousel = [
   { id: 1, URI: "https://res.cloudinary.com/dc4hafqoa/image/upload/v1713444521/eFurniture/slier_bg_k0s1h2.png" },
   { id: 2, URI: "https://res.cloudinary.com/dc4hafqoa/image/upload/v1713445862/eFurniture/slider_bg_2_q0ov8n.png" },
@@ -53,7 +56,7 @@ const Home = () => {
         <Text className="text-xl font-urbanistBold">Most Popular</Text>
       </View>
       <View className="mx-[10px]">
-        <CategoriesFilter />
+        <BestSellerProduct/>
       </View>
 
       <Pressable onPress={go_to_flash_sale} className="px-3">

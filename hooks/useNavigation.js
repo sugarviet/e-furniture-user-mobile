@@ -30,7 +30,9 @@ function useNavigation() {
   const go_to_list_bank_account = () => router.push("/bank/bank-list");
   const go_to_bank_form = (selectedBank) => router.push({ pathname: '/bank/bank-form', params: selectedBank })
   const go_to_flash_sale = () => router.push("/flashsale");
-  const go_to_order_confirmation = (checkoutData) => router.push({ pathname: '/order-confirmation', params: { data: JSON.stringify(checkoutData) } });
+  const go_to_order_confirmation = () => router.push("/order-confirmation");
+  const go_to_order_confirmation_cod = (checkoutData) => router.push({ pathname: '/order-confirmation/cod-confirmation', params: { data: JSON.stringify(checkoutData) } });
+
 
   return {
     go_to_region_select,
@@ -60,7 +62,8 @@ function useNavigation() {
     go_to_list_bank_account,
     go_to_bank_form,
     go_to_flash_sale,
-    go_to_order_confirmation
+    go_to_order_confirmation,
+    go_to_order_confirmation_cod
   };
 }
 

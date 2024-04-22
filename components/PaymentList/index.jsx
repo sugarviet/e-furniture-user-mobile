@@ -19,8 +19,8 @@ const paymentList = [
     {
         method: PAYMENT_METHOD.banking,
         name: 'Online Payment',
-        description: 'Payment by scanning VietQR.',
-        image: IMAGES.vietqr,
+        description: 'Payment by scanning PayOS.',
+        image: IMAGES.payos,
     }
 ]
 

@@ -15,7 +15,7 @@ const TYPE = {
   productDetail: {
     title: "productDetail",
     itemWidth: WIDTH_FULL,
-    padding: 0,
+    padding: 20,
     widthImg: WIDTH_FULL,
     heightImg: WIDTH_FULL,
     resizeMode: 'contain'

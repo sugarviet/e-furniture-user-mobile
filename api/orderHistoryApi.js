@@ -13,4 +13,13 @@ export const get_order_detail_by_id = (params) => {
 export const cancel_order_by_id = (id) => {
     return `${ORDER_URL}/${id}/cancel`
 }
+export const get_order_by_pay_os = (params) => {
+    let orderCode;
+    for (const key in params) {
+        if (typeof params[key] === 'string') {
+            orderCode = params[key];
+        }
+    }
+    return `${ORDER_URL}/payos/${orderCode}`;
+}
 

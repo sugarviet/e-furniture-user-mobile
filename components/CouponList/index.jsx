@@ -38,45 +38,48 @@ const CouponList = () => {
 
     return (
         <View className="h-full relative bg-white">
-            {emptyVoucher && <EmptyContent type="coupon"/>}
-            <ScrollView className="px-2 py-4 mt-4" style={{ marginBottom: 90, height: '100%', width: '100%' }}>
-                {vouchers?.sort((a, b) => {
-                    const aIsHideCoupon = (a.used_turn_count === a.maximum_use_per_user) || (a.minimum_order_value > getTotalPrice());
-                    const bIsHideCoupon = (b.used_turn_count === b.maximum_use_per_user) || (b.minimum_order_value > getTotalPrice());
-                    if (aIsHideCoupon && !bIsHideCoupon) {
-                        return 1;
-                    } else if (!aIsHideCoupon && bIsHideCoupon) {
-                        return -1;
-                    } else {
-                        return 0;
-                    }
-                })
-                    .map((coupon) => (
-                        <View key={coupon._id} className="pb-6">
-                            <CouponCard
-                                getTotalPrice={getTotalPrice}
-                                data={coupon}
-                                key={coupon.id}
-                                selectedVoucher={selectedVoucher}
-                                handleGetCouponId={handleGetCouponId}
-                            />
+            {emptyVoucher ?
+                <EmptyContent type="coupon" />
+                :
+                <>
+                    <ScrollView className="px-2 py-4 mt-4" style={{ marginBottom: 90, height: '100%', width: '100%' }}>
+                        {vouchers?.sort((a, b) => {
+                            const aIsHideCoupon = (a.used_turn_count === a.maximum_use_per_user) || (a.minimum_order_value > getTotalPrice());
+                            const bIsHideCoupon = (b.used_turn_count === b.maximum_use_per_user) || (b.minimum_order_value > getTotalPrice());
+                            if (aIsHideCoupon && !bIsHideCoupon) {
+                                return 1;
+                            } else if (!aIsHideCoupon && bIsHideCoupon) {
+                                return -1;
+                            } else {
+                                return 0;
+                            }
+                        })
+                            .map((coupon) => (
+                                <View key={coupon._id} className="pb-6">
+                                    <CouponCard
+                                        getTotalPrice={getTotalPrice}
+                                        data={coupon}
+                                        key={coupon.id}
+                                        selectedVoucher={selectedVoucher}
+                                        handleGetCouponId={handleGetCouponId}
+                                    />
+                                </View>
+                            ))
+                        }
+                    </ScrollView>
+                    <Pressable
+                        onPress={handleApplyVoucher}
+                        className="absolute bottom-0 left-0 right-0 h-[100px] border-t border-t-grey5 px-5 bg-white"
+                    >
+                        <View className="flex justify-center h-full">
+                            <ButtonModal type="addNewAddress">
+                                <View className="flex flex-row items-center">
+                                    <Text className="text-white font-urbanistSemiBold">Apply</Text>
+                                </View>
+                            </ButtonModal>
                         </View>
-                    ))
-                }
-            </ScrollView>
-            <Pressable
-                onPress={handleApplyVoucher}
-                className="absolute bottom-0 left-0 right-0 h-[100px] border-t border-t-grey5 px-5 bg-white"
-            >
-                <View className="flex justify-center h-full">
-                    <ButtonModal type="addNewAddress">
-                        <View className="flex flex-row items-center">
-                            <Text className="text-white font-urbanistSemiBold">Apply</Text>
-                        </View>
-                    </ButtonModal>
-                </View>
-            </Pressable>
-
+                    </Pressable></>
+            }
         </View>
     )
 }

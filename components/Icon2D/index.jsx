@@ -5,6 +5,7 @@ import {
   Feather,
   AntDesign,
   MaterialIcons,
+  MaterialCommunityIcons,
   FontAwesome6,
 } from "@expo/vector-icons";
 import { ICONS } from "../../constants/icons";
@@ -84,6 +85,18 @@ const types = {
   done: {
     component: MaterialIcons,
     icon: ICONS.ma_done,
+  },
+  cancel: {
+    component: FontAwesome6,
+    icon: ICONS.fa6_cancel,
+  },
+  fail: {
+    component: FontAwesome5,
+    icon: ICONS.fa5_fail,
+  },
+  refund: {
+    component: MaterialCommunityIcons,
+    icon: ICONS.materials_community_refund,
   },
   location: {
     component: Ionicons,

@@ -14,9 +14,10 @@ const DeliveryTrackingBrief = ({ data }) => {
             onPress={() => {
                 go_to_delivery_tracking({ orderTracking: JSON.stringify(data) });
             }}
-            className="border-b border-grey5 flex justify-between flex-row items-center py-4"
+            style={{ flex: 1 }}
+            className="border-b border-grey5 flex flex-row justify-between items-center py-4 px-2"
         >
-            <View className="flex flex-row gap-2 items-center">
+            <View style={{ flex: 1 }} className="flex flex-row gap-2 items-center">
                 <FontAwesome5 name="shipping-fast" size={16} color="black" />
                 <Text className="font-urbanistLight text-[14px]">{data.current_order_tracking.name === "Processing" ? "Efurniture staff is preparing the order" : currentTracking}</Text>
             </View>
