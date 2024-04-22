@@ -25,6 +25,10 @@ const TYPES = {
         type: "Refunded",
         name: "View detail",
     },
+    Failed: {
+        type: "Failed",
+        name: "View detail",
+    },
 
 };
 

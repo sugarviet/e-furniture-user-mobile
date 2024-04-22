@@ -12,8 +12,6 @@ const DeliveryTracking = () => {
 
     const data = JSON.parse(params.orderTracking)
 
-    const orderState = data.order_tracking[data.order_tracking.length - 1].name
-
     const orderTracking = data.order_tracking
 
     return (
@@ -35,14 +33,13 @@ const DeliveryTracking = () => {
                         <Text className="text-sm font-urbanistMedium text-grey1">Shipped with EFX Express Delivery</Text>
                     </View>
                 </View>
-                <OrderStep type={orderState} />
             </View>
             <View className="bg-white px-3 py-3 rounded-md shadow">
                 <View className="border-b border-grey5 pb-2">
                     <Text className="text-base font-urbanistBold ">Order Status Detail</Text>
                 </View>
                 <View className="max-h-[350px]">
-                    <VerticalOrderStep data={orderTracking} type={orderState} />
+                    <VerticalOrderStep data={orderTracking} />
                 </View>
             </View>
         </View>

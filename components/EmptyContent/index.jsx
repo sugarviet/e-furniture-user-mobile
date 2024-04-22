@@ -2,6 +2,14 @@ import { Text, View, Image } from "react-native"
 import { IMAGES } from "../../constants/image"
 
 const TYPES = {
+  review: {
+    title: "You don't have an order yet",
+    subTitle: "You don't have an active order at this time",
+    image: IMAGES.order_not_found,
+    imageWidth: 240,
+    imageHeight: 240,
+    gap: 48,
+  },
   order: {
     title: "You don't have an order yet",
     subTitle: "You don't have an active order at this time",

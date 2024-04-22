@@ -12,9 +12,6 @@ function CheckoutProvider(props) {
   const [selectedPayment, setSelectedPayment] = useState(PAYMENT_METHOD.cod);
   const [orderShipping, setOrderShipping] = useState();
 
-  console.log("selectedPayment orrigin",selectedPayment);
-
-
   const { go_back, go_to_order_confirmation, go_to_home } = useNavigation();
   const { getCart, getTotalPrice } = useCart();
 
