@@ -77,12 +77,14 @@ const TYPE = {
   },
   first_name: {
     placeholder: "First name",
+    icon: IMAGES.user,
     rules: () => ({
       required: "Please enter your first name! ",
     }),
   },
   last_name: {
     placeholder: "Last name",
+    icon: IMAGES.user,
     rules: () => ({
       required: "Please enter your last name! ",
     }),
