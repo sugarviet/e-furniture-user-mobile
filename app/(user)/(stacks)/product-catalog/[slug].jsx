@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { FlatList, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import { get_furniture_by_type_api } from "../../../../api/furnitureUrl";
 import CartHeaderButton from "../../../../components/CartHeaderButton";
 import EmptyContent from "../../../../components/EmptyContent";
@@ -10,13 +10,13 @@ function ProductCatalog({ data, params }) {
   const { slug } = params;
 
   const isEmpty = !data.data.length
- 
+
   return (
     <View className="flex-1">
       <Stack.Screen
         options={{
-          title: slug,
-          headerRight: () => <CartHeaderButton/>,
+          headerTitle: () => <Text className="uppercase font-urbanistExtraBold">{slug}</Text>,
+          headerRight: () => <CartHeaderButton />,
         }}
       />
       {isEmpty ?

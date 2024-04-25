@@ -7,6 +7,7 @@ import CenteredDivider from "../../../components/CenteredDivider";
 const SUPPORT_LIST = [
   "order",
   "bank",
+  "address",
   'cart',
   'edit_profile',
   "assistance",

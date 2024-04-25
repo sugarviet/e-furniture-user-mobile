@@ -11,6 +11,11 @@ function useSupportItemCard() {
       go_to_bank_account();
     },
   };
+  const address = {
+    function: () => {
+      go_to_address_book();
+    },
+  };
   const wish_list = {
     function: () => {
       go_to_wishlist();
@@ -33,7 +38,7 @@ function useSupportItemCard() {
   };
   const setting = {
     function: () => {
-      go_to_address_book();
+      
     },
   };
   const assistance = {
@@ -57,7 +62,7 @@ function useSupportItemCard() {
     },
   };
 
-  return { log_out, wish_list, assistance, setting, saved_post, following, order, cart, bank, edit_profile };
+  return { log_out, wish_list, assistance, setting, saved_post, following, order, cart, bank, edit_profile,address };
 }
 
 export default useSupportItemCard;
