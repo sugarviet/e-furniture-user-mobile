@@ -24,17 +24,10 @@ function CartList() {
     isPurchaseAll,
     getPurchaseItems,
   } = useCart();
-  const [removeItem, setRemoveItem] = useState(undefined);
-
-  const cartRef = useRef(null);
 
   const isEmptyCart = !getCart().length;
 
   const { go_to_checkout } = useNavigation();
-  const handleOpenDeleteModal = (item) => {
-    cartRef.current?.expand();
-    setRemoveItem(item);
-  };
 
   if (isLoading) return <LoadingSpinner />;
 
@@ -51,7 +44,7 @@ function CartList() {
             <CartCard
               key={item.code}
               cart={item}
-              handleOpenDeleteModal={handleOpenDeleteModal}
+              removeFromCart={removeFromCart}
             />
           ))}
         </View>
@@ -89,39 +82,6 @@ function CartList() {
           </View>
         </View>
       </View>
-      <GorhomeBottomSheet ref={cartRef}>
-        <View className="px-6 pb-2 bg-[#fafafa]">
-          <View className="border-b border-grey5 pb-5">
-            <Text className="text-[24px] font-urbanistBold text-center ">
-              Remove From Cart?
-            </Text>
-          </View>
-          <View className="mt-4">
-            {removeItem ? <CartCard cart={removeItem} /> : null}
-          </View>
-        </View>
-        <View className="flex flex-row w-full px-12 justify-center">
-          <Pressable className="w-[60%] mr-1">
-            <TouchableOpacity className="w-full rounded-[40px] h-full pl-2">
-              <View clasme="flex flex-row justify-center items-center py-5 rounded-[40px] bg-[#e7e7e7]">
-                <Text csNalassName="text-black font-urbanistSemiBold pl-3">
-                  Cancel
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </Pressable>
-          <Pressable className="w-[60%] ml-1">
-            <ButtonModal
-              onPress={() => removeFromCart(removeItem.code)}
-              type="remove"
-            >
-              <Text className="text-white font-urbanistSemiBold">
-                Yes, Remove
-              </Text>
-            </ButtonModal>
-          </Pressable>
-        </View>
-      </GorhomeBottomSheet>
     </View>
   );
 }
