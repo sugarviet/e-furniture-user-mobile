@@ -14,10 +14,6 @@ const TYPE = {
     placeholder: "Please enter your review ...",
     rules: () => ({
       required: "Please enter the review",
-      pattern: {
-        value: /^\S*$/,
-        message: "review must be no whitespace",
-      },
     }),
   },
   

@@ -11,6 +11,7 @@ const Orders = ({ ...props }) => {
 
     const { data, isLoading } = useFetchWithAuth(get_order_by_state(props.route.name));
 
+
     const isEmptyData = !data?.data.length
 
     if (isLoading) return <LoadingSpinner />
@@ -23,7 +24,7 @@ const Orders = ({ ...props }) => {
                 :
                 <ScrollView>
                     {data.data.map((order,index) => (
-                        <OrderProductCard key={index} orderData={order} />
+                        <OrderProductCard key={index} orderData={order} state={props.route.name}/>
                     ))}
                 </ScrollView>
             }
