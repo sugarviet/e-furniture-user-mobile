@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, Pressable, TouchableOpacity, View } from "react-native";
 import { IMAGES } from "../../constants/image";
 import QuantityOption from "../QuantityOption";
 import Icon from "../Icon";
@@ -10,6 +10,7 @@ import ProductVariationList from "../ProductVariationList";
 import { Swipeable } from "react-native-gesture-handler";
 import { ICONS } from "../../constants/icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import useNavigation from "../../hooks/useNavigation";
 
 function CartCard({ cart, removeFromCart }) {
   const {
@@ -34,11 +35,12 @@ function CartCard({ cart, removeFromCart }) {
     )
   }
 
+  const { go_to_product_detail } = useNavigation();
 
   return (
     <Swipeable renderRightActions={rightSwipe} overshootRight={false}>
       <View className="bg-white shadow-sm px-5 py-5 mb-3">
-        <View className="flex flex-row gap-3 items-center">
+        <Pressable onPress={() => go_to_product_detail(cart.slug)} className="flex flex-row gap-3 items-center">
           <CheckBox
             isChecked={isInPurchaseItems(cart)}
             onClick={() => addToPurchaseItems(cart)}
@@ -93,7 +95,7 @@ function CartCard({ cart, removeFromCart }) {
               />
             </View>
           </View>
-        </View>
+        </Pressable>
       </View>
     </Swipeable>
   );

@@ -1,27 +1,42 @@
-import { FlatList, View } from "react-native";
-import { withFetchData } from "../../../../hocs/withFetchData";
-import { get_furniture_by_type_api } from "../../../../api/furnitureUrl";
 import { Stack } from "expo-router";
+import { FlatList, View } from "react-native";
+import { get_furniture_by_type_api } from "../../../../api/furnitureUrl";
+import CartHeaderButton from "../../../../components/CartHeaderButton";
+import EmptyContent from "../../../../components/EmptyContent";
 import ProductCard from "../../../../components/ProductCard";
+import { withFetchData } from "../../../../hocs/withFetchData";
 
 function ProductCatalog({ data, params }) {
   const { slug } = params;
+
+  const isEmpty = !data.data.length
+ 
   return (
     <View className="flex-1">
-      <Stack.Screen options={{ title: slug }} />
-      <FlatList
-        data={data.data}
-        className="p-1"
-        numColumns={2}
-        renderItem={({ item }) => {
-          return (
-            <View className="w-1/2 p-1">
-              <ProductCard product={item} />
-            </View>
-          );
+      <Stack.Screen
+        options={{
+          title: slug,
+          headerRight: () => <CartHeaderButton/>,
         }}
-        keyExtractor={(item) => item._id}
       />
+      {isEmpty ?
+        <EmptyContent type="type" slug={slug} />
+        :
+        <FlatList
+          data={data.data}
+          className="p-1"
+          numColumns={2}
+          renderItem={({ item }) => {
+            return (
+              <View className="w-1/2 p-1">
+                <ProductCard product={item} />
+              </View>
+            );
+          }}
+          keyExtractor={(item) => item._id}
+        />
+      }
+
     </View>
   );
 }

@@ -15,6 +15,8 @@ import useNavigation from "../../hooks/useNavigation";
 import ProductVariationList from "../ProductVariationList";
 import { useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
+import { Stack } from "expo-router";
+import CartHeaderButton from "../CartHeaderButton";
 
 function ProductDetail({ data }) {
   const [furniture, setFurniture] = useState(data);
@@ -46,6 +48,12 @@ function ProductDetail({ data }) {
   if (isLoading) return <LoadingSpinner />;
   return (
     <View style={{ height: "100%", backgroundColor: COLORS.white }}>
+      <Stack.Screen
+        options={{
+          title: name,
+          headerRight: () => <CartHeaderButton/>,
+        }}
+      />
       <View style={{ height: 260 }}>
         <CarouselSlider pagination type="productDetail" carouselData={thumbs} />
       </View>
@@ -54,7 +62,7 @@ function ProductDetail({ data }) {
           <Text className="text-black text-[28px] font-urbanistBold">
             {name}
           </Text>
-          {/* <FavoriteButton id={data._id} /> */}
+          <FavoriteButton id={data._id} />
         </View>
         <View className="flex flex-row pt-2 items-center border-b pb-4 border-b-grey5">
           <View className="bg-[#ececec] px-2 py-1 rounded-md mr-4">

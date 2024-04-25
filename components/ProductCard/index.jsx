@@ -28,11 +28,11 @@ const ProductCard = ({ product }) => {
           <View className="relative px-3">
             <Image
               source={{ uri: product.thumbs[0] }}
-              className="w-full h-40 overflow-hidden rounded-lg mt-2 object-center"
+              className="w-full h-40 overflow-hidden rounded-lg mt-6 object-center"
               resizeMode="contain"
             />
             <View className="absolute top-0 right-0 m-2">
-              {/* <FavoriteButton id={product._id} /> */}
+              <FavoriteButton id={product._id} />
             </View>
           </View>
 

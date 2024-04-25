@@ -4,6 +4,7 @@ function useNavigation() {
   const go_back = () => router.back();
   const go_to_welcome_screen = () => router.push("/");
   const go_to_order = () => router.push("/order");
+  const go_to_cart = () => router.push("/cart");
   const go_to_sign_in = () => router.push("/sign-in");
   const go_to_sign_up = () => router.push("/sign-up");
   const go_to_home = () => router.push("/home");
@@ -63,7 +64,8 @@ function useNavigation() {
     go_to_bank_form,
     go_to_flash_sale,
     go_to_order_confirmation,
-    go_to_order_confirmation_cod
+    go_to_order_confirmation_cod,
+    go_to_cart
   };
 }
 

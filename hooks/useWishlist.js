@@ -1,10 +1,10 @@
 import { get_wishlist_api, get_update_wishlist_api } from "../api/wishlistApi";
-import { useDelete, useFetchWithAuth, usePost } from "./api-hooks";
+import {  useDeleteAuth, useFetchWithAuth, usePost } from "./api-hooks";
 
 function useWishlist(id) {
     const { data, isLoading } = useFetchWithAuth(get_wishlist_api());
     const { mutate: addToWishlistMutate } = usePost(get_update_wishlist_api(id), undefined, () => { }, () => { }, get_wishlist_api())
-    const { mutate: removeFromWishlistMutate } = useDelete(get_update_wishlist_api(id), undefined, () => { }, () => { }, get_wishlist_api())
+    const { mutate: removeFromWishlistMutate } = useDeleteAuth(get_update_wishlist_api(id), undefined, () => { }, () => { }, get_wishlist_api())
 
     const addToWishlist = () => {
         addToWishlistMutate();

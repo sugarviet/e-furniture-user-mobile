@@ -65,6 +65,7 @@ import not_found_voucher from '../assets/images/not_found_voucher.png'
 import flash_sale_icon from '../assets/images/flash_sale_icon.png'
 import empty_item from '../assets/images/empty_item.png'
 import not_found_address from '../assets/images/not_found_address.png'
+import not_found_type from '../assets/images/not_found_type.png'
 export const IMAGES = {
     right_arrow_black,
     back,
@@ -132,5 +133,6 @@ export const IMAGES = {
     not_found_voucher,
     flash_sale_icon,
     empty_item,
-    not_found_address
+    not_found_address,
+    not_found_type
 };
