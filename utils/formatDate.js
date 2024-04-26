@@ -15,3 +15,9 @@ export function formatAddDate(isoDate) {
 export function formatTime(isoDate) {
     return dayjs(isoDate).locale('en').format('HH:mm');
 }
+export function formatTimeWithAmPm(isoDate) {
+    return dayjs(isoDate).locale('en').format('hh:mm A');
+}
+export function formatDateFull(isoDate) {
+    return dayjs(isoDate).locale('en').format('dddd, D MMM YYYY');
+}

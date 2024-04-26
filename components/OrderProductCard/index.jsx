@@ -26,7 +26,7 @@ const OrderProductCard = ({ orderData, state }) => {
         <View className="flex flex-row justify-between items-center">
           <Text className="text-[14px] font-urbanistRegular">Order ID: {orderData.order_code}</Text>
           <View className="bg-[#ececec] px-4 py-2 rounded-lg">
-            <Text className="text-[12px] font-urbanistSemiBold"> {orderData.order_tracking[orderData.order_tracking.length - 1].name}</Text>
+            <Text className="text-[12px] font-urbanistBold"> {orderData.order_tracking[orderData.order_tracking.length - 1].name}</Text>
           </View>
         </View>
 

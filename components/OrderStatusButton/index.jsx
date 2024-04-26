@@ -18,7 +18,7 @@ const TYPES = {
         name: "Buy again",
     },
     Cancelled: {
-        type: "Cancel",
+        type: "Cancelled",
         name: "View detail",
     },
     Refunded: {
