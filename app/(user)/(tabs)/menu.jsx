@@ -5,11 +5,10 @@ import SupportItemCard from "../../../components/SupportItemCard";
 import { COLORS } from "../../../constants/theme";
 import CenteredDivider from "../../../components/CenteredDivider";
 const SUPPORT_LIST = [
+  "edit_profile",
   "order",
   "bank",
-  "address",
-  'cart',
-  'edit_profile',
+  'address',
   "assistance",
   "setting",
   "log_out",

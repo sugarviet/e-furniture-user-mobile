@@ -1,26 +1,20 @@
+import { Tabs } from "expo-router";
 import {
-  View,
-  ScrollView,
   Pressable,
-  Text,
   SafeAreaView,
+  ScrollView,
+  Text,
   TouchableOpacity,
-  Image,
+  View
 } from "react-native";
-import CategoriesFilter from "../../../components/CategoriesFilter";
+import BestSellerProduct from "../../../components/BestSellerProduct";
+import BestSelletSlider from "../../../components/BestSelletSlider";
+import FlashSaleBgSlider from "../../../components/FlashSaleBgSlider";
+import HeaderButton from "../../../components/HeaderButton";
+import SearchBar from "../../../components/SearchBar";
 import TypeList from "../../../components/TypeList";
 import types from "../../../data/types";
 import useNavigation from "../../../hooks/useNavigation";
-import SearchBar from "../../../components/SearchBar";
-import BestSelletSlider from "../../../components/BestSelletSlider";
-import { Tabs } from "expo-router";
-import HeaderButton from "../../../components/HeaderButton";
-import { IMAGES } from "../../../constants/image";
-import FlashSaleBgSlider from "../../../components/FlashSaleBgSlider";
-import * as WebBrowser from 'expo-web-browser';
-import * as Linking from 'expo-linking';
-import { useEffect, useState } from "react";
-import BestSellerProduct from "../../../components/BestSellerProduct";
 const productDetailCarousel = [
   { id: 1, URI: "https://res.cloudinary.com/dc4hafqoa/image/upload/v1713444521/eFurniture/slier_bg_k0s1h2.png" },
   { id: 2, URI: "https://res.cloudinary.com/dc4hafqoa/image/upload/v1713445862/eFurniture/slider_bg_2_q0ov8n.png" },

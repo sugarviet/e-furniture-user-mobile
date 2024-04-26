@@ -31,10 +31,6 @@ const TYPE = {
     icon: IMAGES.checkout,
     text: "Order",
   },
-  cart: {
-    icon: IMAGES.bag,
-    text: "Cart",
-  },
   setting: {
     icon: IMAGES.setting,
     text: "Settings",

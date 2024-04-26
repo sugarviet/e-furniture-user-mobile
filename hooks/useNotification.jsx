@@ -37,6 +37,14 @@ const type = {
             update: "Failed update profile",
         },
     },
+    register: {
+        success: {
+            sign_up: "Successfully sign up account",
+        },
+        fail: {
+            sign_up: "Failed update sign up account",
+        },
+    },
 };
 
 function useNotification() {

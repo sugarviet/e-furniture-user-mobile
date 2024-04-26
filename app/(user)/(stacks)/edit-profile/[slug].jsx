@@ -6,7 +6,7 @@ const EditProfile = () => {
   
   return (
    <View className='flex-1 px-4 bg-white'>
-    <Stack.Screen options={{ title: 'Edit Profile' }}/>
+    <Stack.Screen options={{ title: 'Profile' }}/>
     <EditProfileForm />
    </View>
   );

@@ -55,13 +55,13 @@ const TYPE = {
       },
     }),
   },
-  confirmPassword: {
+  confirm_password: {
     placeholder: "Confirm Password",
     icon: IMAGES.padlock,
     isSecure: true,
     rules: (validated) => ({
-      required: "Bạn chưa nhập lại mật khẩu!",
-      validate: () => validated || "Mật khẩu không khớp",
+      required: "Please enter the confirm password",
+      validate: () => validated || "Confirm password don't match with password",
     }),
   },
   email: {

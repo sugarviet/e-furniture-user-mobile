@@ -7,19 +7,27 @@ import { useState } from "react";
 import CheckBox from "../Checkbox";
 import useAuth from "../../hooks/useAuth";
 import ButtonModal from "../ButtonModal";
+import ErrorMessage from "../ErrorMessage";
 
 function SignUpForm() {
   const { control, handleSubmit, watch } = useForm();
   const { go_to_sign_in } = useNavigation();
   const [policyAccepted, setPolicyAccepted] = useState(false);
+  const [policyAcceptedError, setPolicyAcceptedError] = useState(false);
+
+  console.log(policyAccepted);
 
   const password = watch("password");
-  const confirmPassword = watch("confirmPassword");
+  const confirmPassword = watch("confirm_password");
   const { register_with_app } = useAuth()
   const onSubmit = (data) => {
-    console.log(data);
-    const { username, password } = data;
-    register_with_app()
+    if (policyAccepted) {
+      register_with_app(data)
+      setPolicyAcceptedError(false);
+    } else {
+      setPolicyAcceptedError(true);
+    }
+
   };
 
 
@@ -41,17 +49,20 @@ function SignUpForm() {
 
           <FormInput className="shadow-sm h-12 bg-white rounded-md mb-2"
             control={control}
-            type="confirmPassword"
+            type="confirm_password"
             placeholder={"Nhập lại mật khẩu"}
             validated={password === confirmPassword}
           />
         </View>
-        <View className="flex-row items-center mt-2 mb-4 mx-1">
-          <CheckBox
-            checked={policyAccepted}
-            handlePress={() => setPolicyAccepted(!policyAccepted)}
-          />
-          <Text className="flex-1">Accept the policy of eFurniture</Text>
+        <View className=" mt-2 mb-4 mx-1">
+          <View className="flex-row items-center">
+            <CheckBox
+              checked={policyAccepted}
+              handlePress={() => setPolicyAccepted(!policyAccepted)}
+            />
+            <Text className="flex-1">Accept the policy of eFurniture</Text>
+          </View>
+          {policyAcceptedError && <ErrorMessage message="Please accept the policy of eFurniture" />}
         </View>
 
         <ButtonModal onPress={handleSubmit(onSubmit)} type="register">
@@ -61,7 +72,7 @@ function SignUpForm() {
             </Text>
           </View>
         </ButtonModal>
-        <TouchableOpacity onPress={go_to_sign_in} className="mt-4 flex flex-row justify-center items-center py-3 mb-4">
+        <TouchableOpacity onPress={go_to_sign_in} className="mt-4 flex flex-row justify-center items-center py-3 mb-12">
           <Text className="text-base font-urbanistMedium">Already has an account ?{" "}</Text>
           <Text className="text-base font-urbanistMedium" style={{ textDecorationLine: "underline" }}>Sign In</Text>
         </TouchableOpacity>
