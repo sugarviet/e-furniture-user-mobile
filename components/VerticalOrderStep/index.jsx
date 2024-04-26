@@ -98,8 +98,8 @@ function VerticalOrderStep({ data, metaData }) {
             <View className="pl-2 flex flex-row justify-between w-full pr-10 relative">
                 <View className="flex flex-col max-w-[250px]">
                     <Text className="font-urbanistExtraBold text-base" style={{ color }}>{label}</Text>
-                    {label === "Processing" ?
-                        <Text style={{ color }}>eFurniture staff is preparing the order</Text>
+                    {label === "Cancelled" ?
+                        <Text style={{ color }}>Cancel with reason: {note[position]}</Text>
                         :
                         label === "Done" ?
                             <View>

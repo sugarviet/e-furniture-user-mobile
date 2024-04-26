@@ -80,13 +80,13 @@ const OrderProductBriefInfo = ({ orderProduct, state }) => {
               </View>
 
               <View className="flex flex-row items-center justify-end gap-2 pt-3">
-                {/* {onSale && (
-                                    <Text className="text-[16px] font-urbanistSemiBold line-through text-grey2">
-                                        {formatCurrency(
-                                            product.product_id.regular_price
-                                        )}
-                                    </Text>
-                                )} */}
+                {onSale && (
+                  <Text className="text-[16px] font-urbanistSemiBold line-through text-grey2">
+                    {formatCurrency(
+                      product.product.regular_price
+                    )}
+                  </Text>
+                )}
                 <Text className="text-[16px] font-urbanistSemiBold">
                   {formatCurrency(product.price + subPrice)}
                 </Text>
