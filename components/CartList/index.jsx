@@ -13,6 +13,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { ICONS } from "../../constants/icons";
 import CheckBox from "react-native-check-box";
 import EmptyContent from "../EmptyContent";
+import LoadingStrip from "../LoadingStrip";
 
 function CartList() {
   const {
@@ -26,10 +27,13 @@ function CartList() {
   } = useCart();
 
   const isEmptyCart = !getCart().length;
+  const isEmptyPurchase = !getPurchaseItems().length;
+
+  console.log(!isEmptyCart);
 
   const { go_to_checkout } = useNavigation();
 
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingStrip />;
 
   return (
     <View style={{ height: "100%", backgroundColor: COLORS.grey1 }}>
@@ -68,11 +72,11 @@ function CartList() {
             </View>
             <TouchableOpacity
               onPress={() => {
-                if (!isEmptyCart) {
+                if (!isEmptyCart && !isEmptyPurchase) {
                   go_to_checkout(getPurchaseItems());
                 }
               }}
-              className={`w-40 bg-black flex-row h-full items-center justify-center ${isEmptyCart && 'bg-black/30'}`}
+              className={`w-40 bg-black flex-row h-full items-center justify-center ${(isEmptyCart || isEmptyPurchase) && 'bg-black/30'}`}
             >
               <MaterialIcons size={20} color="white" name={ICONS.mi_checkout} />
               <Text className="text-white font-urbanistSemiBold">

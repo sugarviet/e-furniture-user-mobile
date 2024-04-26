@@ -17,8 +17,10 @@ import { useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Stack } from "expo-router";
 import CartHeaderButton from "../CartHeaderButton";
+import { LinearGradient } from "expo-linear-gradient";
 
 function ProductDetail({ data }) {
+
   const [furniture, setFurniture] = useState(data);
   const {
     _id,
@@ -28,6 +30,8 @@ function ProductDetail({ data }) {
     variation,
     description,
     sale_price,
+    stock,
+    regular_price
   } = furniture;
   const { get_average_rating, get_total_feedback, isLoading } =
     useFeedback(_id);
@@ -40,6 +44,14 @@ function ProductDetail({ data }) {
     }
   };
 
+  const onSale = regular_price - sale_price > 0;
+  const outOfStock = !(stock > 0);
+
+  const salePercentage = (
+    ((regular_price - sale_price) / regular_price) *
+    100
+  ).toFixed(1);
+
   const subPrice = select_variation.reduce(
     (total, cur) => total + cur.sub_price,
     0
@@ -51,13 +63,32 @@ function ProductDetail({ data }) {
       <Stack.Screen
         options={{
           title: name,
-          headerRight: () => <CartHeaderButton/>,
+          headerRight: () => <CartHeaderButton />,
         }}
       />
       <View style={{ height: 260 }}>
         <CarouselSlider pagination type="productDetail" carouselData={thumbs} />
       </View>
       <ScrollView className="bg-white flex-1 rounded-t-xl mt-2 px-5 py-6 relative">
+        <View className="flex flex-row items-end gap-2">
+          <Text className="text-[20px] font-urbanistBold">
+            {formatCurrency(sale_price + subPrice)}
+          </Text>
+          {onSale && (
+            <View className="flex flex-row items-end">
+              <Text className="line-through text-grey3 text-[16px] font-urbanistSemiBold pr-2">
+                {formatCurrency(regular_price)}
+              </Text>
+              <LinearGradient start={{ x: 0.8, y: 0.1 }}
+                end={{ x: 0.1, y: 1 }}
+                colors={['#961200', '#c2560a']}
+                className="rounded-sm  px-2 py-1"
+              >
+                <Text className="text-white text-[11px]">-{salePercentage}%</Text>
+              </LinearGradient>
+            </View>
+          )}
+        </View>
         <View className="flex flex-row justify-between items-center">
           <Text className="text-black text-[28px] font-urbanistBold">
             {name}
@@ -88,7 +119,7 @@ function ProductDetail({ data }) {
             data={variation}
           />
         </View>
-        <View className="mt-2">
+        <View className="mt-2 pb-12">
           <Text className="text-black text-[18px] font-urbanistBold">
             Description
           </Text>

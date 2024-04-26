@@ -68,7 +68,7 @@ const TYPES = {
   },
   type: {
     title: "Empty Product",
-    subTitle: `There are currently no sofas available in the catalog`,
+    subTitle: `There are currently no products available in the catalog`,
     image: IMAGES.not_found_type,
     imageWidth: 130,
     imageHeight: 150,

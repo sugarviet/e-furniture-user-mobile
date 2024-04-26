@@ -12,7 +12,7 @@ export default function useAuth() {
   const { success_message, error_message } = useNotification();
   const { go_to_sign_in } = useNavigation();
 
-  const { mutate: login } = usePostWithoutAuth(
+  const { mutate: login, isLoading:isLoginLoading } = usePostWithoutAuth(
     get_login(),
     undefined,
     (data) => {
@@ -57,6 +57,7 @@ export default function useAuth() {
     clearTokens();
   };
   return {
+    isLoginLoading,
     login_with_app,
     register_with_app,
     handleLogout,

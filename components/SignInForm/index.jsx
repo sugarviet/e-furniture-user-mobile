@@ -7,15 +7,19 @@ import useAuthStore from "../../stores/useAuthStore";
 import useNavigation from "../../hooks/useNavigation";
 import useAuth from "../../hooks/useAuth";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import LoadingSpinner from "../LoadingSpinner";
+import LoadingStrip from "../LoadingStrip";
 
 function SignInForm() {
   const { control, handleSubmit } = useForm();
   const { go_to_sign_up } = useNavigation();
-  const { login_with_app } = useAuth();
+  const { login_with_app,isLoginLoading } = useAuth();
 
   const onSubmit = (data) => {
     login_with_app(data);
   };
+
+  if(isLoginLoading) return <LoadingStrip/>
 
   return (
     <View>
