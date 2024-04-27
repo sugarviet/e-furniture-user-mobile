@@ -8,16 +8,17 @@ function useBank() {
 
   const queryClient = useQueryClient();
 
-  const { go_to_bank_account } = useNavigation();
+  const { go_back } = useNavigation();
 
   const { success_message, error_message } = useNotification();
 
-  const { mutate: createBankAccount } = usePostAuth(
+  const { mutate: createBankAccount,isLoading:isCreateBankLoading } = usePostAuth(
     get_create_bank_info_api(),
     undefined,
     () => {
       queryClient.invalidateQueries(get_bank_account_api());
-      go_to_bank_account();
+      go_back();
+      go_back();
       success_message("bank", "add");
     },
     () => {
@@ -37,7 +38,7 @@ function useBank() {
     },
   );
 
-  const { mutate: remove } = useDeleteAuth(
+  const { mutate: remove, isLoading:isRemoveBankLoading } = useDeleteAuth(
     get_create_bank_info_api(),
     undefined,
     () => {
@@ -73,7 +74,7 @@ function useBank() {
     remove(body);
   };
 
-  return { addBankAccount, setDefault, removeBankAccount };
+  return { addBankAccount, setDefault, removeBankAccount,isRemoveBankLoading,isCreateBankLoading };
 }
 
 export default useBank;

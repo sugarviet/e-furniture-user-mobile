@@ -20,10 +20,6 @@ function useHeaderButton() {
         function: () => { go_back() },
     }
 
-    const white = {
-        icon: IMAGES.right_arrow_white,
-        function: () => { go_back() },
-    }
     const back_white = {
         icon: IMAGES.right_arrow_white,
         function: () => { go_to_home() },
@@ -38,7 +34,7 @@ function useHeaderButton() {
         function: () => { go_to_menu() },
     }
 
-    return { close, back, notification, back_white, order_back,bank_back,white };
+    return { close, back, notification, back_white, order_back,bank_back };
 }
 
 export default useHeaderButton;

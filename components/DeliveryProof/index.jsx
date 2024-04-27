@@ -12,8 +12,6 @@ const DeliveryProof = () => {
 
     const orderShipping =orderTracking.order_shipping
 
-    console.log("orderTracking", orderTracking);
-
     return (
         <View className="bg-[#f5f5f5] px-3 ">
             <Stack.Screen

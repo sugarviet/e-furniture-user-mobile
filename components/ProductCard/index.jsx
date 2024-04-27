@@ -13,18 +13,9 @@ import { LinearGradient } from "expo-linear-gradient";
 const ProductCard = ({ product }) => {
 
   const {
-    _id,
-    thumbs,
-    name,
-    select_variation,
-    variation,
-    description,
     sale_price,
-    stock,
     regular_price
   } = product;
-
-  console.log(product);
 
   const { go_to_product_detail } = useNavigation();
 

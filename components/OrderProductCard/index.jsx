@@ -18,6 +18,7 @@ const OrderProductCard = ({ orderData, state }) => {
   return (
     <View className="pt-2 mx-2">
       <Pressable
+        onLongPress={() => { }}
         onPress={() => {
           go_to_order_detail(orderData._id);
         }}
@@ -30,7 +31,7 @@ const OrderProductCard = ({ orderData, state }) => {
           </View>
         </View>
 
-        <OrderProductBriefInfo orderProduct={orderData.order_products.slice(0, 1)} state={state}/>
+        <OrderProductBriefInfo orderProduct={orderData.order_products.slice(0, 1)} state={state} />
 
         {lengthOfProduct > 1 &&
           <View className="border-t border-grey5">
@@ -42,7 +43,7 @@ const OrderProductCard = ({ orderData, state }) => {
           <Text className="font-urbanistSemiBold text-[16px]">Order Total: <Text className="font-urbanistSemiBold text-[14px]">{formatCurrency(orderData.order_checkout.final_total)}</Text></Text>
         </View>
 
-        <DeliveryTrackingBrief data={orderData}/>
+        <DeliveryTrackingBrief data={orderData} />
 
         <OrderStatusButton className="items-end" type={orderState} data={orderData} />
 

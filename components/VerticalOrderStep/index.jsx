@@ -101,16 +101,19 @@ function VerticalOrderStep({ data, metaData }) {
                     {label === "Cancelled" ?
                         <Text style={{ color }}>Cancel with reason: {note[position]}</Text>
                         :
-                        label === "Done" ?
-                            <View>
-                                <Text className="text-sm font-urbanistMedium text-[#26aa99]">Successfully delivered</Text>
-                                <Text className="text-sm font-urbanistMedium text-[#26aa99]">Recipient: {metaData.order_shipping.last_name} {metaData.order_shipping.first_name}</Text>
-                                <TouchableOpacity onPress={() => go_to_delivery_proof({ data: JSON.stringify(metaData) })}>
-                                    <Text className="text-sm font-urbanistMedium text-blue-400 underline">View Proof of Delivery</Text>
-                                </TouchableOpacity>
-                            </View>
+                        label === "Processing" ?
+                            <Text style={{ color }}>eFurniture staff is preparing the order</Text>
                             :
-                            <Text style={{ color }}>{note[position]}</Text>
+                            label === "Done" ?
+                                <View>
+                                    <Text className="text-sm font-urbanistMedium text-[#26aa99]">Successfully delivered</Text>
+                                    <Text className="text-sm font-urbanistMedium text-[#26aa99]">Recipient: {metaData.order_shipping.last_name} {metaData.order_shipping.first_name}</Text>
+                                    <TouchableOpacity onPress={() => go_to_delivery_proof({ data: JSON.stringify(metaData) })}>
+                                        <Text className="text-sm font-urbanistMedium text-blue-400 underline">View Proof of Delivery</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                :
+                                <Text style={{ color }}>{note[position]}</Text>
                     }
                 </View>
                 <View className="absolute left-[-85px] top-1/2 -translate-y-3 flex items-center">

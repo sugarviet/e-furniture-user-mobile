@@ -9,13 +9,14 @@ const STATUS = {
 };
 
 const CategoriesFilter = ({ categories, selectedCategory, onSelectCategory }) => {
+
   return (
     <>
       <View className="my-5">
         <FlatList
           horizontal
           data={categories}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item,index) => index + item}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <View className="mx-1" key={item.id}>

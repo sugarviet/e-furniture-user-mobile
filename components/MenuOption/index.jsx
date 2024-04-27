@@ -57,7 +57,6 @@ function MenuOptionCard({ type }) {
   const { icon, text, path } = props;
 
   const navigate = useNavigation();
-  console.log(icon)
 
   return (
     <TouchableOpacity

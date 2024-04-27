@@ -16,8 +16,6 @@ import DepositPrice from '../DepositPrice'
 
 const OrderDetail = ({ data }) => {
 
-    console.log("detail", data);
-
     const { go_to_delivery_tracking } = useNavigation();
 
     const orderState = data.order_tracking[data.order_tracking.length - 1].name
@@ -29,6 +27,8 @@ const OrderDetail = ({ data }) => {
     const orderShipping = data.order_shipping
 
     const isPaidDeposit = data.order_checkout.paid.type === "Deposit";
+
+    const totalPrice = data.order_checkout.total;
 
     const currentTracking = data.current_order_tracking.name;
     const currentTrackingNote = data.current_order_tracking.note;

@@ -15,8 +15,6 @@ function SignUpForm() {
   const [policyAccepted, setPolicyAccepted] = useState(false);
   const [policyAcceptedError, setPolicyAcceptedError] = useState(false);
 
-  console.log(policyAccepted);
-
   const password = watch("password");
   const confirmPassword = watch("confirm_password");
   const { register_with_app } = useAuth()

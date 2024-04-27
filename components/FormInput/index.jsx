@@ -131,6 +131,10 @@ const TYPE = {
     placeholder: "Leave a message...",
     rules: () => ({}),
   },
+  reason: {
+    placeholder: "Why you want to cancel this order...",
+    rules: () => ({}),
+  },
 };
 
 function FormInput({

@@ -18,6 +18,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Stack } from "expo-router";
 import CartHeaderButton from "../CartHeaderButton";
 import { LinearGradient } from "expo-linear-gradient";
+import LoadingStrip from "../LoadingStrip";
 
 function ProductDetail({ data }) {
 
@@ -57,7 +58,7 @@ function ProductDetail({ data }) {
     0
   );
 
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingStrip />;
   return (
     <View style={{ height: "100%", backgroundColor: COLORS.white }}>
       <Stack.Screen

@@ -34,7 +34,7 @@ function useNavigation() {
   const go_to_flash_sale = () => router.push("/flashsale");
   const go_to_order_confirmation = () => router.push("/order-confirmation");
   const go_to_order_confirmation_cod = (checkoutData) => router.push({ pathname: '/order-confirmation/cod-confirmation', params: { data: JSON.stringify(checkoutData) } });
-
+  const go_to_cancel_order = (cancelData) => router.push({ pathname: '/cancel-order', params: { data: JSON.stringify(cancelData) } });
 
   return {
     go_to_region_select,
@@ -67,7 +67,8 @@ function useNavigation() {
     go_to_order_confirmation,
     go_to_order_confirmation_cod,
     go_to_cart,
-    go_to_delivery_proof
+    go_to_delivery_proof,
+    go_to_cancel_order
   };
 }
 

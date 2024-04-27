@@ -64,6 +64,7 @@ export default function OrderConfirm() {
     if (isDeposit && isCod) {
       await WebBrowser.openBrowserAsync(metaData.order_checkout.pay_os.checkoutUrl);
       WebBrowser.dismissBrowser();
+      go_to_home();
     }
     if (!isDeposit && isCod) {
       setModalVisible(!modalVisible)
@@ -71,6 +72,7 @@ export default function OrderConfirm() {
     if (!isDeposit && !isCod) {
       await WebBrowser.openBrowserAsync(metaData.order_checkout.pay_os.checkoutUrl);
       WebBrowser.dismissBrowser();
+      go_to_home();
     }
   };
 

@@ -29,8 +29,6 @@ function CartList() {
   const isEmptyCart = !getCart().length;
   const isEmptyPurchase = !getPurchaseItems().length;
 
-  console.log(!isEmptyCart);
-
   const { go_to_checkout } = useNavigation();
 
   if (isLoading) return <LoadingStrip />;

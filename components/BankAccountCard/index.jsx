@@ -3,10 +3,12 @@ import { Feather, SimpleLineIcons } from '@expo/vector-icons';
 import { ICONS } from '../../constants/icons'
 import { IMAGES } from '../../constants/image'
 import formatBankAccountNumber from "../../utils/formatBankAccountNumber";
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import ButtonModal from '../ButtonModal';
 import GorhomeBottomSheet from "../BottomSheet";
 import useBank from '../../hooks/useBank';
+import LoadingStrip from '../LoadingStrip';
+import FlashWarningModal from '../FlashWarningModal';
 
 const BankAccountCard = ({ bank }) => {
 
@@ -18,7 +20,9 @@ const BankAccountCard = ({ bank }) => {
         is_default,
     } = bank;
 
-    const { setDefault, removeBankAccount } = useBank();
+    const { setDefault, removeBankAccount, isRemoveBankLoading } = useBank();
+
+    const [isDefault, setIsDefault] = useState(false);
 
     const bankRef = useRef(null);
 
@@ -29,10 +33,24 @@ const BankAccountCard = ({ bank }) => {
         bankRef.current?.close();
     };
 
+    const handleRemoveBank = (id) => {
+        if (bank.is_default) {
+            setIsDefault(!isDefault)
+            setTimeout(() => setIsDefault(false), 2000);
+            handleCloseDeleteModal()
+        } else {
+            removeBankAccount(id);
+            handleCloseDeleteModal()
+        }
+    };
+
+    if (isRemoveBankLoading) return <LoadingStrip />
+
     return (
         <>
             <View className="pt-4 relative">
-                <ImageBackground imageStyle={{ borderRadius: 14}} source={IMAGES.bank_bg} resizeMode="cover" className="py-8 px-6">
+                {isDefault && <FlashWarningModal />}
+                <ImageBackground imageStyle={{ borderRadius: 14 }} source={IMAGES.bank_bg} resizeMode="cover" className="py-8 px-6">
                     <View className="flex flex-row justify-between">
                         <View>
                             <Text className="text-white font-urbanistBold text-base pb-2">
@@ -83,10 +101,9 @@ const BankAccountCard = ({ bank }) => {
                 <View className="flex flex-col gap-4 mx-4">
                     <Pressable className="">
                         <ButtonModal
-                            onPress={() => {
-                                removeBankAccount(bank._id),
-                                handleCloseDeleteModal()
-                            }}
+                            onPress={() =>
+                                handleRemoveBank(bank._id)
+                            }
                             type="removeBank"
                         >
                             <Text className="text-black font-urbanistSemiBold">
@@ -98,7 +115,7 @@ const BankAccountCard = ({ bank }) => {
                         <ButtonModal
                             onPress={() => {
                                 setDefault(bank._id),
-                                handleCloseDeleteModal()
+                                    handleCloseDeleteModal()
                             }}
                             type="setDefaultBank"
                         >
