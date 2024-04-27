@@ -1,3 +1,4 @@
+import LoadingStrip from "../components/LoadingStrip";
 import { useFetchWithAuth } from "../hooks/api-hooks";
 import { useLocalSearchParams } from 'expo-router';
 export const withFetchDataWithAuth = (WrappedComponent, getApi) => {
@@ -6,7 +7,7 @@ export const withFetchDataWithAuth = (WrappedComponent, getApi) => {
 
     const { data, isLoading } = useFetchWithAuth(getApi(params));
 
-    if (isLoading) return;
+    if (isLoading) return <LoadingStrip/>;
     return <WrappedComponent {...props} data={data} />;
   };
 };

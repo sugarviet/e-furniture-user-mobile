@@ -21,6 +21,7 @@ import home from '../assets/images/home.png';
 import cart_success from '../assets/images/cart_success.png';
 import success_bg from '../assets/images/success_bg.png';
 import trash from '../assets/images/trash.png';
+import trash_white from '../assets/images/trash_white.png';
 import shipping_car from '../assets/images/shipping_car.png';
 import coupon from '../assets/images/coupon.png';
 import right_arrow from '../assets/images/right_arrow.png';
@@ -64,6 +65,8 @@ import not_found_voucher from '../assets/images/not_found_voucher.png'
 import flash_sale_icon from '../assets/images/flash_sale_icon.png'
 import empty_item from '../assets/images/empty_item.png'
 import not_found_address from '../assets/images/not_found_address.png'
+import not_found_type from '../assets/images/not_found_type.png'
+import address_book from '../assets/images/address_book.png'
 export const IMAGES = {
     right_arrow_black,
     back,
@@ -92,6 +95,7 @@ export const IMAGES = {
     cart_success,
     success_bg,
     trash,
+    trash_white,
     shipping_car,
     coupon,
     right_arrow,
@@ -130,5 +134,7 @@ export const IMAGES = {
     not_found_voucher,
     flash_sale_icon,
     empty_item,
-    not_found_address
+    not_found_address,
+    not_found_type,
+    address_book
 };

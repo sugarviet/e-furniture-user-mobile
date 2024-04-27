@@ -13,6 +13,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { ICONS } from "../../constants/icons";
 import CheckBox from "react-native-check-box";
 import EmptyContent from "../EmptyContent";
+import LoadingStrip from "../LoadingStrip";
 
 function CartList() {
   const {
@@ -24,19 +25,13 @@ function CartList() {
     isPurchaseAll,
     getPurchaseItems,
   } = useCart();
-  const [removeItem, setRemoveItem] = useState(undefined);
-
-  const cartRef = useRef(null);
 
   const isEmptyCart = !getCart().length;
+  const isEmptyPurchase = !getPurchaseItems().length;
 
   const { go_to_checkout } = useNavigation();
-  const handleOpenDeleteModal = (item) => {
-    cartRef.current?.expand();
-    setRemoveItem(item);
-  };
 
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingStrip />;
 
   return (
     <View style={{ height: "100%", backgroundColor: COLORS.grey1 }}>
@@ -51,7 +46,7 @@ function CartList() {
             <CartCard
               key={item.code}
               cart={item}
-              handleOpenDeleteModal={handleOpenDeleteModal}
+              removeFromCart={removeFromCart}
             />
           ))}
         </View>
@@ -75,11 +70,11 @@ function CartList() {
             </View>
             <TouchableOpacity
               onPress={() => {
-                if (!isEmptyCart) {
+                if (!isEmptyCart && !isEmptyPurchase) {
                   go_to_checkout(getPurchaseItems());
                 }
               }}
-              className={`w-40 bg-black flex-row h-full items-center justify-center ${isEmptyCart && 'bg-black/30'}`}
+              className={`w-40 bg-black flex-row h-full items-center justify-center ${(isEmptyCart || isEmptyPurchase) && 'bg-black/30'}`}
             >
               <MaterialIcons size={20} color="white" name={ICONS.mi_checkout} />
               <Text className="text-white font-urbanistSemiBold">
@@ -89,39 +84,6 @@ function CartList() {
           </View>
         </View>
       </View>
-      <GorhomeBottomSheet ref={cartRef}>
-        <View className="px-6 pb-2 bg-[#fafafa]">
-          <View className="border-b border-grey5 pb-5">
-            <Text className="text-[24px] font-urbanistBold text-center ">
-              Remove From Cart?
-            </Text>
-          </View>
-          <View className="mt-4">
-            {removeItem ? <CartCard cart={removeItem} /> : null}
-          </View>
-        </View>
-        <View className="flex flex-row w-full px-12 justify-center">
-          <Pressable className="w-[60%] mr-1">
-            <TouchableOpacity className="w-full rounded-[40px] h-full pl-2">
-              <View clasme="flex flex-row justify-center items-center py-5 rounded-[40px] bg-[#e7e7e7]">
-                <Text csNalassName="text-black font-urbanistSemiBold pl-3">
-                  Cancel
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </Pressable>
-          <Pressable className="w-[60%] ml-1">
-            <ButtonModal
-              onPress={() => removeFromCart(removeItem.code)}
-              type="remove"
-            >
-              <Text className="text-white font-urbanistSemiBold">
-                Yes, Remove
-              </Text>
-            </ButtonModal>
-          </Pressable>
-        </View>
-      </GorhomeBottomSheet>
     </View>
   );
 }

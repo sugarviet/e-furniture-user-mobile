@@ -21,8 +21,6 @@ const OrderSuccess = ({ data }) => {
 
     const orderConfirmation = data;
 
-    console.log(orderConfirmation);
-
     const isPaidDeposit = orderConfirmation.order_checkout.paid.type === "Deposit";
     const totalPrice = orderConfirmation.order_checkout.total;
     const orderShipping = orderConfirmation.order_shipping || {

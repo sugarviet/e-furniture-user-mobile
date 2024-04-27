@@ -15,7 +15,7 @@ const BestSellerProduct = ({ data }) => {
                 keyExtractor={(item) => item._id}
                 showsHorizontalScrollIndicator={false}
                 renderItem={({ item }) => (
-                    <View className="w-[190px] pr-2" key={item._id}>
+                    <View className="pl-2 w-[190px] pr-2" key={item._id}>
                         <ProductCard product={item} />
                     </View>
                 )}

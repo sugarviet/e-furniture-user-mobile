@@ -21,7 +21,7 @@ const Result = ({ data }) => {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+      <SafeAreaView className="bg-grey6" style={{ flex: 1 }}>
         <View className="px-2 mb-2 py-4">
           <SearchBar initialValue={local.q} />
         </View>
@@ -36,17 +36,19 @@ const Result = ({ data }) => {
         {empty ? (
           <EmptyContent type="search" />
         ) : (
-          <FlatList
-            numColumns={2}
-            data={data.data}
-            style={{ marginTop: 10 }}
-            renderItem={({ item }) => (
-              <View className="w-1/2">
-                <ProductCard product={item} />
-              </View>
-            )}
-            keyExtractor={(item) => item._id}
-          />
+          <View className="mx-1 pb-28">
+            <FlatList
+              numColumns={2}
+              data={data.data}
+              style={{ marginTop: 10 }}
+              renderItem={({ item }) => (
+                <View className="w-1/2 px-1 pb-2">
+                  <ProductCard product={item} />
+                </View>
+              )}
+              keyExtractor={(item) => item._id}
+            />
+          </View>
         )}
       </SafeAreaView>
     </TouchableWithoutFeedback>

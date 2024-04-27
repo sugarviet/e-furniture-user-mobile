@@ -38,8 +38,8 @@ const DeliveryTracking = () => {
                 <View className="border-b border-grey5 pb-2">
                     <Text className="text-base font-urbanistBold ">Order Status Detail</Text>
                 </View>
-                <View className="max-h-[350px]">
-                    <VerticalOrderStep data={orderTracking} />
+                <View className="max-h-[450px]">
+                    <VerticalOrderStep data={orderTracking} metaData={data}/>
                 </View>
             </View>
         </View>

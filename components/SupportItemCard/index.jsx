@@ -19,6 +19,10 @@ const TYPE = {
     icon: IMAGES.wallet,
     text: "Bank Account",
   },
+  address: {
+    icon: IMAGES.address_book,
+    text: "Address Book",
+  },
   assistance: {
     icon: IMAGES.help,
     text: "Help center",
@@ -26,10 +30,6 @@ const TYPE = {
   order: {
     icon: IMAGES.checkout,
     text: "Order",
-  },
-  cart: {
-    icon: IMAGES.bag,
-    text: "Cart",
   },
   setting: {
     icon: IMAGES.setting,

@@ -46,7 +46,6 @@ const Search = () => {
 
 
 const SearchResultCard = ({ text, slug }) => {
-  console.log(slug)
   const {go_to_product_detail} = useNavigation();
 
   return (

@@ -13,6 +13,7 @@ import cart from "../assets/animations/cart.json"
 import logo from "../assets/animations/logo.json"
 import success_bg from "../assets/animations/success_bg.json"
 import loading from "../assets/animations/loading.json"
+import loading_strip from "../assets/animations/loading_strip.json"
 
 
 
@@ -31,5 +32,6 @@ export const ANIMATIONS = {
     cart,
     logo,
     success_bg,
-    loading
+    loading,
+    loading_strip
 };

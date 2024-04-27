@@ -4,7 +4,6 @@ import ProductDetail from "../../../../components/ProductDetail";
 const ViewProductDetail = () => {
     return (
         <View className="bg-white">
-            <Stack.Screen options={{ headerTransparent: false }} />
             <ProductDetail />
         </View>
     );
