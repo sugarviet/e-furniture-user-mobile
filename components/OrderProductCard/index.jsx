@@ -8,7 +8,6 @@ import { formatCurrency } from '../../utils/formatCurrency';
 import DeliveryTrackingBrief from '../DeliveryTrackingBrief';
 
 const OrderProductCard = ({ orderData, state }) => {
-
   const { go_to_order_detail } = useNavigation();
 
   const orderState = orderData.order_tracking[orderData.order_tracking.length - 1].name
@@ -31,7 +30,7 @@ const OrderProductCard = ({ orderData, state }) => {
           </View>
         </View>
 
-        <OrderProductBriefInfo orderProduct={orderData.order_products.slice(0, 1)} state={state} />
+        <OrderProductBriefInfo orderProduct={orderData.order_products.slice(0, 1)} state={state} orderCode={orderData.order_code} />
 
         {lengthOfProduct > 1 &&
           <View className="border-t border-grey5">

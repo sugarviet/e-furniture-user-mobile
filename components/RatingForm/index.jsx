@@ -18,9 +18,11 @@ import useNotification from "../../hooks/useNotification";
 import { useFetch, usePost } from "../../hooks/api-hooks";
 import { handle_feedback } from "../../api/feedbackUrl";
 import { get_order_by_state } from "../../api/orderHistoryApi";
-import { useEffect, useState } from "react";
+import { useEffect, useState, forwardRef } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
-const RatingForm = ({ orderBriefInfoCard }) => {
+const RatingForm = forwardRef(({ orderBriefInfoCard, orderCode }, ref) => {
+  const queryClient = useQueryClient();
   const { control, handleSubmit } = useForm();
   const { success_message, error_message } = useNotification();
   const { mutate } = usePost(
@@ -28,22 +30,22 @@ const RatingForm = ({ orderBriefInfoCard }) => {
     undefined,
     () => {
       success_message(null, null, 'Feedback sent successfully')
+      ref.current?.close();
     },
     () => {
-      error_message(null, null, 'Feedback sent successfully')
+      error_message(null, null, 'Feedback sent failed')
     },
     get_order_by_state("Done")
   );
 
   const onSubmit = (data) => {
     const body = {
-      order_code: "",
+      order_code: orderCode,
       product_id: orderBriefInfoCard.product_id._id,
       rating: data.rating,
       content: data.content,
     };
     mutate(body);
-
   };
 
   return (
@@ -126,6 +128,6 @@ const RatingForm = ({ orderBriefInfoCard }) => {
       </View>
     </SafeAreaView>
   );
-};
+});
 
 export default RatingForm;

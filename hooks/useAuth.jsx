@@ -6,18 +6,19 @@ import { jwtDecode } from "jwt-decode";
 import "core-js/stable/atob";
 import useNotification from "./useNotification";
 
+
 export default function useAuth() {
 
   const { setTokens, clearTokens } = useAuthStore();
   const { success_message, error_message } = useNotification();
   const { go_to_sign_in } = useNavigation();
-
   const { mutate: login, isLoading:isLoginLoading } = usePostWithoutAuth(
     get_login(),
     undefined,
     (data) => {
       const { access_token, refresh_token } = data;
       const decode = jwtDecode(access_token);
+      // loginSocketWithId(decode.account_id)
       setTokens(access_token, refresh_token, decode.account_id);
     },
     () => { }
