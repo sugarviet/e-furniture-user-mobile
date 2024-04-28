@@ -5,7 +5,8 @@ import BottomSheet from "../BottomSheet";
 import RatingForm from "../RatingForm";
 import ProductVariation from "../ProductVariation";
 
-const OrderProductBriefInfo = ({ orderProduct, state }) => {
+const OrderProductBriefInfo = ({ orderProduct, state, orderCode }) => {
+
   const [orderBriefInfoCard, setOrderBriefInfoCard] = useState();
   const ratingBottomSheet = useRef(false);
   const handleOpenRatingModal = (product) => {
@@ -45,7 +46,7 @@ const OrderProductBriefInfo = ({ orderProduct, state }) => {
                 >
                   {product.product_id.name}
                 </Text>
-                {state === 'Done' &&
+                {(state === 'Done' && product.status === 1) &&
                 <Pressable onPress={() => handleOpenRatingModal(product)} className='underline'>
                   <Text className='underline'>Review</Text>
                 </Pressable>
@@ -98,7 +99,7 @@ const OrderProductBriefInfo = ({ orderProduct, state }) => {
 
       <BottomSheet ref={ratingBottomSheet}>
         {orderBriefInfoCard ? (
-          <RatingForm orderBriefInfoCard={orderBriefInfoCard} />
+          <RatingForm orderBriefInfoCard={orderBriefInfoCard} ref={ratingBottomSheet} orderCode={orderCode}/>
         ) : null}
       </BottomSheet>
     </View>

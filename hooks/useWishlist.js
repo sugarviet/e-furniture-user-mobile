@@ -15,7 +15,7 @@ function useWishlist(id) {
     }
 
     const isInWishlist = (id) => {
-        return data.some(item => item._id === id);
+        return data?.some(item => item._id === id);
     }
 
     return { isInWishlist, isLoading, addToWishlist, removeFromWishlist };

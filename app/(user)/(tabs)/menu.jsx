@@ -19,7 +19,7 @@ const Menu = () => {
   const { accountId } = useAuthStore();
   return (
     <ScrollableContentContainer>
-      {accountId && <UserBriefCard />}
+       {accountId && <UserBriefCard />}
       <View className="px-2">
       <CenteredDivider color={COLORS.lightGray} thickness={0.5}/>
         <View>

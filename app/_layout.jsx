@@ -8,8 +8,10 @@ import SplashScreen from "./(authenticate)/splash";
 import { PortalProvider } from '@gorhom/portal';
 import FlashMessage from "react-native-flash-message";
 
-const RootLayout = () => {
+import useAuth from "../stores/useAuthStore";
 
+const RootLayout = () => {
+  const { accessToken } = useAuth();
   const [isShowSplash, setIsShowSplash] = useState(false);
   const [splashAnimationFinished, setSplashAnimationFinished] = useState(false);
 

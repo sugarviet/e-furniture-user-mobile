@@ -61,7 +61,8 @@ const TYPES = {
     submit: {
         icon: null,
         size: 24,
-        bgColor: 'black'
+        bgColor: 'black',
+        rounded: 40,
     },
     addBankAccount: {
         icon: null,

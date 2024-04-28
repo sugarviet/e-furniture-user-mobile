@@ -33,6 +33,8 @@ function useCart() {
             success_message(null, null,"Add to cart successfully");
         },
         (error) => {
+            error_message(null, null,"Add to cart failed");
+
         },
         get_cart_api()
     );
