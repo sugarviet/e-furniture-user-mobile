@@ -15,9 +15,10 @@ import FormInputBottomSheet from "../FormInputBottomSheet";
 import FormRating from "../FormRating";
 import useNotification from "../../hooks/useNotification";
 
-import { usePost } from "../../hooks/api-hooks";
+import { useFetch, usePost } from "../../hooks/api-hooks";
 import { handle_feedback } from "../../api/feedbackUrl";
 import { get_order_by_state } from "../../api/orderHistoryApi";
+import { useEffect, useState } from "react";
 
 const RatingForm = ({ orderBriefInfoCard }) => {
   const { control, handleSubmit } = useForm();
@@ -34,9 +35,9 @@ const RatingForm = ({ orderBriefInfoCard }) => {
     get_order_by_state("Done")
   );
 
-
   const onSubmit = (data) => {
     const body = {
+      order_code: "",
       product_id: orderBriefInfoCard.product_id._id,
       rating: data.rating,
       content: data.content,
