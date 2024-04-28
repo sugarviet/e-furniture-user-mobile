@@ -6,6 +6,7 @@ import useBank from '../../hooks/useBank';
 import BankInput from '../BankInput';
 import ButtonModal from '../ButtonModal';
 import ErrorMessage from "../ErrorMessage";
+import LoadingStrip from "../LoadingStrip";
 
 const client_id = "b2b6a9d3-0e62-48fe-8731-07f072b97412";
 const api_key = "0baa5242-d26e-400f-88e4-0e5b82317b71";
@@ -20,7 +21,7 @@ const BankAccountForm = () => {
     const [accountNumber, setAccountNumber] = useState();
     const [accountError, setAccountError] = useState(false);
 
-    const { addBankAccount } = useBank();
+    const { addBankAccount,isCreateBankLoading } = useBank();
 
     const handleLookUpAccount = () => {
         // const data = JSON.stringify({
@@ -51,6 +52,8 @@ const BankAccountForm = () => {
     const handleAddAccount = () => {
         addBankAccount({ ...params, accountNumber, accountName });
     };
+
+    if(isCreateBankLoading) return <LoadingStrip/>
 
 
     return (

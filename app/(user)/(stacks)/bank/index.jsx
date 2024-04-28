@@ -7,8 +7,8 @@ const Bank = () => {
     <View >
       <Stack.Screen
         options={{
-          title: "Order Detail",
-          headerLeft: () => <HeaderButton type={"bank_back"} />,
+          title: "Bank account",
+          headerLeft: () => <HeaderButton type={"back"} />,
         }}
       />
       <BankAccount />

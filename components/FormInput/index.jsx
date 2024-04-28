@@ -55,13 +55,13 @@ const TYPE = {
       },
     }),
   },
-  confirmPassword: {
+  confirm_password: {
     placeholder: "Confirm Password",
     icon: IMAGES.padlock,
     isSecure: true,
     rules: (validated) => ({
-      required: "Bạn chưa nhập lại mật khẩu!",
-      validate: () => validated || "Mật khẩu không khớp",
+      required: "Please enter the confirm password",
+      validate: () => validated || "Confirm password don't match with password",
     }),
   },
   email: {
@@ -77,12 +77,14 @@ const TYPE = {
   },
   first_name: {
     placeholder: "First name",
+    icon: IMAGES.user,
     rules: () => ({
       required: "Please enter your first name! ",
     }),
   },
   last_name: {
     placeholder: "Last name",
+    icon: IMAGES.user,
     rules: () => ({
       required: "Please enter your last name! ",
     }),
@@ -127,6 +129,10 @@ const TYPE = {
   },
   note: {
     placeholder: "Leave a message...",
+    rules: () => ({}),
+  },
+  reason: {
+    placeholder: "Why you want to cancel this order...",
     rules: () => ({}),
   },
 };

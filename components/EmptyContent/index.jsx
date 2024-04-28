@@ -3,8 +3,8 @@ import { IMAGES } from "../../constants/image"
 
 const TYPES = {
   review: {
-    title: "You don't have an order yet",
-    subTitle: "You don't have an active order at this time",
+    title: "There are no reviews yet",
+    subTitle: "There are no reviews for this product",
     image: IMAGES.order_not_found,
     imageWidth: 240,
     imageHeight: 240,
@@ -36,7 +36,7 @@ const TYPES = {
   },
   coupon: {
     title: "Not found :(",
-    subTitle: "You don't have any bank account available",
+    subTitle: "You don't have any coupon available",
     image: IMAGES.not_found_voucher,
     imageWidth: 176,
     imageHeight: 140,
@@ -65,9 +65,17 @@ const TYPES = {
     imageWidth: 120,
     imageHeight: 210,
     gap: 12,
+  },
+  type: {
+    title: "Empty Product",
+    subTitle: `There are currently no products available in the catalog`,
+    image: IMAGES.not_found_type,
+    imageWidth: 130,
+    imageHeight: 150,
+    gap: 12,
   }
 }
-const EmptyContent = ({ type }) => {
+const EmptyContent = ({ type, slug }) => {
 
   const { title, subTitle, image, imageWidth, imageHeight, gap } = TYPES[type]
 
@@ -76,7 +84,7 @@ const EmptyContent = ({ type }) => {
       <Image source={image} style={{ width: imageWidth, height: imageHeight }} />
       <View style={{ paddingTop: gap }} className='mx-auto'>
         <Text className='text-center font-bold text-lg mb-2'>{title}</Text>
-        <Text>{subTitle}</Text>
+        <Text className='text-center px-4'>{subTitle} <Text className="uppercase">{slug ? slug : ""}</Text></Text>
       </View>
 
     </View>

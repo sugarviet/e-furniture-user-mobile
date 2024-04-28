@@ -1,11 +1,11 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { get_order_by_state } from '../../../../api/orderHistoryApi'
 import EmptyContent from '../../../../components/EmptyContent'
+import LoadingStrip from '../../../../components/LoadingStrip'
 import OrderProductCard from '../../../../components/OrderProductCard'
 import { useFetchWithAuth } from '../../../../hooks/api-hooks'
-import LoadingSpinner from '../../../../components/LoadingSpinner'
 
 const Orders = ({ ...props }) => {
 
@@ -14,7 +14,7 @@ const Orders = ({ ...props }) => {
 
     const isEmptyData = !data?.data.length
 
-    if (isLoading) return <LoadingSpinner />
+    if (isLoading) return <LoadingStrip />
 
     return (
         <View className='bg-[#f5f5f5] flex-1'>

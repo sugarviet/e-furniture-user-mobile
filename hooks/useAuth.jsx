@@ -4,11 +4,15 @@ import useAuthStore from "../stores/useAuthStore";
 import useNavigation from "./useNavigation";
 import { jwtDecode } from "jwt-decode";
 import "core-js/stable/atob";
+import useNotification from "./useNotification";
 
 export default function useAuth() {
+
   const { setTokens, clearTokens } = useAuthStore();
+  const { success_message, error_message } = useNotification();
   const { go_to_sign_in } = useNavigation();
-  const { mutate: login } = usePostWithoutAuth(
+
+  const { mutate: login, isLoading:isLoginLoading } = usePostWithoutAuth(
     get_login(),
     undefined,
     (data) => {
@@ -16,15 +20,18 @@ export default function useAuth() {
       const decode = jwtDecode(access_token);
       setTokens(access_token, refresh_token, decode.account_id);
     },
-    () => {}
+    () => { }
   );
   const { mutate: register } = usePostWithoutAuth(
     get_register(),
     undefined,
     () => {
+      success_message("register", "sign_up");
       go_to_sign_in();
     },
-    () => {}
+    () => {
+      error_message("register", "sign_up");
+    }
   );
   const { mutate: logout } = usePost(
     get_logout(),
@@ -32,7 +39,7 @@ export default function useAuth() {
     () => {
       clearTokens();
     },
-    () => {}
+    () => { }
   );
   const login_with_app = (data) => {
     login(data);
@@ -50,6 +57,7 @@ export default function useAuth() {
     clearTokens();
   };
   return {
+    isLoginLoading,
     login_with_app,
     register_with_app,
     handleLogout,

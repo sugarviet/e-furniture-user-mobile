@@ -28,6 +28,11 @@ const OrderDetail = ({ data }) => {
 
     const isPaidDeposit = data.order_checkout.paid.type === "Deposit";
 
+    const totalPrice = data.order_checkout.total;
+
+    const currentTracking = data.current_order_tracking.name;
+    const currentTrackingNote = data.current_order_tracking.note;
+
     const discount = data.order_checkout.voucher
         ? formatCurrency(
             (data.order_checkout.voucher.value / 100) * totalPrice
@@ -39,7 +44,13 @@ const OrderDetail = ({ data }) => {
             <View className="bg-blackPrimary w-full px-4 py-6 flex flex-row justify-between items-center">
                 <View className="max-w-[300px]">
                     <Text className="text-white text-[16px] font-urbanistSemiBold"  >{data.current_order_tracking.name}</Text>
-                    <Text className="text-white text-[14px] font-urbanistRegular pt-3"  >{data.current_order_tracking.note}</Text>
+                    <Text className="text-white text-[14px] font-urbanistRegular pt-3"  >
+                        {currentTracking === "Cancelled" ?
+                            `Order is cancelled with reason: ${currentTrackingNote}`
+                            : currentTracking === "Done" ?
+                                "Successfully delivered" :
+                                currentTrackingNote}
+                    </Text>
                 </View>
                 <Icon className="mr-3" source={IMAGES.truck_white} style={{ width: 45, height: 45 }} />
             </View>

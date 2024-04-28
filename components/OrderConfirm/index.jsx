@@ -1,8 +1,13 @@
 import { useLocalSearchParams } from "expo-router";
-import { useEffect, useState } from "react";
+import * as WebBrowser from 'expo-web-browser';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Pressable, ScrollView, Text, View } from "react-native";
+import { checkout_with_user } from "../../api/checkoutApi";
 import { IMAGES } from "../../constants/image";
+import { PAYMENT_METHOD } from "../../constants/paymentMethod";
 import { useCheckout } from "../../context/CheckoutContext";
+import { usePost } from "../../hooks/api-hooks";
 import useCart from "../../hooks/useCart";
 import useNavigation from "../../hooks/useNavigation";
 import { formatCurrency } from "../../utils/formatCurrency";
@@ -11,17 +16,12 @@ import CheckoutProductCard from "../CheckoutProductCard";
 import DefaultAddressCard from "../DefaultAddressCard";
 import DefaultCouponCard from "../DefaultCouponCard";
 import DefaultPaymentCard from "../DefaultPaymentCard";
+import FormInput from "../FormInput";
 import Icon from "../Icon";
+import LoadingSpinner from "../LoadingSpinner";
 import PopupModal from "../Modal";
 import OrderConfirmLayout from "../OrderConfirmLayout";
 import ShippingCard from "../ShippingCard";
-import { useForm } from "react-hook-form";
-import FormInput from "../FormInput";
-import { usePost } from "../../hooks/api-hooks";
-import { checkout_with_user } from "../../api/checkoutApi";
-import * as WebBrowser from 'expo-web-browser';
-import { PAYMENT_METHOD } from "../../constants/paymentMethod";
-import * as Linking from 'expo-linking';
 
 export default function OrderConfirm() {
 
@@ -64,6 +64,7 @@ export default function OrderConfirm() {
     if (isDeposit && isCod) {
       await WebBrowser.openBrowserAsync(metaData.order_checkout.pay_os.checkoutUrl);
       WebBrowser.dismissBrowser();
+      go_to_home();
     }
     if (!isDeposit && isCod) {
       setModalVisible(!modalVisible)
@@ -71,6 +72,7 @@ export default function OrderConfirm() {
     if (!isDeposit && !isCod) {
       await WebBrowser.openBrowserAsync(metaData.order_checkout.pay_os.checkoutUrl);
       WebBrowser.dismissBrowser();
+      go_to_home();
     }
   };
 
@@ -104,7 +106,7 @@ export default function OrderConfirm() {
 
 
 
-  if (isPriceVoucherLoading) return <Text>isPriceVoucherLoading</Text>;
+  if (isPriceVoucherLoading) return <LoadingSpinner/>;
 
   return (
     <View className="relative bg-[#f8f8f8]">

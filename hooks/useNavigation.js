@@ -4,6 +4,7 @@ function useNavigation() {
   const go_back = () => router.back();
   const go_to_welcome_screen = () => router.push("/");
   const go_to_order = () => router.push("/order");
+  const go_to_cart = () => router.push("/cart");
   const go_to_sign_in = () => router.push("/sign-in");
   const go_to_sign_up = () => router.push("/sign-up");
   const go_to_home = () => router.push("/home");
@@ -22,6 +23,7 @@ function useNavigation() {
   const go_to_catalog = (slug) => router.push(`/product-catalog/${slug}`)
   const go_to_order_detail = (id) => router.push({ pathname: '/order-detail', params: id })
   const go_to_delivery_tracking = (orderTracking) => router.push({ pathname: '/order-detail/delivery-detail', params: orderTracking })
+  const go_to_delivery_proof = (orderTracking) => router.push({ pathname: '/order-detail/delivery-proof', params: orderTracking })
   const go_to_region_select = () => router.push('/address/add-new-address/region-select')
   const go_to_review_products = (id) => {
     return router.push(`/product-review/${id}`)
@@ -32,7 +34,7 @@ function useNavigation() {
   const go_to_flash_sale = () => router.push("/flashsale");
   const go_to_order_confirmation = () => router.push("/order-confirmation");
   const go_to_order_confirmation_cod = (checkoutData) => router.push({ pathname: '/order-confirmation/cod-confirmation', params: { data: JSON.stringify(checkoutData) } });
-
+  const go_to_cancel_order = (cancelData) => router.push({ pathname: '/cancel-order', params: { data: JSON.stringify(cancelData) } });
 
   return {
     go_to_region_select,
@@ -63,7 +65,10 @@ function useNavigation() {
     go_to_bank_form,
     go_to_flash_sale,
     go_to_order_confirmation,
-    go_to_order_confirmation_cod
+    go_to_order_confirmation_cod,
+    go_to_cart,
+    go_to_delivery_proof,
+    go_to_cancel_order
   };
 }
 
