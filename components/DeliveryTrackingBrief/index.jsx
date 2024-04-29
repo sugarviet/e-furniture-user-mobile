@@ -21,11 +21,13 @@ const DeliveryTrackingBrief = ({ data }) => {
             <View style={{ flex: 1 }} className="flex flex-row gap-2 items-center">
                 <FontAwesome5 name="shipping-fast" size={16} color="#26aa99" />
                 <Text className="font-urbanistRegular text-[14px] text-[#26aa99] max-w-[300px]">
-                    {currentTrackingName === "Cancelled" ?
-                        `Cancel with reason: ${currentTracking}`
-                        : currentTrackingName === "Done" ?
-                            "Successfully delivered" :
-                            currentTracking}
+                    {currentTrackingName === "Processing" ?
+                        `Efurniture staff is preparing the order`
+                        : currentTrackingName === "Cancelled" ?
+                            `Cancel with reason: ${currentTracking}`
+                            : currentTrackingName === "Done" ?
+                                "Successfully delivered" :
+                                currentTracking}
                 </Text>
             </View>
             <Entypo name={ICONS.enTypo_arrow_right} size={16} color="black" />

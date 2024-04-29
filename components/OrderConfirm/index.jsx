@@ -63,16 +63,16 @@ export default function OrderConfirm() {
     const isCod = metaData.payment_method === PAYMENT_METHOD.cod;
     if (isDeposit && isCod) {
       await WebBrowser.openBrowserAsync(metaData.order_checkout.pay_os.checkoutUrl);
-      WebBrowser.dismissBrowser();
       go_to_home();
+      WebBrowser.dismissBrowser();
     }
     if (!isDeposit && isCod) {
       setModalVisible(!modalVisible)
     }
     if (!isDeposit && !isCod) {
       await WebBrowser.openBrowserAsync(metaData.order_checkout.pay_os.checkoutUrl);
-      WebBrowser.dismissBrowser();
       go_to_home();
+      WebBrowser.dismissBrowser();
     }
   };
 

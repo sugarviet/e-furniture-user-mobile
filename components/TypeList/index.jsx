@@ -18,7 +18,7 @@ const TypeList = ({ data }) => {
   };
 
   return (
-    <View className="my-2 mb-8 max-h-48 overflow-hidden">
+    <View className="my-2 mb-2 max-h-48 overflow-hidden">
       <View className="flex-wrap items-center justify-start flex-row">
         {data.map((type) => {
           const { _id, thumb, slug, name } = type;
