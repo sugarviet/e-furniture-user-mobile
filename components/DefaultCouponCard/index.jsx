@@ -8,11 +8,10 @@ import { Entypo } from "@expo/vector-icons";
 import useNavigation from "../../hooks/useNavigation";
 import { IMAGES } from '../../constants/image'
 
-function DefaultCouponCard({ purchaseItems, dataAfterVoucher }) {
-    const { go_to_voucher_list } = useNavigation();
+function DefaultCouponCard({ onPress, dataAfterVoucher }) {
 
     return (
-        <PressableContainer onPress={() => go_to_voucher_list(purchaseItems)}>
+        <PressableContainer onPress={onPress}>
             <View className="flex-row bg-white rounded-xl flex items-center justify-between px-5 py-6 shadow-sm mx-1">
                 <View className="flex flex-row items-center">
                     <Icon

@@ -1,6 +1,6 @@
 import { useLocalSearchParams } from "expo-router";
 import * as WebBrowser from 'expo-web-browser';
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { checkout_with_user } from "../../api/checkoutApi";
@@ -22,19 +22,48 @@ import LoadingSpinner from "../LoadingSpinner";
 import PopupModal from "../Modal";
 import OrderConfirmLayout from "../OrderConfirmLayout";
 import ShippingCard from "../ShippingCard";
+import PaymentList from "../PaymentList";
+import GorhomeBottomSheet from "../BottomSheet";
+import * as Linking from 'expo-linking';
+import CouponList from "../CouponList";
+import useVoucher from "../../hooks/useVoucher";
+import getCoordinates from "../../utils/getCoordinate";
 
 export default function OrderConfirm() {
 
   const { control, handleSubmit } = useForm();
-  const { go_back, go_to_order_confirmation_cod, go_to_home } = useNavigation();
+  const { go_to_cart, go_to_order_confirmation_cod, go_to_home, go_back } = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
 
-  const { getTotalPrice } = useCart();
-  const { orderShipping,
-    selectedPayment,
+  const [selectedPayment, setSelectedPayment] = useState(PAYMENT_METHOD.cod);
+
+  const url = Linking.useURL();
+
+  const handleConfirmPayment = (payment) => {
+    setSelectedPayment(payment);
+    paymentRef.current?.close();
+  }
+
+  const paymentRef = useRef(null);
+  const couponRef = useRef(null);
+
+  const handleOpenPaymentModal = () => {
+    paymentRef.current?.expand();
+  };
+  const handleOpenCouponModal = () => {
+    couponRef.current?.expand();
+  };
+  const handleCloseCouponModal = () => {
+    couponRef.current?.close();
+  };
+
+  const { orderShipping } = useCheckout();
+  const {
+    getTotalPrice,
     dataAfterVoucher,
-    isPriceVoucherLoading,
-  } = useCheckout();
+    setDataAfterVoucher,
+    isVoucherLoading
+  } = useVoucher();
 
   const params = useLocalSearchParams();
   const { data } = params;
@@ -62,21 +91,21 @@ export default function OrderConfirm() {
     const isDeposit = metaData.order_checkout.paid.type === "Deposit"
     const isCod = metaData.payment_method === PAYMENT_METHOD.cod;
     if (isDeposit && isCod) {
+      go_to_cart();
       await WebBrowser.openBrowserAsync(metaData.order_checkout.pay_os.checkoutUrl);
       WebBrowser.dismissBrowser();
-      go_to_home();
     }
     if (!isDeposit && isCod) {
       setModalVisible(!modalVisible)
     }
     if (!isDeposit && !isCod) {
+      go_to_cart();
       await WebBrowser.openBrowserAsync(metaData.order_checkout.pay_os.checkoutUrl);
       WebBrowser.dismissBrowser();
-      go_to_home();
     }
   };
 
-  const { mutate: checkoutForUser, data: dataCheckout } = usePost(
+  const { mutate: checkoutForUser, data: dataCheckout, isLoading: isCheckoutLoading } = usePost(
     checkout_with_user(),
     undefined,
     (data) => {
@@ -87,11 +116,23 @@ export default function OrderConfirm() {
     }
   );
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    const { address, province, district, ward } = orderShipping;
+    const coordinates = await getCoordinates(
+      `${address} ${district} ${ward} ${province}`
+    );
     checkoutForUser({
       order_products: orderProducts,
       payment_method: selectedPayment,
-      order_shipping: orderShipping,
+      order_shipping: {
+        ...orderShipping,
+        longitude: coordinates[0],
+        latitude: coordinates[1],
+        mobile: {
+          returnUrl: url + "/--/order-confirmation",
+          cancelUrl: url + "/--/order-cancelled",
+        }
+      },
       order_checkout: {
         final_total: dataAfterVoucher
           ? dataAfterVoucher.order_total_after_voucher
@@ -104,9 +145,6 @@ export default function OrderConfirm() {
 
   };
 
-
-
-  if (isPriceVoucherLoading) return <LoadingSpinner/>;
 
   return (
     <View className="relative bg-[#f8f8f8]">
@@ -127,11 +165,17 @@ export default function OrderConfirm() {
         </OrderConfirmLayout>
 
         <OrderConfirmLayout type="coupon">
-          <DefaultCouponCard purchaseItems={purchaseItems} dataAfterVoucher={dataAfterVoucher} />
+          <DefaultCouponCard purchaseItems={purchaseItems} dataAfterVoucher={dataAfterVoucher} onPress={handleOpenCouponModal} />
+          <GorhomeBottomSheet ref={couponRef}>
+            <CouponList handleCloseCouponModal={handleCloseCouponModal} setDataAfterVoucher={setDataAfterVoucher} purchaseItems={purchaseItems} getTotalPrice={getTotalPrice} />
+          </GorhomeBottomSheet>
         </OrderConfirmLayout>
 
         <OrderConfirmLayout type="payment">
-          <DefaultPaymentCard />
+          <DefaultPaymentCard onPress={handleOpenPaymentModal} selectedPayment={selectedPayment} />
+          <GorhomeBottomSheet ref={paymentRef}>
+            <PaymentList selectedPayment={selectedPayment} handleConfirmPayment={handleConfirmPayment} />
+          </GorhomeBottomSheet>
         </OrderConfirmLayout>
 
         <OrderConfirmLayout type="note">

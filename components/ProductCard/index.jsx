@@ -1,6 +1,6 @@
 import { FontAwesome5 } from "@expo/vector-icons";
 import React from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import { ICONS } from "../../constants/icons";
 import useNavigation from "../../hooks/useNavigation";
 import useFeedback from "../../hooks/useFeedback";
@@ -9,7 +9,7 @@ import useWishlist from "../../hooks/useWishlist";
 import FavoriteButton from "../FavoriteButton";
 import LoadingSpinner from "../LoadingSpinner";
 import { LinearGradient } from "expo-linear-gradient";
-
+import { Image, Skeleton } from '@rneui/themed';
 const ProductCard = ({ product }) => {
 
   const {
@@ -42,8 +42,11 @@ const ProductCard = ({ product }) => {
           <View className="px-3">
             <Image
               source={{ uri: product.thumbs[0] }}
-              className="w-full h-40 overflow-hidden rounded-lg mt-6 object-center"
+              style={{ width: '100%', height: 160, marginTop: 24 }}
               resizeMode="contain"
+              PlaceholderContent={
+                <LoadingSpinner/>
+              }
             />
             <View className="absolute top-0 right-0 m-2">
               <FavoriteButton id={product._id} />

@@ -46,16 +46,17 @@ const Home = () => {
         <Text className="text-xl font-urbanistBold">Specific Furniture</Text>
       </View>
       <TypeList types={types} />
-      <View className="flex-row justify-between items-center px-3">
-        <Text className="text-xl font-urbanistBold">Most Popular</Text>
-      </View>
-      <View className="mx-[10px]">
-        <BestSellerProduct/>
-      </View>
 
       <Pressable onPress={go_to_flash_sale} className="px-3">
         <FlashSaleBgSlider />
       </Pressable>
+
+      <View className="flex-row justify-between items-center px-3 py-2">
+        <Text className="text-xl font-urbanistBold">Most Popular</Text>
+      </View>
+      <View className="mx-[10px]">
+        <BestSellerProduct />
+      </View>
 
       <View className="flex-row flex-wrap">
         {/* {products.map((product) => (

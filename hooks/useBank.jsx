@@ -12,7 +12,7 @@ function useBank() {
 
   const { success_message, error_message } = useNotification();
 
-  const { mutate: createBankAccount,isLoading:isCreateBankLoading } = usePostAuth(
+  const { mutate: createBankAccount, isLoading: isCreateBankLoading } = usePostAuth(
     get_create_bank_info_api(),
     undefined,
     () => {
@@ -38,7 +38,7 @@ function useBank() {
     },
   );
 
-  const { mutate: remove, isLoading:isRemoveBankLoading } = useDeleteAuth(
+  const { mutate: remove, isLoading: isRemoveBankLoading } = useDeleteAuth(
     get_create_bank_info_api(),
     undefined,
     () => {
@@ -74,7 +74,7 @@ function useBank() {
     remove(body);
   };
 
-  return { addBankAccount, setDefault, removeBankAccount,isRemoveBankLoading,isCreateBankLoading };
+  return { addBankAccount, setDefault, removeBankAccount, isRemoveBankLoading, isCreateBankLoading };
 }
 
 export default useBank;

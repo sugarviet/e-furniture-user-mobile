@@ -7,13 +7,10 @@ import { useCheckout } from '../../context/CheckoutContext'
 import useNavigation from "../../hooks/useNavigation"
 import PressableContainer from '../PressableContainer'
 
-function DefaultPaymentCard() {
-    const { go_to_payment_list } = useNavigation();
-
-    const { selectedPayment } = useCheckout();
+function DefaultPaymentCard({ onPress, selectedPayment }) {
 
     return (
-        <PressableContainer onPress={go_to_payment_list}>
+        <PressableContainer onPress={onPress}>
             <View className="flex-row bg-white rounded-xl flex items-center justify-between px-5 py-6 shadow-sm mx-1">
                 <View className="flex flex-row items-center">
                     <MaterialIcons name="payment" size={28} color="black" />

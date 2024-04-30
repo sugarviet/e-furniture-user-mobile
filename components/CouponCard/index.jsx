@@ -14,11 +14,11 @@ const CouponCard = ({ getTotalPrice, data, selectedVoucher, handleGetCouponId })
         handleGetCouponId(couponId)
     }
 
-    const isHideCoupon = (data.used_turn_count === data.maximum_use_per_user) || (data.minimum_order_value > getTotalPrice())
+    const isHideCoupon = (data.used_turn_count === data.maximum_use_per_user) || (data.minimum_order_value > getTotalPrice)
 
     const maxUsedCoupon = data.used_turn_count === data.maximum_use_per_user
 
-    const notReachValueCoupon = data.minimum_order_value > getTotalPrice()
+    const notReachValueCoupon = data.minimum_order_value > getTotalPrice
 
 
     return (
@@ -38,7 +38,7 @@ const CouponCard = ({ getTotalPrice, data, selectedVoucher, handleGetCouponId })
                 <View className='flex-row bg-white flex items-center justify-between pl-2 pr-3 w-[70%]'>
                     <View className="flex flex-col pl-1">
                         <Text className='font-bold text-sm pb-1'>{data.name}</Text>
-                        <Text className='font-urbanistMedium text-[13px] '>{data.value}% off Capped at ₫100k</Text>
+                        <Text className='font-urbanistMedium text-[13px] '>{data.value}% off Capped at ₫{formatMoney(data.max_discount)}</Text>
                         <Text className='font-urbanistMedium text-[13px] '>Min. Spend ₫{formatMoney(data.minimum_order_value)}</Text>
                         <Text className='font-urbanistMedium text-[12px] text-grey1 pt-2'>{(data.used_turn_count / data.maximum_use) * 100}% used, Valid Till: {formatDate(data.end_date)}</Text>
                     </View>

@@ -29,7 +29,7 @@ function CheckoutProductCard({ cart }) {
           <View className="flex flex-row items-center justify-between">
             <Text
               numberOfLines={2}
-              className="text-[18px] font-urbanistExtraBold max-w-[180px]"
+              className="text-[18px] font-urbanistExtraBold max-w-[200px]"
             >
               {cart.name}
             </Text>

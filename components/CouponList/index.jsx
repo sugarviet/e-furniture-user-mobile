@@ -7,22 +7,17 @@ import { useCheckout } from '../../context/CheckoutContext';
 import LoadingSpinner from '../LoadingSpinner';
 import { useLocalSearchParams } from "expo-router";
 import EmptyContent from '../EmptyContent';
+import useVoucher from '../../hooks/useVoucher';
+import { apply_voucher } from '../../api/voucherApi';
+import { usePost } from '../../hooks/api-hooks';
+import { useState } from 'react';
+import LoadingStrip from '../LoadingStrip';
 
-const CouponList = () => {
-    const { vouchers, isVoucherLoading, handleApplyVoucher, selectedVoucher, setSelectedVoucher } = useCheckout()
+const CouponList = ({ purchaseItems,setDataAfterVoucher,handleCloseCouponModal }) => {
 
-    const params = useLocalSearchParams();
-    const { data } = params;
-    const purchaseItems = JSON.parse(data);
+    const {getTotalPrice, vouchers, isVoucherLoading } = useVoucher();
 
-    const getTotalPrice = () =>
-        purchaseItems.reduce((total, cur) => {
-            const subPrice = cur.select_variation.reduce(
-                (total, cur) => total + cur.sub_price,
-                0
-            );
-            return total + (cur.sale_price + subPrice) * cur.quantity_in_cart;
-        }, 0);
+    const [selectedVoucher, setSelectedVoucher] = useState();
 
     const handleGetCouponId = (couponId) => {
         if (selectedVoucher === couponId) {
@@ -33,12 +28,39 @@ const CouponList = () => {
     };
     const emptyVoucher = !vouchers?.length;
 
+    const productForVoucher = purchaseItems.map((item) => ({
+        product_id: item._id,
+        price: item.select_variation.reduce(
+            (total, cur) => total + cur.sub_price,
+            0
+        ) + item.sale_price,
+        quantity: item.quantity_in_cart
+    }));
 
-    if (isVoucherLoading) return <LoadingSpinner />;
+    const { mutate: applyVoucher, isLoading: isPriceVoucherLoading } = usePost(
+        apply_voucher(selectedVoucher),
+        undefined,
+        (data) => {
+            setDataAfterVoucher(data)
+        },
+        (error) => {
+        }
+    );
+
+    const handleApplyVoucher = () => {
+        if (selectedVoucher) {
+            applyVoucher(productForVoucher);
+        }
+        setDataAfterVoucher(null)
+        handleCloseCouponModal();
+    }
+
+    if (isVoucherLoading) return <LoadingStrip />;
+    if (isPriceVoucherLoading) return <LoadingStrip />;
 
     return (
         <View className="h-full relative bg-white">
-            {emptyVoucher ?
+            {emptyVoucher && isVoucherLoading ?
                 <EmptyContent type="coupon" />
                 :
                 <>

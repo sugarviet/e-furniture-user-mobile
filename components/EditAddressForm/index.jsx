@@ -1,5 +1,5 @@
 import { useLocalSearchParams } from "expo-router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Image, Pressable, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import FormInput from "../../components/FormInput";
@@ -11,11 +11,15 @@ import { delete_single_address, edit_address, get_all_address } from "../../api/
 import { useQueryClient } from "@tanstack/react-query";
 import { useDeleteAuth, useUpdate } from "../../hooks/api-hooks";
 import useNotification from "../../hooks/useNotification";
+import FlashWarningModal from "../FlashWarningModal";
+import ConfirmModal from "../ConfirmModal";
 
 const EditAddressForm = () => {
 
     const params = useLocalSearchParams();
     const data = JSON.parse(params.address);
+
+    console.log(data);
 
     const queryClient = useQueryClient();
 
@@ -24,6 +28,9 @@ const EditAddressForm = () => {
     const { go_to_region_select, go_back } = useNavigation();
 
     const { region, setRegion } = useUserStore();
+
+    const [isDefault, setIsDefault] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
 
     const { success_message, error_message } = useNotification();
 
@@ -64,7 +71,12 @@ const EditAddressForm = () => {
     };
 
     const handleDeleteAddress = (id) => {
-        delete_address(id)
+        if (data.is_default) {
+            setIsDefault(!isDefault)
+            setTimeout(() => setIsDefault(false), 2000);
+        } else {
+            setIsVisible(!isVisible)
+        }
     };
 
     useEffect(() => {
@@ -75,6 +87,7 @@ const EditAddressForm = () => {
 
     return (
         <View className="h-full relative">
+            {isDefault && <FlashWarningModal />}
             <ScrollView className="">
                 <View className="my-2">
                     <Text className="m-2 pl-1 text-gray-500">First name</Text>
@@ -130,6 +143,12 @@ const EditAddressForm = () => {
                     </ButtonModal>
                 </View>
             </Pressable>
+            <ConfirmModal
+                onCancelPress={() => setIsVisible(!isVisible)}
+                onActionPress={() => delete_address(data._id)}
+                isVisible={isVisible}
+                type="address"
+            />
         </View>
     );
 }

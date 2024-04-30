@@ -24,6 +24,7 @@ function useNavigation() {
   const go_to_order_detail = (id) => router.push({ pathname: '/order-detail', params: id })
   const go_to_delivery_tracking = (orderTracking) => router.push({ pathname: '/order-detail/delivery-detail', params: orderTracking })
   const go_to_delivery_proof = (orderTracking) => router.push({ pathname: '/order-detail/delivery-proof', params: orderTracking })
+  const go_to_refund_proof = (orderTracking) => router.push({ pathname: '/order-detail/refund-proof', params: orderTracking })
   const go_to_region_select = () => router.push('/address/add-new-address/region-select')
   const go_to_review_products = (id) => {
     return router.push(`/product-review/${id}`)
@@ -68,7 +69,8 @@ function useNavigation() {
     go_to_order_confirmation_cod,
     go_to_cart,
     go_to_delivery_proof,
-    go_to_cancel_order
+    go_to_cancel_order,
+    go_to_refund_proof
   };
 }
 
