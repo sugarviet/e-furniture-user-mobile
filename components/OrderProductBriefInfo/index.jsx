@@ -18,11 +18,12 @@ const OrderProductBriefInfo = ({ orderProduct, state, orderCode }) => {
     <View className="">
       {orderProduct.map((product, index) => {
         const onSale =
-          product.product_id.regular_price - product.product_id.sale_price > 0;
-        const subPrice = product.variation.reduce(
+          product.product.regular_price - product.price > 0;
+        const subPrice = product.product.select_variation.reduce(
           (total, cur) => total + cur.sub_price,
           0
         );
+
         return (
           <View
             key={`${product} + ${index}`}
@@ -47,10 +48,10 @@ const OrderProductBriefInfo = ({ orderProduct, state, orderCode }) => {
                   {product.product_id.name}
                 </Text>
                 {(state === 'Done' && product.status === 1) &&
-                <Pressable onPress={() => handleOpenRatingModal(product)} className='underline'>
-                  <Text className='underline'>Review</Text>
-                </Pressable>
-                
+                  <Pressable onPress={() => handleOpenRatingModal(product)} className='underline'>
+                    <Text className='underline'>Review</Text>
+                  </Pressable>
+
                 }
               </View>
 
@@ -58,19 +59,21 @@ const OrderProductBriefInfo = ({ orderProduct, state, orderCode }) => {
                 <View>
                   {product.variation.map((item, i) => {
                     const { variation_id, property_id } = item;
-                    const currentVariation = product.product_id.variation.find(
+                    const currentVariation = product.product.variation.find(
                       (i) => i._id === variation_id
                     );
+                    console.log("current", currentVariation);
                     currentVariation.properties =
                       currentVariation.properties.filter(
                         (item) => item._id === property_id
                       );
+
                     return (
                       <ProductVariation
                         key={i}
                         currentVariation={currentVariation}
                         variation={currentVariation}
-                        className="text-[10px] w-6 h-6"
+                        className="text-[10px] w-6 h-6 pt-2"
                       />
                     );
                   })}
@@ -99,7 +102,7 @@ const OrderProductBriefInfo = ({ orderProduct, state, orderCode }) => {
 
       <BottomSheet ref={ratingBottomSheet}>
         {orderBriefInfoCard ? (
-          <RatingForm orderBriefInfoCard={orderBriefInfoCard} ref={ratingBottomSheet} orderCode={orderCode}/>
+          <RatingForm orderBriefInfoCard={orderBriefInfoCard} ref={ratingBottomSheet} orderCode={orderCode} />
         ) : null}
       </BottomSheet>
     </View>

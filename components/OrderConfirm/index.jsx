@@ -26,7 +26,7 @@ import ShippingCard from "../ShippingCard";
 export default function OrderConfirm() {
 
   const { control, handleSubmit } = useForm();
-  const { go_back, go_to_order_confirmation_cod, go_to_home } = useNavigation();
+  const { go_to_cart, go_to_order_confirmation_cod, go_to_home } = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
 
   const { getTotalPrice } = useCart();
@@ -62,16 +62,16 @@ export default function OrderConfirm() {
     const isDeposit = metaData.order_checkout.paid.type === "Deposit"
     const isCod = metaData.payment_method === PAYMENT_METHOD.cod;
     if (isDeposit && isCod) {
+      go_to_cart();
       await WebBrowser.openBrowserAsync(metaData.order_checkout.pay_os.checkoutUrl);
-      go_to_home();
       WebBrowser.dismissBrowser();
     }
     if (!isDeposit && isCod) {
       setModalVisible(!modalVisible)
     }
     if (!isDeposit && !isCod) {
+      go_to_cart();
       await WebBrowser.openBrowserAsync(metaData.order_checkout.pay_os.checkoutUrl);
-      go_to_home();
       WebBrowser.dismissBrowser();
     }
   };

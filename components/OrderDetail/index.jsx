@@ -15,6 +15,8 @@ import DepositPrice from '../DepositPrice'
 
 
 const OrderDetail = ({ data }) => {
+    
+    console.log("detail",data);
 
     const { go_to_delivery_tracking } = useNavigation();
 

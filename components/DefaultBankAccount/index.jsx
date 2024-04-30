@@ -17,11 +17,7 @@ function DefaultBankAccount({ data, setSelectedBank }) {
 
   const { data: bankInfo, isLoading } = useFetchWithAuth(get_bank_by_id(defaultBank._id));
 
-  console.log("default", bankInfo);
-
   const { go_to_bank_account } = useNavigation();
-
-
 
   useEffect(() => (
     setSelectedBank(defaultBank)

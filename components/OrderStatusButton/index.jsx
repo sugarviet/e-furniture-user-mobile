@@ -55,7 +55,6 @@ const OrderStatusButton = ({ type, onPress, data, className }) => {
       go_to_order_detail(data._id);
     }
     if (actionName === "repurchase") {
-      console.log("repurchase order");
       // const list = order_products.map((product) => {
       //   const { product_id } = product;
       //   const { variation } = product_id;

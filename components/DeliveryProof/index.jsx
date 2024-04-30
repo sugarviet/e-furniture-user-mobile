@@ -22,7 +22,7 @@ const DeliveryProof = () => {
                         backgroundColor: '#000',
                     },
                     headerTransparent: false,
-                    // headerLeft: () => <HeaderButton className="text-black" type="black" />,
+                    headerLeft: () => <HeaderButton className="text-black" type="white" />,
                 }}
 
             />

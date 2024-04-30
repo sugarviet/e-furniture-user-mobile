@@ -9,6 +9,8 @@ import { useEffect } from "react";
 
 function DefaultAddressCard({ data }) {
 
+  const isEmpty = data.length === 0
+
   const { go_to_address_book } = useNavigation();
 
   const { setOrderShipping } = useCheckout();
@@ -45,7 +47,7 @@ function DefaultAddressCard({ data }) {
             <Icon2D name="location" size={28} activated="black" />
           </View>
           <View className="ml-2">
-            {data ? (
+            {!isEmpty ? (
               <View>
                 <View className="flex-row items-center mt-1">
                   <Text className="text-sm font-urbanistSemiBold">{`${last_name} ${first_name}`}</Text>
