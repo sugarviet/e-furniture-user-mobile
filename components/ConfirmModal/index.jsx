@@ -9,6 +9,15 @@ import {
 const TYPES = {
     address: {
         name: "Delete Address?",
+        actionName: "Delete"
+    },
+    cancelOrder: {
+        name: "Are you sure to cancel this order?",
+        actionName: "Confirm"
+    },
+    bank: {
+        name: "Delete Bank Account?",
+        actionName: "Delete"
     },
 
 };
@@ -20,7 +29,7 @@ function ConfirmModal({
     onCancelPress
 }) {
 
-    const { name } = TYPES[type];
+    const { name,actionName } = TYPES[type];
 
     return (
         <>
@@ -42,7 +51,7 @@ function ConfirmModal({
                                         </TouchableOpacity>
                                         <View className="border-r border-grey5 h-full"></View>
                                         <TouchableOpacity onPress={onActionPress} className="flex-1 flex-row items-center justify-center">
-                                            <Text className="text-base font-urbanistMedium text-orange-600">Delete</Text>
+                                            <Text className="text-base font-urbanistMedium text-orange-600">{actionName}</Text>
                                         </TouchableOpacity>
                                     </View>
                                 </View>

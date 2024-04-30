@@ -15,7 +15,7 @@ import DepositPrice from '../DepositPrice'
 
 
 const OrderDetail = ({ data }) => {
-    
+
     const { go_to_delivery_tracking } = useNavigation();
 
     const orderState = data.order_tracking[data.order_tracking.length - 1].name
@@ -43,11 +43,14 @@ const OrderDetail = ({ data }) => {
                     <Text className="text-white text-[14px] font-urbanistRegular pt-3"  >
                         {currentTracking === "Processing" ?
                             `Efurniture staff is preparing the order`
-                            : currentTracking === "Done" ?
+                            : currentTracking === "Cancelled" ?
                                 `Order is cancelled with reason: ${currentTrackingNote}`
                                 : currentTracking === "Done" ?
                                     "Successfully delivered" :
-                                    currentTrackingNote}
+                                    currentTracking === "Refunded" ?
+                                        "Successfully refunded" :
+                                        currentTrackingNote
+                        }
                     </Text>
                 </View>
                 <Icon className="mr-3" source={IMAGES.truck_white} style={{ width: 45, height: 45 }} />
@@ -121,6 +124,11 @@ const OrderDetail = ({ data }) => {
                         <Text className="text-sm  font-urbanistSemiBold tracking-wide text-grey2 pb-1">Order time</Text>
                         <Text className="text-sm leading-4 font-urbanistSemiBold tracking-wide text-grey2">{formatTime(data.createdAt)}, {formatDate(data.createdAt)}</Text>
                     </View>
+                    {currentTracking === "Cancelled" && data.payment_method === "Online Payment" &&
+                        <View className="border-t border-grey5 pt-2">
+                            <Text className="text-base font-urbanistSemiBold tracking-wide text-red pb-1">Waiting eFurniture staff refund money to your bank account</Text>
+                        </View>
+                    }
                 </View>
                 <View className="pt-1 px-4 pb-2">
                     <OrderStatusButton type={orderState} data={data} />

@@ -10,8 +10,6 @@ import CouponError from '../CouponError';
 
 const CouponCard = ({ getTotalPrice, data, selectedVoucher, handleGetCouponId }) => {
 
-    console.log(data);
-
     const handleSelectCoupon = (couponId) => {
         handleGetCouponId(couponId)
     }

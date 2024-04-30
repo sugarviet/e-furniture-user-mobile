@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Text, Pressable, TouchableOpacity, View } from "react-native";
+import { Text, Pressable, TouchableOpacity, View } from "react-native";
 import { IMAGES } from "../../constants/image";
 import QuantityOption from "../QuantityOption";
 import Icon from "../Icon";
@@ -11,7 +11,8 @@ import { Swipeable } from "react-native-gesture-handler";
 import { ICONS } from "../../constants/icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import useNavigation from "../../hooks/useNavigation";
-
+import { Image, Skeleton } from '@rneui/themed';
+import LoadingSpinner from "../LoadingSpinner";
 function CartCard({ cart, removeFromCart }) {
   const {
     decreaseQuantity,
@@ -52,12 +53,15 @@ function CartCard({ cart, removeFromCart }) {
             source={{
               uri: cart.thumbs[0],
             }}
+            PlaceholderContent={
+              <LoadingSpinner/>
+            }
           />
           <View className="pt-2">
             <View className="flex flex-row items-center justify-between">
               <Text
                 numberOfLines={2}
-                className="text-[18px] font-urbanistExtraBold max-w-[180px]"
+                className="text-[18px] font-urbanistExtraBold max-w-[200px]"
               >
                 {cart.name}
               </Text>

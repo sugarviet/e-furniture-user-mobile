@@ -75,7 +75,7 @@ const classNameMap = {
 
 function VerticalOrderStep({ data, metaData }) {
 
-    const { go_to_delivery_proof } = useNavigation();
+    const { go_to_delivery_proof, go_to_refund_proof } = useNavigation();
 
     const labels = data.map((track) => track.name).reverse();
     const note = data.map((track) => track.note).reverse();
@@ -113,7 +113,15 @@ function VerticalOrderStep({ data, metaData }) {
                                     </TouchableOpacity>
                                 </View>
                                 :
-                                <Text style={{ color }}>{note[position]}</Text>
+                                label === "Refunded" ?
+                                    <View>
+                                        <Text className="text-sm font-urbanistMedium text-[#26aa99]">Successfully refunded</Text>
+                                        <TouchableOpacity onPress={() => go_to_refund_proof({ data: JSON.stringify(metaData) })}>
+                                            <Text className="text-sm font-urbanistMedium text-blue-400 underline">View Proof of Refund</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                    :
+                                    <Text style={{ color }}>{note[position]}</Text>
                     }
                 </View>
                 <View className="absolute left-[-85px] top-1/2 -translate-y-3 flex items-center">

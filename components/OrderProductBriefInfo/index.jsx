@@ -72,7 +72,7 @@ const OrderProductBriefInfo = ({ orderProduct, state, orderCode }) => {
                         key={i}
                         currentVariation={currentVariation}
                         variation={currentVariation}
-                        className="text-[10px] w-6 h-6 pt-2"
+                        className="text-[10px] w-6 h-6"
                       />
                     );
                   })}

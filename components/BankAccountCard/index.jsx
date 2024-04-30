@@ -9,6 +9,7 @@ import GorhomeBottomSheet from "../BottomSheet";
 import useBank from '../../hooks/useBank';
 import LoadingStrip from '../LoadingStrip';
 import FlashWarningModal from '../FlashWarningModal';
+import ConfirmModal from '../ConfirmModal';
 
 const BankAccountCard = ({ bank }) => {
 
@@ -23,6 +24,7 @@ const BankAccountCard = ({ bank }) => {
     const { setDefault, removeBankAccount, isRemoveBankLoading } = useBank();
 
     const [isDefault, setIsDefault] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
 
     const bankRef = useRef(null);
 
@@ -39,9 +41,13 @@ const BankAccountCard = ({ bank }) => {
             setTimeout(() => setIsDefault(false), 2000);
             handleCloseDeleteModal()
         } else {
-            removeBankAccount(id);
-            handleCloseDeleteModal()
+            setIsVisible(!isVisible)
         }
+    };
+    const handleRemoveBankConfirm = (id) => {
+        removeBankAccount(id)
+        setIsVisible(!isVisible)
+        handleCloseDeleteModal()
     };
 
     if (isRemoveBankLoading) return <LoadingStrip />
@@ -126,6 +132,12 @@ const BankAccountCard = ({ bank }) => {
                     </Pressable>
                 </View>
             </GorhomeBottomSheet>
+            <ConfirmModal
+                onCancelPress={() => setIsVisible(!isVisible)}
+                onActionPress={() => handleRemoveBankConfirm(bank._id)}
+                isVisible={isVisible}
+                type="bank"
+            />
         </>
     )
 }

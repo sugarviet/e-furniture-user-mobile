@@ -12,6 +12,8 @@ function CancelOrderForm() {
     const { data } = params;
     const cancelData = JSON.parse(data);
 
+    console.log(cancelData);
+
     const { control, handleSubmit } = useForm();
 
     const { cancelOrder } = useCancelOrder(cancelData._id);
@@ -20,6 +22,8 @@ function CancelOrderForm() {
     const [isVisible, setIsVisible] = useState(false);
 
     const isCancelMethod = cancelData.payment_method === "Online Payment" || cancelData.order_checkout.paid.type === "Deposit"
+
+    const isPaymentOnline = cancelData.payment_method === "Online Payment"
 
     const onSubmit = (values) => {
         let body;
@@ -44,16 +48,20 @@ function CancelOrderForm() {
         <View className="flex-1">
             <Text className="m-2 pl-1 font-urbanistSemiBold">Reason:</Text>
             <FormInput className="shadow-sm h-12 bg-white rounded-md" type="reason" control={control} />
-            <Text className="text-sm font-urbanistSemiBold m-2">Choose your bank account to receive refund amount.</Text>
-            <DefaultBankAccount setSelectedBank={setSelectedBank} />
-            <TouchableOpacity onPress={()=>setIsVisible(!isVisible)} className="flex items-center bg-white py-4 px-2 mt-12">
+            {isPaymentOnline &&
+                <>
+                    <Text className="text-sm font-urbanistSemiBold m-2">Choose your bank account to receive refund amount.</Text>
+                    <DefaultBankAccount setSelectedBank={setSelectedBank} />
+                </>
+            }
+            <TouchableOpacity onPress={() => setIsVisible(!isVisible)} className="flex items-center bg-white py-4 px-2 mt-12">
                 <Text className="font-urbanistMedium text-red">Cancel Order</Text>
             </TouchableOpacity>
             <ConfirmModal
                 onCancelPress={() => setIsVisible(!isVisible)}
                 onActionPress={handleSubmit(onSubmit)}
                 isVisible={isVisible}
-                type="address"
+                type="cancelOrder"
             />
         </View>
     )

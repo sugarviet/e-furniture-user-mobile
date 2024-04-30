@@ -26,8 +26,11 @@ const DeliveryTrackingBrief = ({ data }) => {
                         : currentTrackingName === "Cancelled" ?
                             `Cancel with reason: ${currentTracking}`
                             : currentTrackingName === "Done" ?
-                                "Successfully delivered" :
-                                currentTracking}
+                                "Successfully delivered"
+                                : currentTrackingName === "Refunded" ?
+                                    "Successfully refunded" :
+                                    currentTracking
+                    }
                 </Text>
             </View>
             <Entypo name={ICONS.enTypo_arrow_right} size={16} color="black" />

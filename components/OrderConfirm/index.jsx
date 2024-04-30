@@ -27,6 +27,7 @@ import GorhomeBottomSheet from "../BottomSheet";
 import * as Linking from 'expo-linking';
 import CouponList from "../CouponList";
 import useVoucher from "../../hooks/useVoucher";
+import getCoordinates from "../../utils/getCoordinate";
 
 export default function OrderConfirm() {
 
@@ -104,7 +105,7 @@ export default function OrderConfirm() {
     }
   };
 
-  const { mutate: checkoutForUser, data: dataCheckout } = usePost(
+  const { mutate: checkoutForUser, data: dataCheckout, isLoading: isCheckoutLoading } = usePost(
     checkout_with_user(),
     undefined,
     (data) => {
@@ -115,12 +116,18 @@ export default function OrderConfirm() {
     }
   );
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    const { address, province, district, ward } = orderShipping;
+    const coordinates = await getCoordinates(
+      `${address} ${district} ${ward} ${province}`
+    );
     checkoutForUser({
       order_products: orderProducts,
       payment_method: selectedPayment,
       order_shipping: {
         ...orderShipping,
+        longitude: coordinates[0],
+        latitude: coordinates[1],
         mobile: {
           returnUrl: url + "/--/order-confirmation",
           cancelUrl: url + "/--/order-cancelled",

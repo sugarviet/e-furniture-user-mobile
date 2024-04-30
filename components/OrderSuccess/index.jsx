@@ -101,7 +101,7 @@ const OrderSuccess = ({ data }) => {
                                 {orderConfirmation.payment_method === PAYMENT_METHOD.cod ?
                                     <Text className="font-urbanistMedium">Cash On Delivery</Text>
                                     :
-                                    <Text className="font-urbanistMedium">Scan QR by VietQr</Text>
+                                    <Text className="font-urbanistMedium">Scan QR by PayOs</Text>
                                 }
                             </View>
                         </View>
@@ -168,7 +168,7 @@ const OrderSuccess = ({ data }) => {
                                         <View className="flex flex-col">
                                             {onSale && (
                                                 <Text className="font-urbanistSemiBold text-[14px] line-through text-grey2">
-                                                    {formatCurrency(product.product_id.regular_price)}
+                                                    {formatCurrency(product.product.regular_price)}
                                                 </Text>
                                             )}
                                             <Text
