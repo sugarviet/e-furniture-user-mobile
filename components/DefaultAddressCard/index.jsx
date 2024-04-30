@@ -31,7 +31,6 @@ function DefaultAddressCard({ data }) {
         phone: phone,
         longitude: 106.75197333979435,
         latitude: 10.786098323202225,
-        mobile: true,
       })
     } else {
       setOrderShipping({})

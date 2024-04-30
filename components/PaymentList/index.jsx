@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { IMAGES } from '../../constants/image';
 import { PAYMENT_METHOD } from '../../constants/paymentMethod';
@@ -7,7 +7,7 @@ import useNavigation from '../../hooks/useNavigation';
 import ButtonModal from '../ButtonModal';
 import PopupModal from '../Modal';
 import PaymentCard from '../PaymentCard';
-
+import GorhomeBottomSheet from "../BottomSheet";
 
 const paymentList = [
     {
@@ -25,14 +25,15 @@ const paymentList = [
 ]
 
 
-const PaymentList = () => {
+const PaymentList = ({ selectedPayment, handleConfirmPayment }) => {
 
-    const { selectedPayment, handleConfirmPayment } = useCheckout();
     const [selectPayment, setSelectPayment] = useState(selectedPayment);
 
     const handleSelectPayment = (payment) => {
         setSelectPayment(payment);
     }
+
+
 
     return (
         <View className="h-full relative bg-white">
@@ -42,7 +43,11 @@ const PaymentList = () => {
             <ScrollView className="px-2 py-4 mt-4" style={{ marginBottom: 90, height: '100%', width: '100%' }}>
                 {paymentList?.map((payment) => (
                     <View key={payment.method} className="pb-6">
-                        <PaymentCard data={payment} selectedPayment={selectedPayment} selectPayment={selectPayment} handleSelectPayment={handleSelectPayment} />
+                        <PaymentCard
+                            data={payment}
+                            selectedPayment={selectedPayment}
+                            selectPayment={selectPayment}
+                            handleSelectPayment={handleSelectPayment} />
                     </View>
                 ))}
             </ScrollView>

@@ -62,7 +62,6 @@ const OrderProductBriefInfo = ({ orderProduct, state, orderCode }) => {
                     const currentVariation = product.product.variation.find(
                       (i) => i._id === variation_id
                     );
-                    console.log("current", currentVariation);
                     currentVariation.properties =
                       currentVariation.properties.filter(
                         (item) => item._id === property_id
