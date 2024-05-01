@@ -1,6 +1,7 @@
 
 import { useEffect } from "react";
 import {
+    get_add_all_api,
     get_add_to_cart_api,
     get_cart_api,
     get_decrease_by_one_api,
@@ -19,6 +20,7 @@ import {
 } from "./api-hooks";
 
 import useNotification from "./useNotification";
+import useNavigation from "./useNavigation";
 
 function useCart() {
     const { success_message, error_message } = useNotification();
@@ -26,18 +28,35 @@ function useCart() {
     const { data, isLoading } = useFetchWithAuth(get_cart_api());
     const { purchaseItems, setPurchaseItems } = useCartStore();
 
+    const { go_to_cart } = useNavigation();
+
     const { mutate: addToCartMutation } = usePost(
         get_add_to_cart_api(),
         undefined,
         (data) => {
-            success_message(null, null,"Add to cart successfully");
+            success_message(null, null, "Add to cart successfully");
         },
         (error) => {
-            error_message(null, null,"Add to cart failed");
+            error_message(null, null, "Add to cart failed");
 
         },
         get_cart_api()
     );
+
+    const { mutate: addManyToCartMutation } = usePost(
+        get_add_all_api(),
+        undefined,
+        () => {
+            success_message(null, null, "Add to cart successfully");
+            go_to_cart()
+        },
+        (error) => {
+            const message = error.response.data.error.message;
+            error_message(null, null, message);
+        },
+        get_cart_api()
+    );
+
     const { mutate: increaseQuantityMutation } = useUpdate(
         get_increase_by_one_api(),
         undefined,
@@ -149,7 +168,18 @@ function useCart() {
 
     const isPurchaseAll = () => purchaseItems.length === getCart().length;
 
+    const addAllToCart = (list) => {
+        const body = list.map((item) => ({
+            _id: item._id,
+            variation: item.select_variation,
+            quantity: 1,
+        }));
+
+        addManyToCartMutation(body);
+    };
+
     return {
+        addAllToCart,
         updateVariation,
         isLoading,
         purchaseAll,

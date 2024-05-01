@@ -3,6 +3,7 @@ import useCart from "../../hooks/useCart";
 import useNavigation from "../../hooks/useNavigation";
 import useOrderAction from "../../hooks/useOrderAction";
 import LoadingStrip from "../LoadingStrip"
+import * as Linking from 'expo-linking';
 
 const TYPES = {
   Pending: {
@@ -40,13 +41,22 @@ const OrderStatusButton = ({ type, onPress, data, className }) => {
 
   const { name, action } = TYPES[type];
 
+  const { order_products } = data;
+
   const { go_to_order_detail, go_to_cancel_order } = useNavigation();
 
   const { payAgain } = useOrderAction(data);
 
+  const { addAllToCart } = useCart();
+
+  const url = Linking.useURL();
+
   const handleAction = (actionName) => {
     if (actionName === "payAgain") {
-      payAgain(data.id);
+      payAgain({
+        returnUrl: url + "/--/order-confirmation",
+        cancelUrl: url + "/--/order-cancelled",
+      });
     }
     if (actionName === "cancelOrder") {
       go_to_cancel_order(data)
@@ -55,21 +65,21 @@ const OrderStatusButton = ({ type, onPress, data, className }) => {
       go_to_order_detail(data._id);
     }
     if (actionName === "repurchase") {
-      // const list = order_products.map((product) => {
-      //   const { product_id } = product;
-      //   const { variation } = product_id;
-      //   return {
-      //     ...product_id,
-      //     select_variation: variation.map((item) => {
-      //       const { _id, properties } = item;
-      //       return {
-      //         variation_id: _id,
-      //         property_id: properties[0]._id,
-      //       };
-      //     }),
-      //   };
-      // });
-      // addAllToCart(list);
+      const list = order_products.map((product) => {
+        const { product_id } = product;
+        const { variation } = product_id;
+        return {
+          ...product_id,
+          select_variation: variation.map((item) => {
+            const { _id, properties } = item;
+            return {
+              variation_id: _id,
+              property_id: properties[0]._id,
+            };
+          }),
+        };
+      });
+      addAllToCart(list);
     }
   };
 
