@@ -28,7 +28,6 @@ import * as Linking from 'expo-linking';
 import CouponList from "../CouponList";
 import useVoucher from "../../hooks/useVoucher";
 import getCoordinates from "../../utils/getCoordinate";
-import LoadingStrip from "../LoadingStrip";
 
 export default function OrderConfirm() {
 
@@ -92,19 +91,17 @@ export default function OrderConfirm() {
     const isDeposit = metaData.order_checkout.paid.type === "Deposit"
     const isCod = metaData.payment_method === PAYMENT_METHOD.cod;
     if (isDeposit && isCod) {
-      
+      go_to_cart();
       await WebBrowser.openBrowserAsync(metaData.order_checkout.pay_os.checkoutUrl);
       WebBrowser.dismissBrowser();
-      // go_to_cart();
     }
     if (!isDeposit && isCod) {
       setModalVisible(!modalVisible)
     }
     if (!isDeposit && !isCod) {
-     
+      go_to_cart();
       await WebBrowser.openBrowserAsync(metaData.order_checkout.pay_os.checkoutUrl);
       WebBrowser.dismissBrowser();
-      // go_to_cart();
     }
   };
 
@@ -148,7 +145,6 @@ export default function OrderConfirm() {
 
   };
 
-  if(isCheckoutLoading) return <LoadingStrip/>
 
   return (
     <View className="relative bg-[#f8f8f8]">

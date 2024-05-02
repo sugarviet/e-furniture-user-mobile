@@ -60,7 +60,7 @@ const CouponList = ({ purchaseItems,setDataAfterVoucher,handleCloseCouponModal }
 
     return (
         <View className="h-full relative bg-white">
-            {emptyVoucher && isVoucherLoading ?
+            {emptyVoucher ?
                 <EmptyContent type="coupon" />
                 :
                 <>
