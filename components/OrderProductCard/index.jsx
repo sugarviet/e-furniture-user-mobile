@@ -1,18 +1,21 @@
-import { Entypo, FontAwesome5 } from '@expo/vector-icons';
+import React, { useMemo } from 'react';
 import { Pressable, Text, View } from "react-native";
-import { ICONS } from "../../constants/icons";
+import { formatCurrency } from '../../utils/formatCurrency';
 import useNavigation from '../../hooks/useNavigation';
 import OrderProductBriefInfo from '../OrderProductBriefInfo';
 import OrderStatusButton from '../OrderStatusButton';
-import { formatCurrency } from '../../utils/formatCurrency';
 import DeliveryTrackingBrief from '../DeliveryTrackingBrief';
 
 const OrderProductCard = ({ orderData, state }) => {
   const { go_to_order_detail } = useNavigation();
 
-  const orderState = orderData.order_tracking[orderData.order_tracking.length - 1].name
+  const orderState = useMemo(() => {
+    return orderData.order_tracking[orderData.order_tracking.length - 1].name;
+  }, [orderData]);
 
-  const lengthOfProduct = orderData.order_products.length
+  const lengthOfProduct = orderData.order_products.length;
+
+  const currentState = orderData.current_order_tracking.name
 
   return (
     <View className="pt-2 mx-2">
@@ -26,7 +29,7 @@ const OrderProductCard = ({ orderData, state }) => {
         <View className="flex flex-row justify-between items-center">
           <Text className="text-[14px] font-urbanistRegular">Order ID: {orderData.order_code}</Text>
           <View className="bg-[#ececec] px-4 py-2 rounded-lg">
-            <Text className="text-[12px] font-urbanistBold"> {orderData.order_tracking[orderData.order_tracking.length - 1].name}</Text>
+            <Text className="text-[12px] font-urbanistBold">{orderState}</Text>
           </View>
         </View>
 
@@ -44,8 +47,16 @@ const OrderProductCard = ({ orderData, state }) => {
 
         <DeliveryTrackingBrief data={orderData} />
 
-        <OrderStatusButton className="items-end" type={orderState} data={orderData} />
+        <View className="flex flex-row items-center">
+          {currentState === "Pending" &&
+            <Text className="text-grey2 font-urbanistRegular text-[11px] max-w-[250px] pr-4">Your order must be paid within 24 hours. If not, your order will be cancelled.</Text>
+          }
+          {currentState === "Cancelled" && orderData.order_checkout.is_paid &&
+            <Text className="text-grey2 font-urbanistRegular text-[11px] max-w-[250px] pr-4">Waiting eFurniture staff refund money to your bank account.</Text>
+          }
 
+          <OrderStatusButton className="items-end" type={orderState} data={orderData} />
+        </View>
       </Pressable>
     </View>
   );

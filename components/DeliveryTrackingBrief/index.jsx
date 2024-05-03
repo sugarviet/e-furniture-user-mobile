@@ -4,7 +4,6 @@ import { ICONS } from "../../constants/icons";
 import useNavigation from '../../hooks/useNavigation';
 
 const DeliveryTrackingBrief = ({ data }) => {
-
     const { go_to_delivery_tracking } = useNavigation();
 
     const currentTracking = data.current_order_tracking.note

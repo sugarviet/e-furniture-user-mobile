@@ -124,11 +124,18 @@ const OrderDetail = ({ data }) => {
                         <Text className="text-sm  font-urbanistSemiBold tracking-wide text-grey2 pb-1">Order time</Text>
                         <Text className="text-sm leading-4 font-urbanistSemiBold tracking-wide text-grey2">{formatTime(data.createdAt)}, {formatDate(data.createdAt)}</Text>
                     </View>
-                    {currentTracking === "Cancelled" && data.payment_method === "Online Payment" &&
+                    {data.note &&
+                        <View className="flex flex-col border-t border-grey5 pt-2">
+                            <Text className="text-sm font-urbanistSemiBold text-blackPrimary tracking-wide pb-1">Note</Text>
+                            <Text className="text-sm leading-4 font-urbanistSemiBold tracking-wide text-grey2 pb-2">{data.note}</Text>
+                        </View>
+                    }
+                    {currentTracking === "Cancelled" && data.order_checkout.is_paid &&
                         <View className="border-t border-grey5 pt-2">
                             <Text className="text-base font-urbanistSemiBold tracking-wide text-red pb-1">Waiting eFurniture staff refund money to your bank account</Text>
                         </View>
                     }
+
                 </View>
                 <View className="pt-1 px-4 pb-2">
                     <OrderStatusButton type={orderState} data={data} />

@@ -86,7 +86,7 @@ const OrderStatusButton = ({ type, onPress, data, className }) => {
 
   return (
     <>
-      <Pressable onPress={() => handleAction(action)} className={`w-full flex my-2 ${className}`}>
+      <Pressable style={{flex:1}} onPress={() => handleAction(action)} className={`w-full my-2 ${className}`}>
         <View className="flex flex-row justify-center items-center px-6 py-[14px] rounded-md bg-black shadow-2xl">
           <Text className="text-white">{name}</Text>
         </View>

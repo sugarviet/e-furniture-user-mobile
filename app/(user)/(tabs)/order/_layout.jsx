@@ -10,7 +10,7 @@ const TAB_ORDER = [
     { title: "processing", name: "Processing" },
     { title: "shipping", name: "Shipping" },
     { title: "done", name: "Done" },
-    { title: "cancel", name: "Cancelled" },
+    { title: "cancelled", name: "Cancelled" },
     { title: "refunded", name: "Refunded" },
     { title: "failed", name: "Failed" },
 ];
