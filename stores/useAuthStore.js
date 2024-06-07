@@ -1,18 +1,29 @@
-import { create } from 'zustand';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { create } from 'zustand'
+import { persist, createJSONStorage } from 'zustand/middleware'
 
-const useAuth = create((set) => ({
-  accessToken: null,
-  refreshToken: null,
-  accountId: null,
+const useAuthStore = create(
+  persist((set, get) => (
+    {
+      accessToken: null,
+      refreshToken: null,
+      accountId: null,
 
-  setTokens: (accessToken, refreshToken, accountId) => {
-    set({ accessToken, refreshToken, accountId });
+      setTokens: (accessToken, refreshToken, accountId) => {
+        set({ accessToken, refreshToken, accountId });
 
-  },
+      },
 
-  clearTokens: () => {
-    set({ accessToken: null, refreshToken: null, accountId: null });
-  },
-}));
+      clearTokens: () => {
+        set({ accessToken: null, refreshToken: null, accountId: null });
+      },
+    }
+  ),
+    {
+      name: "auth-storage",
+      storage: createJSONStorage(() => AsyncStorage)
+    }
+  )
+)
 
-export default useAuth;
+export default useAuthStore;

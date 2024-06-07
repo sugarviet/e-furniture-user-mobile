@@ -1,11 +1,43 @@
-import { Text, View } from "react-native"
+import { View } from "react-native";
+import { useState } from "react";
+import CartList from "../../../components/CartList";
 
 const Cart = () => {
-  return (
-    <View className="flex-1 justify-center items-center bg-blue-400">
-        <Text>Cart page</Text>
-    </View>
-  )
-}
+  const [modalVisible, setModalVisible] = useState(false);
 
-export default Cart
+  return (
+    <>
+      <View
+        style={{
+          backgroundColor: "#000",
+          position: "absolute",
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "100%",
+        }}
+      >
+        <CartList
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+        />
+      </View>
+      {modalVisible && (
+        <View
+          style={{
+            backgroundColor: "#fdfdfd",
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "100%",
+          }}
+        ></View>
+      )}
+    </>
+  );
+};
+
+export default Cart;

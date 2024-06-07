@@ -4,9 +4,9 @@ import Icon from "../Icon";
 
 function ErrorMessage({ message }) {
   return (
-    <View className="flex-row items-center">
+    <View className="flex-row items-center my-1">
       <Icon className="w-4 h-4 mr-1" source={IMAGES.warning} />
-      <Text className="text-rose-500 text-xs">{message}</Text>
+      <Text className="text-rose-500 font-semibold text-xs">{message}</Text>
     </View>
   );
 }

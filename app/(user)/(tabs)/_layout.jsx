@@ -1,14 +1,23 @@
 import { Tabs } from "expo-router";
 import { View, Text } from "react-native";
+import TabIcon from "../../../components/TabIcon";
+import HeaderButton from "../../../components/HeaderButton";
 
 const tabs = [
-  { page: "home", name: "Home", header_options: [] },
+  {
+    page: "home",
+    name: "E-FURNITURE",
+    header_options: ["notification"],
+  },
+  { page: "wishlist", name: "Wishlist", header_options: [] },
   {
     page: "cart",
-    name: "Mua sắm",
-    header_options: ["shopping_cart", "shopping_options"],
+    name: "Shopping Cart",
+    header_options: [],
   },
-  { page: "menu", name: "Menu", header_options: ["search", "chat"] },
+  { page: "order", name: "Order", header_options: [] },
+
+  { page: "menu", name: "Menu", header_options: [] },
 ];
 
 function TabsLayout() {
@@ -23,36 +32,24 @@ function TabsLayout() {
             options={{
               title: "",
               tabBarShowLabel: false,
-              
+              tabBarIcon: ({ focused }) => (
+                <TabIcon activated={focused} name={page} />
+              ),
               headerLeft: () => (
                 <Text
                   style={{
-                    fontSize: 28,
-                    marginHorizontal: 16,
+                    fontSize: 24,
+                    marginHorizontal: 10,
+                    fontWeight: "bold",
                   }}
                 >
                   {name}
                 </Text>
               ),
               headerRight: () => (
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-around",
-                    width: 72,
-                    marginHorizontal: 16,
-                  }}
-                >
+                <View className="flex-row items-center mr-4 w-fit max-w-[90px] justify-around">
                   {header_options.map((option, index) => (
-                    <Text
-                      key={index}
-                      style={{
-                        fontSize: 28,
-                        marginHorizontal: 16,
-                      }}
-                    >
-                      {option}
-                    </Text>
+                    <HeaderButton key={`${option} + ${index}`} type={option} />
                   ))}
                 </View>
               ),
